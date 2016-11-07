@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfArrayOfString>
+    <ArrayOfString>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cteproc.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cte.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\infcte.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\ctenormal.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cteinfctesub.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\CTeTomaICMS.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cterefnf.cs</string>
+    </ArrayOfString>
+  </ArrayOfArrayOfString>
+</ArrayOfArrayOfArrayOfString>
