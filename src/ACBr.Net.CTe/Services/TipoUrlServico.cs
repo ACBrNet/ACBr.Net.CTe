@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 10-12-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-15-2016
+// Last Modified On : 10-12-2016
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="TipoUrlServico.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,20 +29,17 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Collection;
-
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Services
 {
-	public sealed class CTeCollection : DFeCollection<CTeProtCTe>
+	public enum TipoUrlServico
 	{
-		#region Methods
-
-		public void Load(string path)
-		{
-			var doc = CTeProtCTe.Load(path);
-			Add(doc);
-		}
-
-		#endregion Methods
+		RecepcaoEvento,
+		CTeRecepcao,
+		CTeRetRecepcao,
+		CTeInutilizacao,
+		CTeConsultaProtocolo,
+		CTeStatusServico,
+		CTeConsultaCadastro,
+		RecepcaoEventoNacional
 	}
 }

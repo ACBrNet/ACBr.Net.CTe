@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 10-14-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-15-2016
+// Last Modified On : 10-14-2016
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="TipoModal.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,20 +29,36 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Collection;
+using ACBr.Net.DFe.Core.Attributes;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeCollection : DFeCollection<CTeProtCTe>
+	public enum CTeTipoServico
 	{
-		#region Methods
+		[DFeEnum("0")]
+		Normal,
 
-		public void Load(string path)
-		{
-			var doc = CTeProtCTe.Load(path);
-			Add(doc);
-		}
+		[DFeEnum("1")]
+		Subcontratacao,
 
-		#endregion Methods
+		[DFeEnum("2")]
+		Redespacho,
+
+		[DFeEnum("3")]
+		Intermediario,
+
+		[DFeEnum("4")]
+		Multimodal,
+
+		[DFeEnum("6")]
+		TranspPessoas,
+
+		[DFeEnum("7")]
+		TranspValores,
+
+		[DFeEnum("8")]
+		ExcessoBagagem
 	}
 }
+
+#pragma warning restore

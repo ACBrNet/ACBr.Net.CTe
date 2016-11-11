@@ -47,7 +47,7 @@ namespace ACBr.Net.CTe
 
 		public CTeInfNF()
 		{
-			Infos = new DFeCollection<object>();
+			Infos = new DFeCollection<IInfoUnidade>();
 		}
 
 		#endregion Constructors

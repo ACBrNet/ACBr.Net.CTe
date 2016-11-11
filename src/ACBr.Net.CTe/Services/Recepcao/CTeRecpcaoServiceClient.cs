@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-15-2016
+// Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="InfCte.cs" company="ACBr.Net">
+// <copyright file="CTeRecpcaoServiceClient.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,16 +29,40 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Service;
+using System;
+using System.Security.Cryptography.X509Certificates;
+using System.Xml;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Services.Recepcao
 {
-	public enum VersaoCTe
+	public sealed class CTeRecpcaoServiceClient : DFeWebserviceBase<ICteRecepcao>, ICteRecepcao
 	{
-		[DFeEnum("2.00")]
-		v200,
+		#region Constructors
 
-		[DFeEnum("3.00")]
-		v300
+		public CTeRecpcaoServiceClient(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
+		{
+		}
+
+		#endregion Constructors
+
+		#region Methods
+
+		public string RecepcaoLote(CteWsCabecalho cabecalho, string cteDadosMsg)
+		{
+			var mensagem = new XmlDocument();
+			mensagem.LoadXml(cteDadosMsg);
+
+			var inValue = new RecepcaoRequest(cabecalho, mensagem);
+			var retVal = ((ICteRecepcao)this).RecepcaoLote(inValue);
+			return retVal.Result.OuterXml;
+		}
+
+		RecepcaoResponse ICteRecepcao.RecepcaoLote(RecepcaoRequest request)
+		{
+			return Channel.RecepcaoLote(request);
+		}
+
+		#endregion Methods
 	}
 }

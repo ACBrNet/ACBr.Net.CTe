@@ -40,7 +40,7 @@ namespace ACBr.Net.CTe
 	public sealed class CTeInfModal : GenericClone<CTeInfModal>
 	{
 		[DFeAttribute(TipoCampo.Enum, "versaoModal", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public VersaoCTe VersaoModal { get; set; }
+		public CTeVersao VersaoModal { get; set; }
 
 		[DFeItem(typeof(CTeRodoModal), "rodo")]
 		[DFeItem(typeof(CTeAereoModal), "aereo")]

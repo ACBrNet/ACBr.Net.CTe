@@ -72,6 +72,9 @@
     <Compile Include="CTeAquavModal.cs" />
     <Compile Include="CTeBalsa.cs" />
     <Compile Include="CTeDirecao.cs" />
+    <Compile Include="Services\CTeWSCabecalho.cs" />
+    <Compile Include="Services\Recepcao\RecepcaoRequest.cs" />
+    <Compile Include="Services\CTeServicos.cs" />
     <Compile Include="CTeFerrovModal.cs" />
     <Compile Include="CTeInfSeg.cs" />
     <Compile Include="CTeUniAP.cs" />
@@ -117,6 +120,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Recepcao\CTeRecpcaoServiceClient.cs" />
+    <Compile Include="Services\Recepcao\ICteRecepcao.cs" />
+    <Compile Include="Services\Recepcao\RecepcaoResponse.cs" />
+    <Compile Include="Services\ServiceManager.cs" />
     <Compile Include="TipoDataPeriodo.cs" />
     <Compile Include="CTeEntregaComHora.cs" />
     <Compile Include="TipoHorarioIntervalo.cs" />
@@ -138,7 +145,7 @@
     <Compile Include="CTeToma3.cs" />
     <Compile Include="CTeTomador.cs" />
     <Compile Include="CTeToma4.cs" />
-    <Compile Include="TipoServico.cs" />
+    <Compile Include="CTeTipoServico.cs" />
     <Compile Include="CTeImp.cs" />
     <Compile Include="CTeICMSUFFim.cs" />
     <Compile Include="CTeAnulacao.cs" />
@@ -169,7 +176,7 @@
     <Compile Include="CTeVPrest.cs" />
     <Compile Include="CTePrestComp.cs" />
     <Compile Include="CTeEndereco.cs" />
-    <Compile Include="TipoCTe.cs" />
+    <Compile Include="CTeTipo.cs" />
     <Compile Include="CTeICMS.cs" />
     <Compile Include="CTeICMS00.cs" />
     <Compile Include="CTeICMS20.cs" />
@@ -185,141 +192,179 @@
     <Compile Include="CTeUnidadeTransp.cs" />
     <Compile Include="CTeTUnidCarga.cs" />
     <Compile Include="CTeLacre.cs" />
-    <Compile Include="VersaoCTe.cs" />
+    <Compile Include="CTeVersao.cs" />
+    <Compile Include="Services\TipoUrlServico.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="acbr.net.snk" />
-    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Schemas\cancCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\consReciCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\consReciCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\consSitCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\consSitCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\consStatServCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\consStatServTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cteModalAereo_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cteModalAquaviario_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cteModalDutoviario_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cteModalFerroviario_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cteModalRodoviarioOS_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cteModalRodoviario_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cteMultiModal_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cteOS_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cteTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\cte_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\enviCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\evCancCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\evCCeCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\eventoCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\eventoCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\evEPECCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\evGTV_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\evPrestDesacordo_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\evRegMultimodal_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\inutCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\inutCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\procCTeOS_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\procCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\procEventoCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\procInutCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\retConsReciCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\retConsSitCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\retConsStatServCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\retCTeOS_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\retEnviCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\retEventoCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\retInutCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\tiposGeralCTe_v3.00.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\xmldsig-core-schema_v1.01.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-15-2016
+// Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="CteWsCabecalho.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,20 +29,21 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Collection;
+using PropertyChanged;
+using System;
+using System.Xml.Serialization;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Services
 {
-	public sealed class CTeCollection : DFeCollection<CTeProtCTe>
+	[Serializable]
+	[ImplementPropertyChanged]
+	[XmlType(TypeName = "cteCabecMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao")]
+	public sealed class CteWsCabecalho
 	{
-		#region Methods
+		[XmlElement(ElementName = "cUF", Order = 0)]
+		public string CUf { get; set; }
 
-		public void Load(string path)
-		{
-			var doc = CTeProtCTe.Load(path);
-			Add(doc);
-		}
-
-		#endregion Methods
+		[XmlElement(ElementName = "versaoDados", Order = 1)]
+		public string VersaoDados { get; set; }
 	}
 }

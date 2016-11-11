@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-07-2016
+// Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-07-2016
+// Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="CTeProtCTe.cs" company="ACBr.Net">
+// <copyright file="CTeServicos.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,52 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
-using ACBr.Net.DFe.Core.Document;
-using ACBr.Net.DFe.Core.Serializer;
-using PropertyChanged;
+using System;
+using System.Collections.Generic;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Services
 {
-	[ImplementPropertyChanged]
-	public sealed class CTeProtCTe : DFeDocument<CTeProtCTe>
+	[Serializable]
+	public sealed class CTeServicos
 	{
 		#region Constructors
 
-		public CTeProtCTe()
+		public CTeServicos()
 		{
-			Signature = new DFeSignature();
-			InfProt = new CTeInfProt();
+			Homologacao = new Dictionary<TipoUrlServico, string>(8)
+			{
+				{ TipoUrlServico.RecepcaoEvento, string.Empty },
+				{ TipoUrlServico.CTeRecepcao, string.Empty },
+				{ TipoUrlServico.CTeRetRecepcao, string.Empty },
+				{ TipoUrlServico.CTeInutilizacao, string.Empty },
+				{ TipoUrlServico.CTeConsultaProtocolo,string.Empty },
+				{ TipoUrlServico.CTeStatusServico,string.Empty },
+				{ TipoUrlServico.CTeConsultaCadastro,string.Empty },
+				{ TipoUrlServico.RecepcaoEventoNacional, string.Empty }
+			};
+			Producao = new Dictionary<TipoUrlServico, string>(8)
+			{
+				{ TipoUrlServico.RecepcaoEvento, string.Empty },
+				{ TipoUrlServico.CTeRecepcao, string.Empty },
+				{ TipoUrlServico.CTeRetRecepcao, string.Empty },
+				{ TipoUrlServico.CTeInutilizacao, string.Empty },
+				{ TipoUrlServico.CTeConsultaProtocolo,string.Empty },
+				{ TipoUrlServico.CTeStatusServico,string.Empty },
+				{ TipoUrlServico.CTeConsultaCadastro,string.Empty },
+				{ TipoUrlServico.RecepcaoEventoNacional, string.Empty }
+			};
 		}
 
 		#endregion Constructors
 
 		#region Propriedades
 
-		[DFeAttribute(TipoCampo.Str, "versao")]
-		public string Versao { get; set; }
+		public DFeCodUF UF { get; set; }
 
-		[DFeElement("infProt", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeInfProt InfProt { get; set; }
+		public Dictionary<TipoUrlServico, string> Homologacao { get; private set; }
 
-		public DFeSignature Signature { get; set; }
+		public Dictionary<TipoUrlServico, string> Producao { get; private set; }
 
 		#endregion Propriedades
 	}

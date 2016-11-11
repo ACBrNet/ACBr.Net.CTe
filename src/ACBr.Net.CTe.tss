@@ -2,7 +2,13 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cteproc.cs</string>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\acbrcte.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\ctecollection.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cteinfnf.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cte.cs</string>
@@ -11,16 +17,28 @@
       <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\infcte.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\ctenormal.cs</string>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cteprotcte.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cteinfctesub.cs</string>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cteproc.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\CTeTomaICMS.cs</string>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\services\cteservicos.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte\cterefnf.cs</string>
+      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\Services\ServiceManager.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\Services\Recepcao\ICteRecepcao.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\Services\Reference.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\Services\cteCabecMsg.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\Services\Recepcao\CTeRecpcaoServiceClient.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

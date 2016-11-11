@@ -89,7 +89,7 @@ namespace ACBr.Net.CTe
 		public DFeTipoAmbiente TpAmb { get; set; }
 
 		[DFeElement(TipoCampo.Enum, "tpCTe", Id = "#018", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public TipoCTe TpCTe { get; set; }
+		public CTeTipo TpCTe { get; set; }
 
 		[DFeElement(TipoCampo.Enum, "procEmi", Id = "#019", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public DFeProcessoEmissao ProcEmi { get; set; }
@@ -113,7 +113,7 @@ namespace ACBr.Net.CTe
 		public CTeModal Modal { get; set; }
 
 		[DFeElement(TipoCampo.Enum, "tpServ", Id = "#026", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public TipoServico TpServ { get; set; }
+		public CTeTipoServico TpServ { get; set; }
 
 		[DFeElement(TipoCampo.Int, "cMunIni", Id = "#027", Min = 7, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public int CMunIni { get; set; }

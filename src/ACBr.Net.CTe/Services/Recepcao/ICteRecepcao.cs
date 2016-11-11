@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-15-2016
+// Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="ICteRecepcao.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,20 +29,15 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Collection;
+using System.ServiceModel;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Services.Recepcao
 {
-	public sealed class CTeCollection : DFeCollection<CTeProtCTe>
+	[ServiceContract(Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao")]
+	public interface ICteRecepcao
 	{
-		#region Methods
-
-		public void Load(string path)
-		{
-			var doc = CTeProtCTe.Load(path);
-			Add(doc);
-		}
-
-		#endregion Methods
+		[XmlSerializerFormat(SupportFaults = true)]
+		[OperationContract(Action = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao/cteRecepcaoLote", ReplyAction = "*")]
+		RecepcaoResponse RecepcaoLote(RecepcaoRequest request);
 	}
 }

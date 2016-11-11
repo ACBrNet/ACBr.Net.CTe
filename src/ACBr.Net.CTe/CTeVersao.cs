@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-14-2016
+// Created          : 10-15-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-14-2016
+// Last Modified On : 10-15-2016
 // ***********************************************************************
-// <copyright file="TipoModal.cs" company="ACBr.Net">
+// <copyright file="CTeVersao.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -33,32 +33,12 @@ using ACBr.Net.DFe.Core.Attributes;
 
 namespace ACBr.Net.CTe
 {
-	public enum TipoServico
+	public enum CTeVersao
 	{
-		[DFeEnum("0")]
-		Normal,
+		[DFeEnum("2.00")]
+		v200,
 
-		[DFeEnum("1")]
-		Subcontratacao,
-
-		[DFeEnum("2")]
-		Redespacho,
-
-		[DFeEnum("3")]
-		Intermediario,
-
-		[DFeEnum("4")]
-		Multimodal,
-
-		[DFeEnum("6")]
-		TranspPessoas,
-
-		[DFeEnum("7")]
-		TranspValores,
-
-		[DFeEnum("8")]
-		ExcessoBagagem
+		[DFeEnum("3.00")]
+		v300
 	}
 }
-
-#pragma warning restore

@@ -63,7 +63,7 @@ namespace ACBr.Net.CTe
 			Emit = new CTeEmit();
 			Compl = new CTeCompl();
 			Ide = new CTeIde();
-			Versao = VersaoCTe.v300;
+			Versao = CTeVersao.v300;
 		}
 
 		#endregion Contructors
@@ -71,7 +71,7 @@ namespace ACBr.Net.CTe
 		#region Propriedades
 
 		[DFeAttribute(TipoCampo.Enum, "versao", Id = "#002", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public VersaoCTe Versao { get; set; }
+		public CTeVersao Versao { get; set; }
 
 		[DFeAttribute(TipoCampo.Str, "Id", Id = "#003", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public string Id { get; set; }

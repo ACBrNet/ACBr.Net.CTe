@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-15-2016
+// Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="RecepcaoResponse.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,20 +29,36 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Collection;
+using System.ServiceModel;
+using System.Xml;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Services.Recepcao
 {
-	public sealed class CTeCollection : DFeCollection<CTeProtCTe>
+	[MessageContract(WrapperName = "cteRecepcaoLoteResponse", IsWrapped = false)]
+	public sealed class RecepcaoResponse
 	{
-		#region Methods
+		#region Constructors
 
-		public void Load(string path)
+		public RecepcaoResponse()
 		{
-			var doc = CTeProtCTe.Load(path);
-			Add(doc);
 		}
 
-		#endregion Methods
+		public RecepcaoResponse(CteWsCabecalho cabecalho, XmlNode result)
+		{
+			Cabecalho = cabecalho;
+			Result = result;
+		}
+
+		#endregion Constructors
+
+		#region Propriedades
+
+		[MessageHeader(Name = "cTeCabecMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao")]
+		public CteWsCabecalho Cabecalho;
+
+		[MessageBodyMember(Name = "cteRecepcaoLoteResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao", Order = 0)]
+		public XmlNode Result;
+
+		#endregion Propriedades
 	}
 }
