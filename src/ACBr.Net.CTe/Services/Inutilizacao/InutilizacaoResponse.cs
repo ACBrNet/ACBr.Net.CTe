@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="RecepcaoRequest.cs" company="ACBr.Net">
+// <copyright file="InutilizacaoResponse.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -32,19 +32,30 @@
 using System.ServiceModel;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services.Inutilizacao
 {
-	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
-	public sealed class RecepcaoRequest : RequestBase
+	[MessageContract(WrapperName = "cteInutilizacaoCTResponse", IsWrapped = false)]
+	public sealed class InutilizacaoResponse : ResponseBase
 	{
 		#region Constructors
 
-		public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
+		public InutilizacaoResponse()
+		{
+		}
+
+		public InutilizacaoResponse(CTeWsCabecalho cabecalho, XmlNode result)
 		{
 			Cabecalho = cabecalho;
-			Mensagem = mensagem;
+			Result = result;
 		}
 
 		#endregion Constructors
+
+		#region Propriedades
+
+		[MessageBodyMember(Name = "cteInutilizacaoCTResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao", Order = 0)]
+		public XmlNode Result;
+
+		#endregion Propriedades
 	}
 }

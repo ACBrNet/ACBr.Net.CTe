@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="RecepcaoRequest.cs" company="ACBr.Net">
+// <copyright file="InutilizacaoRequest.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -30,21 +30,20 @@
 // ***********************************************************************
 
 using System.ServiceModel;
-using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services.Inutilizacao
 {
-	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
-	public sealed class RecepcaoRequest : RequestBase
+	[MessageContract(WrapperName = "cteInutilizacaoCTRequest", IsWrapped = false)]
+	public sealed class InutilizacaoRequest : RequestBase
 	{
-		#region Constructors
+		public InutilizacaoRequest()
+		{
+		}
 
-		public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
+		public InutilizacaoRequest(CTeWsCabecalho cabecalho, System.Xml.XmlNode mensagem)
 		{
 			Cabecalho = cabecalho;
 			Mensagem = mensagem;
 		}
-
-		#endregion Constructors
 	}
 }

@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="CteWsCabecalho.cs" company="ACBr.Net">
+// <copyright file="CTeWsCabecalho.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -38,7 +38,7 @@ namespace ACBr.Net.CTe.Services
 	[Serializable]
 	[ImplementPropertyChanged]
 	[XmlType(TypeName = "cteCabecMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao")]
-	public sealed class CteWsCabecalho
+	public sealed class CTeWsCabecalho
 	{
 		[XmlElement(ElementName = "cUF", Order = 0)]
 		public string CUf { get; set; }

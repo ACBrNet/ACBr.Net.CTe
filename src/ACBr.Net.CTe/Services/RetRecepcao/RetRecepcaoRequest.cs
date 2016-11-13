@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="RecepcaoRequest.cs" company="ACBr.Net">
+// <copyright file="RetRecepcaoRequest.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -32,14 +32,14 @@
 using System.ServiceModel;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services.RetRecepcao
 {
-	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
-	public sealed class RecepcaoRequest : RequestBase
+	[MessageContract(WrapperName = "cteRetRecepcaoRequest", IsWrapped = false)]
+	public sealed class RetRecepcaoRequest : RequestBase
 	{
 		#region Constructors
 
-		public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
+		public RetRecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
 		{
 			Cabecalho = cabecalho;
 			Mensagem = mensagem;

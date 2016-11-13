@@ -42,27 +42,27 @@ namespace ACBr.Net.CTe.Services
 
 		public CTeServicos()
 		{
-			Homologacao = new Dictionary<TipoUrlServico, string>(8)
+			Homologacao = new Dictionary<TipoUrlServico, ServiceInfo>(8)
 			{
-				{ TipoUrlServico.RecepcaoEvento, string.Empty },
-				{ TipoUrlServico.CTeRecepcao, string.Empty },
-				{ TipoUrlServico.CTeRetRecepcao, string.Empty },
-				{ TipoUrlServico.CTeInutilizacao, string.Empty },
-				{ TipoUrlServico.CTeConsultaProtocolo,string.Empty },
-				{ TipoUrlServico.CTeStatusServico,string.Empty },
-				{ TipoUrlServico.CTeConsultaCadastro,string.Empty },
-				{ TipoUrlServico.RecepcaoEventoNacional, string.Empty }
+				{ TipoUrlServico.RecepcaoEvento, new ServiceInfo() },
+				{ TipoUrlServico.CTeRecepcao, new ServiceInfo() },
+				{ TipoUrlServico.CTeRetRecepcao, new ServiceInfo() },
+				{ TipoUrlServico.CTeInutilizacao, new ServiceInfo() },
+				{ TipoUrlServico.CTeConsultaProtocolo, new ServiceInfo() },
+				{ TipoUrlServico.CTeStatusServico, new ServiceInfo() },
+				{ TipoUrlServico.CTeConsultaCadastro, new ServiceInfo() },
+				{ TipoUrlServico.RecepcaoEventoNacional, new ServiceInfo() }
 			};
-			Producao = new Dictionary<TipoUrlServico, string>(8)
+			Producao = new Dictionary<TipoUrlServico, ServiceInfo>(8)
 			{
-				{ TipoUrlServico.RecepcaoEvento, string.Empty },
-				{ TipoUrlServico.CTeRecepcao, string.Empty },
-				{ TipoUrlServico.CTeRetRecepcao, string.Empty },
-				{ TipoUrlServico.CTeInutilizacao, string.Empty },
-				{ TipoUrlServico.CTeConsultaProtocolo,string.Empty },
-				{ TipoUrlServico.CTeStatusServico,string.Empty },
-				{ TipoUrlServico.CTeConsultaCadastro,string.Empty },
-				{ TipoUrlServico.RecepcaoEventoNacional, string.Empty }
+				{ TipoUrlServico.RecepcaoEvento, new ServiceInfo() },
+				{ TipoUrlServico.CTeRecepcao, new ServiceInfo() },
+				{ TipoUrlServico.CTeRetRecepcao, new ServiceInfo() },
+				{ TipoUrlServico.CTeInutilizacao, new ServiceInfo() },
+				{ TipoUrlServico.CTeConsultaProtocolo, new ServiceInfo() },
+				{ TipoUrlServico.CTeStatusServico, new ServiceInfo() },
+				{ TipoUrlServico.CTeConsultaCadastro, new ServiceInfo() },
+				{ TipoUrlServico.RecepcaoEventoNacional, new ServiceInfo() }
 			};
 		}
 
@@ -72,9 +72,9 @@ namespace ACBr.Net.CTe.Services
 
 		public DFeCodUF UF { get; set; }
 
-		public Dictionary<TipoUrlServico, string> Homologacao { get; private set; }
+		public Dictionary<TipoUrlServico, ServiceInfo> Homologacao { get; private set; }
 
-		public Dictionary<TipoUrlServico, string> Producao { get; private set; }
+		public Dictionary<TipoUrlServico, ServiceInfo> Producao { get; private set; }
 
 		#endregion Propriedades
 	}

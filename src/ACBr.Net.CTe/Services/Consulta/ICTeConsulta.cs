@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="RecepcaoRequest.cs" company="ACBr.Net">
+// <copyright file="ICTeConsulta.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -30,21 +30,14 @@
 // ***********************************************************************
 
 using System.ServiceModel;
-using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services.Consulta
 {
-	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
-	public sealed class RecepcaoRequest : RequestBase
+	[ServiceContract(Name = "CteConsultaSoap12", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta")]
+	public interface ICTeConsulta
 	{
-		#region Constructors
-
-		public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
-		{
-			Cabecalho = cabecalho;
-			Mensagem = mensagem;
-		}
-
-		#endregion Constructors
+		[XmlSerializerFormat(SupportFaults = true)]
+		[OperationContract(Name = "cteConsultaCT", Action = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta/cteConsultaCT", ReplyAction = "*")]
+		ConsultaResponse ConsultaCTe(ConsultaRequest request);
 	}
 }

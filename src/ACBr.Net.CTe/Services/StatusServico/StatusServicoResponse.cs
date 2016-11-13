@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="RecepcaoRequest.cs" company="ACBr.Net">
+// <copyright file="StatusServicoResponse.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -27,24 +27,35 @@
 // DEALINGS IN THE SOFTWARE.
 // </copyright>
 // <summary></summary>
-// ***********************************************************************
+// *************************************************************
 
 using System.ServiceModel;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services.StatusServico
 {
-	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
-	public sealed class RecepcaoRequest : RequestBase
+	[MessageContract(WrapperName = "cteStatusServicoCTResponse", IsWrapped = false)]
+	public sealed class StatusServicoResponse : ResponseBase
 	{
 		#region Constructors
 
-		public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
+		public StatusServicoResponse()
+		{
+		}
+
+		public StatusServicoResponse(CTeWsCabecalho cabecalho, XmlNode result)
 		{
 			Cabecalho = cabecalho;
-			Mensagem = mensagem;
+			Result = result;
 		}
 
 		#endregion Constructors
+
+		#region Propriedades
+
+		[MessageBodyMember(Name = "cteStatusServicoCTResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico", Order = 0)]
+		public XmlNode Result;
+
+		#endregion Propriedades
 	}
 }

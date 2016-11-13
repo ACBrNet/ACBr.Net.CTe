@@ -72,6 +72,19 @@
     <Compile Include="CTeAquavModal.cs" />
     <Compile Include="CTeBalsa.cs" />
     <Compile Include="CTeDirecao.cs" />
+    <Compile Include="Services\Consulta\ConsultaRequest.cs" />
+    <Compile Include="Services\Consulta\CTeConsultaServiceClient.cs" />
+    <Compile Include="Services\Consulta\ICTeConsulta.cs" />
+    <Compile Include="Services\Consulta\ConsultaResponse.cs" />
+    <Compile Include="Services\Inutilizacao\InutilizacaoResponse.cs" />
+    <Compile Include="Services\Inutilizacao\InutilizacaoRequest.cs" />
+    <Compile Include="Services\Inutilizacao\ICTeInutilizacao.cs" />
+    <Compile Include="Services\Inutilizacao\CTeInutilizacaoServiceClient.cs" />
+    <Compile Include="Services\RecepcaoEvento\RecepcaoEventoResponse.cs" />
+    <Compile Include="Services\RecepcaoEvento\RecepcaoEventoRequest.cs" />
+    <Compile Include="Services\RecepcaoEvento\ICTeRecepcaoEvento.cs" />
+    <Compile Include="Services\RecepcaoEvento\CTeRecepcaoEventoServiceClient.cs" />
+    <Compile Include="Services\RequestBase.cs" />
     <Compile Include="Services\CTeWSCabecalho.cs" />
     <Compile Include="Services\Recepcao\RecepcaoRequest.cs" />
     <Compile Include="Services\CTeServicos.cs" />
@@ -120,10 +133,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Recepcao\CTeRecpcaoServiceClient.cs" />
+    <Compile Include="Services\Recepcao\CTeRecepcaoServiceClient.cs" />
     <Compile Include="Services\Recepcao\ICteRecepcao.cs" />
     <Compile Include="Services\Recepcao\RecepcaoResponse.cs" />
+    <Compile Include="Services\RetRecepcao\RetRecepcaoResponse.cs" />
+    <Compile Include="Services\RetRecepcao\RetRecepcaoRequest.cs" />
+    <Compile Include="Services\RetRecepcao\ICTeRetRecepcao.cs" />
+    <Compile Include="Services\RetRecepcao\CTeRetRecepcaoServiceClient.cs" />
+    <Compile Include="Services\ServiceInfo.cs" />
     <Compile Include="Services\ServiceManager.cs" />
+    <Compile Include="Services\ResponseBase.cs" />
+    <Compile Include="Services\StatusServico\StatusServicoResponse.cs" />
+    <Compile Include="Services\StatusServico\StatusServicoRequest.cs" />
+    <Compile Include="Services\StatusServico\ICTeStatusServico.cs" />
+    <Compile Include="Services\StatusServico\CTeStatusServicoServiceClient.cs" />
     <Compile Include="TipoDataPeriodo.cs" />
     <Compile Include="CTeEntregaComHora.cs" />
     <Compile Include="TipoHorarioIntervalo.cs" />
@@ -373,6 +396,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

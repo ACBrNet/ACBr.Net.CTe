@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="RecepcaoRequest.cs" company="ACBr.Net">
+// <copyright file="CTeStatusServicoServiceClient.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,22 +29,45 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ServiceModel;
+using ACBr.Net.Core.Exceptions;
+using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Service;
+using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services.StatusServico
 {
-	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
-	public sealed class RecepcaoRequest : RequestBase
+	public sealed class CTeStatusServicoServiceClient : DFeWebserviceBase<ICTeStatusServico>, ICTeStatusServico
 	{
 		#region Constructors
 
-		public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
+		public CTeStatusServicoServiceClient(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
 		{
-			Cabecalho = cabecalho;
-			Mensagem = mensagem;
 		}
 
 		#endregion Constructors
+
+		#region Methods
+
+		public string StatusServico(CTeWsCabecalho cabecalho, string mensagem)
+		{
+			Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
+			Guard.Against<ArgumentNullException>(mensagem.IsEmpty(), nameof(mensagem));
+
+			var xml = new XmlDocument();
+			xml.LoadXml(mensagem);
+
+			var inValue = new StatusServicoRequest(cabecalho, xml);
+			var retVal = ((ICTeStatusServico)this).StatusServico(inValue);
+			return retVal.Result.OuterXml;
+		}
+
+		StatusServicoResponse ICTeStatusServico.StatusServico(StatusServicoRequest request)
+		{
+			return Channel.StatusServico(request);
+		}
+
+		#endregion Methods
 	}
 }

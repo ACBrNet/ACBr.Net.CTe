@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="RecepcaoRequest.cs" company="ACBr.Net">
+// <copyright file="ICTeRecepcaoEvento.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -30,21 +30,14 @@
 // ***********************************************************************
 
 using System.ServiceModel;
-using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services.RecepcaoEvento
 {
-	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
-	public sealed class RecepcaoRequest : RequestBase
+	[ServiceContract(Name = "CteRecepcaoEventoSoap12", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoEvento")]
+	public interface ICTeRecepcaoEvento
 	{
-		#region Constructors
-
-		public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
-		{
-			Cabecalho = cabecalho;
-			Mensagem = mensagem;
-		}
-
-		#endregion Constructors
+		[XmlSerializerFormat(SupportFaults = true)]
+		[OperationContract(Name = "cteRecepcaoEvento", Action = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoEvento/cteRecepcaoEvento", ReplyAction = "*")]
+		RecepcaoEventoResponse RecepcaoEvento(RecepcaoEventoRequest request);
 	}
 }

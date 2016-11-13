@@ -33,11 +33,11 @@ using System.ServiceModel;
 
 namespace ACBr.Net.CTe.Services.Recepcao
 {
-	[ServiceContract(Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao")]
+	[ServiceContract(Name = "CteRecepcaoSoap12", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao")]
 	public interface ICteRecepcao
 	{
 		[XmlSerializerFormat(SupportFaults = true)]
-		[OperationContract(Action = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao/cteRecepcaoLote", ReplyAction = "*")]
+		[OperationContract(Name = "cteRecepcaoLote", Action = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao/cteRecepcaoLote", ReplyAction = "*")]
 		RecepcaoResponse RecepcaoLote(RecepcaoRequest request);
 	}
 }

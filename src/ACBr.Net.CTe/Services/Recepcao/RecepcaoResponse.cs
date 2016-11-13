@@ -35,7 +35,7 @@ using System.Xml;
 namespace ACBr.Net.CTe.Services.Recepcao
 {
 	[MessageContract(WrapperName = "cteRecepcaoLoteResponse", IsWrapped = false)]
-	public sealed class RecepcaoResponse
+	public sealed class RecepcaoResponse : ResponseBase
 	{
 		#region Constructors
 
@@ -43,7 +43,7 @@ namespace ACBr.Net.CTe.Services.Recepcao
 		{
 		}
 
-		public RecepcaoResponse(CteWsCabecalho cabecalho, XmlNode result)
+		public RecepcaoResponse(CTeWsCabecalho cabecalho, XmlNode result)
 		{
 			Cabecalho = cabecalho;
 			Result = result;
@@ -52,9 +52,6 @@ namespace ACBr.Net.CTe.Services.Recepcao
 		#endregion Constructors
 
 		#region Propriedades
-
-		[MessageHeader(Name = "cTeCabecMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao")]
-		public CteWsCabecalho Cabecalho;
 
 		[MessageBodyMember(Name = "cteRecepcaoLoteResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao", Order = 0)]
 		public XmlNode Result;

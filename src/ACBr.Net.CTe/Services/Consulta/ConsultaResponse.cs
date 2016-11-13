@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="RecepcaoRequest.cs" company="ACBr.Net">
+// <copyright file="ConsultaResponse.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -32,19 +32,30 @@
 using System.ServiceModel;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services.Consulta
 {
-	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
-	public sealed class RecepcaoRequest : RequestBase
+	[MessageContract(WrapperName = "cteConsultaCTResponse", IsWrapped = false)]
+	public sealed class ConsultaResponse : ResponseBase
 	{
 		#region Constructors
 
-		public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
+		public ConsultaResponse()
+		{
+		}
+
+		public ConsultaResponse(CTeWsCabecalho cabecalho, XmlNode result)
 		{
 			Cabecalho = cabecalho;
-			Mensagem = mensagem;
+			Result = result;
 		}
 
 		#endregion Constructors
+
+		#region Propriedades
+
+		[MessageBodyMember(Name = "cteConsultaCTResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta", Order = 0)]
+		public XmlNode Result;
+
+		#endregion Propriedades
 	}
 }

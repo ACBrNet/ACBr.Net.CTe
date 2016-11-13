@@ -67,7 +67,7 @@ namespace ACBr.Net.CTe.Services
 
 		#region Methods
 
-		public static string GetServiceAndress(CTeVersao versao, DFeCodUF uf, TipoUrlServico tipo, DFeTipoAmbiente ambiente)
+		public static ServiceInfo GetServiceAndress(CTeVersao versao, DFeCodUF uf, TipoUrlServico tipo, DFeTipoAmbiente ambiente)
 		{
 			var services = Servicos[versao].SingleOrDefault(x => x.UF == uf);
 

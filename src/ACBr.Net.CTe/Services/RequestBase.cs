@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="CTeRecpcaoServiceClient.cs" company="ACBr.Net">
+// <copyright file="RecepcaoRequest.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,40 +29,35 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Service;
-using System;
-using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services
 {
-	public sealed class CTeRecpcaoServiceClient : DFeWebserviceBase<ICteRecepcao>, ICteRecepcao
+	public abstract class RequestBase
 	{
 		#region Constructors
 
-		public CTeRecpcaoServiceClient(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
+		protected RequestBase()
 		{
+		}
+
+		protected RequestBase(CTeWsCabecalho cabecalho, XmlNode mensagem)
+		{
+			Cabecalho = cabecalho;
+			Mensagem = mensagem;
 		}
 
 		#endregion Constructors
 
-		#region Methods
+		#region Propriedades
 
-		public string RecepcaoLote(CteWsCabecalho cabecalho, string cteDadosMsg)
-		{
-			var mensagem = new XmlDocument();
-			mensagem.LoadXml(cteDadosMsg);
+		[MessageHeader(Name = "cteCabecMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta")]
+		public CTeWsCabecalho Cabecalho;
 
-			var inValue = new RecepcaoRequest(cabecalho, mensagem);
-			var retVal = ((ICteRecepcao)this).RecepcaoLote(inValue);
-			return retVal.Result.OuterXml;
-		}
+		[MessageBodyMember(Name = "cteDadosMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta", Order = 0)]
+		public XmlNode Mensagem;
 
-		RecepcaoResponse ICteRecepcao.RecepcaoLote(RecepcaoRequest request)
-		{
-			return Channel.RecepcaoLote(request);
-		}
-
-		#endregion Methods
+		#endregion Propriedades
 	}
 }
