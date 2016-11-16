@@ -31,14 +31,13 @@
 
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
 namespace ACBr.Net.CTe.Services.Inutilizacao
 {
-	public sealed class CTeInutilizacaoServiceClient : DFeWebserviceBase<ICTeInutilizacao>, ICTeInutilizacao
+	public sealed class CTeInutilizacaoServiceClient : Soap12WebserviceBase<ICTeInutilizacao>, ICTeInutilizacao
 	{
 		#region Constructors
 

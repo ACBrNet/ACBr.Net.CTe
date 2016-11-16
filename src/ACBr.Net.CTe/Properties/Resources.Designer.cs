@@ -77,5 +77,15 @@ namespace ACBr.Net.CTe.Properties {
                 return ResourceManager.GetString("CTeIEIsento", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Services {
+            get {
+                object obj = ResourceManager.GetObject("Services", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

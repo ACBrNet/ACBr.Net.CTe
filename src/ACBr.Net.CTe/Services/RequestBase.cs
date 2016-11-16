@@ -34,6 +34,7 @@ using System.Xml;
 
 namespace ACBr.Net.CTe.Services
 {
+	[MessageContract]
 	public abstract class RequestBase
 	{
 		#region Constructors
@@ -52,10 +53,10 @@ namespace ACBr.Net.CTe.Services
 
 		#region Propriedades
 
-		[MessageHeader(Name = "cteCabecMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta")]
+		[MessageHeader(Name = "cteCabecMsg")]
 		public CTeWsCabecalho Cabecalho;
 
-		[MessageBodyMember(Name = "cteDadosMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta", Order = 0)]
+		[MessageBodyMember(Name = "cteDadosMsg", Order = 0)]
 		public XmlNode Mensagem;
 
 		#endregion Propriedades

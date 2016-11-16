@@ -31,14 +31,13 @@
 
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
 namespace ACBr.Net.CTe.Services.RetRecepcao
 {
-	public sealed class CTeRetRecepcaoServiceClient : DFeWebserviceBase<ICTeRetRecepcao>, ICTeRetRecepcao
+	public sealed class CTeRetRecepcaoServiceClient : Soap12WebserviceBase<ICTeRetRecepcao>, ICTeRetRecepcao
 	{
 		#region Constructors
 

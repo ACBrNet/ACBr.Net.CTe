@@ -31,14 +31,13 @@
 
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
 namespace ACBr.Net.CTe.Services.StatusServico
 {
-	public sealed class CTeStatusServicoServiceClient : DFeWebserviceBase<ICTeStatusServico>, ICTeStatusServico
+	public sealed class CTeStatusServicoServiceClient : Soap12WebserviceBase<ICTeStatusServico>, ICTeStatusServico
 	{
 		#region Constructors
 

@@ -2,11 +2,12 @@
 
 namespace ACBr.Net.CTe.Services
 {
+	[MessageContract]
 	public abstract class ResponseBase
 	{
 		#region Propriedades
 
-		[MessageHeader(Name = "cteCabecMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao")]
+		[MessageHeader(Name = "cteCabecMsg")]
 		public CTeWsCabecalho Cabecalho;
 
 		#endregion Propriedades

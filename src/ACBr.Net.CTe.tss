@@ -2,10 +2,8 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\Services\Consulta\ConsultaRequest.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\Services\Consulta\CTeConsultaServiceClient.cs</string>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte.demo\form1.cs</string>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte.demo\form1.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

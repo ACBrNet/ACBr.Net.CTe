@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="CTeConsultaServiceClient.cs" company="ACBr.Net">
+// <copyright file="Soap12WebserviceBase.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,44 +29,22 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.Core.Exceptions;
-using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
-using System.Xml;
+using System.ServiceModel.Channels;
 
-namespace ACBr.Net.CTe.Services.Consulta
+namespace ACBr.Net.CTe.Services
 {
-	public sealed class CTeConsultaServiceClient : Soap12WebserviceBase<ICTeConsulta>, ICTeConsulta
+	public abstract class Soap12WebserviceBase<T> : DFeWebserviceBase<T> where T : class
 	{
-		#region Constructors
-
-		public CTeConsultaServiceClient(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
+		protected Soap12WebserviceBase(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
 		{
+			var custom = new CustomBinding(Endpoint.Binding);
+			var version = custom.Elements.Find<TextMessageEncodingBindingElement>();
+			version.MessageVersion = MessageVersion.Soap12;
+
+			Endpoint.Binding = custom;
 		}
-
-		#endregion Constructors
-
-		#region Methods
-
-		public string ConsultaCTe(CTeWsCabecalho cabecalho, string mensagem)
-		{
-			Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-			Guard.Against<ArgumentNullException>(mensagem.IsEmpty(), nameof(mensagem));
-
-			var xml = new XmlDocument();
-			xml.LoadXml(mensagem);
-
-			var inValue = new ConsultaRequest(cabecalho, xml);
-			var retVal = ((ICTeConsulta)this).ConsultaCTe(inValue);
-			return retVal.Result.OuterXml;
-		}
-
-		ConsultaResponse ICTeConsulta.ConsultaCTe(ConsultaRequest request)
-		{
-			return Channel.ConsultaCTe(request);
-		}
-
-		#endregion Methods
 	}
 }

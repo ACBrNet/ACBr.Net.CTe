@@ -37,11 +37,11 @@ namespace ACBr.Net.CTe.Services
 {
 	[Serializable]
 	[ImplementPropertyChanged]
-	[XmlType(TypeName = "cteCabecMsg", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao")]
+	[XmlType(TypeName = "cteCabecMsg")]
 	public sealed class CTeWsCabecalho
 	{
 		[XmlElement(ElementName = "cUF", Order = 0)]
-		public string CUf { get; set; }
+		public int CUf { get; set; }
 
 		[XmlElement(ElementName = "versaoDados", Order = 1)]
 		public string VersaoDados { get; set; }

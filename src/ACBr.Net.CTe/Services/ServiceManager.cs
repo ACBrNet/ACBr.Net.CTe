@@ -128,7 +128,7 @@ namespace ACBr.Net.CTe.Services
 			byte[] buffer = null;
 			if (path.IsEmpty())
 			{
-				buffer = null; //Properties.Resources.Municipios;
+				buffer = Properties.Resources.Services;
 			}
 			else if (File.Exists(path))
 			{
