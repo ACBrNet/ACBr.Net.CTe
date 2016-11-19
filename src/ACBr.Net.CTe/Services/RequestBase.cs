@@ -30,35 +30,13 @@
 // ***********************************************************************
 
 using System.ServiceModel;
-using System.Xml;
 
 namespace ACBr.Net.CTe.Services
 {
 	[MessageContract]
 	public abstract class RequestBase
 	{
-		#region Constructors
-
-		protected RequestBase()
-		{
-		}
-
-		protected RequestBase(CTeWsCabecalho cabecalho, XmlNode mensagem)
-		{
-			Cabecalho = cabecalho;
-			Mensagem = mensagem;
-		}
-
-		#endregion Constructors
-
-		#region Propriedades
-
 		[MessageHeader(Name = "cteCabecMsg")]
 		public CTeWsCabecalho Cabecalho;
-
-		[MessageBodyMember(Name = "cteDadosMsg", Order = 0)]
-		public XmlNode Mensagem;
-
-		#endregion Propriedades
 	}
 }

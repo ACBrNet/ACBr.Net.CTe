@@ -30,14 +30,13 @@
 // ***********************************************************************
 
 using ACBr.Net.Core.Exceptions;
-using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
-using System.Xml;
 
 namespace ACBr.Net.CTe.Services.StatusServico
 {
-	public sealed class CTeStatusServicoServiceClient : Soap12WebserviceBase<ICTeStatusServico>, ICTeStatusServico
+	public sealed class CTeStatusServicoServiceClient : DFeSoap12ServiceClientBase<ICTeStatusServico>, ICTeStatusServico
 	{
 		#region Constructors
 
@@ -49,17 +48,14 @@ namespace ACBr.Net.CTe.Services.StatusServico
 
 		#region Methods
 
-		public string StatusServico(CTeWsCabecalho cabecalho, string mensagem)
+		public StatusServicoResult StatusServico(CTeWsCabecalho cabecalho, ConsStatServCte mensagem)
 		{
 			Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-			Guard.Against<ArgumentNullException>(mensagem.IsEmpty(), nameof(mensagem));
+			Guard.Against<ArgumentNullException>(mensagem == null, nameof(mensagem));
 
-			var xml = new XmlDocument();
-			xml.LoadXml(mensagem);
-
-			var inValue = new StatusServicoRequest(cabecalho, xml);
+			var inValue = new StatusServicoRequest(cabecalho, new StatusServicoMensagem(mensagem));
 			var retVal = ((ICTeStatusServico)this).StatusServico(inValue);
-			return retVal.Result.OuterXml;
+			return StatusServicoResult.Load(retVal.Result.OuterXml);
 		}
 
 		StatusServicoResponse ICTeStatusServico.StatusServico(StatusServicoRequest request)

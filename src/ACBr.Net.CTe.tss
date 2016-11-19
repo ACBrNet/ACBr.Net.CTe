@@ -5,5 +5,14 @@
       <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte.demo\form1.cs</string>
       <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte.demo\form1.cs</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>e:\programacao\acbr\acbr.net\acbr.net.cte\src\acbr.net.cte.demo\extensions.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\CTe.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>E:\Programacao\ACBr\ACBr.Net\ACBr.Net.CTe\src\ACBr.Net.CTe\Services\Soap12WebserviceBase.cs</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

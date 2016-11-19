@@ -42,7 +42,6 @@ namespace ACBr.Net.CTe.Services.RetRecepcao
 		public RetRecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
 		{
 			Cabecalho = cabecalho;
-			Mensagem = mensagem;
 		}
 
 		#endregion Constructors

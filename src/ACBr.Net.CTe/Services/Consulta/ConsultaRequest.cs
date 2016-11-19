@@ -46,7 +46,7 @@ namespace ACBr.Net.CTe.Services.Consulta
 		public ConsultaRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
 		{
 			Cabecalho = cabecalho;
-			Mensagem = mensagem;
+			//Mensagem = mensagem;
 		}
 
 		#endregion Constructors

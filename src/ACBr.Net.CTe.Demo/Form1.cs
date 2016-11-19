@@ -36,6 +36,14 @@ namespace ACBr.Net.CTe.Demo
 
 		#region Methods
 
+		protected override void OnLoad(EventArgs e)
+		{
+			comboBoxVersao.EnumDataSource<CTeVersao>(CTeVersao.v200);
+			comboBoxAmbiente.EnumDataSource<DFeTipoAmbiente>(DFeTipoAmbiente.Homologacao);
+
+			base.OnLoad(e);
+		}
+
 		private void InitializeLog()
 		{
 			var config = new LoggingConfiguration();
@@ -82,9 +90,9 @@ namespace ACBr.Net.CTe.Demo
 				VersaoDados = info.Versao
 			};
 
-			var mensagem = $"<consStatServCte versao=\"{info.Versao}\" xmlns=\"http://www.portalfiscal.inf.br/cte\"><tpAmb>2</tpAmb><xServ>STATUS</xServ></consStatServCte>";
+			var mensagem = new ConsStatServCte(DFeTipoAmbiente.Homologacao, info.Versao);
 			var ret = cliente.StatusServico(cabecalho, mensagem);
-			MessageBox.Show(ret);
+			MessageBox.Show(ret.Motivo);
 		}
 
 		#endregion Methods

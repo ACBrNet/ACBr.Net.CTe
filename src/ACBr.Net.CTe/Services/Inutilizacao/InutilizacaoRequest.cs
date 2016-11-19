@@ -43,7 +43,6 @@ namespace ACBr.Net.CTe.Services.Inutilizacao
 		public InutilizacaoRequest(CTeWsCabecalho cabecalho, System.Xml.XmlNode mensagem)
 		{
 			Cabecalho = cabecalho;
-			Mensagem = mensagem;
 		}
 	}
 }

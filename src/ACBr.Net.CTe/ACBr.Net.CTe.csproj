@@ -42,8 +42,8 @@
       <HintPath>..\packages\ACBr.Net.Core.1.0.1.4-beta1\lib\net40\ACBr.Net.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ACBr.Net.DFe.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\ACBr.Net.DFe.Core.1.0.1.6-beta2\lib\net40\ACBr.Net.DFe.Core.dll</HintPath>
+    <Reference Include="ACBr.Net.DFe.Core, Version=1.0.1.6, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\ACBr.Net.DFe.Core.1.0.1.6-beta3\lib\net40\ACBr.Net.DFe.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PropertyChanged, Version=1.52.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
@@ -72,10 +72,12 @@
     <Compile Include="CTeAquavModal.cs" />
     <Compile Include="CTeBalsa.cs" />
     <Compile Include="CTeDirecao.cs" />
+    <Compile Include="Services\StatusServico\ConsStatServCte.cs" />
     <Compile Include="Services\Consulta\ConsultaRequest.cs" />
     <Compile Include="Services\Consulta\CTeConsultaServiceClient.cs" />
     <Compile Include="Services\Consulta\ICTeConsulta.cs" />
     <Compile Include="Services\Consulta\ConsultaResponse.cs" />
+    <Compile Include="Services\StatusServico\StatusServicoMensagem.cs" />
     <Compile Include="Services\Inutilizacao\InutilizacaoResponse.cs" />
     <Compile Include="Services\Inutilizacao\InutilizacaoRequest.cs" />
     <Compile Include="Services\Inutilizacao\ICTeInutilizacao.cs" />
@@ -143,11 +145,11 @@
     <Compile Include="Services\ServiceInfo.cs" />
     <Compile Include="Services\ServiceManager.cs" />
     <Compile Include="Services\ResponseBase.cs" />
-    <Compile Include="Services\Soap12WebserviceBase.cs" />
     <Compile Include="Services\StatusServico\StatusServicoResponse.cs" />
     <Compile Include="Services\StatusServico\StatusServicoRequest.cs" />
     <Compile Include="Services\StatusServico\ICTeStatusServico.cs" />
     <Compile Include="Services\StatusServico\CTeStatusServicoServiceClient.cs" />
+    <Compile Include="Services\StatusServico\StatusServicoResult.cs" />
     <Compile Include="TipoDataPeriodo.cs" />
     <Compile Include="CTeEntregaComHora.cs" />
     <Compile Include="TipoHorarioIntervalo.cs" />
@@ -223,45 +225,78 @@
     <None Include="acbr.net.snk" />
     <None Include="packages.config" />
     <None Include="Resources\services.cte" />
+    <None Include="Schemas\cancCTeTiposBasico_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\cancCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\consReciCTeTiposBasico_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\consReciCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\consReciCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\consReciCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\consSitCTeTiposBasico_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\consSitCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\consSitCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\consSitCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\consStatServCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\consStatServCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\consStatServTiposBasico_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\consStatServTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\cteModalAereo_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\cteModalAereo_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\cteModalAquaviario_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\cteModalAquaviario_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\cteModalDutoviario_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\cteModalDutoviario_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\cteModalFerroviario_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\cteModalFerroviario_v3.00.xsd">
       <SubType>Designer</SubType>
@@ -271,9 +306,15 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\cteModalRodoviario_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\cteModalRodoviario_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\cteMultiModal_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\cteMultiModal_v3.00.xsd">
       <SubType>Designer</SubType>
@@ -283,33 +324,57 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\cteTiposBasico_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\cteTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\cte_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\cte_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\enviCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\enviCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\evCancCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\evCancCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\evCCeCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\evCCeCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\eventoCTeTiposBasico_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\eventoCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\eventoCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\eventoCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\evEPECCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\evEPECCTe_v3.00.xsd">
       <SubType>Designer</SubType>
@@ -323,13 +388,22 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\evRegMultimodal_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\evRegMultimodal_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\inutCTeTiposBasico_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\inutCTeTiposBasico_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\inutCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\inutCTe_v3.00.xsd">
       <SubType>Designer</SubType>
@@ -339,25 +413,43 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\procCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\procCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\procEventoCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\procEventoCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\procInutCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\procInutCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\retConsReciCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\retConsReciCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\retConsSitCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\retConsSitCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\retConsStatServCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\retConsStatServCTe_v3.00.xsd">
       <SubType>Designer</SubType>
@@ -367,17 +459,29 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\retEnviCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\retEnviCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\retEventoCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\retEventoCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Schemas\retInutCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\retInutCTe_v3.00.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\tiposGeralCTe_v2.00.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\tiposGeralCTe_v3.00.xsd">
       <SubType>Designer</SubType>

@@ -31,13 +31,14 @@
 
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
 namespace ACBr.Net.CTe.Services.Consulta
 {
-	public sealed class CTeConsultaServiceClient : Soap12WebserviceBase<ICTeConsulta>, ICTeConsulta
+	public sealed class CTeConsultaServiceClient : DFeSoap12ServiceClientBase<ICTeConsulta>, ICTeConsulta
 	{
 		#region Constructors
 

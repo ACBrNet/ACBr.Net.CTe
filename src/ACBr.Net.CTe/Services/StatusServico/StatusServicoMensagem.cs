@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="StatusServicoRequest.cs" company="ACBr.Net">
+// <copyright file="StatusServicoMensagem.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,32 +29,25 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ServiceModel;
+using System;
+using System.Xml.Serialization;
 
 namespace ACBr.Net.CTe.Services.StatusServico
 {
-	[MessageContract(WrapperName = "cteStatusServicoCTRequest", IsWrapped = false)]
-	public sealed class StatusServicoRequest : RequestBase
+	[Serializable]
+	[XmlType(TypeName = "cteDadosMsg")]
+	public class StatusServicoMensagem
 	{
-		#region Constructors
-
-		public StatusServicoRequest()
+		public StatusServicoMensagem()
 		{
 		}
 
-		public StatusServicoRequest(CTeWsCabecalho cabecalho, StatusServicoMensagem mensagem)
+		public StatusServicoMensagem(ConsStatServCte mensagem)
 		{
-			Cabecalho = cabecalho;
 			Mensagem = mensagem;
 		}
 
-		#endregion Constructors
-
-		#region Propriedades
-
-		[MessageBodyMember(Name = "cteDadosMsg", Order = 0)]
-		public StatusServicoMensagem Mensagem;
-
-		#endregion Propriedades
+		[XmlElement(ElementName = "consStatServCte", Namespace = "http://www.portalfiscal.inf.br/cte")]
+		public ConsStatServCte Mensagem { get; set; }
 	}
 }

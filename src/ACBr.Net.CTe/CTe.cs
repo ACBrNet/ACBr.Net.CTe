@@ -55,7 +55,29 @@ namespace ACBr.Net.CTe
 
 		public DFeSignature Signature { get; set; }
 
+		[DFeIgnore]
+		public bool Cancelada { get; set; }
+
 		#endregion Propriedades
+
+		#region Methods
+
+		private string GetRootName()
+		{
+			if (InfCte.Versao == CTeVersao.v300 && InfCte.Ide.Mod == ModeloCTe.Mod67)
+			{
+				return "CTeOS";
+			}
+
+			return "CTe";
+		}
+
+		private static string[] GetRootNames()
+		{
+			return new[] { "CTe", "CTeOS" };
+		}
+
+		#endregion Methods
 	}
 }
 

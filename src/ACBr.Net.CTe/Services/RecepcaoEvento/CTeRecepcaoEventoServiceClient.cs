@@ -31,13 +31,14 @@
 
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
 namespace ACBr.Net.CTe.Services.RecepcaoEvento
 {
-	public sealed class CTeRecepcaoEventoServiceClient : Soap12WebserviceBase<ICTeRecepcaoEvento>, ICTeRecepcaoEvento
+	public sealed class CTeRecepcaoEventoServiceClient : DFeSoap12ServiceClientBase<ICTeRecepcaoEvento>, ICTeRecepcaoEvento
 	{
 		#region Constructors
 

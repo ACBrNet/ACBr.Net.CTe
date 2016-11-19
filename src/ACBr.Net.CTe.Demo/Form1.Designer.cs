@@ -30,6 +30,12 @@
 		{
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPageCTe = new System.Windows.Forms.TabPage();
+			this.button1 = new System.Windows.Forms.Button();
+			this.button4 = new System.Windows.Forms.Button();
+			this.button11 = new System.Windows.Forms.Button();
+			this.button15 = new System.Windows.Forms.Button();
+			this.button16 = new System.Windows.Forms.Button();
+			this.button17 = new System.Windows.Forms.Button();
 			this.button14 = new System.Windows.Forms.Button();
 			this.button13 = new System.Windows.Forms.Button();
 			this.button12 = new System.Windows.Forms.Button();
@@ -59,6 +65,24 @@
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.btnSalvarConfig = new System.Windows.Forms.Button();
 			this.tbcConfiguracoes = new System.Windows.Forms.TabControl();
+			this.tabPageCertificado = new System.Windows.Forms.TabPage();
+			this.btnGetCertificate = new System.Windows.Forms.Button();
+			this.txtNumeroSerie = new System.Windows.Forms.TextBox();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label10 = new System.Windows.Forms.Label();
+			this.txtSenha = new System.Windows.Forms.TextBox();
+			this.btnFindCertificate = new System.Windows.Forms.Button();
+			this.txtCertificado = new System.Windows.Forms.TextBox();
+			this.label9 = new System.Windows.Forms.Label();
+			this.tabPageGeral = new System.Windows.Forms.TabPage();
+			this.btnSelecionarArquivo = new System.Windows.Forms.Button();
+			this.txtArquivoCidades = new System.Windows.Forms.TextBox();
+			this.label13 = new System.Windows.Forms.Label();
+			this.chkSalvarArquivos = new System.Windows.Forms.CheckBox();
+			this.btnSelecionarSchema = new System.Windows.Forms.Button();
+			this.txtSchemas = new System.Windows.Forms.TextBox();
+			this.label12 = new System.Windows.Forms.Label();
+			this.tabPageWebservice = new System.Windows.Forms.TabPage();
 			this.tabPageEmitente = new System.Windows.Forms.TabPage();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
@@ -88,24 +112,6 @@
 			this.lblCNPJ = new System.Windows.Forms.Label();
 			this.txtIM = new System.Windows.Forms.TextBox();
 			this.txtCNPJ = new System.Windows.Forms.TextBox();
-			this.tabPageCertificado = new System.Windows.Forms.TabPage();
-			this.btnGetCertificate = new System.Windows.Forms.Button();
-			this.txtNumeroSerie = new System.Windows.Forms.TextBox();
-			this.label11 = new System.Windows.Forms.Label();
-			this.label10 = new System.Windows.Forms.Label();
-			this.txtSenha = new System.Windows.Forms.TextBox();
-			this.btnFindCertificate = new System.Windows.Forms.Button();
-			this.txtCertificado = new System.Windows.Forms.TextBox();
-			this.label9 = new System.Windows.Forms.Label();
-			this.tabPageGeral = new System.Windows.Forms.TabPage();
-			this.btnSelecionarArquivo = new System.Windows.Forms.Button();
-			this.txtArquivoCidades = new System.Windows.Forms.TextBox();
-			this.label13 = new System.Windows.Forms.Label();
-			this.chkSalvarArquivos = new System.Windows.Forms.CheckBox();
-			this.btnSelecionarSchema = new System.Windows.Forms.Button();
-			this.txtSchemas = new System.Windows.Forms.TextBox();
-			this.label12 = new System.Windows.Forms.Label();
-			this.tabPageWebservice = new System.Windows.Forms.TabPage();
 			this.tabPageEmail = new System.Windows.Forms.TabPage();
 			this.tabPageAndress = new System.Windows.Forms.TabPage();
 			this.btnDeletar = new System.Windows.Forms.Button();
@@ -113,17 +119,14 @@
 			this.btnSalvar = new System.Windows.Forms.Button();
 			this.btnCarregar = new System.Windows.Forms.Button();
 			this.listView1 = new System.Windows.Forms.ListView();
-			this.cmhCidade = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.cmhUF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.cmhCodigo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.cmhCodigoSiafi = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.cmhProvedor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.button1 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
-			this.button11 = new System.Windows.Forms.Button();
-			this.button15 = new System.Windows.Forms.Button();
-			this.button16 = new System.Windows.Forms.Button();
-			this.button17 = new System.Windows.Forms.Button();
+			this.columnHeaderUF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeaderTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeaderVersao = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeaderUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.comboBoxVersao = new System.Windows.Forms.ComboBox();
+			this.comboBoxAmbiente = new System.Windows.Forms.ComboBox();
+			this.label14 = new System.Windows.Forms.Label();
+			this.label15 = new System.Windows.Forms.Label();
 			this.tabControl1.SuspendLayout();
 			this.tabPageCTe.SuspendLayout();
 			this.tabControl3.SuspendLayout();
@@ -135,9 +138,9 @@
 			this.tabPageDados.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tbcConfiguracoes.SuspendLayout();
-			this.tabPageEmitente.SuspendLayout();
 			this.tabPageCertificado.SuspendLayout();
 			this.tabPageGeral.SuspendLayout();
+			this.tabPageEmitente.SuspendLayout();
 			this.tabPageAndress.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -182,6 +185,60 @@
 			this.tabPageCTe.TabIndex = 0;
 			this.tabPageCTe.Text = "CTe";
 			this.tabPageCTe.UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(665, 189);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(180, 23);
+			this.button1.TabIndex = 23;
+			this.button1.Text = "Enviar Evento Email";
+			this.button1.UseVisualStyleBackColor = true;
+			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(665, 160);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(180, 23);
+			this.button4.TabIndex = 22;
+			this.button4.Text = "Enviar CTe Email";
+			this.button4.UseVisualStyleBackColor = true;
+			// 
+			// button11
+			// 
+			this.button11.Location = new System.Drawing.Point(479, 189);
+			this.button11.Name = "button11";
+			this.button11.Size = new System.Drawing.Size(180, 23);
+			this.button11.TabIndex = 21;
+			this.button11.Text = "Gerar PDF Evento";
+			this.button11.UseVisualStyleBackColor = true;
+			// 
+			// button15
+			// 
+			this.button15.Location = new System.Drawing.Point(479, 160);
+			this.button15.Name = "button15";
+			this.button15.Size = new System.Drawing.Size(180, 23);
+			this.button15.TabIndex = 20;
+			this.button15.Text = "Gerar PDF";
+			this.button15.UseVisualStyleBackColor = true;
+			// 
+			// button16
+			// 
+			this.button16.Location = new System.Drawing.Point(293, 189);
+			this.button16.Name = "button16";
+			this.button16.Size = new System.Drawing.Size(180, 23);
+			this.button16.TabIndex = 19;
+			this.button16.Text = "Imprimir Evento";
+			this.button16.UseVisualStyleBackColor = true;
+			// 
+			// button17
+			// 
+			this.button17.Location = new System.Drawing.Point(293, 160);
+			this.button17.Name = "button17";
+			this.button17.Size = new System.Drawing.Size(180, 23);
+			this.button17.TabIndex = 18;
+			this.button17.Text = "Imprimir DACTe";
+			this.button17.UseVisualStyleBackColor = true;
 			// 
 			// button14
 			// 
@@ -475,6 +532,178 @@
 			this.tbcConfiguracoes.Size = new System.Drawing.Size(277, 360);
 			this.tbcConfiguracoes.TabIndex = 0;
 			// 
+			// tabPageCertificado
+			// 
+			this.tabPageCertificado.Controls.Add(this.btnGetCertificate);
+			this.tabPageCertificado.Controls.Add(this.txtNumeroSerie);
+			this.tabPageCertificado.Controls.Add(this.label11);
+			this.tabPageCertificado.Controls.Add(this.label10);
+			this.tabPageCertificado.Controls.Add(this.txtSenha);
+			this.tabPageCertificado.Controls.Add(this.btnFindCertificate);
+			this.tabPageCertificado.Controls.Add(this.txtCertificado);
+			this.tabPageCertificado.Controls.Add(this.label9);
+			this.tabPageCertificado.Location = new System.Drawing.Point(4, 22);
+			this.tabPageCertificado.Name = "tabPageCertificado";
+			this.tabPageCertificado.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageCertificado.Size = new System.Drawing.Size(269, 334);
+			this.tabPageCertificado.TabIndex = 1;
+			this.tabPageCertificado.Text = "Certificado";
+			this.tabPageCertificado.UseVisualStyleBackColor = true;
+			// 
+			// btnGetCertificate
+			// 
+			this.btnGetCertificate.Location = new System.Drawing.Point(239, 106);
+			this.btnGetCertificate.Name = "btnGetCertificate";
+			this.btnGetCertificate.Size = new System.Drawing.Size(24, 20);
+			this.btnGetCertificate.TabIndex = 12;
+			this.btnGetCertificate.Text = "...";
+			this.btnGetCertificate.UseVisualStyleBackColor = true;
+			// 
+			// txtNumeroSerie
+			// 
+			this.txtNumeroSerie.Location = new System.Drawing.Point(6, 106);
+			this.txtNumeroSerie.Name = "txtNumeroSerie";
+			this.txtNumeroSerie.Size = new System.Drawing.Size(227, 20);
+			this.txtNumeroSerie.TabIndex = 14;
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(6, 90);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(86, 13);
+			this.label11.TabIndex = 13;
+			this.label11.Text = "Número de Serie";
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(6, 51);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(38, 13);
+			this.label10.TabIndex = 11;
+			this.label10.Text = "Senha";
+			// 
+			// txtSenha
+			// 
+			this.txtSenha.Location = new System.Drawing.Point(6, 67);
+			this.txtSenha.Name = "txtSenha";
+			this.txtSenha.PasswordChar = '*';
+			this.txtSenha.Size = new System.Drawing.Size(257, 20);
+			this.txtSenha.TabIndex = 10;
+			// 
+			// btnFindCertificate
+			// 
+			this.btnFindCertificate.Location = new System.Drawing.Point(239, 28);
+			this.btnFindCertificate.Name = "btnFindCertificate";
+			this.btnFindCertificate.Size = new System.Drawing.Size(24, 20);
+			this.btnFindCertificate.TabIndex = 4;
+			this.btnFindCertificate.Text = "...";
+			this.btnFindCertificate.UseVisualStyleBackColor = true;
+			// 
+			// txtCertificado
+			// 
+			this.txtCertificado.Location = new System.Drawing.Point(6, 28);
+			this.txtCertificado.Name = "txtCertificado";
+			this.txtCertificado.Size = new System.Drawing.Size(227, 20);
+			this.txtCertificado.TabIndex = 9;
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(6, 12);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(48, 13);
+			this.label9.TabIndex = 8;
+			this.label9.Text = "Caminho";
+			// 
+			// tabPageGeral
+			// 
+			this.tabPageGeral.Controls.Add(this.btnSelecionarArquivo);
+			this.tabPageGeral.Controls.Add(this.txtArquivoCidades);
+			this.tabPageGeral.Controls.Add(this.label13);
+			this.tabPageGeral.Controls.Add(this.chkSalvarArquivos);
+			this.tabPageGeral.Controls.Add(this.btnSelecionarSchema);
+			this.tabPageGeral.Controls.Add(this.txtSchemas);
+			this.tabPageGeral.Controls.Add(this.label12);
+			this.tabPageGeral.Location = new System.Drawing.Point(4, 22);
+			this.tabPageGeral.Name = "tabPageGeral";
+			this.tabPageGeral.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageGeral.Size = new System.Drawing.Size(269, 334);
+			this.tabPageGeral.TabIndex = 2;
+			this.tabPageGeral.Text = "Geral";
+			this.tabPageGeral.UseVisualStyleBackColor = true;
+			// 
+			// btnSelecionarArquivo
+			// 
+			this.btnSelecionarArquivo.Location = new System.Drawing.Point(239, 89);
+			this.btnSelecionarArquivo.Name = "btnSelecionarArquivo";
+			this.btnSelecionarArquivo.Size = new System.Drawing.Size(24, 20);
+			this.btnSelecionarArquivo.TabIndex = 19;
+			this.btnSelecionarArquivo.Text = "...";
+			this.btnSelecionarArquivo.UseVisualStyleBackColor = true;
+			// 
+			// txtArquivoCidades
+			// 
+			this.txtArquivoCidades.Location = new System.Drawing.Point(6, 90);
+			this.txtArquivoCidades.Name = "txtArquivoCidades";
+			this.txtArquivoCidades.Size = new System.Drawing.Size(227, 20);
+			this.txtArquivoCidades.TabIndex = 21;
+			// 
+			// label13
+			// 
+			this.label13.AutoSize = true;
+			this.label13.Location = new System.Drawing.Point(6, 74);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(84, 13);
+			this.label13.TabIndex = 20;
+			this.label13.Text = "Arquivo Cidades";
+			// 
+			// chkSalvarArquivos
+			// 
+			this.chkSalvarArquivos.AutoSize = true;
+			this.chkSalvarArquivos.Location = new System.Drawing.Point(6, 54);
+			this.chkSalvarArquivos.Name = "chkSalvarArquivos";
+			this.chkSalvarArquivos.Size = new System.Drawing.Size(129, 17);
+			this.chkSalvarArquivos.TabIndex = 18;
+			this.chkSalvarArquivos.Text = "Salvar arquivos NFSe";
+			this.chkSalvarArquivos.UseVisualStyleBackColor = true;
+			// 
+			// btnSelecionarSchema
+			// 
+			this.btnSelecionarSchema.Location = new System.Drawing.Point(239, 28);
+			this.btnSelecionarSchema.Name = "btnSelecionarSchema";
+			this.btnSelecionarSchema.Size = new System.Drawing.Size(24, 20);
+			this.btnSelecionarSchema.TabIndex = 10;
+			this.btnSelecionarSchema.Text = "...";
+			this.btnSelecionarSchema.UseVisualStyleBackColor = true;
+			// 
+			// txtSchemas
+			// 
+			this.txtSchemas.Location = new System.Drawing.Point(6, 28);
+			this.txtSchemas.Name = "txtSchemas";
+			this.txtSchemas.Size = new System.Drawing.Size(227, 20);
+			this.txtSchemas.TabIndex = 12;
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Location = new System.Drawing.Point(6, 12);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(81, 13);
+			this.label12.TabIndex = 11;
+			this.label12.Text = "Pasta Schemas";
+			// 
+			// tabPageWebservice
+			// 
+			this.tabPageWebservice.Location = new System.Drawing.Point(4, 22);
+			this.tabPageWebservice.Name = "tabPageWebservice";
+			this.tabPageWebservice.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageWebservice.Size = new System.Drawing.Size(269, 334);
+			this.tabPageWebservice.TabIndex = 3;
+			this.tabPageWebservice.Text = "Webservice";
+			this.tabPageWebservice.UseVisualStyleBackColor = true;
+			// 
 			// tabPageEmitente
 			// 
 			this.tabPageEmitente.Controls.Add(this.label7);
@@ -747,178 +976,6 @@
 			this.txtCNPJ.Size = new System.Drawing.Size(125, 20);
 			this.txtCNPJ.TabIndex = 3;
 			// 
-			// tabPageCertificado
-			// 
-			this.tabPageCertificado.Controls.Add(this.btnGetCertificate);
-			this.tabPageCertificado.Controls.Add(this.txtNumeroSerie);
-			this.tabPageCertificado.Controls.Add(this.label11);
-			this.tabPageCertificado.Controls.Add(this.label10);
-			this.tabPageCertificado.Controls.Add(this.txtSenha);
-			this.tabPageCertificado.Controls.Add(this.btnFindCertificate);
-			this.tabPageCertificado.Controls.Add(this.txtCertificado);
-			this.tabPageCertificado.Controls.Add(this.label9);
-			this.tabPageCertificado.Location = new System.Drawing.Point(4, 22);
-			this.tabPageCertificado.Name = "tabPageCertificado";
-			this.tabPageCertificado.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageCertificado.Size = new System.Drawing.Size(269, 334);
-			this.tabPageCertificado.TabIndex = 1;
-			this.tabPageCertificado.Text = "Certificado";
-			this.tabPageCertificado.UseVisualStyleBackColor = true;
-			// 
-			// btnGetCertificate
-			// 
-			this.btnGetCertificate.Location = new System.Drawing.Point(239, 106);
-			this.btnGetCertificate.Name = "btnGetCertificate";
-			this.btnGetCertificate.Size = new System.Drawing.Size(24, 20);
-			this.btnGetCertificate.TabIndex = 12;
-			this.btnGetCertificate.Text = "...";
-			this.btnGetCertificate.UseVisualStyleBackColor = true;
-			// 
-			// txtNumeroSerie
-			// 
-			this.txtNumeroSerie.Location = new System.Drawing.Point(6, 106);
-			this.txtNumeroSerie.Name = "txtNumeroSerie";
-			this.txtNumeroSerie.Size = new System.Drawing.Size(227, 20);
-			this.txtNumeroSerie.TabIndex = 14;
-			// 
-			// label11
-			// 
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(6, 90);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(86, 13);
-			this.label11.TabIndex = 13;
-			this.label11.Text = "Número de Serie";
-			// 
-			// label10
-			// 
-			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(6, 51);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(38, 13);
-			this.label10.TabIndex = 11;
-			this.label10.Text = "Senha";
-			// 
-			// txtSenha
-			// 
-			this.txtSenha.Location = new System.Drawing.Point(6, 67);
-			this.txtSenha.Name = "txtSenha";
-			this.txtSenha.PasswordChar = '*';
-			this.txtSenha.Size = new System.Drawing.Size(257, 20);
-			this.txtSenha.TabIndex = 10;
-			// 
-			// btnFindCertificate
-			// 
-			this.btnFindCertificate.Location = new System.Drawing.Point(239, 28);
-			this.btnFindCertificate.Name = "btnFindCertificate";
-			this.btnFindCertificate.Size = new System.Drawing.Size(24, 20);
-			this.btnFindCertificate.TabIndex = 4;
-			this.btnFindCertificate.Text = "...";
-			this.btnFindCertificate.UseVisualStyleBackColor = true;
-			// 
-			// txtCertificado
-			// 
-			this.txtCertificado.Location = new System.Drawing.Point(6, 28);
-			this.txtCertificado.Name = "txtCertificado";
-			this.txtCertificado.Size = new System.Drawing.Size(227, 20);
-			this.txtCertificado.TabIndex = 9;
-			// 
-			// label9
-			// 
-			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(6, 12);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(48, 13);
-			this.label9.TabIndex = 8;
-			this.label9.Text = "Caminho";
-			// 
-			// tabPageGeral
-			// 
-			this.tabPageGeral.Controls.Add(this.btnSelecionarArquivo);
-			this.tabPageGeral.Controls.Add(this.txtArquivoCidades);
-			this.tabPageGeral.Controls.Add(this.label13);
-			this.tabPageGeral.Controls.Add(this.chkSalvarArquivos);
-			this.tabPageGeral.Controls.Add(this.btnSelecionarSchema);
-			this.tabPageGeral.Controls.Add(this.txtSchemas);
-			this.tabPageGeral.Controls.Add(this.label12);
-			this.tabPageGeral.Location = new System.Drawing.Point(4, 22);
-			this.tabPageGeral.Name = "tabPageGeral";
-			this.tabPageGeral.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageGeral.Size = new System.Drawing.Size(269, 334);
-			this.tabPageGeral.TabIndex = 2;
-			this.tabPageGeral.Text = "Geral";
-			this.tabPageGeral.UseVisualStyleBackColor = true;
-			// 
-			// btnSelecionarArquivo
-			// 
-			this.btnSelecionarArquivo.Location = new System.Drawing.Point(239, 89);
-			this.btnSelecionarArquivo.Name = "btnSelecionarArquivo";
-			this.btnSelecionarArquivo.Size = new System.Drawing.Size(24, 20);
-			this.btnSelecionarArquivo.TabIndex = 19;
-			this.btnSelecionarArquivo.Text = "...";
-			this.btnSelecionarArquivo.UseVisualStyleBackColor = true;
-			// 
-			// txtArquivoCidades
-			// 
-			this.txtArquivoCidades.Location = new System.Drawing.Point(6, 90);
-			this.txtArquivoCidades.Name = "txtArquivoCidades";
-			this.txtArquivoCidades.Size = new System.Drawing.Size(227, 20);
-			this.txtArquivoCidades.TabIndex = 21;
-			// 
-			// label13
-			// 
-			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(6, 74);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(84, 13);
-			this.label13.TabIndex = 20;
-			this.label13.Text = "Arquivo Cidades";
-			// 
-			// chkSalvarArquivos
-			// 
-			this.chkSalvarArquivos.AutoSize = true;
-			this.chkSalvarArquivos.Location = new System.Drawing.Point(6, 54);
-			this.chkSalvarArquivos.Name = "chkSalvarArquivos";
-			this.chkSalvarArquivos.Size = new System.Drawing.Size(129, 17);
-			this.chkSalvarArquivos.TabIndex = 18;
-			this.chkSalvarArquivos.Text = "Salvar arquivos NFSe";
-			this.chkSalvarArquivos.UseVisualStyleBackColor = true;
-			// 
-			// btnSelecionarSchema
-			// 
-			this.btnSelecionarSchema.Location = new System.Drawing.Point(239, 28);
-			this.btnSelecionarSchema.Name = "btnSelecionarSchema";
-			this.btnSelecionarSchema.Size = new System.Drawing.Size(24, 20);
-			this.btnSelecionarSchema.TabIndex = 10;
-			this.btnSelecionarSchema.Text = "...";
-			this.btnSelecionarSchema.UseVisualStyleBackColor = true;
-			// 
-			// txtSchemas
-			// 
-			this.txtSchemas.Location = new System.Drawing.Point(6, 28);
-			this.txtSchemas.Name = "txtSchemas";
-			this.txtSchemas.Size = new System.Drawing.Size(227, 20);
-			this.txtSchemas.TabIndex = 12;
-			// 
-			// label12
-			// 
-			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(6, 12);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(81, 13);
-			this.label12.TabIndex = 11;
-			this.label12.Text = "Pasta Schemas";
-			// 
-			// tabPageWebservice
-			// 
-			this.tabPageWebservice.Location = new System.Drawing.Point(4, 22);
-			this.tabPageWebservice.Name = "tabPageWebservice";
-			this.tabPageWebservice.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageWebservice.Size = new System.Drawing.Size(269, 334);
-			this.tabPageWebservice.TabIndex = 3;
-			this.tabPageWebservice.Text = "Webservice";
-			this.tabPageWebservice.UseVisualStyleBackColor = true;
-			// 
 			// tabPageEmail
 			// 
 			this.tabPageEmail.Location = new System.Drawing.Point(4, 22);
@@ -931,6 +988,10 @@
 			// 
 			// tabPageAndress
 			// 
+			this.tabPageAndress.Controls.Add(this.label15);
+			this.tabPageAndress.Controls.Add(this.label14);
+			this.tabPageAndress.Controls.Add(this.comboBoxAmbiente);
+			this.tabPageAndress.Controls.Add(this.comboBoxVersao);
 			this.tabPageAndress.Controls.Add(this.btnDeletar);
 			this.tabPageAndress.Controls.Add(this.btnAdicionar);
 			this.tabPageAndress.Controls.Add(this.btnSalvar);
@@ -948,9 +1009,9 @@
 			// 
 			this.btnDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnDeletar.Location = new System.Drawing.Point(693, 434);
+			this.btnDeletar.Location = new System.Drawing.Point(693, 451);
 			this.btnDeletar.Name = "btnDeletar";
-			this.btnDeletar.Size = new System.Drawing.Size(75, 45);
+			this.btnDeletar.Size = new System.Drawing.Size(75, 28);
 			this.btnDeletar.TabIndex = 4;
 			this.btnDeletar.Text = "Deletar";
 			this.btnDeletar.UseVisualStyleBackColor = true;
@@ -959,9 +1020,9 @@
 			// 
 			this.btnAdicionar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAdicionar.Location = new System.Drawing.Point(774, 434);
+			this.btnAdicionar.Location = new System.Drawing.Point(774, 451);
 			this.btnAdicionar.Name = "btnAdicionar";
-			this.btnAdicionar.Size = new System.Drawing.Size(75, 45);
+			this.btnAdicionar.Size = new System.Drawing.Size(75, 28);
 			this.btnAdicionar.TabIndex = 3;
 			this.btnAdicionar.Text = "Adicionar";
 			this.btnAdicionar.UseVisualStyleBackColor = true;
@@ -970,9 +1031,9 @@
 			// 
 			this.btnSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnSalvar.Location = new System.Drawing.Point(89, 434);
+			this.btnSalvar.Location = new System.Drawing.Point(612, 451);
 			this.btnSalvar.Name = "btnSalvar";
-			this.btnSalvar.Size = new System.Drawing.Size(75, 45);
+			this.btnSalvar.Size = new System.Drawing.Size(75, 28);
 			this.btnSalvar.TabIndex = 2;
 			this.btnSalvar.Text = "Salvar";
 			this.btnSalvar.UseVisualStyleBackColor = true;
@@ -981,9 +1042,9 @@
 			// 
 			this.btnCarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCarregar.Location = new System.Drawing.Point(8, 434);
+			this.btnCarregar.Location = new System.Drawing.Point(531, 451);
 			this.btnCarregar.Name = "btnCarregar";
-			this.btnCarregar.Size = new System.Drawing.Size(75, 45);
+			this.btnCarregar.Size = new System.Drawing.Size(75, 28);
 			this.btnCarregar.TabIndex = 1;
 			this.btnCarregar.Text = "Carregar";
 			this.btnCarregar.UseVisualStyleBackColor = true;
@@ -991,11 +1052,10 @@
 			// listView1
 			// 
 			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.cmhCidade,
-            this.cmhUF,
-            this.cmhCodigo,
-            this.cmhCodigoSiafi,
-            this.cmhProvedor});
+            this.columnHeaderUF,
+            this.columnHeaderTipo,
+            this.columnHeaderVersao,
+            this.columnHeaderUrl});
 			this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.listView1.FullRowSelect = true;
 			this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -1003,89 +1063,66 @@
 			this.listView1.Location = new System.Drawing.Point(3, 3);
 			this.listView1.MultiSelect = false;
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(851, 425);
+			this.listView1.Size = new System.Drawing.Size(851, 442);
 			this.listView1.TabIndex = 0;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
 			// 
-			// cmhCidade
+			// columnHeaderUF
 			// 
-			this.cmhCidade.Text = "Cidade";
-			this.cmhCidade.Width = 471;
+			this.columnHeaderUF.Text = "UF";
+			this.columnHeaderUF.Width = 96;
 			// 
-			// cmhUF
+			// columnHeaderTipo
 			// 
-			this.cmhUF.Text = "UF";
-			this.cmhUF.Width = 91;
+			this.columnHeaderTipo.Text = "Serviço";
+			this.columnHeaderTipo.Width = 95;
 			// 
-			// cmhCodigo
+			// columnHeaderVersao
 			// 
-			this.cmhCodigo.Text = "Codigo";
-			this.cmhCodigo.Width = 101;
+			this.columnHeaderVersao.Text = "Versão";
+			this.columnHeaderVersao.Width = 266;
 			// 
-			// cmhCodigoSiafi
+			// columnHeaderUrl
 			// 
-			this.cmhCodigoSiafi.Text = "CodigoSiafi";
-			this.cmhCodigoSiafi.Width = 96;
+			this.columnHeaderUrl.Text = "Endereço";
+			this.columnHeaderUrl.Width = 241;
 			// 
-			// cmhProvedor
+			// comboBoxVersao
 			// 
-			this.cmhProvedor.Text = "Provedor";
-			this.cmhProvedor.Width = 86;
+			this.comboBoxVersao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxVersao.FormattingEnabled = true;
+			this.comboBoxVersao.Location = new System.Drawing.Point(64, 456);
+			this.comboBoxVersao.Name = "comboBoxVersao";
+			this.comboBoxVersao.Size = new System.Drawing.Size(121, 21);
+			this.comboBoxVersao.TabIndex = 5;
 			// 
-			// button1
+			// comboBoxAmbiente
 			// 
-			this.button1.Location = new System.Drawing.Point(665, 189);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(180, 23);
-			this.button1.TabIndex = 23;
-			this.button1.Text = "Enviar Evento Email";
-			this.button1.UseVisualStyleBackColor = true;
+			this.comboBoxAmbiente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxAmbiente.FormattingEnabled = true;
+			this.comboBoxAmbiente.Location = new System.Drawing.Point(248, 456);
+			this.comboBoxAmbiente.Name = "comboBoxAmbiente";
+			this.comboBoxAmbiente.Size = new System.Drawing.Size(121, 21);
+			this.comboBoxAmbiente.TabIndex = 6;
 			// 
-			// button4
+			// label14
 			// 
-			this.button4.Location = new System.Drawing.Point(665, 160);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(180, 23);
-			this.button4.TabIndex = 22;
-			this.button4.Text = "Enviar CTe Email";
-			this.button4.UseVisualStyleBackColor = true;
+			this.label14.AutoSize = true;
+			this.label14.Location = new System.Drawing.Point(18, 459);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(40, 13);
+			this.label14.TabIndex = 7;
+			this.label14.Text = "Versão";
 			// 
-			// button11
+			// label15
 			// 
-			this.button11.Location = new System.Drawing.Point(479, 189);
-			this.button11.Name = "button11";
-			this.button11.Size = new System.Drawing.Size(180, 23);
-			this.button11.TabIndex = 21;
-			this.button11.Text = "Gerar PDF Evento";
-			this.button11.UseVisualStyleBackColor = true;
-			// 
-			// button15
-			// 
-			this.button15.Location = new System.Drawing.Point(479, 160);
-			this.button15.Name = "button15";
-			this.button15.Size = new System.Drawing.Size(180, 23);
-			this.button15.TabIndex = 20;
-			this.button15.Text = "Gerar PDF";
-			this.button15.UseVisualStyleBackColor = true;
-			// 
-			// button16
-			// 
-			this.button16.Location = new System.Drawing.Point(293, 189);
-			this.button16.Name = "button16";
-			this.button16.Size = new System.Drawing.Size(180, 23);
-			this.button16.TabIndex = 19;
-			this.button16.Text = "Imprimir Evento";
-			this.button16.UseVisualStyleBackColor = true;
-			// 
-			// button17
-			// 
-			this.button17.Location = new System.Drawing.Point(293, 160);
-			this.button17.Name = "button17";
-			this.button17.Size = new System.Drawing.Size(180, 23);
-			this.button17.TabIndex = 18;
-			this.button17.Text = "Imprimir DACTe";
-			this.button17.UseVisualStyleBackColor = true;
+			this.label15.AutoSize = true;
+			this.label15.Location = new System.Drawing.Point(191, 459);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(51, 13);
+			this.label15.TabIndex = 8;
+			this.label15.Text = "Ambiente";
 			// 
 			// Form1
 			// 
@@ -1107,13 +1144,14 @@
 			this.tabPageDados.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.tbcConfiguracoes.ResumeLayout(false);
-			this.tabPageEmitente.ResumeLayout(false);
-			this.tabPageEmitente.PerformLayout();
 			this.tabPageCertificado.ResumeLayout(false);
 			this.tabPageCertificado.PerformLayout();
 			this.tabPageGeral.ResumeLayout(false);
 			this.tabPageGeral.PerformLayout();
+			this.tabPageEmitente.ResumeLayout(false);
+			this.tabPageEmitente.PerformLayout();
 			this.tabPageAndress.ResumeLayout(false);
+			this.tabPageAndress.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -1205,17 +1243,20 @@
 		private System.Windows.Forms.Button btnSalvar;
 		private System.Windows.Forms.Button btnCarregar;
 		private System.Windows.Forms.ListView listView1;
-		private System.Windows.Forms.ColumnHeader cmhCidade;
-		private System.Windows.Forms.ColumnHeader cmhUF;
-		private System.Windows.Forms.ColumnHeader cmhCodigo;
-		private System.Windows.Forms.ColumnHeader cmhCodigoSiafi;
-		private System.Windows.Forms.ColumnHeader cmhProvedor;
+		private System.Windows.Forms.ColumnHeader columnHeaderUF;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Button button11;
 		private System.Windows.Forms.Button button15;
 		private System.Windows.Forms.Button button16;
 		private System.Windows.Forms.Button button17;
+		private System.Windows.Forms.ColumnHeader columnHeaderTipo;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.ComboBox comboBoxAmbiente;
+		private System.Windows.Forms.ComboBox comboBoxVersao;
+		private System.Windows.Forms.ColumnHeader columnHeaderVersao;
+		private System.Windows.Forms.ColumnHeader columnHeaderUrl;
 	}
 }
 

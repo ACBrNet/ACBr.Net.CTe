@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="StatusServicoRequest.cs" company="ACBr.Net">
+// <copyright file="ConsStatServCte.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,32 +29,34 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ServiceModel;
+using ACBr.Net.DFe.Core.Common;
+using System;
+using System.Xml.Serialization;
 
 namespace ACBr.Net.CTe.Services.StatusServico
 {
-	[MessageContract(WrapperName = "cteStatusServicoCTRequest", IsWrapped = false)]
-	public sealed class StatusServicoRequest : RequestBase
+	[Serializable]
+	[XmlType(TypeName = "consStatServCte")]
+	public sealed class ConsStatServCte
 	{
-		#region Constructors
-
-		public StatusServicoRequest()
+		public ConsStatServCte()
 		{
 		}
 
-		public StatusServicoRequest(CTeWsCabecalho cabecalho, StatusServicoMensagem mensagem)
+		public ConsStatServCte(DFeTipoAmbiente ambiente, string versao)
 		{
-			Cabecalho = cabecalho;
-			Mensagem = mensagem;
+			Ambiente = ambiente == DFeTipoAmbiente.Producao ? 1 : 2;
+			Versao = versao;
+			xServ = "STATUS";
 		}
 
-		#endregion Constructors
+		[XmlAttribute(AttributeName = "versao")]
+		public string Versao { get; set; }
 
-		#region Propriedades
+		[XmlElement(ElementName = "tpAmb", Order = 0)]
+		public int Ambiente { get; set; }
 
-		[MessageBodyMember(Name = "cteDadosMsg", Order = 0)]
-		public StatusServicoMensagem Mensagem;
-
-		#endregion Propriedades
+		[XmlElement(ElementName = "xServ", Order = 1)]
+		public string xServ { get; set; }
 	}
 }

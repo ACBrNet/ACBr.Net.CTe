@@ -29,14 +29,12 @@
 // <summary></summary>
 // ***********************************************************************
 
-using PropertyChanged;
 using System;
 using System.Xml.Serialization;
 
 namespace ACBr.Net.CTe.Services
 {
 	[Serializable]
-	[ImplementPropertyChanged]
 	[XmlType(TypeName = "cteCabecMsg")]
 	public sealed class CTeWsCabecalho
 	{

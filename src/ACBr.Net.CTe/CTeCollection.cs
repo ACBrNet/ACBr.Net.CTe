@@ -33,13 +33,13 @@ using ACBr.Net.DFe.Core.Collection;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeCollection : DFeCollection<CTeProtCTe>
+	public sealed class CTeCollection : DFeCollection<CTe>
 	{
 		#region Methods
 
 		public void Load(string path)
 		{
-			var doc = CTeProtCTe.Load(path);
+			var doc = CTe.Load(path);
 			Add(doc);
 		}
 
