@@ -32,7 +32,7 @@
 using System.ServiceModel;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.StatusServico
+namespace ACBr.Net.CTe.Services
 {
 	[MessageContract(WrapperName = "cteStatusServicoCTResponse", IsWrapped = false)]
 	public sealed class StatusServicoResponse : ResponseBase

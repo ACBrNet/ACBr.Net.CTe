@@ -29,25 +29,66 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+using System.ComponentModel;
+using System.Drawing;
 using ACBr.Net.Core;
+using ACBr.Net.Core.Logging;
+using ACBr.Net.CTe.Configuracao;
+using ACBr.Net.CTe.Services;
 
 namespace ACBr.Net.CTe
 {
 	// ReSharper disable once InconsistentNaming
-	public class ACBrCTe : ACBrComponent
+	[ToolboxBitmap(typeof(ACBrCTe), "ACBr.Net.CTe.ACBrCTe.bmp")]
+	public sealed class ACBrCTe : ACBrComponent, IACBrLog
 	{
 		#region Propriedades
 
+		public CTeConfig Configuracoes { get; private set; }
+
+		[Browsable(false)]
 		public CTeCollection Conhecimentos { get; private set; }
 
 		#endregion Propriedades
 
 		#region Methods
 
+		public StatusServicoResult ConsultarSituacaoServico()
+		{
+			var cert = Configuracoes.Certificados.ObterCertificado();
+
+			try
+			{
+				var info = ServiceManager.GetServiceAndress(Configuracoes.Geral.VersaoCTe, Configuracoes.WebServices.Uf, TipoUrlServico.CTeStatusServico, Configuracoes.WebServices.Ambiente);
+				using (var cliente = new CTeStatusServicoServiceClient(info.Url, Configuracoes.WebServices.TimeOut, cert))
+				{
+					var cabecalho = new CTeWsCabecalho
+					{
+						CUf = (int)Configuracoes.WebServices.Uf,
+						VersaoDados = info.Versao
+					};
+
+					var mensagem = new ConsStatServCte(Configuracoes.WebServices.Ambiente, info.Versao);
+					return cliente.StatusServico(cabecalho, mensagem);
+				}
+			}
+			catch (Exception exception)
+			{
+				this.Log().Error("ConsultarSituacaoServico", exception);
+				throw;
+			}
+			finally
+			{
+				cert.Reset();
+			}
+		}
+
 		#region Override
 
 		protected override void OnInitialize()
 		{
+			Configuracoes = new CTeConfig();
 			Conhecimentos = new CTeCollection();
 		}
 

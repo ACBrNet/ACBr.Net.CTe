@@ -32,10 +32,12 @@
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Document;
+using PropertyChanged;
 
 namespace ACBr.Net.CTe
 {
-	[DFeRoot("CTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+	[ImplementPropertyChanged]
+	[DFeRoot(Namespace = "http://www.portalfiscal.inf.br/cte")]
 	public sealed class CTe : DFeDocument<CTe>
 	{
 		#region Constructors

@@ -1,12 +1,12 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 06-11-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 06-11-2017
 // ***********************************************************************
-// <copyright file="ConsStatServCte.cs" company="ACBr.Net">
+// <copyright file="CfgWebServices.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -30,33 +30,54 @@
 // ***********************************************************************
 
 using System;
-using System.Xml.Serialization;
+using System.ComponentModel;
+using ACBr.Net.Core;
 using ACBr.Net.DFe.Core.Common;
+using PropertyChanged;
 
-namespace ACBr.Net.CTe.Services
+namespace ACBr.Net.CTe.Configuracao
 {
-	[Serializable]
-	[XmlType(TypeName = "consStatServCte")]
-	public sealed class ConsStatServCte
-	{
-		public ConsStatServCte()
-		{
-		}
+    [ImplementPropertyChanged]
+    [TypeConverter(typeof(ACBrExpandableObjectConverter))]
+    public sealed class CfgWebServices : DFeWebserviceConfigBase
+    {
+        #region Constructor
 
-		public ConsStatServCte(DFeTipoAmbiente ambiente, string versao)
-		{
-			Ambiente = ambiente == DFeTipoAmbiente.Producao ? 1 : 2;
-			Versao = versao;
-			xServ = "STATUS";
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CfgWebServices"/> class.
+        /// </summary>
+        internal CfgWebServices()
+        {
+            Ambiente = DFeTipoAmbiente.Homologacao;
+            Visualizar = false;
+            AjustaAguardaConsultaRet = false;
+            AguardarConsultaRet = 1;
+            Tentativas = 3;
+            ProxyHost = string.Empty;
+            ProxyPass = string.Empty;
+            ProxyPort = string.Empty;
+            ProxyUser = string.Empty;
+        }
 
-		[XmlAttribute(AttributeName = "versao")]
-		public string Versao { get; set; }
+        #endregion Constructor
 
-		[XmlElement(ElementName = "tpAmb", Order = 0)]
-		public int Ambiente { get; set; }
+        #region Properties
 
-		[XmlElement(ElementName = "xServ", Order = 1)]
-		public string xServ { get; set; }
-	}
+        public TimeSpan? TimeOut
+        {
+            get
+            {
+                TimeSpan? timeOut = null;
+                if (AjustaAguardaConsultaRet)
+                    timeOut = TimeSpan.FromSeconds((int)AguardarConsultaRet);
+
+                return timeOut;
+            }
+        }
+
+        [Browsable(true)]
+        public DFeCodUF Uf { get; set; }
+
+        #endregion Properties
+    }
 }

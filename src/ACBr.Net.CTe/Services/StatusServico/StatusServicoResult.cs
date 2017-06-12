@@ -29,13 +29,13 @@
 // <summary></summary>
 // *************************************************************
 
+using System;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 using PropertyChanged;
-using System;
 
-namespace ACBr.Net.CTe.Services.StatusServico
+namespace ACBr.Net.CTe.Services
 {
 	[ImplementPropertyChanged]
 	[DFeRoot("retConsStatServCte", Namespace = "http://www.portalfiscal.inf.br/cte")]

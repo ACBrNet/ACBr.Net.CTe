@@ -31,7 +31,7 @@
 
 using System.ServiceModel;
 
-namespace ACBr.Net.CTe.Services.Inutilizacao
+namespace ACBr.Net.CTe.Services
 {
 	[MessageContract(WrapperName = "cteInutilizacaoCTRequest", IsWrapped = false)]
 	public sealed class InutilizacaoRequest : RequestBase

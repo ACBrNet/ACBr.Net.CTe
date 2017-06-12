@@ -32,7 +32,7 @@
 using System.ServiceModel;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.RetRecepcao
+namespace ACBr.Net.CTe.Services
 {
 	[MessageContract(WrapperName = "cteRetRecepcaoResponse", IsWrapped = false)]
 	public sealed class RetRecepcaoResponse : ResponseBase

@@ -31,7 +31,7 @@
 
 using System.ServiceModel;
 
-namespace ACBr.Net.CTe.Services.StatusServico
+namespace ACBr.Net.CTe.Services
 {
 	[MessageContract(WrapperName = "cteStatusServicoCTRequest", IsWrapped = false)]
 	public sealed class StatusServicoRequest : RequestBase

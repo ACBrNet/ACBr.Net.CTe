@@ -1,12 +1,12 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 06-11-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 06-11-2017
 // ***********************************************************************
-// <copyright file="InutilizacaoResponse.cs" company="ACBr.Net">
+// <copyright file="CTeConfig.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,33 +29,45 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ServiceModel;
-using System.Xml;
+using System.ComponentModel;
+using ACBr.Net.Core;
+using PropertyChanged;
 
-namespace ACBr.Net.CTe.Services
+namespace ACBr.Net.CTe.Configuracao
 {
-	[MessageContract(WrapperName = "cteInutilizacaoCTResponse", IsWrapped = false)]
-	public sealed class InutilizacaoResponse : ResponseBase
-	{
-		#region Constructors
+    [ImplementPropertyChanged]
+    [TypeConverter(typeof(ACBrExpandableObjectConverter))]
+    public sealed class CTeConfig
+    {
+        #region Constructor
 
-		public InutilizacaoResponse()
-		{
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CTeConfig"/> class.
+        /// </summary>
+        public CTeConfig()
+        {
+            Geral = new CfgGeral();
+            Arquivos = new CfgArquivos(this);
+            Certificados = new CfgCertificados();
+            WebServices = new CfgWebServices();
+        }
 
-		public InutilizacaoResponse(CTeWsCabecalho cabecalho, XmlNode result)
-		{
-			Cabecalho = cabecalho;
-			Result = result;
-		}
+        #endregion Constructor
 
-		#endregion Constructors
+        #region Properties
 
-		#region Propriedades
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public CfgGeral Geral { get; }
 
-		[MessageBodyMember(Name = "cteInutilizacaoCTResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao", Order = 0)]
-		public XmlNode Result;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public CfgArquivos Arquivos { get; }
 
-		#endregion Propriedades
-	}
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public CfgCertificados Certificados { get; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public CfgWebServices WebServices { get; }
+
+        #endregion Properties
+    }
 }

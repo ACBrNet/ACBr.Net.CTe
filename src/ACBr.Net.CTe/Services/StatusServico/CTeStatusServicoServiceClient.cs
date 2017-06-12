@@ -34,7 +34,7 @@ using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
 
-namespace ACBr.Net.CTe.Services.StatusServico
+namespace ACBr.Net.CTe.Services
 {
 	public sealed class CTeStatusServicoServiceClient : DFeSoap12ServiceClientBase<ICTeStatusServico>, ICTeStatusServico
 	{

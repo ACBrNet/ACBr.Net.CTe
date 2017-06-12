@@ -32,7 +32,7 @@
 using System.ServiceModel;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Consulta
+namespace ACBr.Net.CTe.Services
 {
 	[MessageContract(WrapperName = "cteConsultaCTResponse", IsWrapped = false)]
 	public sealed class ConsultaResponse : ResponseBase

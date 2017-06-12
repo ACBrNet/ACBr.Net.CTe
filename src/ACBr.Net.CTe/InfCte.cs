@@ -42,6 +42,7 @@ namespace ACBr.Net.CTe
 	{
 		#region Fields
 
+		private CTeIde ide;
 		private CTeExped exped;
 		private CTeRem rem;
 		private CTeReceb receb;
@@ -77,7 +78,22 @@ namespace ACBr.Net.CTe
 		public string Id { get; set; }
 
 		[DFeElement("ide", Id = "#004", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeIde Ide { get; set; }
+		public CTeIde Ide
+		{
+			get
+			{
+				return ide;
+			}
+			set
+			{
+				if (value.Parent != this)
+				{
+					value.Parent = this;
+				}
+
+				ide = value;
+			}
+		}
 
 		[DFeElement("compl", Ocorrencia = Ocorrencia.Obrigatoria)]
 		public CTeCompl Compl { get; set; }
@@ -177,22 +193,22 @@ namespace ACBr.Net.CTe
 
 		private bool ShouldSerializeRem()
 		{
-			return !Rem.CNPJ.IsEmpty() || !Rem.CPF.IsEmpty() || !Rem.XNome.IsEmpty();
+			return Ide.Mod == ModeloCTe.Mod57 && (!Rem.CNPJ.IsEmpty() || !Rem.CPF.IsEmpty() || !Rem.XNome.IsEmpty());
 		}
 
 		private bool ShouldSerializeExped()
 		{
-			return !Exped.CNPJ.IsEmpty() || !Exped.CPF.IsEmpty() || !Exped.XNome.IsEmpty();
+			return Ide.Mod == ModeloCTe.Mod57 && (!Exped.CNPJ.IsEmpty() || !Exped.CPF.IsEmpty() || !Exped.XNome.IsEmpty());
 		}
 
 		private bool ShouldSerializeReceb()
 		{
-			return !Receb.CNPJ.IsEmpty() || !Receb.CPF.IsEmpty() || !Receb.XNome.IsEmpty();
+			return Ide.Mod == ModeloCTe.Mod57 && (!Receb.CNPJ.IsEmpty() || !Receb.CPF.IsEmpty() || !Receb.XNome.IsEmpty());
 		}
 
 		private bool ShouldSerializeDest()
 		{
-			return !Dest.CNPJ.IsEmpty() || !Dest.CPF.IsEmpty() || !Dest.XNome.IsEmpty();
+			return Ide.Mod == ModeloCTe.Mod57 && (!Dest.CNPJ.IsEmpty() || !Dest.CPF.IsEmpty() || !Dest.XNome.IsEmpty());
 		}
 
 		#endregion Methods

@@ -31,7 +31,7 @@
 
 using System.ServiceModel;
 
-namespace ACBr.Net.CTe.Services.Inutilizacao
+namespace ACBr.Net.CTe.Services
 {
 	[ServiceContract(Name = "CteInutilizacaoSoap12", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao")]
 	public interface ICTeInutilizacao

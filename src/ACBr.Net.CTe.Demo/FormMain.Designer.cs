@@ -1,6 +1,6 @@
 ﻿namespace ACBr.Net.CTe.Demo
 {
-	partial class Form1
+	partial class FormMain
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -43,12 +43,12 @@
 			this.button9 = new System.Windows.Forms.Button();
 			this.button8 = new System.Windows.Forms.Button();
 			this.button7 = new System.Windows.Forms.Button();
-			this.button6 = new System.Windows.Forms.Button();
+			this.loadCTeButton = new System.Windows.Forms.Button();
 			this.button5 = new System.Windows.Forms.Button();
 			this.btnConsultarSituacao = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
-			this.buttonStatusService = new System.Windows.Forms.Button();
+			this.statusServiceButton = new System.Windows.Forms.Button();
 			this.tabControl3 = new System.Windows.Forms.TabControl();
 			this.tabPageRespostas = new System.Windows.Forms.TabPage();
 			this.rtLogResposta = new System.Windows.Forms.RichTextBox();
@@ -57,7 +57,7 @@
 			this.tabPageLog = new System.Windows.Forms.TabPage();
 			this.rtbLog = new System.Windows.Forms.RichTextBox();
 			this.tabPageXmlCTe = new System.Windows.Forms.TabPage();
-			this.wbbNFSe = new System.Windows.Forms.WebBrowser();
+			this.wbbXml = new System.Windows.Forms.WebBrowser();
 			this.tabPageRetornoWS = new System.Windows.Forms.TabPage();
 			this.wbbRetorno = new System.Windows.Forms.WebBrowser();
 			this.tabPageDados = new System.Windows.Forms.TabPage();
@@ -114,6 +114,10 @@
 			this.txtCNPJ = new System.Windows.Forms.TextBox();
 			this.tabPageEmail = new System.Windows.Forms.TabPage();
 			this.tabPageAndress = new System.Windows.Forms.TabPage();
+			this.label15 = new System.Windows.Forms.Label();
+			this.label14 = new System.Windows.Forms.Label();
+			this.comboBoxAmbiente = new System.Windows.Forms.ComboBox();
+			this.comboBoxVersao = new System.Windows.Forms.ComboBox();
 			this.btnDeletar = new System.Windows.Forms.Button();
 			this.btnAdicionar = new System.Windows.Forms.Button();
 			this.btnSalvar = new System.Windows.Forms.Button();
@@ -123,10 +127,7 @@
 			this.columnHeaderTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeaderVersao = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeaderUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.comboBoxVersao = new System.Windows.Forms.ComboBox();
-			this.comboBoxAmbiente = new System.Windows.Forms.ComboBox();
-			this.label14 = new System.Windows.Forms.Label();
-			this.label15 = new System.Windows.Forms.Label();
+			this.acbrCTe = new ACBr.Net.CTe.ACBrCTe();
 			this.tabControl1.SuspendLayout();
 			this.tabPageCTe.SuspendLayout();
 			this.tabControl3.SuspendLayout();
@@ -170,12 +171,12 @@
 			this.tabPageCTe.Controls.Add(this.button9);
 			this.tabPageCTe.Controls.Add(this.button8);
 			this.tabPageCTe.Controls.Add(this.button7);
-			this.tabPageCTe.Controls.Add(this.button6);
+			this.tabPageCTe.Controls.Add(this.loadCTeButton);
 			this.tabPageCTe.Controls.Add(this.button5);
 			this.tabPageCTe.Controls.Add(this.btnConsultarSituacao);
 			this.tabPageCTe.Controls.Add(this.button3);
 			this.tabPageCTe.Controls.Add(this.button2);
-			this.tabPageCTe.Controls.Add(this.buttonStatusService);
+			this.tabPageCTe.Controls.Add(this.statusServiceButton);
 			this.tabPageCTe.Controls.Add(this.tabControl3);
 			this.tabPageCTe.Controls.Add(this.groupBox1);
 			this.tabPageCTe.Location = new System.Drawing.Point(4, 22);
@@ -303,14 +304,15 @@
 			this.button7.Text = "Cancelamento CTe pela Chave";
 			this.button7.UseVisualStyleBackColor = true;
 			// 
-			// button6
+			// loadCTeButton
 			// 
-			this.button6.Location = new System.Drawing.Point(293, 102);
-			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(180, 23);
-			this.button6.TabIndex = 9;
-			this.button6.Text = "Importar XML";
-			this.button6.UseVisualStyleBackColor = true;
+			this.loadCTeButton.Location = new System.Drawing.Point(293, 102);
+			this.loadCTeButton.Name = "loadCTeButton";
+			this.loadCTeButton.Size = new System.Drawing.Size(180, 23);
+			this.loadCTeButton.TabIndex = 9;
+			this.loadCTeButton.Text = "Importar XML";
+			this.loadCTeButton.UseVisualStyleBackColor = true;
+			this.loadCTeButton.Click += new System.EventHandler(this.loadCTeButton_Click);
 			// 
 			// button5
 			// 
@@ -348,15 +350,15 @@
 			this.button2.Text = "Inutilizar Numeração";
 			this.button2.UseVisualStyleBackColor = true;
 			// 
-			// buttonStatusService
+			// statusServiceButton
 			// 
-			this.buttonStatusService.Location = new System.Drawing.Point(293, 15);
-			this.buttonStatusService.Name = "buttonStatusService";
-			this.buttonStatusService.Size = new System.Drawing.Size(180, 23);
-			this.buttonStatusService.TabIndex = 4;
-			this.buttonStatusService.Text = "Status Serviço";
-			this.buttonStatusService.UseVisualStyleBackColor = true;
-			this.buttonStatusService.Click += new System.EventHandler(this.buttonStatusService_Click);
+			this.statusServiceButton.Location = new System.Drawing.Point(293, 15);
+			this.statusServiceButton.Name = "statusServiceButton";
+			this.statusServiceButton.Size = new System.Drawing.Size(180, 23);
+			this.statusServiceButton.TabIndex = 4;
+			this.statusServiceButton.Text = "Status Serviço";
+			this.statusServiceButton.UseVisualStyleBackColor = true;
+			this.statusServiceButton.Click += new System.EventHandler(this.statusServiceButton_Click);
 			// 
 			// tabControl3
 			// 
@@ -439,7 +441,7 @@
 			// 
 			// tabPageXmlCTe
 			// 
-			this.tabPageXmlCTe.Controls.Add(this.wbbNFSe);
+			this.tabPageXmlCTe.Controls.Add(this.wbbXml);
 			this.tabPageXmlCTe.Location = new System.Drawing.Point(4, 22);
 			this.tabPageXmlCTe.Name = "tabPageXmlCTe";
 			this.tabPageXmlCTe.Padding = new System.Windows.Forms.Padding(3);
@@ -448,14 +450,14 @@
 			this.tabPageXmlCTe.Text = "CTe";
 			this.tabPageXmlCTe.UseVisualStyleBackColor = true;
 			// 
-			// wbbNFSe
+			// wbbXml
 			// 
-			this.wbbNFSe.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.wbbNFSe.Location = new System.Drawing.Point(3, 3);
-			this.wbbNFSe.MinimumSize = new System.Drawing.Size(20, 20);
-			this.wbbNFSe.Name = "wbbNFSe";
-			this.wbbNFSe.Size = new System.Drawing.Size(554, 232);
-			this.wbbNFSe.TabIndex = 2;
+			this.wbbXml.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.wbbXml.Location = new System.Drawing.Point(3, 3);
+			this.wbbXml.MinimumSize = new System.Drawing.Size(20, 20);
+			this.wbbXml.Name = "wbbXml";
+			this.wbbXml.Size = new System.Drawing.Size(554, 232);
+			this.wbbXml.TabIndex = 2;
 			// 
 			// tabPageRetornoWS
 			// 
@@ -1005,6 +1007,42 @@
 			this.tabPageAndress.Text = "Gerenciador de Endereços";
 			this.tabPageAndress.UseVisualStyleBackColor = true;
 			// 
+			// label15
+			// 
+			this.label15.AutoSize = true;
+			this.label15.Location = new System.Drawing.Point(191, 459);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(51, 13);
+			this.label15.TabIndex = 8;
+			this.label15.Text = "Ambiente";
+			// 
+			// label14
+			// 
+			this.label14.AutoSize = true;
+			this.label14.Location = new System.Drawing.Point(18, 459);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(40, 13);
+			this.label14.TabIndex = 7;
+			this.label14.Text = "Versão";
+			// 
+			// comboBoxAmbiente
+			// 
+			this.comboBoxAmbiente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxAmbiente.FormattingEnabled = true;
+			this.comboBoxAmbiente.Location = new System.Drawing.Point(248, 456);
+			this.comboBoxAmbiente.Name = "comboBoxAmbiente";
+			this.comboBoxAmbiente.Size = new System.Drawing.Size(121, 21);
+			this.comboBoxAmbiente.TabIndex = 6;
+			// 
+			// comboBoxVersao
+			// 
+			this.comboBoxVersao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxVersao.FormattingEnabled = true;
+			this.comboBoxVersao.Location = new System.Drawing.Point(64, 456);
+			this.comboBoxVersao.Name = "comboBoxVersao";
+			this.comboBoxVersao.Size = new System.Drawing.Size(121, 21);
+			this.comboBoxVersao.TabIndex = 5;
+			// 
 			// btnDeletar
 			// 
 			this.btnDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1088,49 +1126,13 @@
 			this.columnHeaderUrl.Text = "Endereço";
 			this.columnHeaderUrl.Width = 241;
 			// 
-			// comboBoxVersao
-			// 
-			this.comboBoxVersao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxVersao.FormattingEnabled = true;
-			this.comboBoxVersao.Location = new System.Drawing.Point(64, 456);
-			this.comboBoxVersao.Name = "comboBoxVersao";
-			this.comboBoxVersao.Size = new System.Drawing.Size(121, 21);
-			this.comboBoxVersao.TabIndex = 5;
-			// 
-			// comboBoxAmbiente
-			// 
-			this.comboBoxAmbiente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxAmbiente.FormattingEnabled = true;
-			this.comboBoxAmbiente.Location = new System.Drawing.Point(248, 456);
-			this.comboBoxAmbiente.Name = "comboBoxAmbiente";
-			this.comboBoxAmbiente.Size = new System.Drawing.Size(121, 21);
-			this.comboBoxAmbiente.TabIndex = 6;
-			// 
-			// label14
-			// 
-			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(18, 459);
-			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(40, 13);
-			this.label14.TabIndex = 7;
-			this.label14.Text = "Versão";
-			// 
-			// label15
-			// 
-			this.label15.AutoSize = true;
-			this.label15.Location = new System.Drawing.Point(191, 459);
-			this.label15.Name = "label15";
-			this.label15.Size = new System.Drawing.Size(51, 13);
-			this.label15.TabIndex = 8;
-			this.label15.Text = "Ambiente";
-			// 
-			// Form1
+			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(865, 511);
 			this.Controls.Add(this.tabControl1);
-			this.Name = "Form1";
+			this.Name = "FormMain";
 			this.Text = "ACBrCTe Demo";
 			this.Shown += new System.EventHandler(this.Form1_Shown);
 			this.tabControl1.ResumeLayout(false);
@@ -1167,12 +1169,12 @@
 		private System.Windows.Forms.Button button9;
 		private System.Windows.Forms.Button button8;
 		private System.Windows.Forms.Button button7;
-		private System.Windows.Forms.Button button6;
+		private System.Windows.Forms.Button loadCTeButton;
 		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.Button btnConsultarSituacao;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button buttonStatusService;
+		private System.Windows.Forms.Button statusServiceButton;
 		private System.Windows.Forms.TabControl tabControl3;
 		private System.Windows.Forms.TabPage tabPageRespostas;
 		private System.Windows.Forms.RichTextBox rtLogResposta;
@@ -1181,7 +1183,7 @@
 		private System.Windows.Forms.TabPage tabPageLog;
 		private System.Windows.Forms.RichTextBox rtbLog;
 		private System.Windows.Forms.TabPage tabPageXmlCTe;
-		private System.Windows.Forms.WebBrowser wbbNFSe;
+		private System.Windows.Forms.WebBrowser wbbXml;
 		private System.Windows.Forms.TabPage tabPageRetornoWS;
 		private System.Windows.Forms.WebBrowser wbbRetorno;
 		private System.Windows.Forms.TabPage tabPageDados;
@@ -1257,6 +1259,7 @@
 		private System.Windows.Forms.ComboBox comboBoxVersao;
 		private System.Windows.Forms.ColumnHeader columnHeaderVersao;
 		private System.Windows.Forms.ColumnHeader columnHeaderUrl;
+		private ACBrCTe acbrCTe;
 	}
 }
 

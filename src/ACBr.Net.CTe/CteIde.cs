@@ -29,6 +29,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
@@ -51,6 +52,9 @@ namespace ACBr.Net.CTe
 		#endregion Constructors
 
 		#region Propriedades
+
+		[DFeIgnore]
+		internal InfCte Parent { get; set; }
 
 		[DFeElement(TipoCampo.Enum, "cUF", Id = "#005", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public DFeCodUF CUF { get; set; }
@@ -143,10 +147,11 @@ namespace ACBr.Net.CTe
 		public CTeIndIEToma IndIEToma { get; set; }
 
 		[DFeItem(typeof(CTeToma3), "toma3")]
+		[DFeItem(typeof(CTeToma03), "toma03")]
 		[DFeItem(typeof(CTeToma4), "toma4")]
 		public ICTeTomador Tomador { get; set; }
 
-		[DFeElement(TipoCampo.DatHorTz, "dhCont", Id = "#057", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+		[DFeElement(TipoCampo.Custom, "dhCont", Id = "#057", Min = 1, Max = 21, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public DateTime DhCont { get; set; }
 
 		[DFeElement(TipoCampo.Str, "xJust", Id = "#058", Min = 15, Max = 256, Ocorrencia = Ocorrencia.Obrigatoria)]
@@ -158,7 +163,27 @@ namespace ACBr.Net.CTe
 
 		private bool ShouldSerializeIndGlobalizado()
 		{
-			return IndGlobalizado == CTeIndicador.Sim;
+			return Parent.Versao == CTeVersao.v300 && Mod == ModeloCTe.Mod57 && IndGlobalizado == CTeIndicador.Sim;
+		}
+
+		private bool ShouldSerializeIndIEToma()
+		{
+			return Parent.Versao == CTeVersao.v300 && Mod == ModeloCTe.Mod67;
+		}
+
+		private bool ShouldSerializeRetira()
+		{
+			return Mod == ModeloCTe.Mod57;
+		}
+
+		private bool ShouldSerializeXDetRetira()
+		{
+			return Mod == ModeloCTe.Mod57;
+		}
+
+		private bool ShouldSerializeTomador()
+		{
+			return Mod == ModeloCTe.Mod57;
 		}
 
 		private bool ShouldSerializeDhCont()
@@ -169,6 +194,18 @@ namespace ACBr.Net.CTe
 		private bool ShouldSerializeXJust()
 		{
 			return TpEmis == DFeTipoEmissao.FSDA;
+		}
+
+		private string SerializeDhCont()
+		{
+			return Parent.Versao == CTeVersao.v300
+				? DhCont.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'sszzz")
+				: DhCont.ToString("s");
+		}
+
+		private object DeserializeDhCont(string value)
+		{
+			return value.ToData();
 		}
 
 		#endregion Methods

@@ -31,7 +31,7 @@
 
 using System.ServiceModel;
 
-namespace ACBr.Net.CTe.Services.RetRecepcao
+namespace ACBr.Net.CTe.Services
 {
 	[ServiceContract(Name = "CteRetRecepcaoSoap12", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRetRecepcao")]
 	public interface ICTeRetRecepcao

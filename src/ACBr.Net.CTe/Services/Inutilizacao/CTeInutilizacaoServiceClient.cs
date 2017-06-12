@@ -36,7 +36,7 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Inutilizacao
+namespace ACBr.Net.CTe.Services
 {
 	public sealed class CTeInutilizacaoServiceClient : DFeSoap12ServiceClientBase<ICTeInutilizacao>, ICTeInutilizacao
 	{

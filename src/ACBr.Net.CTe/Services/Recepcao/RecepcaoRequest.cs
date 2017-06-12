@@ -32,7 +32,7 @@
 using System.ServiceModel;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.Recepcao
+namespace ACBr.Net.CTe.Services
 {
 	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
 	public sealed class RecepcaoRequest : RequestBase

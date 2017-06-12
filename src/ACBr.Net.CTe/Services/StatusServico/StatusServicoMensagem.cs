@@ -32,7 +32,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace ACBr.Net.CTe.Services.StatusServico
+namespace ACBr.Net.CTe.Services
 {
 	[Serializable]
 	[XmlType(TypeName = "cteDadosMsg")]

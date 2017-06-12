@@ -31,7 +31,7 @@
 
 using System.ServiceModel;
 
-namespace ACBr.Net.CTe.Services.StatusServico
+namespace ACBr.Net.CTe.Services
 {
 	[ServiceContract(Name = "CteStatusServicoSoap12", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico")]
 	public interface ICTeStatusServico

@@ -48,10 +48,10 @@ namespace ACBr.Net.CTe.Services
 
 		static ServiceManager()
 		{
-			Servicos = new Dictionary<CTeVersao, List<CTeServicos>>(2)
+			Servicos = new Dictionary<CTeVersao, CTeServicos[]>(2)
 			{
-				{CTeVersao.v200, new List<CTeServicos>(27)},
-				{CTeVersao.v300, new List<CTeServicos>(27)}
+				{CTeVersao.v200, new CTeServicos[27]},
+				{CTeVersao.v300, new CTeServicos[27]}
 			};
 
 			Load();
@@ -61,7 +61,7 @@ namespace ACBr.Net.CTe.Services
 
 		#region Propriedades
 
-		public static Dictionary<CTeVersao, List<CTeServicos>> Servicos { get; }
+		public static Dictionary<CTeVersao, CTeServicos[]> Servicos { get; }
 
 		#endregion Propriedades
 
@@ -70,7 +70,6 @@ namespace ACBr.Net.CTe.Services
 		public static ServiceInfo GetServiceAndress(CTeVersao versao, DFeCodUF uf, TipoUrlServico tipo, DFeTipoAmbiente ambiente)
 		{
 			var services = Servicos[versao].SingleOrDefault(x => x.UF == uf);
-
 			Guard.Against<ACBrException>(services == null, "UF não encontrada no arquivo de serviços");
 
 			switch (ambiente)
@@ -155,7 +154,7 @@ namespace ACBr.Net.CTe.Services
 			using (var zip = new GZipStream(stream, CompressionMode.Decompress))
 			{
 				var formatter = new BinaryFormatter();
-				var itens = (KeyValuePair<CTeVersao, List<CTeServicos>>[])formatter.Deserialize(zip);
+				var itens = (KeyValuePair<CTeVersao, CTeServicos[]>[])formatter.Deserialize(zip);
 
 				Servicos.Clear();
 				foreach (var item in itens)

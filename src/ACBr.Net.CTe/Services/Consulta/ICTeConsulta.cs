@@ -31,7 +31,7 @@
 
 using System.ServiceModel;
 
-namespace ACBr.Net.CTe.Services.Consulta
+namespace ACBr.Net.CTe.Services
 {
 	[ServiceContract(Name = "CteConsultaSoap12", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta")]
 	public interface ICTeConsulta

@@ -36,7 +36,7 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
-namespace ACBr.Net.CTe.Services.RecepcaoEvento
+namespace ACBr.Net.CTe.Services
 {
 	public sealed class CTeRecepcaoEventoServiceClient : DFeSoap12ServiceClientBase<ICTeRecepcaoEvento>, ICTeRecepcaoEvento
 	{

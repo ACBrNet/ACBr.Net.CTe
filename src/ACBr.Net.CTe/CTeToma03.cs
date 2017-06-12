@@ -1,12 +1,12 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 10-14-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 10-14-2016
 // ***********************************************************************
-// <copyright file="InutilizacaoResponse.cs" company="ACBr.Net">
+// <copyright file="CTeToma03.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,33 +29,15 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ServiceModel;
-using System.Xml;
+using ACBr.Net.Core.Generics;
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe.Services
+namespace ACBr.Net.CTe
 {
-	[MessageContract(WrapperName = "cteInutilizacaoCTResponse", IsWrapped = false)]
-	public sealed class InutilizacaoResponse : ResponseBase
+	public sealed class CTeToma03 : GenericClone<CTeToma03>, ICTeTomador
 	{
-		#region Constructors
-
-		public InutilizacaoResponse()
-		{
-		}
-
-		public InutilizacaoResponse(CTeWsCabecalho cabecalho, XmlNode result)
-		{
-			Cabecalho = cabecalho;
-			Result = result;
-		}
-
-		#endregion Constructors
-
-		#region Propriedades
-
-		[MessageBodyMember(Name = "cteInutilizacaoCTResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao", Order = 0)]
-		public XmlNode Result;
-
-		#endregion Propriedades
+		[DFeElement(TipoCampo.Enum, "toma", Id = "#036", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+		public CTeTomador Toma { get; set; }
 	}
 }

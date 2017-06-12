@@ -29,14 +29,14 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.Core.Exceptions;
-using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
+using ACBr.Net.Core.Exceptions;
+using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Service;
 
-namespace ACBr.Net.CTe.Services.Consulta
+namespace ACBr.Net.CTe.Services
 {
 	public sealed class CTeConsultaServiceClient : DFeSoap12ServiceClientBase<ICTeConsulta>, ICTeConsulta
 	{
