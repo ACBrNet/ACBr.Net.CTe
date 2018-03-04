@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f1489cbe-cc98-46ff-90a2-6a2c0ae30908</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ACBr.Net.CTe</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ACBrCTe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AquavDetCont.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigArquivos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigCertificados.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigGeral.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigWebServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAereoModal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAereoNatCarga.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAereoPeri.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAereoTarifa.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAInfTotAP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAnulacao.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAquavInfDoc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAquavInfNF.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAquavInfNFe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAquavModal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeAutXML.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeBalsa.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeCobranca.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeCompl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeComplemento.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeComplEntrega.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeDest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeDirecao.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeDuplicata.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CteDutoModal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEmiDocAnt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEmiOcc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEmit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEndereco.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEntregaComData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEntregaComHora.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEntregaNoInter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEntregaNoPeriodo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEntregaSemData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeEntregaSemHora.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeExped.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeFaturamento.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeFerrovEnv.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeFerrovModal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeFluxo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeFluxoPass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeICMS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeICMS00.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeICMS20.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeICMS45.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeICMS60.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeICMS90.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeICMSOutraUF.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeICMSSN.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeICMSUFFim.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeIdDocAntEle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeIdDocAntPap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CteIde.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeImp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeIndicador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeIndIEToma.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeIndNegociavel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfCanc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfCarga.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfCteMultimodal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfCteSub.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfEvento.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfGlobalizado.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfManu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfModal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfNF.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfNFe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfOutros.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfProt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfQ.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfSeg.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeLacre.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeModal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeMultimodal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeNormal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeObsCont.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeObsFisco.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTePrestComp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CteProc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeProtCTe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeReceb.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeRefNF.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeRem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeRetCancCte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeRetEventoCTe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeRetira.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeRodoModal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeRodoOcc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeSeguro.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeStrings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTipo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTipoDocumento.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTipoDocumentoAnterior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTipoEvento.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTipoServico.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTipoTrafego.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeToma03.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeToma3.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeToma4.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTomador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTomaICMS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTrafegoMutuo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTrafMut.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeTUnidCarga.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeUniAP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeUnidadeTransp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeVeicNovos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeVersao.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeVPrest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICTeAquavInfDoc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICTeICMS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICTeIdDocAnt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICTeInfDoc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICTeModal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICTeTipoData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICTeTipoHora.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICTeTomador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IInfoCTe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IInfoUnidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InfCte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModeloCTe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ConsultaCTeResposta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ConsultaStatusResposta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ConsultaCTeRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ConsultaCTeResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ConsultaResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\CTeConsultaServiceClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ICTeConsulta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeResposta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeResultaBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeWSCabecalho.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\CTeInutilizacaoServiceClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\ICTeInutilizacao.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\InutilizacaoRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\InutilizacaoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\CTeRecepcaoEventoServiceClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\ICTeRecepcaoEvento.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\RecepcaoEventoRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\RecepcaoEventoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\CTeRecepcaoServiceClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\ICteRecepcao.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\RecepcaoRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\RecepcaoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RequestBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ResponseBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RetRecepcao\CTeRetRecepcaoServiceClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RetRecepcao\ICTeRetRecepcao.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RetRecepcao\RetRecepcaoRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RetRecepcao\RetRecepcaoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ServicoCTe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\CTeStatusServicoServiceClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\ICTeStatusServico.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\StatusServiceResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\StatusServicoRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\StatusServicoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TipoDataPeriodo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TipoHorarioIntervalo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ACBrCTe.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\services.cte" />
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cancCTeTiposBasico_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cancCTeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consReciCTeTiposBasico_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consReciCTeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consReciCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consReciCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consSitCTeTiposBasico_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consSitCTeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consSitCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consSitCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consStatServCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consStatServCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consStatServTiposBasico_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consStatServTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalAereo_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalAereo_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalAquaviario_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalAquaviario_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalDutoviario_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalDutoviario_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalFerroviario_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalFerroviario_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalRodoviarioOS_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalRodoviario_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteModalRodoviario_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteMultiModal_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteMultiModal_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteOS_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteTiposBasico_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cteTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cte_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\cte_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\enviCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\enviCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evCancCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evCancCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evCCeCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evCCeCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\eventoCTeTiposBasico_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\eventoCTeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\eventoCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\eventoCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evEPECCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evEPECCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evGTV_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evPrestDesacordo_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evRegMultimodal_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\evRegMultimodal_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\inutCTeTiposBasico_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\inutCTeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\inutCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\inutCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\procCTeOS_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\procCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\procCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\procEventoCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\procEventoCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\procInutCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\procInutCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retConsReciCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retConsReciCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retConsSitCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retConsSitCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retConsStatServCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retConsStatServCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retCTeOS_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retEnviCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retEnviCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retEventoCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retEventoCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retInutCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\retInutCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\tiposGeralCTe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\tiposGeralCTe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\xmldsig-core-schema_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

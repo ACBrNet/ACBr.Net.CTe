@@ -1,8 +1,9 @@
-﻿using System;
-using System.Configuration;
+using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
+using System.Xml;
+using ACBr.Net.Core.Extensions;
 
 namespace ACBr.Net.CTe.Demo
 {
@@ -16,24 +17,40 @@ namespace ACBr.Net.CTe.Demo
 			var path = Path.GetTempPath();
 			var fileName = Guid.NewGuid() + ".xml";
 			var fullFileName = Path.Combine(path, fileName);
-			var xmlDoc = File.Exists(xml) ? XDocument.Load(xml) : XDocument.Parse(xml);
+			var xmlDoc = new XmlDocument();
+			if (File.Exists(xml))
+				xmlDoc.Load(xml);
+			else
+				xmlDoc.LoadXml(xml);
 			xmlDoc.Save(fullFileName);
 			browser.Navigate(fullFileName);
 		}
 
-		public static void EnumDataSource<T>(this ComboBox cmb, T? valorPadrao = null) where T : struct
+		public static void EnumDataSource<T>(this ComboBox cmb) where T : struct
 		{
-			cmb.DataSource = Enum.GetValues(typeof(T));
-			if (valorPadrao.HasValue)
-				cmb.SelectedItem = valorPadrao.Value;
+			cmb.DataSource = (from T value in Enum.GetValues(typeof(T)) select new ItemData<T>(value))
+				.OrderBy(x => x.Description).ToArray();
 		}
 
-		public static void AddValue(this KeyValueConfigurationCollection col, string key, string value)
+		public static void EnumDataSource<T>(this ComboBox cmb, T valorPadrao) where T : struct
 		{
-			if (col[key]?.Value != null)
-				col[key].Value = value;
-			else
-				col.Add(key, value);
+			var dataSource = (from T value in Enum.GetValues(typeof(T)) select new ItemData<T>(value))
+				.OrderBy(x => x.Description).ToArray();
+			cmb.DataSource = dataSource;
+			cmb.SelectedItem = dataSource.SingleOrDefault(x => x.Content.Equals(valorPadrao));
+		}
+
+		public static void EnumDataSource<T>(this ComboBox cmb, T valorPadrao, params T[] excluded) where T : struct
+		{
+			var dataSource = (from T value in Enum.GetValues(typeof(T)) where !value.IsIn(excluded) select new ItemData<T>(value))
+				.OrderBy(x => x.Description).ToArray();
+			cmb.DataSource = dataSource;
+			cmb.SelectedItem = dataSource.SingleOrDefault(x => x.Content.Equals(valorPadrao));
+		}
+
+		public static T GetSelectedValue<T>(this ComboBox cmb) where T : struct
+		{
+			return ((ItemData<T>)cmb.SelectedItem).Content;
 		}
 	}
 }

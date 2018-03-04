@@ -9,27 +9,32 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ACBr.Net.CTe</RootNamespace>
     <AssemblyName>ACBr.Net.CTe</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Debug\Net45\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\bin\Debug\Net45\ACBr.Net.CTe.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\Net45\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\bin\Release\Net45\ACBr.Net.CTe.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -38,15 +43,14 @@
     <AssemblyOriginatorKeyFile>acbr.net.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ACBr.Net.Core, Version=1.0.1.7, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\ACBr.Net.Core.1.0.1.7\lib\net40\ACBr.Net.Core.dll</HintPath>
+    <Reference Include="ACBr.Net.Core, Version=1.2.1.0, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\ACBr.Net.Core.1.2.1-beta3\lib\net452\ACBr.Net.Core.dll</HintPath>
     </Reference>
-    <Reference Include="ACBr.Net.DFe.Core, Version=1.0.2.4, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\ACBr.Net.DFe.Core.1.0.2.4-beta1\lib\net40\ACBr.Net.DFe.Core.dll</HintPath>
+    <Reference Include="ACBr.Net.DFe.Core, Version=1.2.1.0, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\ACBr.Net.DFe.Core.1.2.1-beta3\lib\net452\ACBr.Net.DFe.Core.dll</HintPath>
     </Reference>
-    <Reference Include="PropertyChanged, Version=1.53.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyChanged.Fody.1.53.0\lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="PropertyChanged, Version=2.2.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.2.2.9\lib\net452\PropertyChanged.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -61,461 +65,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ACBrCTe.cs">
-      <SubType>ACBr.Net</SubType>
+    <Compile Include="..\Shared\ACBr.Net.CTe.AssemblyInfo.cs">
+      <Link>Properties\ACBr.Net.CTe.AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AquavDetCont.cs" />
-    <Compile Include="Configuracao\CfgArquivos.cs" />
-    <Compile Include="Configuracao\CfgCertificados.cs" />
-    <Compile Include="Configuracao\CfgGeral.cs" />
-    <Compile Include="Configuracao\CfgWebServices.cs" />
-    <Compile Include="Configuracao\CTeConfig.cs" />
-    <Compile Include="CTeAquavInfNF.cs" />
-    <Compile Include="CTeAquavInfDoc.cs" />
-    <Compile Include="CTeAquavModal.cs" />
-    <Compile Include="CTeBalsa.cs" />
-    <Compile Include="CTeDirecao.cs" />
-    <Compile Include="CTeToma03.cs" />
-    <Compile Include="Services\StatusServico\ConsStatServCte.cs" />
-    <Compile Include="Services\Consulta\ConsultaRequest.cs" />
-    <Compile Include="Services\Consulta\CTeConsultaServiceClient.cs" />
-    <Compile Include="Services\Consulta\ICTeConsulta.cs" />
-    <Compile Include="Services\Consulta\ConsultaResponse.cs" />
-    <Compile Include="Services\StatusServico\StatusServicoMensagem.cs" />
-    <Compile Include="Services\Inutilizacao\InutilizacaoResponse.cs" />
-    <Compile Include="Services\Inutilizacao\InutilizacaoRequest.cs" />
-    <Compile Include="Services\Inutilizacao\ICTeInutilizacao.cs" />
-    <Compile Include="Services\Inutilizacao\CTeInutilizacaoServiceClient.cs" />
-    <Compile Include="Services\RecepcaoEvento\RecepcaoEventoResponse.cs" />
-    <Compile Include="Services\RecepcaoEvento\RecepcaoEventoRequest.cs" />
-    <Compile Include="Services\RecepcaoEvento\ICTeRecepcaoEvento.cs" />
-    <Compile Include="Services\RecepcaoEvento\CTeRecepcaoEventoServiceClient.cs" />
-    <Compile Include="Services\RequestBase.cs" />
-    <Compile Include="Services\CTeWSCabecalho.cs" />
-    <Compile Include="Services\Recepcao\RecepcaoRequest.cs" />
-    <Compile Include="Services\CTeServicos.cs" />
-    <Compile Include="CTeFerrovModal.cs" />
-    <Compile Include="CTeInfSeg.cs" />
-    <Compile Include="CTeUniAP.cs" />
-    <Compile Include="CTeAereoPeri.cs" />
-    <Compile Include="CTeAereoTarifa.cs" />
-    <Compile Include="CTeInfManu.cs" />
-    <Compile Include="CTeAereoModal.cs" />
-    <Compile Include="CTeAereoNatCarga.cs" />
-    <Compile Include="CTeEmiOcc.cs" />
-    <Compile Include="CTeRodoOcc.cs" />
-    <Compile Include="CTeTipoDocumento.cs" />
-    <Compile Include="CTeCollection.cs" />
-    <Compile Include="CTeTipoTrafego.cs" />
-    <Compile Include="CTeTrafMut.cs" />
-    <Compile Include="CTeTrafegoMutuo.cs" />
-    <Compile Include="CTeFerrovEnv.cs" />
-    <Compile Include="ICTeAquavInfDoc.cs" />
-    <Compile Include="ICTeICMS.cs" />
-    <Compile Include="ICTeInfDoc.cs" />
-    <Compile Include="ICTeModal.cs" />
-    <Compile Include="ICTeTipoData.cs" />
-    <Compile Include="ICTeTipoHora.cs" />
-    <Compile Include="ICTeTomador.cs" />
-    <Compile Include="IInfoCTe.cs" />
-    <Compile Include="IInfoUnidade.cs" />
-    <Compile Include="CTeMultimodal.cs" />
-    <Compile Include="CTeIndNegociavel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CteProc.cs" />
-    <Compile Include="CTe.cs" />
-    <Compile Include="InfCte.cs" />
-    <Compile Include="CTeAutXML.cs" />
-    <Compile Include="CTeCompl.cs" />
-    <Compile Include="CTeComplEntrega.cs" />
-    <Compile Include="CTeEntregaComData.cs" />
-    <Compile Include="CTeRodoModal.cs" />
-    <Compile Include="CTeAInfTotAP.cs" />
-    <Compile Include="CTeAquavInfNFe.cs" />
-    <Compile Include="CteDutoModal.cs" />
-    <Compile Include="CTeSeguro.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Services\Recepcao\CTeRecepcaoServiceClient.cs" />
-    <Compile Include="Services\Recepcao\ICteRecepcao.cs" />
-    <Compile Include="Services\Recepcao\RecepcaoResponse.cs" />
-    <Compile Include="Services\RetRecepcao\RetRecepcaoResponse.cs" />
-    <Compile Include="Services\RetRecepcao\RetRecepcaoRequest.cs" />
-    <Compile Include="Services\RetRecepcao\ICTeRetRecepcao.cs" />
-    <Compile Include="Services\RetRecepcao\CTeRetRecepcaoServiceClient.cs" />
-    <Compile Include="Services\ServiceInfo.cs" />
-    <Compile Include="Services\ServiceManager.cs" />
-    <Compile Include="Services\ResponseBase.cs" />
-    <Compile Include="Services\StatusServico\StatusServicoResponse.cs" />
-    <Compile Include="Services\StatusServico\StatusServicoRequest.cs" />
-    <Compile Include="Services\StatusServico\ICTeStatusServico.cs" />
-    <Compile Include="Services\StatusServico\CTeStatusServicoServiceClient.cs" />
-    <Compile Include="Services\StatusServico\StatusServicoResult.cs" />
-    <Compile Include="TipoDataPeriodo.cs" />
-    <Compile Include="CTeEntregaComHora.cs" />
-    <Compile Include="TipoHorarioIntervalo.cs" />
-    <Compile Include="CTeEntregaNoInter.cs" />
-    <Compile Include="CTeEntregaNoPeriodo.cs" />
-    <Compile Include="CTeEntregaSemData.cs" />
-    <Compile Include="CTeEntregaSemHora.cs" />
-    <Compile Include="CTeFluxo.cs" />
-    <Compile Include="CTeFluxoPass.cs" />
-    <Compile Include="CTeObsCont.cs" />
-    <Compile Include="CTeObsFisco.cs" />
-    <Compile Include="CTeDest.cs" />
-    <Compile Include="CTeEmit.cs" />
-    <Compile Include="CTeExped.cs" />
-    <Compile Include="CteIde.cs" />
-    <Compile Include="CTeIndicador.cs" />
-    <Compile Include="CTeIndIEToma.cs" />
-    <Compile Include="CTeRetira.cs" />
-    <Compile Include="CTeToma3.cs" />
-    <Compile Include="CTeTomador.cs" />
-    <Compile Include="CTeToma4.cs" />
-    <Compile Include="CTeTipoServico.cs" />
-    <Compile Include="CTeImp.cs" />
-    <Compile Include="CTeICMSUFFim.cs" />
-    <Compile Include="CTeAnulacao.cs" />
-    <Compile Include="CTeComplemento.cs" />
-    <Compile Include="CTeNormal.cs" />
-    <Compile Include="CTeCobranca.cs" />
-    <Compile Include="CTeDuplicata.cs" />
-    <Compile Include="CTeFaturamento.cs" />
-    <Compile Include="CTeEmiDocAnt.cs" />
-    <Compile Include="ICTeIdDocAnt.cs" />
-    <Compile Include="CTeIdDocAntEle.cs" />
-    <Compile Include="CTeIdDocAntPap.cs" />
-    <Compile Include="CTeTipoDocumentoAnterior.cs" />
-    <Compile Include="CTeInfCarga.cs" />
-    <Compile Include="CTeInfQ.cs" />
-    <Compile Include="CTeInfCteMultimodal.cs" />
-    <Compile Include="CTeInfCteSub.cs" />
-    <Compile Include="CTeTomaICMS.cs" />
-    <Compile Include="CTeRefNF.cs" />
-    <Compile Include="CTeInfNF.cs" />
-    <Compile Include="CTeInfNFe.cs" />
-    <Compile Include="CTeInfOutros.cs" />
-    <Compile Include="CTeInfGlobalizado.cs" />
-    <Compile Include="CTeInfModal.cs" />
-    <Compile Include="CTeVeicNovos.cs" />
-    <Compile Include="CTeReceb.cs" />
-    <Compile Include="CTeRem.cs" />
-    <Compile Include="CTeVPrest.cs" />
-    <Compile Include="CTePrestComp.cs" />
-    <Compile Include="CTeEndereco.cs" />
-    <Compile Include="CTeTipo.cs" />
-    <Compile Include="CTeICMS.cs" />
-    <Compile Include="CTeICMS00.cs" />
-    <Compile Include="CTeICMS20.cs" />
-    <Compile Include="CTeICMS45.cs" />
-    <Compile Include="CTeICMS60.cs" />
-    <Compile Include="CTeICMS90.cs" />
-    <Compile Include="CTeICMSOutraUF.cs" />
-    <Compile Include="CTeICMSSN.cs" />
-    <Compile Include="ModeloCTe.cs" />
-    <Compile Include="CTeModal.cs" />
-    <Compile Include="CTeProtCTe.cs" />
-    <Compile Include="CTeInfProt.cs" />
-    <Compile Include="CTeUnidadeTransp.cs" />
-    <Compile Include="CTeTUnidCarga.cs" />
-    <Compile Include="CTeLacre.cs" />
-    <Compile Include="CTeVersao.cs" />
-    <Compile Include="Services\TipoUrlServico.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="acbr.net.snk" />
+    <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Resources\services.cte" />
-    <None Include="Schemas\cancCTeTiposBasico_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\cancCTeTiposBasico_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\consReciCTeTiposBasico_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\consReciCTeTiposBasico_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\consReciCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\consReciCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\consSitCTeTiposBasico_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\consSitCTeTiposBasico_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\consSitCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\consSitCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\consStatServCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\consStatServCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\consStatServTiposBasico_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\consStatServTiposBasico_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cteModalAereo_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\cteModalAereo_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cteModalAquaviario_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\cteModalAquaviario_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cteModalDutoviario_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\cteModalDutoviario_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cteModalFerroviario_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\cteModalFerroviario_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cteModalRodoviarioOS_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cteModalRodoviario_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\cteModalRodoviario_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cteMultiModal_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\cteMultiModal_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cteOS_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cteTiposBasico_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\cteTiposBasico_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\cte_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\cte_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\enviCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\enviCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\evCancCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\evCancCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\evCCeCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\evCCeCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\eventoCTeTiposBasico_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\eventoCTeTiposBasico_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\eventoCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\eventoCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\evEPECCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\evEPECCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\evGTV_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\evPrestDesacordo_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\evRegMultimodal_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\evRegMultimodal_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\inutCTeTiposBasico_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\inutCTeTiposBasico_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\inutCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\inutCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\procCTeOS_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\procCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\procCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\procEventoCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\procEventoCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\procInutCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\procInutCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\retConsReciCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\retConsReciCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\retConsSitCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\retConsSitCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\retConsStatServCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\retConsStatServCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\retCTeOS_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\retEnviCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\retEnviCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\retEventoCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\retEventoCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\retInutCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\retInutCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\tiposGeralCTe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\tiposGeralCTe_v3.00.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\xmldsig-core-schema_v1.01.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ACBrCTe.bmp" />
-  </ItemGroup>
+  <Import Project="..\ACBr.Net.CTe.Shared\ACBr.Net.CTe.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.2.1.0\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.2.1.0\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
+  <Import Project="..\packages\Fody.2.4.4\build\Fody.targets" Condition="Exists('..\packages\Fody.2.4.4\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.2.1.0\build\portable-net+sl+win+wpa+wp\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.1.0\build\portable-net+sl+win+wpa+wp\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.2.4.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.4.4\build\Fody.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

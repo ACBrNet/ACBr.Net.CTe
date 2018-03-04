@@ -1,13 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACBr.Net.CTe", "ACBr.Net.CTe\ACBr.Net.CTe.csproj", "{950A8980-2F67-4110-9521-9E3B0E5F6694}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACBr.Net.CTe.Demo", "ACBr.Net.CTe.Demo\ACBr.Net.CTe.Demo.csproj", "{2FCBB84A-25B0-4C05-BCDC-46A61C82ED1A}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ACBr.Net.CTe.Shared", "ACBr.Net.CTe.Shared\ACBr.Net.CTe.Shared.shproj", "{F1489CBE-CC98-46FF-90A2-6A2C0AE30908}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{5981C831-42FA-49C5-A56D-B012DF69E789}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{3A25E064-557A-4671-93D8-73EF51C92323}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{D1E3C9C8-064A-4F1A-B89D-BD1EB6CFA6AD}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\ACBr.Net.CTe.AssemblyInfo.cs = Shared\ACBr.Net.CTe.AssemblyInfo.cs
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ACBr.Net.CTe.Shared\ACBr.Net.CTe.Shared.projitems*{950a8980-2f67-4110-9521-9e3b0e5f6694}*SharedItemsImports = 4
+		ACBr.Net.CTe.Shared\ACBr.Net.CTe.Shared.projitems*{f1489cbe-cc98-46ff-90a2-6a2c0ae30908}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -24,5 +39,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{950A8980-2F67-4110-9521-9E3B0E5F6694} = {5981C831-42FA-49C5-A56D-B012DF69E789}
+		{2FCBB84A-25B0-4C05-BCDC-46A61C82ED1A} = {3A25E064-557A-4671-93D8-73EF51C92323}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {71B0E486-108E-459C-96CC-0A11B80CA0BE}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACBr.Net.CTe", "ACBr.Net.CTe\ACBr.Net.CTe.csproj", "{950A8980-2F67-4110-9521-9E3B0E5F6694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACBr.Net.CTe.Demo", "ACBr.Net.CTe.Demo\ACBr.Net.CTe.Demo.csproj", "{2FCBB84A-25B0-4C05-BCDC-46A61C82ED1A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ACBr.Net.CTe.Shared", "ACBr.Net.CTe.Shared\ACBr.Net.CTe.Shared.shproj", "{F1489CBE-CC98-46FF-90A2-6A2C0AE30908}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{5981C831-42FA-49C5-A56D-B012DF69E789}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{3A25E064-557A-4671-93D8-73EF51C92323}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACBr.Net.CTe.Standard", "ACBr.Net.CTe.Standard\ACBr.Net.CTe.Standard.csproj", "{2169FA5D-AFF2-472C-AB90-620533B68E21}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ACBr.Net.CTe.Shared\ACBr.Net.CTe.Shared.projitems*{950a8980-2f67-4110-9521-9e3b0e5f6694}*SharedItemsImports = 4
+		ACBr.Net.CTe.Shared\ACBr.Net.CTe.Shared.projitems*{f1489cbe-cc98-46ff-90a2-6a2c0ae30908}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{950A8980-2F67-4110-9521-9E3B0E5F6694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{950A8980-2F67-4110-9521-9E3B0E5F6694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{950A8980-2F67-4110-9521-9E3B0E5F6694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{950A8980-2F67-4110-9521-9E3B0E5F6694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FCBB84A-25B0-4C05-BCDC-46A61C82ED1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FCBB84A-25B0-4C05-BCDC-46A61C82ED1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FCBB84A-25B0-4C05-BCDC-46A61C82ED1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FCBB84A-25B0-4C05-BCDC-46A61C82ED1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2169FA5D-AFF2-472C-AB90-620533B68E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2169FA5D-AFF2-472C-AB90-620533B68E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2169FA5D-AFF2-472C-AB90-620533B68E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2169FA5D-AFF2-472C-AB90-620533B68E21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{950A8980-2F67-4110-9521-9E3B0E5F6694} = {5981C831-42FA-49C5-A56D-B012DF69E789}
+		{2FCBB84A-25B0-4C05-BCDC-46A61C82ED1A} = {3A25E064-557A-4671-93D8-73EF51C92323}
+		{2169FA5D-AFF2-472C-AB90-620533B68E21} = {5981C831-42FA-49C5-A56D-B012DF69E789}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {71B0E486-108E-459C-96CC-0A11B80CA0BE}
+	EndGlobalSection
+EndGlobal
