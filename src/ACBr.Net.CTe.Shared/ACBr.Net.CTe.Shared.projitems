@@ -140,6 +140,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ConsultaCTeResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ConsultaResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\CTeConsultaServiceClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\CTeServiceClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ICTeConsulta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeResposta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeResultaBase.cs" />

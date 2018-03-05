@@ -65,15 +65,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSalvarConfig = new System.Windows.Forms.Button();
             this.tbcConfiguracoes = new System.Windows.Forms.TabControl();
-            this.tabPageCertificado = new System.Windows.Forms.TabPage();
-            this.btnGetCertificate = new System.Windows.Forms.Button();
-            this.txtNumeroSerie = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtSenha = new System.Windows.Forms.TextBox();
-            this.btnFindCertificate = new System.Windows.Forms.Button();
-            this.txtCertificado = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.tabPageGeral = new System.Windows.Forms.TabPage();
             this.btnSelecionarArquivo = new System.Windows.Forms.Button();
             this.txtArquivoServicos = new System.Windows.Forms.TextBox();
@@ -82,16 +73,13 @@
             this.btnSelecionarSchema = new System.Windows.Forms.Button();
             this.txtSchemas = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.tabPageWebservice = new System.Windows.Forms.TabPage();
             this.tabPageEmitente = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtCodSiafi = new System.Windows.Forms.TextBox();
             this.txtCodCidade = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtUf = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cmbCidades = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -112,6 +100,32 @@
             this.lblCNPJ = new System.Windows.Forms.Label();
             this.txtIM = new System.Windows.Forms.TextBox();
             this.txtCNPJ = new System.Windows.Forms.TextBox();
+            this.tabPageWebservice = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtProxyPass = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtProxyUser = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtProxyPort = new System.Windows.Forms.TextBox();
+            this.txtProxyHost = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.nudTimeOut = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rdbHomologacao = new System.Windows.Forms.RadioButton();
+            this.rdbProducao = new System.Windows.Forms.RadioButton();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbbUfWebservice = new System.Windows.Forms.ComboBox();
+            this.tabPageCertificado = new System.Windows.Forms.TabPage();
+            this.btnGetCertificate = new System.Windows.Forms.Button();
+            this.txtNumeroSerie = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtSenha = new System.Windows.Forms.TextBox();
+            this.btnFindCertificate = new System.Windows.Forms.Button();
+            this.txtCertificado = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tabPageEmail = new System.Windows.Forms.TabPage();
             this.tabPageAndress = new System.Windows.Forms.TabPage();
             this.label14 = new System.Windows.Forms.Label();
@@ -141,9 +155,13 @@
             this.tabPageDados.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tbcConfiguracoes.SuspendLayout();
-            this.tabPageCertificado.SuspendLayout();
             this.tabPageGeral.SuspendLayout();
             this.tabPageEmitente.SuspendLayout();
+            this.tabPageWebservice.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTimeOut)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.tabPageCertificado.SuspendLayout();
             this.tabPageAndress.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -527,10 +545,10 @@
             // 
             // tbcConfiguracoes
             // 
-            this.tbcConfiguracoes.Controls.Add(this.tabPageCertificado);
             this.tbcConfiguracoes.Controls.Add(this.tabPageGeral);
-            this.tbcConfiguracoes.Controls.Add(this.tabPageWebservice);
             this.tbcConfiguracoes.Controls.Add(this.tabPageEmitente);
+            this.tbcConfiguracoes.Controls.Add(this.tabPageWebservice);
+            this.tbcConfiguracoes.Controls.Add(this.tabPageCertificado);
             this.tbcConfiguracoes.Controls.Add(this.tabPageEmail);
             this.tbcConfiguracoes.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbcConfiguracoes.Location = new System.Drawing.Point(3, 16);
@@ -538,93 +556,6 @@
             this.tbcConfiguracoes.SelectedIndex = 0;
             this.tbcConfiguracoes.Size = new System.Drawing.Size(277, 360);
             this.tbcConfiguracoes.TabIndex = 0;
-            // 
-            // tabPageCertificado
-            // 
-            this.tabPageCertificado.Controls.Add(this.btnGetCertificate);
-            this.tabPageCertificado.Controls.Add(this.txtNumeroSerie);
-            this.tabPageCertificado.Controls.Add(this.label11);
-            this.tabPageCertificado.Controls.Add(this.label10);
-            this.tabPageCertificado.Controls.Add(this.txtSenha);
-            this.tabPageCertificado.Controls.Add(this.btnFindCertificate);
-            this.tabPageCertificado.Controls.Add(this.txtCertificado);
-            this.tabPageCertificado.Controls.Add(this.label9);
-            this.tabPageCertificado.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCertificado.Name = "tabPageCertificado";
-            this.tabPageCertificado.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCertificado.Size = new System.Drawing.Size(269, 334);
-            this.tabPageCertificado.TabIndex = 1;
-            this.tabPageCertificado.Text = "Certificado";
-            this.tabPageCertificado.UseVisualStyleBackColor = true;
-            // 
-            // btnGetCertificate
-            // 
-            this.btnGetCertificate.Location = new System.Drawing.Point(239, 106);
-            this.btnGetCertificate.Name = "btnGetCertificate";
-            this.btnGetCertificate.Size = new System.Drawing.Size(24, 20);
-            this.btnGetCertificate.TabIndex = 12;
-            this.btnGetCertificate.Text = "...";
-            this.btnGetCertificate.UseVisualStyleBackColor = true;
-            this.btnGetCertificate.Click += new System.EventHandler(this.btnGetCertificate_Click);
-            // 
-            // txtNumeroSerie
-            // 
-            this.txtNumeroSerie.Location = new System.Drawing.Point(6, 106);
-            this.txtNumeroSerie.Name = "txtNumeroSerie";
-            this.txtNumeroSerie.Size = new System.Drawing.Size(227, 20);
-            this.txtNumeroSerie.TabIndex = 14;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 90);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(86, 13);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "Número de Serie";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 51);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(38, 13);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "Senha";
-            // 
-            // txtSenha
-            // 
-            this.txtSenha.Location = new System.Drawing.Point(6, 67);
-            this.txtSenha.Name = "txtSenha";
-            this.txtSenha.PasswordChar = '*';
-            this.txtSenha.Size = new System.Drawing.Size(257, 20);
-            this.txtSenha.TabIndex = 10;
-            // 
-            // btnFindCertificate
-            // 
-            this.btnFindCertificate.Location = new System.Drawing.Point(239, 28);
-            this.btnFindCertificate.Name = "btnFindCertificate";
-            this.btnFindCertificate.Size = new System.Drawing.Size(24, 20);
-            this.btnFindCertificate.TabIndex = 4;
-            this.btnFindCertificate.Text = "...";
-            this.btnFindCertificate.UseVisualStyleBackColor = true;
-            this.btnFindCertificate.Click += new System.EventHandler(this.btnFindCertificate_Click);
-            // 
-            // txtCertificado
-            // 
-            this.txtCertificado.Location = new System.Drawing.Point(6, 28);
-            this.txtCertificado.Name = "txtCertificado";
-            this.txtCertificado.Size = new System.Drawing.Size(227, 20);
-            this.txtCertificado.TabIndex = 9;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 12);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 13);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Caminho";
             // 
             // tabPageGeral
             // 
@@ -651,6 +582,7 @@
             this.btnSelecionarArquivo.TabIndex = 19;
             this.btnSelecionarArquivo.Text = "...";
             this.btnSelecionarArquivo.UseVisualStyleBackColor = true;
+            this.btnSelecionarArquivo.Click += new System.EventHandler(this.btnSelecionarArquivo_Click);
             // 
             // txtArquivoServicos
             // 
@@ -686,6 +618,7 @@
             this.btnSelecionarSchema.TabIndex = 10;
             this.btnSelecionarSchema.Text = "...";
             this.btnSelecionarSchema.UseVisualStyleBackColor = true;
+            this.btnSelecionarSchema.Click += new System.EventHandler(this.btnSelecionarSchema_Click);
             // 
             // txtSchemas
             // 
@@ -703,26 +636,14 @@
             this.label12.TabIndex = 11;
             this.label12.Text = "Pasta Schemas";
             // 
-            // tabPageWebservice
-            // 
-            this.tabPageWebservice.Location = new System.Drawing.Point(4, 22);
-            this.tabPageWebservice.Name = "tabPageWebservice";
-            this.tabPageWebservice.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageWebservice.Size = new System.Drawing.Size(269, 334);
-            this.tabPageWebservice.TabIndex = 3;
-            this.tabPageWebservice.Text = "Webservice";
-            this.tabPageWebservice.UseVisualStyleBackColor = true;
-            // 
             // tabPageEmitente
             // 
-            this.tabPageEmitente.Controls.Add(this.label7);
+            this.tabPageEmitente.Controls.Add(this.textBox5);
             this.tabPageEmitente.Controls.Add(this.label8);
-            this.tabPageEmitente.Controls.Add(this.txtCodSiafi);
             this.tabPageEmitente.Controls.Add(this.txtCodCidade);
             this.tabPageEmitente.Controls.Add(this.label6);
             this.tabPageEmitente.Controls.Add(this.txtUf);
             this.tabPageEmitente.Controls.Add(this.label5);
-            this.tabPageEmitente.Controls.Add(this.cmbCidades);
             this.tabPageEmitente.Controls.Add(this.label3);
             this.tabPageEmitente.Controls.Add(this.label4);
             this.tabPageEmitente.Controls.Add(this.textBox3);
@@ -751,40 +672,29 @@
             this.tabPageEmitente.Text = "Emitente";
             this.tabPageEmitente.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // textBox5
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(134, 290);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 13);
-            this.label7.TabIndex = 28;
-            this.label7.Text = "Cód. Siafi";
+            this.textBox5.Location = new System.Drawing.Point(64, 266);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(151, 20);
+            this.textBox5.TabIndex = 27;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 290);
+            this.label8.Location = new System.Drawing.Point(6, 250);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 13);
+            this.label8.Size = new System.Drawing.Size(26, 13);
             this.label8.TabIndex = 25;
-            this.label8.Text = "Cód. Cidade";
-            // 
-            // txtCodSiafi
-            // 
-            this.txtCodSiafi.BackColor = System.Drawing.Color.White;
-            this.txtCodSiafi.Location = new System.Drawing.Point(137, 306);
-            this.txtCodSiafi.Name = "txtCodSiafi";
-            this.txtCodSiafi.ReadOnly = true;
-            this.txtCodSiafi.Size = new System.Drawing.Size(125, 20);
-            this.txtCodSiafi.TabIndex = 27;
+            this.label8.Text = "Cód";
             // 
             // txtCodCidade
             // 
             this.txtCodCidade.BackColor = System.Drawing.Color.White;
-            this.txtCodCidade.Location = new System.Drawing.Point(6, 306);
+            this.txtCodCidade.Location = new System.Drawing.Point(7, 266);
             this.txtCodCidade.Name = "txtCodCidade";
             this.txtCodCidade.ReadOnly = true;
-            this.txtCodCidade.Size = new System.Drawing.Size(125, 20);
+            this.txtCodCidade.Size = new System.Drawing.Size(52, 20);
             this.txtCodCidade.TabIndex = 26;
             // 
             // label6
@@ -809,20 +719,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 250);
+            this.label5.Location = new System.Drawing.Point(61, 250);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 22;
             this.label5.Text = "Cidade";
-            // 
-            // cmbCidades
-            // 
-            this.cmbCidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCidades.FormattingEnabled = true;
-            this.cmbCidades.Location = new System.Drawing.Point(6, 266);
-            this.cmbCidades.Name = "cmbCidades";
-            this.cmbCidades.Size = new System.Drawing.Size(206, 21);
-            this.cmbCidades.TabIndex = 3;
             // 
             // label3
             // 
@@ -984,6 +885,268 @@
             this.txtCNPJ.Name = "txtCNPJ";
             this.txtCNPJ.Size = new System.Drawing.Size(125, 20);
             this.txtCNPJ.TabIndex = 3;
+            // 
+            // tabPageWebservice
+            // 
+            this.tabPageWebservice.Controls.Add(this.groupBox3);
+            this.tabPageWebservice.Controls.Add(this.label17);
+            this.tabPageWebservice.Controls.Add(this.nudTimeOut);
+            this.tabPageWebservice.Controls.Add(this.groupBox2);
+            this.tabPageWebservice.Controls.Add(this.label7);
+            this.tabPageWebservice.Controls.Add(this.cbbUfWebservice);
+            this.tabPageWebservice.Location = new System.Drawing.Point(4, 22);
+            this.tabPageWebservice.Name = "tabPageWebservice";
+            this.tabPageWebservice.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageWebservice.Size = new System.Drawing.Size(269, 334);
+            this.tabPageWebservice.TabIndex = 3;
+            this.tabPageWebservice.Text = "Webservice";
+            this.tabPageWebservice.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtProxyPass);
+            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Controls.Add(this.txtProxyUser);
+            this.groupBox3.Controls.Add(this.label20);
+            this.groupBox3.Controls.Add(this.label19);
+            this.groupBox3.Controls.Add(this.txtProxyPort);
+            this.groupBox3.Controls.Add(this.txtProxyHost);
+            this.groupBox3.Controls.Add(this.label18);
+            this.groupBox3.Location = new System.Drawing.Point(6, 121);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(257, 100);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Proxy";
+            // 
+            // txtProxyPass
+            // 
+            this.txtProxyPass.Location = new System.Drawing.Point(130, 71);
+            this.txtProxyPass.Name = "txtProxyPass";
+            this.txtProxyPass.PasswordChar = '*';
+            this.txtProxyPass.Size = new System.Drawing.Size(121, 20);
+            this.txtProxyPass.TabIndex = 17;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(127, 55);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(38, 13);
+            this.label21.TabIndex = 16;
+            this.label21.Text = "Senha";
+            // 
+            // txtProxyUser
+            // 
+            this.txtProxyUser.Location = new System.Drawing.Point(6, 71);
+            this.txtProxyUser.Name = "txtProxyUser";
+            this.txtProxyUser.Size = new System.Drawing.Size(118, 20);
+            this.txtProxyUser.TabIndex = 15;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(3, 55);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(43, 13);
+            this.label20.TabIndex = 14;
+            this.label20.Text = "Usuario";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(189, 16);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(32, 13);
+            this.label19.TabIndex = 13;
+            this.label19.Text = "Porta";
+            // 
+            // txtProxyPort
+            // 
+            this.txtProxyPort.Location = new System.Drawing.Point(192, 32);
+            this.txtProxyPort.Name = "txtProxyPort";
+            this.txtProxyPort.Size = new System.Drawing.Size(59, 20);
+            this.txtProxyPort.TabIndex = 12;
+            // 
+            // txtProxyHost
+            // 
+            this.txtProxyHost.Location = new System.Drawing.Point(6, 32);
+            this.txtProxyHost.Name = "txtProxyHost";
+            this.txtProxyHost.Size = new System.Drawing.Size(180, 20);
+            this.txtProxyHost.TabIndex = 11;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(3, 16);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 13);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "Host";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 97);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(45, 13);
+            this.label17.TabIndex = 15;
+            this.label17.Text = "Timeout";
+            // 
+            // nudTimeOut
+            // 
+            this.nudTimeOut.Location = new System.Drawing.Point(57, 95);
+            this.nudTimeOut.Maximum = new decimal(new int[] {
+            -1530494977,
+            232830,
+            0,
+            0});
+            this.nudTimeOut.Name = "nudTimeOut";
+            this.nudTimeOut.Size = new System.Drawing.Size(60, 20);
+            this.nudTimeOut.TabIndex = 14;
+            this.nudTimeOut.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rdbHomologacao);
+            this.groupBox2.Controls.Add(this.rdbProducao);
+            this.groupBox2.Location = new System.Drawing.Point(6, 42);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(257, 45);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Selecione o Ambiente de Destino";
+            // 
+            // rdbHomologacao
+            // 
+            this.rdbHomologacao.AutoSize = true;
+            this.rdbHomologacao.Checked = true;
+            this.rdbHomologacao.Location = new System.Drawing.Point(137, 19);
+            this.rdbHomologacao.Name = "rdbHomologacao";
+            this.rdbHomologacao.Size = new System.Drawing.Size(91, 17);
+            this.rdbHomologacao.TabIndex = 1;
+            this.rdbHomologacao.TabStop = true;
+            this.rdbHomologacao.Text = "Homologação";
+            this.rdbHomologacao.UseVisualStyleBackColor = true;
+            // 
+            // rdbProducao
+            // 
+            this.rdbProducao.AutoSize = true;
+            this.rdbProducao.Location = new System.Drawing.Point(16, 19);
+            this.rdbProducao.Name = "rdbProducao";
+            this.rdbProducao.Size = new System.Drawing.Size(71, 17);
+            this.rdbProducao.TabIndex = 0;
+            this.rdbProducao.Text = "Produção";
+            this.rdbProducao.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "UF Destino";
+            // 
+            // cbbUfWebservice
+            // 
+            this.cbbUfWebservice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbUfWebservice.FormattingEnabled = true;
+            this.cbbUfWebservice.Location = new System.Drawing.Point(72, 15);
+            this.cbbUfWebservice.Name = "cbbUfWebservice";
+            this.cbbUfWebservice.Size = new System.Drawing.Size(191, 21);
+            this.cbbUfWebservice.TabIndex = 11;
+            // 
+            // tabPageCertificado
+            // 
+            this.tabPageCertificado.Controls.Add(this.btnGetCertificate);
+            this.tabPageCertificado.Controls.Add(this.txtNumeroSerie);
+            this.tabPageCertificado.Controls.Add(this.label11);
+            this.tabPageCertificado.Controls.Add(this.label10);
+            this.tabPageCertificado.Controls.Add(this.txtSenha);
+            this.tabPageCertificado.Controls.Add(this.btnFindCertificate);
+            this.tabPageCertificado.Controls.Add(this.txtCertificado);
+            this.tabPageCertificado.Controls.Add(this.label9);
+            this.tabPageCertificado.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCertificado.Name = "tabPageCertificado";
+            this.tabPageCertificado.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCertificado.Size = new System.Drawing.Size(269, 334);
+            this.tabPageCertificado.TabIndex = 1;
+            this.tabPageCertificado.Text = "Certificado";
+            this.tabPageCertificado.UseVisualStyleBackColor = true;
+            // 
+            // btnGetCertificate
+            // 
+            this.btnGetCertificate.Location = new System.Drawing.Point(239, 106);
+            this.btnGetCertificate.Name = "btnGetCertificate";
+            this.btnGetCertificate.Size = new System.Drawing.Size(24, 20);
+            this.btnGetCertificate.TabIndex = 12;
+            this.btnGetCertificate.Text = "...";
+            this.btnGetCertificate.UseVisualStyleBackColor = true;
+            this.btnGetCertificate.Click += new System.EventHandler(this.btnGetCertificate_Click);
+            // 
+            // txtNumeroSerie
+            // 
+            this.txtNumeroSerie.Location = new System.Drawing.Point(6, 106);
+            this.txtNumeroSerie.Name = "txtNumeroSerie";
+            this.txtNumeroSerie.Size = new System.Drawing.Size(227, 20);
+            this.txtNumeroSerie.TabIndex = 14;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 90);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(86, 13);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Número de Serie";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 51);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(38, 13);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Senha";
+            // 
+            // txtSenha
+            // 
+            this.txtSenha.Location = new System.Drawing.Point(6, 67);
+            this.txtSenha.Name = "txtSenha";
+            this.txtSenha.PasswordChar = '*';
+            this.txtSenha.Size = new System.Drawing.Size(257, 20);
+            this.txtSenha.TabIndex = 10;
+            // 
+            // btnFindCertificate
+            // 
+            this.btnFindCertificate.Location = new System.Drawing.Point(239, 28);
+            this.btnFindCertificate.Name = "btnFindCertificate";
+            this.btnFindCertificate.Size = new System.Drawing.Size(24, 20);
+            this.btnFindCertificate.TabIndex = 4;
+            this.btnFindCertificate.Text = "...";
+            this.btnFindCertificate.UseVisualStyleBackColor = true;
+            this.btnFindCertificate.Click += new System.EventHandler(this.btnFindCertificate_Click);
+            // 
+            // txtCertificado
+            // 
+            this.txtCertificado.Location = new System.Drawing.Point(6, 28);
+            this.txtCertificado.Name = "txtCertificado";
+            this.txtCertificado.Size = new System.Drawing.Size(227, 20);
+            this.txtCertificado.TabIndex = 9;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Caminho";
             // 
             // tabPageEmail
             // 
@@ -1205,12 +1368,19 @@
             this.tabPageDados.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tbcConfiguracoes.ResumeLayout(false);
-            this.tabPageCertificado.ResumeLayout(false);
-            this.tabPageCertificado.PerformLayout();
             this.tabPageGeral.ResumeLayout(false);
             this.tabPageGeral.PerformLayout();
             this.tabPageEmitente.ResumeLayout(false);
             this.tabPageEmitente.PerformLayout();
+            this.tabPageWebservice.ResumeLayout(false);
+            this.tabPageWebservice.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTimeOut)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.tabPageCertificado.ResumeLayout(false);
+            this.tabPageCertificado.PerformLayout();
             this.tabPageAndress.ResumeLayout(false);
             this.tabPageAndress.PerformLayout();
             this.ResumeLayout(false);
@@ -1251,14 +1421,11 @@
 		private System.Windows.Forms.Button btnSalvarConfig;
 		private System.Windows.Forms.TabControl tbcConfiguracoes;
 		private System.Windows.Forms.TabPage tabPageEmitente;
-		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.TextBox txtCodSiafi;
 		private System.Windows.Forms.TextBox txtCodCidade;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.TextBox txtUf;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.ComboBox cmbCidades;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox textBox3;
@@ -1321,6 +1488,23 @@
         private System.Windows.Forms.ColumnHeader clhVersao;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cbbVersao;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rdbHomologacao;
+        private System.Windows.Forms.RadioButton rdbProducao;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbbUfWebservice;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown nudTimeOut;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txtProxyPass;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtProxyUser;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtProxyPort;
+        private System.Windows.Forms.TextBox txtProxyHost;
+        private System.Windows.Forms.Label label18;
     }
 }
 

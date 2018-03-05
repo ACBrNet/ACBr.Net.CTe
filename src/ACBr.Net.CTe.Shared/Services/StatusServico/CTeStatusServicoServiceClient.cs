@@ -38,67 +38,52 @@ using ACBr.Net.Core.Extensions;
 
 namespace ACBr.Net.CTe.Services
 {
-	public sealed class CTeStatusServicoServiceClient : DFeSoap12ServiceClientBase<ICTeStatusServico>, ICTeStatusServico
-	{
-		#region Fields
+    public sealed class CTeStatusServicoServiceClient : CTeServiceClient<ICTeStatusServico>, ICTeStatusServico
+    {
+        #region Constructors
 
-		private readonly object serviceLock;
-		private string xmlEnvio;
-		private string xmlRetorno;
+        public CTeStatusServicoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
+            base(config, ServicoCTe.CTeStatusServico, certificado)
+        {
+        }
 
-		#endregion Fields
+        #endregion Constructors
 
-		#region Constructors
+        #region Methods
 
-		public CTeStatusServicoServiceClient(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
-		{
-			serviceLock = new object();
-		}
+        public ConsultaStatusResposta StatusServico(CTeWsCabecalho cabecalho, string request, string fileName)
+        {
+            Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
+            Guard.Against<ArgumentNullException>(request.IsEmpty(), nameof(request));
 
-		#endregion Constructors
+            lock (serviceLock)
+            {
+                xmlFileName = fileName;
 
-		#region Methods
+                var doc = new XmlDocument();
+                doc.LoadXml(request);
 
-		public ConsultaStatusResposta StatusServico(CTeWsCabecalho cabecalho, string request)
-		{
-			Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-			Guard.Against<ArgumentNullException>(request.IsEmpty(), nameof(request));
+                var inValue = new StatusServicoRequest(cabecalho, doc);
+                var retVal = ((ICTeStatusServico)this).StatusServico(inValue);
 
-			lock (serviceLock)
-			{
-				var doc = new XmlDocument();
-				doc.LoadXml(request);
+                var retorno = new ConsultaStatusResposta(xmlEnvio, xmlRetorno)
+                {
+                    Resultado = StatusServiceResult.Load(retVal.Result.OuterXml)
+                };
 
-				var inValue = new StatusServicoRequest(cabecalho, doc);
-				var retVal = ((ICTeStatusServico)this).StatusServico(inValue);
+                xmlFileName = string.Empty;
+                xmlEnvio = string.Empty;
+                xmlRetorno = string.Empty;
 
-				var retorno = new ConsultaStatusResposta(xmlEnvio, xmlRetorno)
-				{
-					Resultado = StatusServiceResult.Load(retVal.Result.OuterXml)
-				};
+                return retorno;
+            }
+        }
 
-				xmlEnvio = null;
-				xmlRetorno = null;
+        StatusServicoResponse ICTeStatusServico.StatusServico(StatusServicoRequest request)
+        {
+            return Channel.StatusServico(request);
+        }
 
-				return retorno;
-			}
-		}
-
-		StatusServicoResponse ICTeStatusServico.StatusServico(StatusServicoRequest request)
-		{
-			return Channel.StatusServico(request);
-		}
-
-		protected override void BeforeSendDFeRequest(string message)
-		{
-			xmlEnvio = message;
-		}
-
-		protected override void AfterReceiveDFeReply(string message)
-		{
-			xmlRetorno = message;
-		}
-
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }

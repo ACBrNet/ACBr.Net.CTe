@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACBr.Net.CTe", "ACBr.Net.CTe\ACBr.Net.CTe.csproj", "{950A8980-2F67-4110-9521-9E3B0E5F6694}"
 EndProject
@@ -12,11 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{5981C831-42FA-49C5-A56D-B012DF69E789}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{3A25E064-557A-4671-93D8-73EF51C92323}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{D1E3C9C8-064A-4F1A-B89D-BD1EB6CFA6AD}"
-	ProjectSection(SolutionItems) = preProject
-		Shared\ACBr.Net.CTe.AssemblyInfo.cs = Shared\ACBr.Net.CTe.AssemblyInfo.cs
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

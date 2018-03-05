@@ -32,56 +32,76 @@
 using System;
 using System.ComponentModel;
 using ACBr.Net.Core;
+using ACBr.Net.Core.Exceptions;
+using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe
 {
-	[TypeConverter(typeof(ACBrExpandableObjectConverter))]
-	public sealed class CTeConfigWebServices : DFeWebserviceConfigBase, INotifyPropertyChanged
-	{
-		#region Events
+    [TypeConverter(typeof(ACBrExpandableObjectConverter))]
+    public sealed class CTeConfigWebServices : DFeWebserviceConfigBase, INotifyPropertyChanged
+    {
+        #region Fields
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        private DFeCodUF uf;
 
-		#endregion Events
+        #endregion Fields
 
-		#region Constructor
+        #region Events
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CTeConfigWebServices"/> class.
-		/// </summary>
-		internal CTeConfigWebServices()
-		{
-			Ambiente = DFeTipoAmbiente.Homologacao;
-			Visualizar = false;
-			AjustaAguardaConsultaRet = false;
-			AguardarConsultaRet = 1;
-			Tentativas = 3;
-			ProxyHost = string.Empty;
-			ProxyPass = string.Empty;
-			ProxyPort = string.Empty;
-			ProxyUser = string.Empty;
-		}
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Constructor
+        #endregion Events
 
-		#region Properties
+        #region Constructor
 
-		public TimeSpan? TimeOut
-		{
-			get
-			{
-				TimeSpan? timeOut = null;
-				if (AjustaAguardaConsultaRet)
-					timeOut = TimeSpan.FromSeconds((int)AguardarConsultaRet);
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CTeConfigWebServices"/> class.
+        /// </summary>
+        internal CTeConfigWebServices()
+        {
+            uf = DFeCodUF.MS;
+            Ambiente = DFeTipoAmbiente.Homologacao;
+            Visualizar = false;
+            AjustaAguardaConsultaRet = false;
+            AguardarConsultaRet = 1;
+            Tentativas = 3;
+            ProxyHost = string.Empty;
+            ProxyPass = string.Empty;
+            ProxyPort = string.Empty;
+            ProxyUser = string.Empty;
+        }
 
-				return timeOut;
-			}
-		}
+        #endregion Constructor
 
-		[Browsable(true)]
-		public DFeCodUF Uf { get; set; }
+        #region Properties
 
-		#endregion Properties
-	}
+        public TimeSpan? TimeOut
+        {
+            get
+            {
+                TimeSpan? timeOut = null;
+                if (AjustaAguardaConsultaRet)
+                    timeOut = TimeSpan.FromSeconds((int)AguardarConsultaRet);
+
+                return timeOut;
+            }
+        }
+
+        [Browsable(true)]
+        public DFeCodUF Uf
+        {
+            get => uf;
+            set
+            {
+                if (value == uf) return;
+
+                Guard.Against<ArgumentException>(value.IsIn(DFeCodUF.EX, DFeCodUF.AN), "Estado informado incorreto.");
+
+                uf = value;
+            }
+        }
+
+        #endregion Properties
+    }
 }

@@ -31,6 +31,7 @@
 
 using System;
 using System.ComponentModel;
+using System.IO;
 
 #if !NETSTANDARD2_0
 
@@ -55,6 +56,16 @@ namespace ACBr.Net.CTe
 
     public sealed class ACBrCTe : ACBrComponent, IACBrLog
     {
+        #region Internal Types
+
+        private enum TipoArquivo
+        {
+            CTe,
+            Evento
+        }
+
+        #endregion Internal Types
+
         #region Propriedades
 
         /// <summary>
@@ -86,10 +97,8 @@ namespace ACBr.Net.CTe
 
             try
             {
-                var url = CTeServiceManager.GetServiceAndress(Configuracoes.Geral.VersaoCTe, Configuracoes.WebServices.Uf, ServicoCTe.CTeConsultaProtocolo, Configuracoes.WebServices.Ambiente);
                 var versao = Configuracoes.Geral.VersaoCTe.GetDescription();
-
-                using (var cliente = new CTeConsultaServiceClient(url, Configuracoes.WebServices.TimeOut, cert))
+                using (var cliente = new CTeConsultaServiceClient(Configuracoes, cert))
                 {
                     var cabecalho = new CTeWsCabecalho
                     {
@@ -104,12 +113,15 @@ namespace ACBr.Net.CTe
                     request.Append($"<chCTe>{chave}</chCTe>");
                     request.Append("</consSitCTe>");
 
-                    return cliente.Consulta(cabecalho, request.ToString());
+                    var requestXml = request.ToString();
+                    var ret = cliente.Consulta(cabecalho, requestXml, $"CTe_Consultar_{DateTime.Now:YYYYMMDDHHmmssfff}_{chave}");
+
+                    return ret;
                 }
             }
             catch (Exception exception)
             {
-                this.Log().Error("[ConsultarCTe]", exception);
+                this.Log().Error("[Consultar]", exception);
                 throw;
             }
             finally
@@ -128,10 +140,8 @@ namespace ACBr.Net.CTe
 
             try
             {
-                var url = CTeServiceManager.GetServiceAndress(Configuracoes.Geral.VersaoCTe, Configuracoes.WebServices.Uf, ServicoCTe.CTeStatusServico, Configuracoes.WebServices.Ambiente);
                 var versao = Configuracoes.Geral.VersaoCTe.GetDescription();
-
-                using (var cliente = new CTeStatusServicoServiceClient(url, Configuracoes.WebServices.TimeOut, cert))
+                using (var cliente = new CTeStatusServicoServiceClient(Configuracoes, cert))
                 {
                     var cabecalho = new CTeWsCabecalho()
                     {
@@ -145,7 +155,9 @@ namespace ACBr.Net.CTe
                     request.Append("<xServ>STATUS</xServ>");
                     request.Append("</consStatServCte>");
 
-                    return cliente.StatusServico(cabecalho, request.ToString());
+                    var requestXml = request.ToString();
+                    var ret = cliente.StatusServico(cabecalho, requestXml, $"CTe_ConsultarSituacao_{DateTime.Now:YYYYMMDDHHmmssfff}");
+                    return ret;
                 }
             }
             catch (Exception exception)
@@ -158,6 +170,29 @@ namespace ACBr.Net.CTe
                 cert.Reset();
             }
         }
+
+        #region Private
+
+        private void GravarArquivoEmDisco(TipoArquivo tipo, string conteudoArquivo, string nomeArquivo, DateTime? data = null)
+        {
+            switch (tipo)
+            {
+                case TipoArquivo.CTe:
+                    nomeArquivo = Path.Combine(Configuracoes.Arquivos.GetPathCTe(data ?? DateTime.Today), nomeArquivo);
+                    break;
+
+                case TipoArquivo.Evento:
+                    nomeArquivo = Path.Combine(Configuracoes.Arquivos.GetPathEvento(data ?? DateTime.Today), nomeArquivo);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(tipo), tipo, null);
+            }
+
+            File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
+        }
+
+        #endregion Private
 
         #region Override
 

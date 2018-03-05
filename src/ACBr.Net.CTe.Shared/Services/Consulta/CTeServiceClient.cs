@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 03-04-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-22-2017
+// Last Modified On : 03-04-2018
 // ***********************************************************************
-// <copyright file="CTeConsultaServiceClient.cs" company="ACBr.Net">
+// <copyright file="CTeServiceClient.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -30,58 +30,66 @@
 // ***********************************************************************
 
 using System;
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
-using System.Xml;
-using ACBr.Net.Core.Exceptions;
-using ACBr.Net.Core.Extensions;
+using System.Text;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-    public sealed class CTeConsultaServiceClient : CTeServiceClient<ICTeConsulta>, ICTeConsulta
+    public abstract class CTeServiceClient<T> : DFeSoap12ServiceClientBase<T> where T : class
     {
+        #region Fields
+
+        protected readonly object serviceLock;
+        protected string xmlEnvio;
+        protected string xmlRetorno;
+        protected string xmlFileName;
+
+        #endregion Fields
+
         #region Constructors
 
-        public CTeConsultaServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
-            base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
+        protected CTeServiceClient(CTeConfig config, ServicoCTe service, X509Certificate2 certificado = null) :
+            base(CTeServiceManager.GetServiceAndress(config.Geral.VersaoCTe, config.WebServices.Uf, service, config.WebServices.Ambiente),
+                config.WebServices.TimeOut, certificado)
         {
+            serviceLock = new object();
+            Config = config;
         }
 
         #endregion Constructors
 
+        #region Properties
+
+        public CTeConfig Config { get; }
+
+        #endregion Properties
+
         #region Methods
 
-        public ConsultaCTeResposta Consulta(CTeWsCabecalho cabecalho, string mensagem, string fileName)
+        protected void GravarArquivoEmDisco(string conteudoArquivo, string nomeArquivo)
         {
-            Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-            Guard.Against<ArgumentNullException>(mensagem.IsEmpty(), nameof(mensagem));
-            Guard.Against<ArgumentNullException>(fileName.IsEmpty(), nameof(fileName));
+            if (Config.Geral.Salvar == false) return;
 
-            lock (serviceLock)
-            {
-                xmlFileName = fileName;
+            var path = Config.Arquivos.GetPathLote();
+            var filePath = Path.Combine(path, nomeArquivo);
+            if (Directory.Exists(path))
+                Directory.CreateDirectory(path);
 
-                var xml = new XmlDocument();
-                xml.LoadXml(mensagem);
-
-                var inValue = new ConsultaCTeRequest(cabecalho, xml);
-                var retVal = ((ICTeConsulta)this).ConsultaCTe(inValue);
-
-                var retorno = new ConsultaCTeResposta(xmlEnvio, xmlRetorno)
-                {
-                    Resultado = ConsultaCTeResult.Load(retVal.Result.OuterXml)
-                };
-
-                xmlEnvio = string.Empty;
-                xmlRetorno = string.Empty;
-                xmlFileName = string.Empty;
-
-                return retorno;
-            }
+            File.WriteAllText(filePath, conteudoArquivo, Encoding.UTF8);
         }
 
-        ConsultaResponse ICTeConsulta.ConsultaCTe(ConsultaCTeRequest request)
+        protected override void BeforeSendDFeRequest(string message)
         {
-            return Channel.ConsultaCTe(request);
+            xmlEnvio = message;
+            GravarArquivoEmDisco(message, $"{xmlFileName}_env.xml");
+        }
+
+        protected override void AfterReceiveDFeReply(string message)
+        {
+            xmlRetorno = message;
+            GravarArquivoEmDisco(message, $"{xmlFileName}_ret.xml");
         }
 
         #endregion Methods
