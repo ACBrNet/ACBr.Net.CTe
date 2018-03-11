@@ -31,53 +31,54 @@
 
 using System.ComponentModel;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Collection;
+using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeRodoModal : GenericClone<CTeRodoModal>, ICTeModal, INotifyPropertyChanged
-	{
-		#region Events
+    [DFeRoot("rodo")]
+    public sealed class CTeRodoModal : DFeDocument<CTeRodoModal>, ICTeModal, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeRodoModal()
-		{
-			Occ = new DFeCollection<CTeRodoOcc>();
-		}
+        public CTeRodoModal()
+        {
+            Occ = new DFeCollection<CTeRodoOcc>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.Custom, "", Id = "", Min = 6, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string RNTRC { get; set; }
+        [DFeElement(TipoCampo.Custom, "", Id = "", Min = 6, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string RNTRC { get; set; }
 
-		[DFeElement("occ", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeCollection<CTeRodoOcc> Occ { get; set; }
+        [DFeElement("occ", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<CTeRodoOcc> Occ { get; set; }
 
-		#endregion Propriedades
+        #endregion Propriedades
 
-		#region Methods
+        #region Methods
 
-		private string SerializeRNTRC()
-		{
-			;
-			return RNTRC.Trim().ToUpper() == CTeStrings.CTeIEIsento ? RNTRC.Trim().ToUpper() : RNTRC.OnlyNumbers();
-		}
+        private string SerializeRNTRC()
+        {
+            ;
+            return RNTRC.Trim().ToUpper() == CTeStrings.CTeIEIsento ? RNTRC.Trim().ToUpper() : RNTRC.OnlyNumbers();
+        }
 
-		private object DeserializeRNTRC(string value)
-		{
-			return value;
-		}
+        private object DeserializeRNTRC(string value)
+        {
+            return value;
+        }
 
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }

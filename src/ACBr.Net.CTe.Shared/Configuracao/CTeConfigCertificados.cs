@@ -35,24 +35,24 @@ using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe
 {
-	[TypeConverter(typeof(ACBrExpandableObjectConverter))]
-	public sealed class CTeConfigCertificados : DFeCertificadosConfigBase, INotifyPropertyChanged
-	{
-		#region Events
+    [TypeConverter(typeof(ACBrExpandableObjectConverter))]
+    public sealed class CTeConfigCertificados : DFeCertificadosConfigBase<ACBrCTe>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructor
+        #region Constructor
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CTeConfigCertificados"/> class.
-		/// </summary>
-		internal CTeConfigCertificados()
-		{
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CTeConfigCertificados"/> class.
+        /// </summary>
+        internal CTeConfigCertificados(ACBrCTe parent) : base(parent)
+        {
+        }
 
-		#endregion Constructor
-	}
+        #endregion Constructor
+    }
 }

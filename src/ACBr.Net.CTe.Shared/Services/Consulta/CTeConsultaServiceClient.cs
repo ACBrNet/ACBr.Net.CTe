@@ -31,9 +31,11 @@
 
 using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Xml;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe.Services
 {
@@ -44,37 +46,38 @@ namespace ACBr.Net.CTe.Services
         public CTeConsultaServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
             base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
         {
+            Schema = SchemaCTe.ConsSitCTe;
+            ArquivoEnvio = "ped-sit";
+            ArquivoResposta = "sit";
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public ConsultaCTeResposta Consulta(CTeWsCabecalho cabecalho, string mensagem, string fileName)
+        public ConsultaCTeResposta Consulta(string chave)
         {
-            Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-            Guard.Against<ArgumentNullException>(mensagem.IsEmpty(), nameof(mensagem));
-            Guard.Against<ArgumentNullException>(fileName.IsEmpty(), nameof(fileName));
+            Guard.Against<ArgumentNullException>(chave.IsEmpty(), nameof(chave));
 
             lock (serviceLock)
             {
-                xmlFileName = fileName;
+                var request = new StringBuilder();
+                request.Append($"<consSitCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{Config.Geral.VersaoDFe.GetDescription()}\">");
+                request.Append($"<tpAmb>{(Config.WebServices.Ambiente == DFeTipoAmbiente.Producao ? 1 : 2)}</tpAmb>");
+                request.Append("<xServ>CONSULTAR</xServ>");
+                request.Append($"<chCTe>{chave}</chCTe>");
+                request.Append("</consSitCTe>");
 
-                var xml = new XmlDocument();
-                xml.LoadXml(mensagem);
+                var dadosMsg = request.ToString();
+                ValidateMessage(dadosMsg);
 
-                var inValue = new ConsultaCTeRequest(cabecalho, xml);
+                var doc = new XmlDocument();
+                doc.LoadXml(dadosMsg);
+
+                var inValue = new ConsultaCTeRequest(DefineHeader(), doc);
                 var retVal = ((ICTeConsulta)this).ConsultaCTe(inValue);
 
-                var retorno = new ConsultaCTeResposta(xmlEnvio, xmlRetorno)
-                {
-                    Resultado = ConsultaCTeResult.Load(retVal.Result.OuterXml)
-                };
-
-                xmlEnvio = string.Empty;
-                xmlRetorno = string.Empty;
-                xmlFileName = string.Empty;
-
+                var retorno = new ConsultaCTeResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
                 return retorno;
             }
         }

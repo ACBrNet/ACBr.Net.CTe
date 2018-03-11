@@ -32,132 +32,243 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using System.Reflection;
 using ACBr.Net.Core;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.CTe.Services;
 using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe
 {
-	[TypeConverter(typeof(ACBrExpandableObjectConverter))]
-	public sealed class CTeConfigArquivos : DFeArquivosConfigBase, INotifyPropertyChanged
-	{
-		#region Events
+    [TypeConverter(typeof(ACBrExpandableObjectConverter))]
+    public sealed class CTeConfigArquivos : DFeArquivosConfigBase<ACBrCTe, SchemaCTe>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Fields
+        #region Constructor
 
-		private CTeConfig parent;
+        /// <summary>
+        /// Inicializa uma nova instancia da classe <see cref="CTeConfigArquivos"/>.
+        /// </summary>
+        internal CTeConfigArquivos(ACBrCTe parent) : base(parent)
+        {
+        }
 
-		#endregion Fields
+        #endregion Constructor
 
-		#region Constructor
+        #region Properties
 
-		/// <summary>
-		/// Inicializa uma nova instancia da classe <see cref="CTeConfigArquivos"/>.
-		/// </summary>
-		internal CTeConfigArquivos(CTeConfig parent)
-		{
-			this.parent = parent;
-			Salvar = false;
-			AdicionarLiteral = false;
-			PastaMensal = false;
+        /// <summary>
+        /// Gets or sets the path n fe.
+        /// </summary>
+        /// <value>The path n fe.</value>
+        [Browsable(true)]
+        public string PathCTe { get; set; }
 
-			var path = Assembly.GetExecutingAssembly().GetPath();
-			if (!path.IsEmpty())
-			{
-				PathCTe = Path.Combine(path, "CTe");
-				PathLote = Path.Combine(path, "Lote");
-				PathEvento = Path.Combine(path, "Evento");
-			}
-			else
-			{
-				PathCTe = string.Empty;
-				PathLote = string.Empty;
-				PathEvento = string.Empty;
-			}
-		}
+        /// <summary>
+        /// Gets or sets the path lote.
+        /// </summary>
+        /// <value>The path lote.</value>
+        [Browsable(true)]
+        public string PathInu { get; set; }
 
-		#endregion Constructor
+        /// <summary>
+        /// Gets or sets the path lote.
+        /// </summary>
+        /// <value>The path lote.</value>
+        [Browsable(true)]
+        public string PathEvento { get; set; }
 
-		#region Properties
+        #endregion Properties
 
-		/// <summary>
-		/// Gets or sets the path n fe.
-		/// </summary>
-		/// <value>The path n fe.</value>
-		[Browsable(true)]
-		public string PathCTe { get; set; }
+        #region Methods
 
-		/// <summary>
-		/// Gets or sets the path lote.
-		/// </summary>
-		/// <value>The path lote.</value>
-		[Browsable(true)]
-		public string PathLote { get; set; }
+        /// <summary>
+        /// Retorna o caminho onde será salvo os CTes.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="cnpj"></param>
+        /// <param name="modelo"></param>
+        /// <returns></returns>
+        public string GetPathCTe(DateTime? data = null, string cnpj = "", ModeloCTe modelo = ModeloCTe.CTe)
+        {
+            string modeloDscr;
+            switch (modelo)
+            {
+                case ModeloCTe.CTeOS:
+                    modeloDscr = "CTeOS";
+                    break;
 
-		/// <summary>
-		/// Gets or sets the path lote.
-		/// </summary>
-		/// <value>The path lote.</value>
-		[Browsable(true)]
-		public string PathEvento { get; set; }
+                default:
+                    modeloDscr = "CTe";
+                    break;
+            }
 
-		#endregion Properties
+            return GetPath(PathCTe, modeloDscr, cnpj, data, modeloDscr);
+        }
 
-		#region Methods
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="cnpj"></param>
+        /// <returns></returns>
+        public string GetPathInu(DateTime? data = null, string cnpj = "")
+        {
+            return GetPath(PathInu, "Inu", cnpj);
+        }
 
-		public string GetPathCTe(DateTime data)
-		{
-			var dir = string.IsNullOrEmpty(PathCTe.Trim()) ? parent.Geral.PathSalvar : PathCTe;
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="cnpj"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public string GetPathEvento(CTeTipoEvento tipo, string cnpj = "", DateTime? data = null)
+        {
+            var result = GetPath(PathEvento, "Evento", cnpj, data);
 
-			if (PastaMensal)
-				dir = Path.Combine(dir, data.ToString("yyyyMM"));
+            if (AdicionarLiteral)
+                result = Path.Combine(result, tipo.GetDescription());
 
-			if (AdicionarLiteral && !dir.EndsWith("CTe"))
-				dir = Path.Combine(dir, "CTe");
+            if (!Directory.Exists(result))
+                Directory.CreateDirectory(result);
 
-			if (!Directory.Exists(dir))
-				Directory.CreateDirectory(dir);
+            return result;
+        }
 
-			return dir;
-		}
+        /// <inheritdoc />
+        protected override void ArquivoServicoChange()
+        {
+            CTeServiceManager.Load(ArquivoServicos);
+        }
 
-		public string GetPathLote()
-		{
-			var dir = string.IsNullOrEmpty(PathLote.Trim()) ? parent.Geral.PathSalvar : PathLote;
+        /// <inheritdoc />
+        public override string GetSchema(SchemaCTe schema)
+        {
+            if (SchemasCache.ContainsKey(schema)) return SchemasCache[schema];
 
-			if (PastaMensal)
-				dir = Path.Combine(dir, DateTime.Now.ToString("yyyyMM"));
+            var schemaPath = "";
+            var versao = Parent.Configuracoes.Geral.VersaoDFe;
+            switch (schema)
+            {
+                case SchemaCTe.CTe:
+                    schemaPath = Path.Combine(PathSchemas, $"cte_v{versao.GetDescription()}.xsd");
+                    break;
 
-			if (AdicionarLiteral && !dir.EndsWith("Lote"))
-				dir = Path.Combine(dir, "Lote");
+                case SchemaCTe.CTeOS:
+                    schemaPath = Path.Combine(PathSchemas, $"cteOS_v{versao.GetDescription()}.xsd");
+                    break;
 
-			if (!Directory.Exists(dir))
-				Directory.CreateDirectory(dir);
+                case SchemaCTe.CancCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"evCancCTe_v{versao.GetDescription()}.xsd");
+                    break;
 
-			return dir;
-		}
+                case SchemaCTe.InutCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"inutCTe_v{versao.GetDescription()}.xsd");
+                    break;
 
-		public string GetPathEvento(DateTime data)
-		{
-			var dir = string.IsNullOrEmpty(PathEvento.Trim()) ? parent.Geral.PathSalvar : PathEvento;
+                case SchemaCTe.EventoCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"eventoCTe_v{versao.GetDescription()}.xsd");
+                    break;
 
-			if (PastaMensal)
-				dir = Path.Combine(dir, data.ToString("yyyyMM"));
+                case SchemaCTe.ProcCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"procCTe_v{versao.GetDescription()}.xsd");
+                    break;
 
-			if (AdicionarLiteral && !dir.EndsWith("Evento"))
-				dir = Path.Combine(dir, "Evento");
+                case SchemaCTe.ProcEventoCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"procEventoCTe_v{versao.GetDescription()}.xsd");
+                    break;
 
-			if (!Directory.Exists(dir))
-				Directory.CreateDirectory(dir);
+                case SchemaCTe.ConsSitCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"consSitCTe_v{versao.GetDescription()}.xsd");
+                    break;
 
-			return dir;
-		}
+                case SchemaCTe.ConsStatServCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"consStatServCTe_v{versao.GetDescription()}.xsd");
+                    break;
 
-		#endregion Methods
-	}
+                case SchemaCTe.ConsCad:
+                    schemaPath = Path.Combine(PathSchemas, "consCad_v2.00.xsd");
+                    break;
+
+                case SchemaCTe.CteModalAereo:
+                    schemaPath = Path.Combine(PathSchemas, $"cteModalAereo_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.CteModalAquaviario:
+                    schemaPath = Path.Combine(PathSchemas, $"cteModalAquaviario_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.CteModalDutoviario:
+                    schemaPath = Path.Combine(PathSchemas, $"cteModalDutoviario_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.CteModalFerroviario:
+                    schemaPath = Path.Combine(PathSchemas, $"cteModalFerroviario_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.CteModalRodoviario:
+                    schemaPath = Path.Combine(PathSchemas, $"cteModalRodoviario_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.CteMultiModal:
+                    schemaPath = Path.Combine(PathSchemas, $"cteMultiModal_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.EvEPECCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"evEPECCTe_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.EvCancCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"evCancCTe_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.EvRegMultimodal:
+                    schemaPath = Path.Combine(PathSchemas, $"evRegMultimodal_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.EvCCeCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"evCCeCTe_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.DistDFeInt:
+                    schemaPath = Path.Combine(PathSchemas, "distDFeInt_v1.00.xsd");
+                    break;
+
+                case SchemaCTe.CteModalRodoviarioOS:
+                    schemaPath = Path.Combine(PathSchemas, $"cteModalRodoviarioOS_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.EvPrestDesacordo:
+                    schemaPath = Path.Combine(PathSchemas, $"evPrestDesacordo_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.EvGTV:
+                    schemaPath = Path.Combine(PathSchemas, $"evGTV_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.ProcCTeOS:
+                    schemaPath = Path.Combine(PathSchemas, $"procCTeOS_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.EnviCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"enviCTe_v{versao.GetDescription()}.xsd");
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(schema), schema, null);
+            }
+
+            SchemasCache.Add(schema, schemaPath);
+
+            return SchemasCache[schema];
+        }
+
+        #endregion Methods
+    }
 }

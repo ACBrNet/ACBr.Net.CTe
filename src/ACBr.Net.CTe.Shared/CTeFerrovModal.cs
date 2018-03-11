@@ -30,40 +30,41 @@
 // ***********************************************************************
 
 using System.ComponentModel;
-using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeFerrovModal : GenericClone<CTeFerrovModal>, ICTeModal, INotifyPropertyChanged
-	{
-		#region Events
+    [DFeRoot("ferrov")]
+    public sealed class CTeFerrovModal : DFeDocument<CTeFerrovModal>, ICTeModal, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeFerrovModal()
-		{
-			TrafMut = new CTeTrafMut();
-		}
+        public CTeFerrovModal()
+        {
+            TrafMut = new CTeTrafMut();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.Enum, "tpTraf", Id = "#01", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeTipoTrafego TpTraf { get; set; }
+        [DFeElement(TipoCampo.Enum, "tpTraf", Id = "#01", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeTipoTrafego TpTraf { get; set; }
 
-		[DFeElement("trafMut", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeTrafMut TrafMut { get; set; }
+        [DFeElement("trafMut", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeTrafMut TrafMut { get; set; }
 
-		[DFeElement(TipoCampo.Str, "fluxo", Id = "#22", Min = 1, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Fluxo { get; set; }
+        [DFeElement(TipoCampo.Str, "fluxo", Id = "#22", Min = 1, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Fluxo { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }

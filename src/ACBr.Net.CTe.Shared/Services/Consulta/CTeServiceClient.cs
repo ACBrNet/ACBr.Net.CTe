@@ -31,8 +31,13 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Xml;
+using ACBr.Net.Core.Exceptions;
+using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
@@ -42,16 +47,13 @@ namespace ACBr.Net.CTe.Services
         #region Fields
 
         protected readonly object serviceLock;
-        protected string xmlEnvio;
-        protected string xmlRetorno;
-        protected string xmlFileName;
 
         #endregion Fields
 
         #region Constructors
 
         protected CTeServiceClient(CTeConfig config, ServicoCTe service, X509Certificate2 certificado = null) :
-            base(CTeServiceManager.GetServiceAndress(config.Geral.VersaoCTe, config.WebServices.Uf, service, config.WebServices.Ambiente),
+            base(CTeServiceManager.GetServiceAndress(config.Geral.VersaoDFe, config.WebServices.UF, service, config.WebServices.Ambiente),
                 config.WebServices.TimeOut, certificado)
         {
             serviceLock = new object();
@@ -64,32 +66,101 @@ namespace ACBr.Net.CTe.Services
 
         public CTeConfig Config { get; }
 
+        public SchemaCTe Schema { get; protected set; }
+
+        public string ArquivoEnvio { get; protected set; }
+
+        public string ArquivoResposta { get; protected set; }
+
+        public string EnvelopeSoap { get; protected set; }
+
+        public string RetornoWS { get; protected set; }
+
         #endregion Properties
 
         #region Methods
 
-        protected void GravarArquivoEmDisco(string conteudoArquivo, string nomeArquivo)
+        protected virtual CTeWsCabecalho DefineHeader()
         {
-            if (Config.Geral.Salvar == false) return;
-
-            var path = Config.Arquivos.GetPathLote();
-            var filePath = Path.Combine(path, nomeArquivo);
-            if (Directory.Exists(path))
-                Directory.CreateDirectory(path);
-
-            File.WriteAllText(filePath, conteudoArquivo, Encoding.UTF8);
+            var versao = Config.Geral.VersaoDFe.GetDescription();
+            return new CTeWsCabecalho
+            {
+                CUf = (int)Config.WebServices.UF,
+                VersaoDados = versao,
+            };
         }
 
+        protected virtual void ValidateMessage(string xml)
+        {
+            var schemaFile = Config.Arquivos.GetSchema(Schema);
+            XmlSchemaValidation.ValidarXml(xml, schemaFile, out var erros, out string[] _);
+
+            Guard.Against<ACBrDFeException>(erros.Any(), "Erros de validação do xml." +
+                                                         $"{(Config.Geral.ExibirErroSchema ? Environment.NewLine + erros.AsString() : "")}");
+        }
+
+        /// <summary>
+        /// Salvar o arquivo xml do CTe no disco de acordo com as propriedades.
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="conteudoArquivo"></param>
+        /// <param name="nomeArquivo"></param>
+        /// <param name="data"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        protected void GravarCTe(string conteudoArquivo, string nomeArquivo, DateTime data, string cnpj, ModeloCTe modelo)
+        {
+            if (!Config.Arquivos.Salvar) return;
+
+            conteudoArquivo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + conteudoArquivo;
+            nomeArquivo = Path.Combine(Config.Arquivos.GetPathCTe(data, cnpj, modelo), nomeArquivo);
+            File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// Salvar o arquivo xml do Evento no disco de acordo com as propriedades.
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="conteudoArquivo"></param>
+        /// <param name="nomeArquivo"></param>
+        /// <param name="data"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        protected void GravarEvento(string conteudoArquivo, string nomeArquivo, CTeTipoEvento evento, DateTime data, string cnpj)
+        {
+            if (!Config.Arquivos.Salvar) return;
+
+            conteudoArquivo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + conteudoArquivo;
+            nomeArquivo = Path.Combine(Config.Arquivos.GetPathEvento(evento, cnpj, data), nomeArquivo);
+            File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// Salvar o arquivo xml no disco de acordo com as propriedades.
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="conteudoArquivo"></param>
+        /// <param name="nomeArquivo"></param>
+        /// <param name="data"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        protected void GravarSoap(string conteudoArquivo, string nomeArquivo)
+        {
+            if (Config.WebServices.Salvar == false) return;
+
+            nomeArquivo = Path.Combine(Config.Arquivos.PathSalvar, nomeArquivo);
+            File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
+        }
+
+        /// <inheritdoc />
         protected override void BeforeSendDFeRequest(string message)
         {
-            xmlEnvio = message;
-            GravarArquivoEmDisco(message, $"{xmlFileName}_env.xml");
+            EnvelopeSoap = message;
+            GravarSoap(message, $"{DateTime.Now:yyyyMMddHHmmsszzz}_{ArquivoEnvio}_env.xml");
         }
 
+        /// <inheritdoc />
         protected override void AfterReceiveDFeReply(string message)
         {
-            xmlRetorno = message;
-            GravarArquivoEmDisco(message, $"{xmlFileName}_ret.xml");
+            RetornoWS = message;
+            GravarSoap(message, $"{DateTime.Now:yyyyMMddHHmmsszzz}_{ArquivoResposta}_ret.xml");
         }
 
         #endregion Methods

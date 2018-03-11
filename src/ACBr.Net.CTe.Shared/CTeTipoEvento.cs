@@ -29,19 +29,23 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.ComponentModel;
 using ACBr.Net.DFe.Core.Attributes;
 
 namespace ACBr.Net.CTe
 {
-	public enum CTeTipoEvento
-	{
-		[DFeEnum("110111")]
-		Cancelamento = 110111,
+    public enum CTeTipoEvento
+    {
+        [DFeEnum("110111")]
+        [Description("Cancelamento")]
+        Cancelamento = 110111,
 
-		[DFeEnum("110110")]
-		CartaCorrecao = 110110,
+        [DFeEnum("110110")]
+        [Description("CCe")]
+        CartaCorrecao = 110110,
 
-		[DFeEnum("310610")]
-		MDFeAutorizado = 310610
-	}
+        [DFeEnum("310610")]
+        [Description("MDFeAutorizado")]
+        MDFeAutorizado = 310610
+    }
 }

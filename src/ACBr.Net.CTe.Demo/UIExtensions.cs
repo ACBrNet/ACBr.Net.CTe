@@ -2,12 +2,12 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml;
+using System.Xml.Linq;
 using ACBr.Net.Core.Extensions;
 
 namespace ACBr.Net.CTe.Demo
 {
-    public static class Extensions
+    public static class UIExtensions
     {
         public static void LoadXml(this WebBrowser browser, string xml)
         {
@@ -17,11 +17,8 @@ namespace ACBr.Net.CTe.Demo
             var path = Path.GetTempPath();
             var fileName = Guid.NewGuid() + ".xml";
             var fullFileName = Path.Combine(path, fileName);
-            var xmlDoc = new XmlDocument();
-            if (File.Exists(xml))
-                xmlDoc.Load(xml);
-            else
-                xmlDoc.LoadXml(xml);
+            var xmlDoc = File.Exists(xml) ? XDocument.Load(xml) : XDocument.Parse(xml);
+
             xmlDoc.Save(fullFileName);
             browser.Navigate(fullFileName);
         }
@@ -57,6 +54,11 @@ namespace ACBr.Net.CTe.Demo
         {
             var values = (ItemData<T>[])cmb.DataSource;
             cmb.SelectedItem = values.SingleOrDefault(x => x.Content.Equals(value));
+        }
+
+        public static void AppendLine(this RichTextBox richText, string line)
+        {
+            richText.AppendText(line + Environment.NewLine);
         }
     }
 }

@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 06-11-2017
+// Created          : 03-09-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 06-11-2017
+// Last Modified On : 03-09-2018
 // ***********************************************************************
-// <copyright file="CTeConfig.cs" company="ACBr.Net">
+// <copyright file="RecepcaoCTeResposta.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,30 +29,16 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Common;
-
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Services
 {
-    public sealed class CTeConfig : DFeConfigBase<ACBrCTe, CTeConfigGeral, CTeVersao, CTeConfigWebServices, CTeConfigCertificados, CTeConfigArquivos, SchemaCTe>
+    public sealed class RecepcaoCTeResposta : CTeResposta<CTeRecepcaoResult>
     {
         #region Constructor
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CTeConfig"/> class.
-        /// </summary>
-        public CTeConfig(ACBrCTe parent) : base(parent)
+        public RecepcaoCTeResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs) : base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs)
         {
         }
 
         #endregion Constructor
-
-        /// <inheritdoc />
-        protected override void CreateConfigs()
-        {
-            Geral = new CTeConfigGeral(Parent);
-            WebServices = new CTeConfigWebServices(Parent);
-            Certificados = new CTeConfigCertificados(Parent);
-            Arquivos = new CTeConfigArquivos(Parent);
-        }
     }
 }

@@ -11,6 +11,7 @@ namespace ACBr.Net
         #region Fields
 
         private readonly Configuration config;
+        private const string Key = @"a1!B78s!5(h23y1g12\t\98w";
 
         #endregion Fields
 
@@ -28,6 +29,16 @@ namespace ACBr.Net
         public void Set(string setting, object value)
         {
             var valor = string.Format(CultureInfo.InvariantCulture, "{0}", value);
+
+            if (config.AppSettings.Settings[setting]?.Value != null)
+                config.AppSettings.Settings[setting].Value = valor;
+            else
+                config.AppSettings.Settings.Add(setting, valor);
+        }
+
+        public void SetCrypt(string setting, string value)
+        {
+            var valor = !value.IsEmpty() ? value.Encrypt(Key) : value;
 
             if (config.AppSettings.Settings[setting]?.Value != null)
                 config.AppSettings.Settings[setting].Value = valor;
@@ -54,6 +65,12 @@ namespace ACBr.Net
             {
                 return defaultValue;
             }
+        }
+
+        public string GetCrypt(string setting, string defaultValue)
+        {
+            var value = config.AppSettings.Settings[setting]?.Value;
+            return value.IsEmpty() ? defaultValue : value.Decrypt(Key);
         }
 
         public void Save()

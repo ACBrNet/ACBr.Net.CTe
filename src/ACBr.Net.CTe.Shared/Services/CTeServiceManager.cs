@@ -77,7 +77,7 @@ namespace ACBr.Net.CTe.Services
         /// Retorna a url do serviço de acordo com os dados passados.
         /// </summary>
         /// <param name="versao">Versão da CTe</param>
-        /// <param name="uf">Uf do serviço</param>
+        /// <param name="uf">UF do serviço</param>
         /// <param name="tipo">Tipo de serviço</param>
         /// <param name="ambiente">Ambiente</param>
         /// <returns></returns>

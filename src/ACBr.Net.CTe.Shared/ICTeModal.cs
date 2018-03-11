@@ -29,9 +29,13 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Text;
+using ACBr.Net.DFe.Core.Common;
+
 namespace ACBr.Net.CTe
 {
-	public interface ICTeModal
-	{
-	}
+    public interface ICTeModal
+    {
+        string GetXml(DFeSaveOptions options = DFeSaveOptions.None, Encoding encoding = null);
+    }
 }

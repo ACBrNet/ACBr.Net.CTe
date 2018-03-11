@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigCertificados.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigGeral.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigWebServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuracao\SchemaCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeAereoModal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeAereoNatCarga.cs" />
@@ -30,7 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CTeAutXML.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeBalsa.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeCobranca.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CTeCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConhecimentosCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeCompl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeComplemento.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeComplEntrega.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeWSCabecalho.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\EnviarCTeResposta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\CTeInutilizacaoServiceClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\ICTeInutilizacao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\InutilizacaoRequest.cs" />
@@ -157,6 +159,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\ICTeRecepcaoEvento.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\RecepcaoEventoRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\RecepcaoEventoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoCTeResposta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\CTeinfRec.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\CTeRecepcaoResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\CTeRecepcaoServiceClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\ICteRecepcao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\RecepcaoRequest.cs" />
@@ -173,6 +178,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\StatusServiceResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\StatusServicoRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\StatusServicoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StatusACBrCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoDataPeriodo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoHorarioIntervalo.cs" />
   </ItemGroup>
@@ -187,6 +193,7 @@
     <None Include="$(MSBuildThisFileDirectory)Schemas\cancCTeTiposBasico_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\consCad_v2.00.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\consReciCTeTiposBasico_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -277,6 +284,7 @@
     <None Include="$(MSBuildThisFileDirectory)Schemas\cte_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\distDFeInt_v1.00.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\enviCTe_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

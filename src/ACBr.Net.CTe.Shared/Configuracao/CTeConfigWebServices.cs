@@ -39,7 +39,7 @@ using ACBr.Net.DFe.Core.Common;
 namespace ACBr.Net.CTe
 {
     [TypeConverter(typeof(ACBrExpandableObjectConverter))]
-    public sealed class CTeConfigWebServices : DFeWebserviceConfigBase, INotifyPropertyChanged
+    public sealed class CTeConfigWebServices : DFeWebserviceConfigBase<ACBrCTe>, INotifyPropertyChanged
     {
         #region Fields
 
@@ -58,18 +58,9 @@ namespace ACBr.Net.CTe
         /// <summary>
         /// Initializes a new instance of the <see cref="CTeConfigWebServices"/> class.
         /// </summary>
-        internal CTeConfigWebServices()
+        internal CTeConfigWebServices(ACBrCTe parent) : base(parent)
         {
             uf = DFeCodUF.MS;
-            Ambiente = DFeTipoAmbiente.Homologacao;
-            Visualizar = false;
-            AjustaAguardaConsultaRet = false;
-            AguardarConsultaRet = 1;
-            Tentativas = 3;
-            ProxyHost = string.Empty;
-            ProxyPass = string.Empty;
-            ProxyPort = string.Empty;
-            ProxyUser = string.Empty;
         }
 
         #endregion Constructor
@@ -89,7 +80,7 @@ namespace ACBr.Net.CTe
         }
 
         [Browsable(true)]
-        public DFeCodUF Uf
+        public DFeCodUF UF
         {
             get => uf;
             set

@@ -29,12 +29,11 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.Core.Exceptions;
-using ACBr.Net.DFe.Core.Service;
-using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Xml;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe.Services
 {
@@ -45,36 +44,39 @@ namespace ACBr.Net.CTe.Services
         public CTeStatusServicoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
             base(config, ServicoCTe.CTeStatusServico, certificado)
         {
+            Schema = SchemaCTe.ConsStatServCTe;
+            ArquivoEnvio = "ped-sta";
+            ArquivoResposta = "sta";
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public ConsultaStatusResposta StatusServico(CTeWsCabecalho cabecalho, string request, string fileName)
+        /// <summary>
+        /// Consulta a situação do serviço da CTe.
+        /// </summary>
+        /// <returns></returns>
+        public ConsultaStatusResposta StatusServico()
         {
-            Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-            Guard.Against<ArgumentNullException>(request.IsEmpty(), nameof(request));
-
             lock (serviceLock)
             {
-                xmlFileName = fileName;
+                var request = new StringBuilder();
+                request.Append($"<consStatServCte xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{Config.Geral.VersaoDFe.GetDescription()}\">");
+                request.Append($"<tpAmb>{(Config.WebServices.Ambiente == DFeTipoAmbiente.Producao ? 1 : 2)}</tpAmb>");
+                request.Append("<xServ>STATUS</xServ>");
+                request.Append("</consStatServCte>");
+
+                var dadosMsg = request.ToString();
+                ValidateMessage(dadosMsg);
 
                 var doc = new XmlDocument();
-                doc.LoadXml(request);
+                doc.LoadXml(dadosMsg);
 
-                var inValue = new StatusServicoRequest(cabecalho, doc);
+                var inValue = new StatusServicoRequest(DefineHeader(), doc);
                 var retVal = ((ICTeStatusServico)this).StatusServico(inValue);
 
-                var retorno = new ConsultaStatusResposta(xmlEnvio, xmlRetorno)
-                {
-                    Resultado = StatusServiceResult.Load(retVal.Result.OuterXml)
-                };
-
-                xmlFileName = string.Empty;
-                xmlEnvio = string.Empty;
-                xmlRetorno = string.Empty;
-
+                var retorno = new ConsultaStatusResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
                 return retorno;
             }
         }

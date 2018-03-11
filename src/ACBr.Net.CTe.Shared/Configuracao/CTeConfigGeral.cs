@@ -29,20 +29,14 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
 using System.ComponentModel;
-using System.IO;
-using System.Reflection;
 using ACBr.Net.Core;
-using ACBr.Net.Core.Exceptions;
-using ACBr.Net.Core.Extensions;
-using ACBr.Net.CTe.Services;
 using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe
 {
     [TypeConverter(typeof(ACBrExpandableObjectConverter))]
-    public sealed class CTeConfigGeral : DFeGeralConfigBase, INotifyPropertyChanged
+    public sealed class CTeConfigGeral : DFeGeralConfigBase<ACBrCTe, CTeVersao>, INotifyPropertyChanged
     {
         #region Events
 
@@ -50,54 +44,16 @@ namespace ACBr.Net.CTe
 
         #endregion Events
 
-        #region Fields
-
-        private string arquivoServicos;
-
-        #endregion Fields
-
         #region Constructor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CTeConfigGeral"/> class.
         /// </summary>
-        internal CTeConfigGeral()
+        internal CTeConfigGeral(ACBrCTe parent) : base(parent)
         {
-            Salvar = false;
-
-            var path = Assembly.GetExecutingAssembly().GetPath();
-            if (!path.IsEmpty())
-            {
-                PathSchemas = Path.Combine(path, "Schemas");
-                PathSalvar = Path.Combine(path, "XmlCTe");
-            }
-
-            arquivoServicos = string.Empty;
-            VersaoCTe = CTeVersao.v300;
-            ExibirErroSchema = false;
-            RetirarAcentos = false;
-            FormatoAlerta = "TAG:%TAG% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.";
-            arquivoServicos = string.Empty;
+            VersaoDFe = CTeVersao.v300;
         }
 
         #endregion Constructor
-
-        #region Properties
-
-        public CTeVersao VersaoCTe { get; }
-
-        public string ArquivoServicos
-        {
-            get => arquivoServicos;
-            set
-            {
-                if (value == arquivoServicos) return;
-
-                arquivoServicos = value ?? string.Empty;
-                CTeServiceManager.Load(arquivoServicos);
-            }
-        }
-
-        #endregion Properties
     }
 }

@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 06-11-2017
+// Created          : 07-23-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 06-11-2017
+// Last Modified On : 07-23-2016
 // ***********************************************************************
-// <copyright file="CTeConfig.cs" company="ACBr.Net">
+// <copyright file="StatusACBrCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,30 +29,23 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Common;
-
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeConfig : DFeConfigBase<ACBrCTe, CTeConfigGeral, CTeVersao, CTeConfigWebServices, CTeConfigCertificados, CTeConfigArquivos, SchemaCTe>
+    public enum StatusACBrCTe
     {
-        #region Constructor
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CTeConfig"/> class.
-        /// </summary>
-        public CTeConfig(ACBrCTe parent) : base(parent)
-        {
-        }
-
-        #endregion Constructor
-
-        /// <inheritdoc />
-        protected override void CreateConfigs()
-        {
-            Geral = new CTeConfigGeral(Parent);
-            WebServices = new CTeConfigWebServices(Parent);
-            Certificados = new CTeConfigCertificados(Parent);
-            Arquivos = new CTeConfigArquivos(Parent);
-        }
+        CTeIdle,
+        CTeStatusServico,
+        CTeRecepcao,
+        CTeRetRecepcao,
+        CTeConsulta,
+        CTeCancelamento,
+        CTeInutilizacao,
+        CTeRecibo,
+        CTeCadastro,
+        CTeEmail,
+        CTeCCe,
+        CTeEvento,
+        CTeDistDFeInt,
+        CTeEnvioWebService
     }
 }

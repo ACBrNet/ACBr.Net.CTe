@@ -31,33 +31,34 @@
 
 using System;
 using System.ComponentModel;
-using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CteDutoModal : GenericClone<CteDutoModal>, ICTeModal, INotifyPropertyChanged
-	{
-		#region Events
+    [DFeRoot("duto")]
+    public sealed class CteDutoModal : DFeDocument<CteDutoModal>, ICTeModal, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Properties
 
-		[DFeElement(TipoCampo.De6, "vTar", Id = "#002", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public decimal? VTar { get; set; }
+        [DFeElement(TipoCampo.De6, "vTar", Id = "#002", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? VTar { get; set; }
 
-		[DFeElement(TipoCampo.Dat, "dIni", Id = "#003", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DateTime DIni { get; set; }
+        [DFeElement(TipoCampo.Dat, "dIni", Id = "#003", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTime DIni { get; set; }
 
-		[DFeElement(TipoCampo.Dat, "dFim", Id = "#004", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DateTime DFim { get; set; }
+        [DFeElement(TipoCampo.Dat, "dFim", Id = "#004", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTime DFim { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }
 
 #pragma warning restore

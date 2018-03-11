@@ -34,16 +34,17 @@ using System.Xml;
 
 namespace ACBr.Net.CTe.Services
 {
-	[MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
-	public sealed class RecepcaoRequest : RequestBase
-	{
-		#region Constructors
+    [MessageContract(WrapperName = "cteRecepcaoLoteRequest", IsWrapped = false)]
+    public sealed class RecepcaoRequest : RequestBase
+    {
+        #region Constructors
 
-		public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
-		{
-			Cabecalho = cabecalho;
-		}
+        public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
+        {
+            Cabecalho = cabecalho;
+            Mensagem = mensagem;
+        }
 
-		#endregion Constructors
-	}
+        #endregion Constructors
+    }
 }

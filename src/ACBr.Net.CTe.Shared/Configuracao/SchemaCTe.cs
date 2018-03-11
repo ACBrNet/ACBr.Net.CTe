@@ -4,7 +4,7 @@
 // Created          : 10-15-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-15-2016
+// Last Modified On : 03-09-2018
 // ***********************************************************************
 // <copyright file="CTeCollection.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -29,55 +29,35 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.IO;
-using ACBr.Net.Core.Exceptions;
-using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core.Collection;
-
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeCollection : DFeCollection<CteProc>
+    public enum SchemaCTe
     {
-        #region Constructors
-
-        internal CTeCollection()
-        {
-        }
-
-        #endregion Constructors
-
-        #region Methods
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="path"></param>
-        public void Load(string path)
-        {
-            Guard.Against<ArgumentNullException>(path.IsEmpty(), nameof(path));
-            Guard.Against<ArgumentException>(!File.Exists(path), "Arquivo não encontrado");
-
-            Load(File.Open(path, FileMode.Open));
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="stream"></param>
-        public void Load(Stream stream)
-        {
-            Guard.Against<ArgumentNullException>(stream == null, nameof(stream));
-            Guard.Against<ArgumentException>(stream.Length == 0, "Stream vazio");
-
-            using (var reader = new StreamReader(stream))
-            {
-                var conteudo = reader.ReadToEnd();
-                var cteProc = conteudo.Contains("cteProc") ? CteProc.Load(conteudo) : new CteProc { CTe = CTe.Load(conteudo) };
-                Add(cteProc);
-            }
-        }
-
-        #endregion Methods
+        CTe,
+        CTeOS,
+        CancCTe,
+        InutCTe,
+        EventoCTe,
+        ProcCTe,
+        ProcEventoCTe,
+        ConsSitCTe,
+        ConsStatServCTe,
+        ConsCad,
+        CteModalAereo,
+        CteModalAquaviario,
+        CteModalDutoviario,
+        CteModalFerroviario,
+        CteModalRodoviario,
+        CteMultiModal,
+        EvEPECCTe,
+        EvCancCTe,
+        EvRegMultimodal,
+        EvCCeCTe,
+        DistDFeInt,
+        CteModalRodoviarioOS,
+        EvPrestDesacordo,
+        EvGTV,
+        ProcCTeOS,
+        EnviCTe
     }
 }

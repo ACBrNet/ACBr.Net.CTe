@@ -31,7 +31,7 @@
 
 using System;
 using System.ComponentModel;
-using System.IO;
+using System.Net;
 
 #if !NETSTANDARD2_0
 
@@ -39,13 +39,11 @@ using System.Drawing;
 
 #endif
 
-using System.Text;
 using ACBr.Net.Core;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Logging;
 using ACBr.Net.CTe.Services;
-using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe
 {
@@ -56,16 +54,6 @@ namespace ACBr.Net.CTe
 
     public sealed class ACBrCTe : ACBrComponent, IACBrLog
     {
-        #region Internal Types
-
-        private enum TipoArquivo
-        {
-            CTe,
-            Evento
-        }
-
-        #endregion Internal Types
-
         #region Propriedades
 
         /// <summary>
@@ -78,11 +66,59 @@ namespace ACBr.Net.CTe
         /// Retorna a lista de CTes para processamento.
         /// </summary>
         [Browsable(false)]
-        public CTeCollection Conhecimentos { get; private set; }
+        public ConhecimentosCollection Conhecimentos { get; private set; }
 
         #endregion Propriedades
 
         #region Methods
+
+        /// <summary>
+        /// Metodo para enviar a CTe carregadas na coleção.
+        /// </summary>
+        /// <param name="lote">Número do lote.</param>
+        /// <param name="imprimir">True se deve imprimir os CTe retornado com sucesso.</param>
+        /// <returns></returns>
+        public EnviarCTeResposta Enviar(int lote, bool imprimir = true)
+        {
+            return Enviar(lote.ToString(), imprimir);
+        }
+
+        /// <summary>
+        /// Metodo para enviar a CTe carregadas na coleção.
+        /// </summary>
+        /// <param name="lote">Número do lote.</param>
+        /// <param name="imprimir">True se deve imprimir os CTe retornado com sucesso.</param>
+        /// <returns></returns>
+        public EnviarCTeResposta Enviar(string lote, bool imprimir)
+        {
+            var oldProtocol = ServicePointManager.SecurityProtocol;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
+            var cert = Configuracoes.Certificados.ObterCertificado();
+
+            try
+            {
+                Conhecimentos.Assinar();
+                Conhecimentos.Validar();
+
+                RecepcaoCTeResposta retRecpcao;
+                using (var cliente = new CTeRecepcaoServiceClient(Configuracoes, cert))
+                {
+                    retRecpcao = cliente.RecepcaoLote(Conhecimentos.NaoAutorizadas, lote);
+                }
+
+                return new EnviarCTeResposta() { RecepcaoResposta = retRecpcao };
+            }
+            catch (Exception exception)
+            {
+                this.Log().Error("[EnviarCTe]", exception);
+                throw;
+            }
+            finally
+            {
+                cert.Reset();
+                ServicePointManager.SecurityProtocol = oldProtocol;
+            }
+        }
 
         /// <summary>
         /// Metodo para checar a situação da CTe pela chave.
@@ -93,30 +129,15 @@ namespace ACBr.Net.CTe
             Guard.Against<ArgumentNullException>(chave == null, nameof(chave));
             Guard.Against<ArgumentException>(chave.IsEmpty(), nameof(chave));
 
+            var oldProtocol = ServicePointManager.SecurityProtocol;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
             var cert = Configuracoes.Certificados.ObterCertificado();
 
             try
             {
-                var versao = Configuracoes.Geral.VersaoCTe.GetDescription();
                 using (var cliente = new CTeConsultaServiceClient(Configuracoes, cert))
                 {
-                    var cabecalho = new CTeWsCabecalho
-                    {
-                        CUf = (int)Configuracoes.WebServices.Uf,
-                        VersaoDados = versao,
-                    };
-
-                    var request = new StringBuilder();
-                    request.Append($"<consSitCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{versao}\">");
-                    request.Append($"<tpAmb>{(Configuracoes.WebServices.Ambiente == DFeTipoAmbiente.Producao ? 1 : 2)}</tpAmb>");
-                    request.Append("<xServ>CONSULTAR</xServ>");
-                    request.Append($"<chCTe>{chave}</chCTe>");
-                    request.Append("</consSitCTe>");
-
-                    var requestXml = request.ToString();
-                    var ret = cliente.Consulta(cabecalho, requestXml, $"CTe_Consultar_{DateTime.Now:YYYYMMDDHHmmssfff}_{chave}");
-
-                    return ret;
+                    return cliente.Consulta(chave);
                 }
             }
             catch (Exception exception)
@@ -127,6 +148,7 @@ namespace ACBr.Net.CTe
             finally
             {
                 cert.Reset();
+                ServicePointManager.SecurityProtocol = oldProtocol;
             }
         }
 
@@ -136,28 +158,15 @@ namespace ACBr.Net.CTe
         /// <returns>A situação do serviço de CTe</returns>
         public ConsultaStatusResposta ConsultarSituacaoServico()
         {
+            var oldProtocol = ServicePointManager.SecurityProtocol;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
             var cert = Configuracoes.Certificados.ObterCertificado();
 
             try
             {
-                var versao = Configuracoes.Geral.VersaoCTe.GetDescription();
                 using (var cliente = new CTeStatusServicoServiceClient(Configuracoes, cert))
                 {
-                    var cabecalho = new CTeWsCabecalho()
-                    {
-                        CUf = (int)Configuracoes.WebServices.Uf,
-                        VersaoDados = versao,
-                    };
-
-                    var request = new StringBuilder();
-                    request.Append($"<consStatServCte xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{versao}\">");
-                    request.Append($"<tpAmb>{(Configuracoes.WebServices.Ambiente == DFeTipoAmbiente.Producao ? 1 : 2)}</tpAmb>");
-                    request.Append("<xServ>STATUS</xServ>");
-                    request.Append("</consStatServCte>");
-
-                    var requestXml = request.ToString();
-                    var ret = cliente.StatusServico(cabecalho, requestXml, $"CTe_ConsultarSituacao_{DateTime.Now:YYYYMMDDHHmmssfff}");
-                    return ret;
+                    return cliente.StatusServico();
                 }
             }
             catch (Exception exception)
@@ -168,39 +177,17 @@ namespace ACBr.Net.CTe
             finally
             {
                 cert.Reset();
+                ServicePointManager.SecurityProtocol = oldProtocol;
             }
         }
-
-        #region Private
-
-        private void GravarArquivoEmDisco(TipoArquivo tipo, string conteudoArquivo, string nomeArquivo, DateTime? data = null)
-        {
-            switch (tipo)
-            {
-                case TipoArquivo.CTe:
-                    nomeArquivo = Path.Combine(Configuracoes.Arquivos.GetPathCTe(data ?? DateTime.Today), nomeArquivo);
-                    break;
-
-                case TipoArquivo.Evento:
-                    nomeArquivo = Path.Combine(Configuracoes.Arquivos.GetPathEvento(data ?? DateTime.Today), nomeArquivo);
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(tipo), tipo, null);
-            }
-
-            File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
-        }
-
-        #endregion Private
 
         #region Override
 
         /// <inheritdoc />
         protected override void OnInitialize()
         {
-            Configuracoes = new CTeConfig();
-            Conhecimentos = new CTeCollection();
+            Configuracoes = new CTeConfig(this);
+            Conhecimentos = new ConhecimentosCollection(this);
         }
 
         /// <inheritdoc />

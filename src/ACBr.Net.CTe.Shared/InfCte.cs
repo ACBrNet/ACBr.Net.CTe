@@ -37,187 +37,172 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class InfCte : INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class InfCte : INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Fields
+        #region Fields
 
-		private CTeIde ide;
-		private CTeExped exped;
-		private CTeRem rem;
-		private CTeReceb receb;
-		private CTeDest dest;
+        private CTeIde ide;
+        private CTeExped exped;
+        private CTeRem rem;
+        private CTeReceb receb;
+        private CTeDest dest;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Contructors
+        #region Contructors
 
-		public InfCte()
-		{
-			AutXml = new DFeCollection<CTeAutXML>();
-			Imp = new CTeImp();
-			VPrest = new CTeVPrest();
-			Dest = new CTeDest(this);
-			Receb = new CTeReceb(this);
-			exped = new CTeExped(this);
-			rem = new CTeRem(this);
-			Emit = new CTeEmit();
-			Compl = new CTeCompl();
-			Ide = new CTeIde();
-			Versao = CTeVersao.v300;
-		}
+        public InfCte()
+        {
+            AutXml = new DFeCollection<CTeAutXML>();
+            Imp = new CTeImp();
+            VPrest = new CTeVPrest();
+            Dest = new CTeDest(this);
+            Receb = new CTeReceb(this);
+            exped = new CTeExped(this);
+            rem = new CTeRem(this);
+            Emit = new CTeEmit();
+            Compl = new CTeCompl();
+            Ide = new CTeIde();
+            Versao = CTeVersao.v300;
+        }
 
-		#endregion Contructors
+        #endregion Contructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeAttribute(TipoCampo.Enum, "versao", Id = "#002", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeVersao Versao { get; set; }
+        [DFeAttribute(TipoCampo.Enum, "versao", Id = "#002", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
 
-		[DFeAttribute(TipoCampo.Str, "Id", Id = "#003", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Id { get; set; }
+        [DFeAttribute(TipoCampo.Str, "Id", Id = "#003", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Id { get; set; }
 
-		[DFeElement("ide", Id = "#004", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeIde Ide
-		{
-			get
-			{
-				return ide;
-			}
-			set
-			{
-				if (value.Parent != this)
-				{
-					value.Parent = this;
-				}
+        [DFeElement("ide", Id = "#004", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeIde Ide
+        {
+            get => ide;
+            set
+            {
+                if (value.Parent != this)
+                {
+                    value.Parent = this;
+                }
 
-				ide = value;
-			}
-		}
+                ide = value;
+            }
+        }
 
-		[DFeElement("compl", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeCompl Compl { get; set; }
+        [DFeElement("compl", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeCompl Compl { get; set; }
 
-		[DFeElement("emit", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeEmit Emit { get; set; }
+        [DFeElement("emit", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeEmit Emit { get; set; }
 
-		[DFeElement("rem", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public CTeRem Rem
-		{
-			get
-			{
-				return rem;
-			}
-			set
-			{
-				if (value.Parent != this)
-				{
-					value.Parent = this;
-				}
+        [DFeElement("rem", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeRem Rem
+        {
+            get => rem;
+            set
+            {
+                if (value.Parent != this)
+                {
+                    value.Parent = this;
+                }
 
-				rem = value;
-			}
-		}
+                rem = value;
+            }
+        }
 
-		[DFeElement("exped", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public CTeExped Exped
-		{
-			get
-			{
-				return exped;
-			}
-			set
-			{
-				if (value.Parent != this)
-				{
-					value.Parent = this;
-				}
+        [DFeElement("exped", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeExped Exped
+        {
+            get => exped;
+            set
+            {
+                if (value.Parent != this)
+                {
+                    value.Parent = this;
+                }
 
-				exped = value;
-			}
-		}
+                exped = value;
+            }
+        }
 
-		[DFeElement("receb", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public CTeReceb Receb
-		{
-			get
-			{
-				return receb;
-			}
-			set
-			{
-				if (value.Parent != this)
-				{
-					value.Parent = this;
-				}
+        [DFeElement("receb", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeReceb Receb
+        {
+            get => receb;
+            set
+            {
+                if (value.Parent != this)
+                {
+                    value.Parent = this;
+                }
 
-				receb = value;
-			}
-		}
+                receb = value;
+            }
+        }
 
-		[DFeElement("dest", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public CTeDest Dest
-		{
-			get
-			{
-				return dest;
-			}
-			set
-			{
-				if (value.Parent != this)
-				{
-					value.Parent = this;
-				}
+        [DFeElement("dest", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeDest Dest
+        {
+            get => dest;
+            set
+            {
+                if (value.Parent != this)
+                {
+                    value.Parent = this;
+                }
 
-				dest = value;
-			}
-		}
+                dest = value;
+            }
+        }
 
-		[DFeElement("vPrest", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeVPrest VPrest { get; set; }
+        [DFeElement("vPrest", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVPrest VPrest { get; set; }
 
-		[DFeElement("imp", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeImp Imp { get; set; }
+        [DFeElement("imp", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeImp Imp { get; set; }
 
-		[DFeItem(typeof(CTeNormal), "infCTeNorm")]
-		[DFeItem(typeof(CTeAnulacao), "infCteAnu")]
-		[DFeItem(typeof(CTeComplemento), "infCteComp")]
-		public IInfoCTe InfoCTe { get; set; }
+        [DFeItem(typeof(CTeNormal), "infCTeNorm")]
+        [DFeItem(typeof(CTeAnulacao), "infCteAnu")]
+        [DFeItem(typeof(CTeComplemento), "infCteComp")]
+        public IInfoCTe InfoCTe { get; set; }
 
-		[DFeElement("autXML", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DFeCollection<CTeAutXML> AutXml { get; set; }
+        [DFeElement("autXML", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeAutXML> AutXml { get; set; }
 
-		#endregion Propriedades
+        #endregion Propriedades
 
-		#region Methods
+        #region Methods
 
-		private bool ShouldSerializeRem()
-		{
-			return Ide.Mod == ModeloCTe.CTe && (!Rem.CNPJ.IsEmpty() || !Rem.CPF.IsEmpty() || !Rem.XNome.IsEmpty());
-		}
+        private bool ShouldSerializeRem()
+        {
+            return Ide.Mod == ModeloCTe.CTe && (!Rem.CNPJ.IsEmpty() || !Rem.CPF.IsEmpty() || !Rem.XNome.IsEmpty());
+        }
 
-		private bool ShouldSerializeExped()
-		{
-			return Ide.Mod == ModeloCTe.CTe && (!Exped.CNPJ.IsEmpty() || !Exped.CPF.IsEmpty() || !Exped.XNome.IsEmpty());
-		}
+        private bool ShouldSerializeExped()
+        {
+            return Ide.Mod == ModeloCTe.CTe && (!Exped.CNPJ.IsEmpty() || !Exped.CPF.IsEmpty() || !Exped.XNome.IsEmpty());
+        }
 
-		private bool ShouldSerializeReceb()
-		{
-			return Ide.Mod == ModeloCTe.CTe && (!Receb.CNPJ.IsEmpty() || !Receb.CPF.IsEmpty() || !Receb.XNome.IsEmpty());
-		}
+        private bool ShouldSerializeReceb()
+        {
+            return Ide.Mod == ModeloCTe.CTe && (!Receb.CNPJ.IsEmpty() || !Receb.CPF.IsEmpty() || !Receb.XNome.IsEmpty());
+        }
 
-		private bool ShouldSerializeDest()
-		{
-			return Ide.Mod == ModeloCTe.CTe && (!Dest.CNPJ.IsEmpty() || !Dest.CPF.IsEmpty() || !Dest.XNome.IsEmpty());
-		}
+        private bool ShouldSerializeDest()
+        {
+            return Ide.Mod == ModeloCTe.CTe && (!Dest.CNPJ.IsEmpty() || !Dest.CPF.IsEmpty() || !Dest.XNome.IsEmpty());
+        }
 
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }
 
 #pragma warning restore

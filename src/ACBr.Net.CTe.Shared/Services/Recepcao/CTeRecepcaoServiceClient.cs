@@ -30,44 +30,79 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Xml;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core.Service;
+using ACBr.Net.DFe.Core;
+using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe.Services
 {
-	public sealed class CTeRecepcaoServiceClient : DFeSoap12ServiceClientBase<ICteRecepcao>, ICteRecepcao
-	{
-		#region Constructors
+    public sealed class CTeRecepcaoServiceClient : CTeServiceClient<ICteRecepcao>, ICteRecepcao
+    {
+        #region Constructors
 
-		public CTeRecepcaoServiceClient(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
-		{
-		}
+        public CTeRecepcaoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
+            base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
+        {
+            Schema = SchemaCTe.EnviCTe;
+            ArquivoEnvio = "ped-sta";
+            ArquivoResposta = "sta";
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Methods
+        #region Methods
 
-		public string RecepcaoLote(CTeWsCabecalho cabecalho, string mensagem)
-		{
-			Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-			Guard.Against<ArgumentNullException>(mensagem.IsEmpty(), nameof(mensagem));
+        public RecepcaoCTeResposta RecepcaoLote(IEnumerable<CTe> ctes, string loteId)
+        {
+            Guard.Against<ArgumentException>(ctes.Count() > 50, "So pode enviar 50 conhecimentos por lote.");
 
-			var xml = new XmlDocument();
-			xml.LoadXml(mensagem);
+            lock (serviceLock)
+            {
+                var request = new StringBuilder();
+                request.Append($"<enviCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{Config.Geral.VersaoDFe.GetDescription()}\">");
+                request.Append($"<idLote>{loteId}</idLote>");
 
-			var inValue = new RecepcaoRequest(cabecalho, xml);
-			var retVal = ((ICteRecepcao)this).RecepcaoLote(inValue);
-			return retVal.Result.OuterXml;
-		}
+                var saveOptions = DFeSaveOptions.DisableFormatting | DFeSaveOptions.OmitDeclaration;
+                if (Config.Geral.RetirarAcentos) saveOptions |= DFeSaveOptions.RemoveAccents;
+                if (Config.Geral.RetirarEspacos) saveOptions |= DFeSaveOptions.RemoveSpaces;
 
-		RecepcaoResponse ICteRecepcao.RecepcaoLote(RecepcaoRequest request)
-		{
-			return Channel.RecepcaoLote(request);
-		}
+                foreach (var cte in ctes)
+                {
+                    var cteXml = cte.GetXml(saveOptions);
+                    GravarCTe(cteXml, cte.GetXmlName(), cte.InfCte.Ide.DhEmi, cte.InfCte.Emit.CNPJ, cte.InfCte.Ide.Mod);
+                    request.Append(cteXml);
+                }
 
-		#endregion Methods
-	}
+                request.Append("</enviCTe>");
+
+                var dadosMsg = request.ToString();
+
+                Guard.Against<ACBrDFeException>(dadosMsg.Length > (500 * 1024),
+                    $"Tamanho do XML de Dados superior a 500 Kbytes. Tamanho atual: {Math.Truncate(dadosMsg.Length / 1024M)} Kbytes");
+
+                ValidateMessage(dadosMsg);
+
+                var doc = new XmlDocument();
+                doc.LoadXml(dadosMsg);
+
+                var inValue = new RecepcaoRequest(DefineHeader(), doc);
+                var retVal = ((ICteRecepcao)this).RecepcaoLote(inValue);
+                var retorno = new RecepcaoCTeResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
+                return retorno;
+            }
+        }
+
+        RecepcaoResponse ICteRecepcao.RecepcaoLote(RecepcaoRequest request)
+        {
+            return Channel.RecepcaoLote(request);
+        }
+
+        #endregion Methods
+    }
 }

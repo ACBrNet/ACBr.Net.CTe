@@ -31,95 +31,92 @@
 
 using System.ComponentModel;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Collection;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeReceb : GenericClone<CTeExped>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeReceb : DFeParentItem<CTeReceb, InfCte>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeReceb()
-		{
-			EnderReceb = new CTeEndereco();
-		}
+        public CTeReceb()
+        {
+            EnderReceb = new CTeEndereco();
+        }
 
-		public CTeReceb(InfCte parent) : this()
-		{
-			Parent = parent;
-		}
+        public CTeReceb(InfCte parent) : this()
+        {
+            Parent = parent;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeIgnore]
-		internal InfCte Parent { get; set; }
+        [DFeElement(TipoCampo.StrNumberFill, "CPF", Id = "#161", Min = 11, Max = 11, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string CPF { get; set; }
 
-		[DFeElement(TipoCampo.StrNumberFill, "CPF", Id = "#161", Min = 11, Max = 11, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string CPF { get; set; }
+        [DFeElement(TipoCampo.StrNumberFill, "CNPJ", Id = "#162", Min = 14, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string CNPJ { get; set; }
 
-		[DFeElement(TipoCampo.StrNumberFill, "CNPJ", Id = "#162", Min = 14, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string CNPJ { get; set; }
+        [DFeElement(TipoCampo.Custom, "IE", Id = "#163", Min = 0, Max = 14, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string IE { get; set; }
 
-		[DFeElement(TipoCampo.Custom, "IE", Id = "#163", Min = 0, Max = 14, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string IE { get; set; }
+        [DFeElement(TipoCampo.Custom, "xNome", Id = "#164", Min = 2, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string XNome { get; set; }
 
-		[DFeElement(TipoCampo.Custom, "xNome", Id = "#164", Min = 2, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string XNome { get; set; }
+        [DFeElement(TipoCampo.StrNumber, "fone", Id = "#165", Min = 7, Max = 12, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Fone { get; set; }
 
-		[DFeElement(TipoCampo.StrNumber, "fone", Id = "#165", Min = 7, Max = 12, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Fone { get; set; }
+        [DFeElement("enderReceb", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeEndereco EnderReceb { get; set; }
 
-		[DFeElement("enderReceb", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeEndereco EnderReceb { get; set; }
+        [DFeElement(TipoCampo.Str, "email", Id = "#177", Min = 1, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string Email { get; set; }
 
-		[DFeElement(TipoCampo.Str, "email", Id = "#177", Min = 1, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string Email { get; set; }
+        #endregion Propriedades
 
-		#endregion Propriedades
+        #region Methods
 
-		#region Methods
+        private bool ShouldSerializeCPF()
+        {
+            return CNPJ.IsEmpty();
+        }
 
-		private bool ShouldSerializeCPF()
-		{
-			return CNPJ.IsEmpty();
-		}
+        private bool ShouldSerializeCNPJ()
+        {
+            return CPF.IsEmpty();
+        }
 
-		private bool ShouldSerializeCNPJ()
-		{
-			return CPF.IsEmpty();
-		}
+        private string SerializeIE()
+        {
+            return IE.Trim().ToUpper() == CTeStrings.CTeIEIsento ? IE.Trim().ToUpper() : IE.OnlyNumbers();
+        }
 
-		private string SerializeIE()
-		{
-			return IE.Trim().ToUpper() == CTeStrings.CTeIEIsento ? IE.Trim().ToUpper() : IE.OnlyNumbers();
-		}
+        private object DeserializeIE(string value)
+        {
+            return value;
+        }
 
-		private object DeserializeIE(string value)
-		{
-			return value;
-		}
+        private string SerializeXNome()
+        {
+            return Parent.Ide.TpAmb == DFeTipoAmbiente.Homologacao ? CTeStrings.CTeHomologação : XNome;
+        }
 
-		private string SerializeXNome()
-		{
-			return Parent.Ide.TpAmb == DFeTipoAmbiente.Homologacao ? CTeStrings.CTeHomologação : XNome;
-		}
+        private object DeserializeXNome(string value)
+        {
+            return value;
+        }
 
-		private object DeserializeXNome(string value)
-		{
-			return value;
-		}
-
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }

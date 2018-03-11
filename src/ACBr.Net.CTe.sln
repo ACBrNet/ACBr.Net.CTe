@@ -12,6 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{5981C831-42FA-49C5-A56D-B012DF69E789}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{3A25E064-557A-4671-93D8-73EF51C92323}"
+	ProjectSection(SolutionItems) = preProject
+		ACBr.Net.CTe.Shared\Services\Recepcao\CTeRecepcaoResposta.cs = ACBr.Net.CTe.Shared\Services\Recepcao\CTeRecepcaoResposta.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-22-2016
+// Created          : 03-09-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-22-2016
+// Last Modified On : 03-09-2018
 // ***********************************************************************
-// <copyright file="CTeMultimodal.cs" company="ACBr.Net">
+// <copyright file="CTeinfRec.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,54 +29,26 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ComponentModel;
-using ACBr.Net.Core.Extensions;
+using System;
 using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
-using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Services
 {
-    [DFeRoot("multimodal")]
-    public sealed class CTeMultimodal : DFeDocument<CTeMultimodal>, ICTeModal, INotifyPropertyChanged
+    public sealed class CTeinfRec : GenericClone<CTeinfRec>
     {
-        #region Events
+        #region Properties
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        [DFeElement(TipoCampo.Str, "tMed", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string NRec { get; set; }
 
-        #endregion Events
+        [DFeElement(TipoCampo.DatHorTz, "dhRecbto", Min = 19, Max = 19, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTimeOffset DhRecbto { get; set; }
 
-        #region Constructors
+        [DFeElement(TipoCampo.Int, "tMed", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public int TMed { get; set; }
 
-        public CTeMultimodal()
-        {
-            Seg = new CTeSeguro();
-        }
-
-        #endregion Constructors
-
-        #region Propriedades
-
-        [DFeElement(TipoCampo.Str, "COTM", Id = "", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string COTM { get; set; }
-
-        [DFeElement(TipoCampo.Enum, "indNegociavel", Id = "", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public CTeIndNegociavel IndNegociavel { get; set; }
-
-        [DFeElement("seg", Ocorrencia = Ocorrencia.Obrigatoria)]
-        public CTeSeguro Seg { get; set; }
-
-        #endregion Propriedades
-
-        #region Methods
-
-        private bool ShouldSerializerSeg()
-        {
-            return !Seg.NAver.IsEmpty() || !Seg.NApol.IsEmpty() ||
-                   !Seg.InfSeg.CNPJ.IsEmpty() || !Seg.InfSeg.XSeg.IsEmpty();
-        }
-
-        #endregion Methods
+        #endregion Properties
     }
 }

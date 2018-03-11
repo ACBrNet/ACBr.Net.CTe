@@ -33,13 +33,13 @@ using ACBr.Net.DFe.Core.Attributes;
 
 namespace ACBr.Net.CTe
 {
-    public enum ModeloCTe
+    public enum ModeloCTe : byte
     {
         [DFeEnum("57")]
-        CTe,
+        CTe = 57,
 
         [DFeEnum("67")]
-        CTeOs
+        CTeOS = 67
     }
 }
 

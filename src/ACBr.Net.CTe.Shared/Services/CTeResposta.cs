@@ -29,28 +29,40 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Reflection;
+using System.Text;
+using ACBr.Net.DFe.Core.Common;
+
 namespace ACBr.Net.CTe.Services
 {
-	public abstract class CTeResposta<T> where T : class
-	{
-		#region Constructors
+    public abstract class CTeResposta<T> where T : DFeDocument<T>
+    {
+        #region Constructors
 
-		protected CTeResposta(string xmlEnvio, string xmlRetorno)
-		{
-			XmlEnvio = xmlEnvio;
-			XmlRetorno = xmlRetorno;
-		}
+        protected CTeResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs)
+        {
+            XmlEnvio = xmlEnvio;
+            XmlRetorno = xmlRetorno;
+            EnvelopeSoap = envelopeSoap;
+            RetornoWS = respostaWs;
 
-		#endregion Constructors
+            Resultado = DFeDocument<T>.Load(xmlRetorno, Encoding.UTF8);
+        }
 
-		#region Properties
+        #endregion Constructors
 
-		public string XmlEnvio { get; protected set; }
+        #region Properties
 
-		public string XmlRetorno { get; protected set; }
+        public string XmlEnvio { get; }
 
-		public T Resultado { get; set; }
+        public string XmlRetorno { get; }
 
-		#endregion Properties
-	}
+        public string EnvelopeSoap { get; }
+
+        public string RetornoWS { get; }
+
+        public T Resultado { get; }
+
+        #endregion Properties
+    }
 }

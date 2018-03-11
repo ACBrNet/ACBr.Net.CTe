@@ -30,64 +30,65 @@
 // ***********************************************************************
 
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Collection;
 using ACBr.Net.DFe.Core.Serializer;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeAereoModal : GenericClone<CTeAereoModal>, ICTeModal, INotifyPropertyChanged
-	{
-		#region Events
+    [DFeRoot("aereo")]
+    public sealed class CTeAereoModal : DFeDocument<CTeAereoModal>, ICTeModal, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeAereoModal()
-		{
-			Peri = new DFeCollection<CTeAereoPeri>();
-			Tarifa = new CTeAereoTarifa();
-			NatCarga = new CTeAereoNatCarga();
-		}
+        public CTeAereoModal()
+        {
+            Peri = new DFeCollection<CTeAereoPeri>();
+            Tarifa = new CTeAereoTarifa();
+            NatCarga = new CTeAereoNatCarga();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.Int, "nMinu", Id = "", Min = 9, Max = 9, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public int NMinu { get; set; }
+        [DFeElement(TipoCampo.Int, "nMinu", Id = "", Min = 9, Max = 9, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public int NMinu { get; set; }
 
-		[DFeElement(TipoCampo.Str, "nOCA", Id = "", Min = 11, Max = 11, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string NOCA { get; set; }
+        [DFeElement(TipoCampo.Str, "nOCA", Id = "", Min = 11, Max = 11, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string NOCA { get; set; }
 
-		[DFeElement(TipoCampo.Dat, "dPrevAereo", Id = "", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DateTime? DPrevAereo { get; set; }
+        [DFeElement(TipoCampo.Dat, "dPrevAereo", Id = "", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DateTime? DPrevAereo { get; set; }
 
-		[DFeElement("natCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeAereoNatCarga NatCarga { get; set; }
+        [DFeElement("natCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeAereoNatCarga NatCarga { get; set; }
 
-		[DFeElement("tarifa", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeAereoTarifa Tarifa { get; set; }
+        [DFeElement("tarifa", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeAereoTarifa Tarifa { get; set; }
 
-		[DFeElement("peri", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DFeCollection<CTeAereoPeri> Peri { get; set; }
+        [DFeElement("peri", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeAereoPeri> Peri { get; set; }
 
-		#endregion Propriedades
+        #endregion Propriedades
 
-		#region Methods
+        #region Methods
 
-		private bool ShouldSerializeNatCarga()
-		{
-			return NatCarga.CInfManu.Any() || !NatCarga.XDime.IsEmpty();
-		}
+        private bool ShouldSerializeNatCarga()
+        {
+            return NatCarga.CInfManu.Any() || !NatCarga.XDime.IsEmpty();
+        }
 
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }

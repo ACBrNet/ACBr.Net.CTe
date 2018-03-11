@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Logging;
 using ACBr.Net.CTe.Services;
-using TimeSpan = System.TimeSpan;
 
 namespace ACBr.Net.CTe.Demo
 {
@@ -22,7 +21,6 @@ namespace ACBr.Net.CTe.Demo
 
         private bool loaded;
         private ACBrConfig config;
-        private const string Key = @"a1!B78s!5(h23y1g12\t\98w";
 
         #endregion Fields
 
@@ -51,6 +49,11 @@ namespace ACBr.Net.CTe.Demo
         #region Methods
 
         #region EventHandlers
+
+        private void chkSalvarArquivos_CheckedChanged(object sender, EventArgs e)
+        {
+            acbrCTe.Configuracoes.Geral.Salvar = chkSalvarArquivos.Checked;
+        }
 
         private void combobox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -92,6 +95,20 @@ namespace ACBr.Net.CTe.Demo
         {
             var ret = acbrCTe.ConsultarSituacaoServico();
             wbbResposta.LoadXml(ret.XmlRetorno);
+            wbbRetorno.LoadXml(ret.RetornoWS);
+
+            rtLogResposta.AppendLine("Status Serviço");
+            rtLogResposta.AppendLine($"tpAmb:     {ret.Resultado.TipoAmbiente.GetDescription()}");
+            rtLogResposta.AppendLine($"verAplic:  {ret.Resultado.VersaoAplicacao}");
+            rtLogResposta.AppendLine($"cStat:     {ret.Resultado.CStat}");
+            rtLogResposta.AppendLine($"xMotivo:   {ret.Resultado.Motivo}");
+            rtLogResposta.AppendLine($"cUF:       {ret.Resultado.UF}");
+            rtLogResposta.AppendLine($"dhRecbto:  {ret.Resultado.DhRecbto:G}");
+            rtLogResposta.AppendLine($"tMed:      {ret.Resultado.TMed}");
+            rtLogResposta.AppendLine($"dhRetorno: {ret.Resultado.DhRetorno:G}");
+            rtLogResposta.AppendLine($"xObs:      {ret.Resultado.Obs}");
+
+            tbcRespostas.SelectedTab = tabPageRespostas;
         }
 
         private void loadCTeButton_Click(object sender, EventArgs e)
@@ -101,6 +118,10 @@ namespace ACBr.Net.CTe.Demo
 
             acbrCTe.Conhecimentos.Load(file);
             wbbXml.LoadXml(acbrCTe.Conhecimentos.Last().GetXml());
+        }
+
+        private void listViewServicos_DoubleClick(object sender, EventArgs e)
+        {
         }
 
         private void btnImportar_Click(object sender, EventArgs e)
@@ -181,6 +202,7 @@ namespace ACBr.Net.CTe.Demo
                 item.SubItems.Add(uf.GetDescription());
                 item.SubItems.Add(tipo.GetDescription());
                 item.SubItems.Add(serviceInfo[tipo]);
+                item.Tag = serviceInfo;
                 serviceList.Add(item);
             }
 
@@ -195,7 +217,7 @@ namespace ACBr.Net.CTe.Demo
             acbrCTe.Configuracoes.Certificados.Certificado = !txtCertificado.Text.IsEmpty() ? txtCertificado.Text : txtNumeroSerie.Text;
             acbrCTe.Configuracoes.Certificados.Senha = txtSenha.Text;
 
-            acbrCTe.Configuracoes.WebServices.Uf = cbbUfWebservice.GetSelectedValue<DFeCodUF>();
+            acbrCTe.Configuracoes.WebServices.UF = cbbUfWebservice.GetSelectedValue<DFeCodUF>();
             acbrCTe.Configuracoes.WebServices.Ambiente = rdbProducao.Checked ? DFeTipoAmbiente.Producao : DFeTipoAmbiente.Homologacao;
             acbrCTe.Configuracoes.WebServices.AguardarConsultaRet = (uint)(nudTimeOut.Value / 100);
             acbrCTe.Configuracoes.WebServices.ProxyHost = txtProxyHost.Text;
@@ -209,8 +231,7 @@ namespace ACBr.Net.CTe.Demo
             config = ACBrConfig.CreateOrLoad(Path.Combine(Application.StartupPath, "cte.config"));
 
             txtCertificado.Text = config.Get("Certificado", string.Empty);
-            var senha = config.Get("Senha", string.Empty);
-            txtSenha.Text = !senha.IsEmpty() ? senha.Decrypt(Key) : string.Empty;
+            txtSenha.Text = config.GetCrypt("Senha", string.Empty);
             txtNumeroSerie.Text = config.Get("NumeroSerie", string.Empty);
 
             cbbUfWebservice.SetSelectedValue(config.Get("UF", DFeCodUF.MS));
@@ -220,8 +241,7 @@ namespace ACBr.Net.CTe.Demo
             txtProxyHost.Text = config.Get("ProxyHost", txtProxyHost.Text);
             txtProxyPort.Text = config.Get("ProxyPort", txtProxyPort.Text);
             txtProxyUser.Text = config.Get("ProxyUser", txtProxyUser.Text);
-            var proxyPass = config.Get("ProxyPass", string.Empty);
-            txtProxyPass.Text = !proxyPass.IsEmpty() ? proxyPass.Decrypt(Key) : string.Empty;
+            txtProxyPass.Text = config.GetCrypt("ProxyPass", string.Empty);
 
             AplicarConfig();
         }
@@ -229,7 +249,7 @@ namespace ACBr.Net.CTe.Demo
         private void SaveConfig()
         {
             config.Set("Certificado", txtCertificado.Text);
-            config.Set("Senha", !txtSenha.Text.IsEmpty() ? txtSenha.Text.Encrypt(Key) : txtSenha.Text);
+            config.SetCrypt("Senha", txtSenha.Text);
             config.Set("NumeroSerie", txtNumeroSerie.Text);
 
             config.Set("UF", (int)cbbUfWebservice.GetSelectedValue<DFeCodUF>());
@@ -238,7 +258,7 @@ namespace ACBr.Net.CTe.Demo
             config.Set("ProxyHost", txtProxyHost.Text);
             config.Set("ProxyPort", txtProxyPort.Text);
             config.Set("ProxyUser", txtProxyUser.Text);
-            config.Set("ProxyPass", !txtProxyPass.Text.IsEmpty() ? txtProxyPass.Text.Encrypt(Key) : txtProxyPass.Text);
+            config.SetCrypt("ProxyPass", txtProxyPass.Text);
 
             config.Save();
             AplicarConfig();

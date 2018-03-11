@@ -49,10 +49,10 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.statusServiceButton = new System.Windows.Forms.Button();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tbcRespostas = new System.Windows.Forms.TabControl();
             this.tabPageRespostas = new System.Windows.Forms.TabPage();
             this.rtLogResposta = new System.Windows.Forms.RichTextBox();
-            this.tabPageXmlResposta = new System.Windows.Forms.TabPage();
+            this.tbpXmlResposta = new System.Windows.Forms.TabPage();
             this.wbbResposta = new System.Windows.Forms.WebBrowser();
             this.tabPageLog = new System.Windows.Forms.TabPage();
             this.rtbLog = new System.Windows.Forms.RichTextBox();
@@ -146,9 +146,9 @@
             this.acbrCTe = new ACBr.Net.CTe.ACBrCTe();
             this.tabControl1.SuspendLayout();
             this.tabPageCTe.SuspendLayout();
-            this.tabControl3.SuspendLayout();
+            this.tbcRespostas.SuspendLayout();
             this.tabPageRespostas.SuspendLayout();
-            this.tabPageXmlResposta.SuspendLayout();
+            this.tbpXmlResposta.SuspendLayout();
             this.tabPageLog.SuspendLayout();
             this.tabPageXmlCTe.SuspendLayout();
             this.tabPageRetornoWS.SuspendLayout();
@@ -197,7 +197,7 @@
             this.tabPageCTe.Controls.Add(this.button3);
             this.tabPageCTe.Controls.Add(this.button2);
             this.tabPageCTe.Controls.Add(this.statusServiceButton);
-            this.tabPageCTe.Controls.Add(this.tabControl3);
+            this.tabPageCTe.Controls.Add(this.tbcRespostas);
             this.tabPageCTe.Controls.Add(this.groupBox1);
             this.tabPageCTe.Location = new System.Drawing.Point(4, 22);
             this.tabPageCTe.Name = "tabPageCTe";
@@ -380,20 +380,20 @@
             this.statusServiceButton.UseVisualStyleBackColor = true;
             this.statusServiceButton.Click += new System.EventHandler(this.statusServiceButton_Click);
             // 
-            // tabControl3
+            // tbcRespostas
             // 
-            this.tabControl3.Controls.Add(this.tabPageRespostas);
-            this.tabControl3.Controls.Add(this.tabPageXmlResposta);
-            this.tabControl3.Controls.Add(this.tabPageLog);
-            this.tabControl3.Controls.Add(this.tabPageXmlCTe);
-            this.tabControl3.Controls.Add(this.tabPageRetornoWS);
-            this.tabControl3.Controls.Add(this.tabPageDados);
-            this.tabControl3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl3.Location = new System.Drawing.Point(286, 218);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(568, 264);
-            this.tabControl3.TabIndex = 2;
+            this.tbcRespostas.Controls.Add(this.tabPageRespostas);
+            this.tbcRespostas.Controls.Add(this.tbpXmlResposta);
+            this.tbcRespostas.Controls.Add(this.tabPageLog);
+            this.tbcRespostas.Controls.Add(this.tabPageXmlCTe);
+            this.tbcRespostas.Controls.Add(this.tabPageRetornoWS);
+            this.tbcRespostas.Controls.Add(this.tabPageDados);
+            this.tbcRespostas.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbcRespostas.Location = new System.Drawing.Point(286, 218);
+            this.tbcRespostas.Name = "tbcRespostas";
+            this.tbcRespostas.SelectedIndex = 0;
+            this.tbcRespostas.Size = new System.Drawing.Size(568, 264);
+            this.tbcRespostas.TabIndex = 2;
             // 
             // tabPageRespostas
             // 
@@ -418,16 +418,16 @@
             this.rtLogResposta.TabIndex = 1;
             this.rtLogResposta.Text = "";
             // 
-            // tabPageXmlResposta
+            // tbpXmlResposta
             // 
-            this.tabPageXmlResposta.Controls.Add(this.wbbResposta);
-            this.tabPageXmlResposta.Location = new System.Drawing.Point(4, 22);
-            this.tabPageXmlResposta.Name = "tabPageXmlResposta";
-            this.tabPageXmlResposta.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXmlResposta.Size = new System.Drawing.Size(560, 238);
-            this.tabPageXmlResposta.TabIndex = 1;
-            this.tabPageXmlResposta.Text = "Xml Resposta";
-            this.tabPageXmlResposta.UseVisualStyleBackColor = true;
+            this.tbpXmlResposta.Controls.Add(this.wbbResposta);
+            this.tbpXmlResposta.Location = new System.Drawing.Point(4, 22);
+            this.tbpXmlResposta.Name = "tbpXmlResposta";
+            this.tbpXmlResposta.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpXmlResposta.Size = new System.Drawing.Size(560, 238);
+            this.tbpXmlResposta.TabIndex = 1;
+            this.tbpXmlResposta.Text = "Xml Resposta";
+            this.tbpXmlResposta.UseVisualStyleBackColor = true;
             // 
             // wbbResposta
             // 
@@ -609,6 +609,7 @@
             this.chkSalvarArquivos.TabIndex = 18;
             this.chkSalvarArquivos.Text = "Salvar arquivos CTe";
             this.chkSalvarArquivos.UseVisualStyleBackColor = true;
+            this.chkSalvarArquivos.CheckedChanged += new System.EventHandler(this.chkSalvarArquivos_CheckedChanged);
             // 
             // btnSelecionarSchema
             // 
@@ -1300,6 +1301,7 @@
             this.listViewServicos.TabIndex = 0;
             this.listViewServicos.UseCompatibleStateImageBehavior = false;
             this.listViewServicos.View = System.Windows.Forms.View.Details;
+            this.listViewServicos.DoubleClick += new System.EventHandler(this.listViewServicos_DoubleClick);
             // 
             // clhVersao
             // 
@@ -1324,28 +1326,21 @@
             // acbrCTe
             // 
             this.acbrCTe.Configuracoes.Arquivos.AdicionarLiteral = false;
-            this.acbrCTe.Configuracoes.Arquivos.PastaMensal = false;
             this.acbrCTe.Configuracoes.Arquivos.PathCTe = "C:\\Users\\rften\\AppData\\Local\\Microsoft\\VisualStudio\\15.0_ba1d4182\\ProjectAssembli" +
     "es\\_djzog3j01\\CTe";
             this.acbrCTe.Configuracoes.Arquivos.PathEvento = "C:\\Users\\rften\\AppData\\Local\\Microsoft\\VisualStudio\\15.0_ba1d4182\\ProjectAssembli" +
     "es\\_djzog3j01\\Evento";
-            this.acbrCTe.Configuracoes.Arquivos.PathLote = "C:\\Users\\rften\\AppData\\Local\\Microsoft\\VisualStudio\\15.0_ba1d4182\\ProjectAssembli" +
-    "es\\_djzog3j01\\Lote";
             this.acbrCTe.Configuracoes.Arquivos.Salvar = false;
             this.acbrCTe.Configuracoes.Certificados.Certificado = "";
             this.acbrCTe.Configuracoes.Certificados.CertificadoBytes = null;
             this.acbrCTe.Configuracoes.Certificados.Senha = null;
-            this.acbrCTe.Configuracoes.Geral.ArquivoServicos = "";
-            this.acbrCTe.Configuracoes.Geral.PathSalvar = "C:\\Users\\rften\\AppData\\Local\\Microsoft\\VisualStudio\\15.0_ba1d4182\\ProjectAssembli" +
-    "es\\_djzog3j01\\XmlCTe";
-            this.acbrCTe.Configuracoes.Geral.PathSchemas = "C:\\Users\\rften\\AppData\\Local\\Microsoft\\VisualStudio\\15.0_ba1d4182\\ProjectAssembli" +
-    "es\\_djzog3j01\\Schemas";
+            this.acbrCTe.Configuracoes.Geral.Salvar = true;
             this.acbrCTe.Configuracoes.WebServices.AguardarConsultaRet = ((uint)(1u));
             this.acbrCTe.Configuracoes.WebServices.ProxyHost = "";
             this.acbrCTe.Configuracoes.WebServices.ProxyPass = "";
             this.acbrCTe.Configuracoes.WebServices.ProxyPort = "";
             this.acbrCTe.Configuracoes.WebServices.ProxyUser = "";
-            this.acbrCTe.Configuracoes.WebServices.Uf = ACBr.Net.DFe.Core.Common.DFeCodUF.MS;
+            this.acbrCTe.Configuracoes.WebServices.UF = ACBr.Net.DFe.Core.Common.DFeCodUF.MS;
             // 
             // FormMain
             // 
@@ -1359,9 +1354,9 @@
             this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.tabControl1.ResumeLayout(false);
             this.tabPageCTe.ResumeLayout(false);
-            this.tabControl3.ResumeLayout(false);
+            this.tbcRespostas.ResumeLayout(false);
             this.tabPageRespostas.ResumeLayout(false);
-            this.tabPageXmlResposta.ResumeLayout(false);
+            this.tbpXmlResposta.ResumeLayout(false);
             this.tabPageLog.ResumeLayout(false);
             this.tabPageXmlCTe.ResumeLayout(false);
             this.tabPageRetornoWS.ResumeLayout(false);
@@ -1404,10 +1399,10 @@
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button statusServiceButton;
-		private System.Windows.Forms.TabControl tabControl3;
+		private System.Windows.Forms.TabControl tbcRespostas;
 		private System.Windows.Forms.TabPage tabPageRespostas;
 		private System.Windows.Forms.RichTextBox rtLogResposta;
-		private System.Windows.Forms.TabPage tabPageXmlResposta;
+		private System.Windows.Forms.TabPage tbpXmlResposta;
 		private System.Windows.Forms.WebBrowser wbbResposta;
 		private System.Windows.Forms.TabPage tabPageLog;
 		private System.Windows.Forms.RichTextBox rtbLog;

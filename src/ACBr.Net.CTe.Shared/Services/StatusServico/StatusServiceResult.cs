@@ -35,13 +35,19 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe.Services
 {
-	[DFeRoot("retConsStatServCte", Namespace = "http://www.portalfiscal.inf.br/cte")]
-	public sealed class StatusServiceResult : CTeResultaBase<StatusServiceResult>
-	{
-		[DFeElement(TipoCampo.DatHor, "dhRecbto", Min = 19, Max = 19, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DateTime DhRecbto { get; set; }
+    [DFeRoot("retConsStatServCte", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class StatusServiceResult : CTeResultaBase<StatusServiceResult>
+    {
+        [DFeElement(TipoCampo.DatHorTz, "dhRecbto", Min = 19, Max = 19, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTimeOffset DhRecbto { get; set; }
 
-		[DFeElement(TipoCampo.Str, "tMed", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string TMed { get; set; }
-	}
+        [DFeElement(TipoCampo.Int, "tMed", Min = 0, Max = 255, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public int TMed { get; set; }
+
+        [DFeElement(TipoCampo.DatHorTz, "dhRetorno", Min = 19, Max = 19, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTimeOffset DhRetorno { get; set; }
+
+        [DFeElement(TipoCampo.Str, "xObs", Min = 0, Max = 255, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string Obs { get; set; }
+    }
 }

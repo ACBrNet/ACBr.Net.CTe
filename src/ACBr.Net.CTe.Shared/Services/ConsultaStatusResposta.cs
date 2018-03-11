@@ -31,14 +31,14 @@
 
 namespace ACBr.Net.CTe.Services
 {
-	public class ConsultaStatusResposta : CTeResposta<StatusServiceResult>
-	{
-		#region Constructor
+    public class ConsultaStatusResposta : CTeResposta<StatusServiceResult>
+    {
+        #region Constructor
 
-		public ConsultaStatusResposta(string xmlEnvio, string xmlRetorno) : base(xmlEnvio, xmlRetorno)
-		{
-		}
+        public ConsultaStatusResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs) : base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs)
+        {
+        }
 
-		#endregion Constructor
-	}
+        #endregion Constructor
+    }
 }

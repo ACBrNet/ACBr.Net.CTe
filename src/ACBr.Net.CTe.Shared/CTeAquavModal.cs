@@ -30,57 +30,58 @@
 // ***********************************************************************
 
 using System.ComponentModel;
-using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Collection;
+using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeAquavModal : GenericClone<CTeAquavModal>, ICTeModal, INotifyPropertyChanged
-	{
-		#region Events
+    [DFeRoot("aquav")]
+    public sealed class CTeAquavModal : DFeDocument<CTeAquavModal>, ICTeModal, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeAquavModal()
-		{
-			DetCont = new DFeCollection<AquavDetCont>();
-			Balsa = new DFeCollection<CTeBalsa>();
-		}
+        public CTeAquavModal()
+        {
+            DetCont = new DFeCollection<AquavDetCont>();
+            Balsa = new DFeCollection<CTeBalsa>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.De2, "vPrest", Id = "#02", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VPrest { get; set; }
+        [DFeElement(TipoCampo.De2, "vPrest", Id = "#02", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VPrest { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vAFRMM", Id = "#03", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VAFRMM { get; set; }
+        [DFeElement(TipoCampo.De2, "vAFRMM", Id = "#03", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VAFRMM { get; set; }
 
-		[DFeElement(TipoCampo.Str, "xNavio", Id = "#04", Min = 1, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string XNavio { get; set; }
+        [DFeElement(TipoCampo.Str, "xNavio", Id = "#04", Min = 1, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string XNavio { get; set; }
 
-		[DFeElement("balsa", Id = "#05", Min = 0, Max = 3, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DFeCollection<CTeBalsa> Balsa { get; set; }
+        [DFeElement("balsa", Id = "#05", Min = 0, Max = 3, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeBalsa> Balsa { get; set; }
 
-		[DFeElement(TipoCampo.Int, "nViag", Id = "#07", Min = 1, Max = 10, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public int NViag { get; set; }
+        [DFeElement(TipoCampo.Int, "nViag", Id = "#07", Min = 1, Max = 10, Ocorrencia = Ocorrencia.MaiorQueZero)]
+        public int NViag { get; set; }
 
-		[DFeElement(TipoCampo.Enum, "direc", Id = "#08", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeDirecao Direc { get; set; }
+        [DFeElement(TipoCampo.Enum, "direc", Id = "#08", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeDirecao Direc { get; set; }
 
-		[DFeElement(TipoCampo.Str, "irin", Id = "#09", Min = 1, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Irin { get; set; }
+        [DFeElement(TipoCampo.Str, "irin", Id = "#09", Min = 1, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Irin { get; set; }
 
-		[DFeElement("detCont", Id = "#10", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DFeCollection<AquavDetCont> DetCont { get; set; }
+        [DFeElement("detCont", Id = "#10", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<AquavDetCont> DetCont { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }
