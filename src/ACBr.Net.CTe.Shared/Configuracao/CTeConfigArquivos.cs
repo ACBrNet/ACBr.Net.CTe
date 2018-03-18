@@ -55,6 +55,7 @@ namespace ACBr.Net.CTe
         /// </summary>
         internal CTeConfigArquivos(ACBrCTe parent) : base(parent)
         {
+            EmissaoPathCTe = false;
         }
 
         #endregion Constructor
@@ -81,6 +82,10 @@ namespace ACBr.Net.CTe
         /// <value>The path lote.</value>
         [Browsable(true)]
         public string PathEvento { get; set; }
+
+        public bool EmissaoPathCTe { get; set; }
+
+        public bool SalvarApenasCTeProcessados { get; set; }
 
         #endregion Properties
 
@@ -258,6 +263,10 @@ namespace ACBr.Net.CTe
 
                 case SchemaCTe.EnviCTe:
                     schemaPath = Path.Combine(PathSchemas, $"enviCTe_v{versao.GetDescription()}.xsd");
+                    break;
+
+                case SchemaCTe.ConsReciCTe:
+                    schemaPath = Path.Combine(PathSchemas, $"consReciCTe_v{versao.GetDescription()}.xsd");
                     break;
 
                 default:

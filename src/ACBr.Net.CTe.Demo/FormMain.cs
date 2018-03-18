@@ -50,9 +50,9 @@ namespace ACBr.Net.CTe.Demo
 
         #region EventHandlers
 
-        private void chkSalvarArquivos_CheckedChanged(object sender, EventArgs e)
+        private void acbrCTe_StatusChanged(object sender, EventArgs e)
         {
-            acbrCTe.Configuracoes.Geral.Salvar = chkSalvarArquivos.Checked;
+            FormStatus.ShowStatus(acbrCTe.Status);
         }
 
         private void combobox_SelectedIndexChanged(object sender, EventArgs e)
@@ -91,12 +91,13 @@ namespace ACBr.Net.CTe.Demo
             if (!txtNumeroSerie.Text.IsEmpty()) txtCertificado.Text = string.Empty;
         }
 
-        private void statusServiceButton_Click(object sender, EventArgs e)
+        private void btnConsultarSituacao_Click(object sender, EventArgs e)
         {
             var ret = acbrCTe.ConsultarSituacaoServico();
             wbbResposta.LoadXml(ret.XmlRetorno);
             wbbRetorno.LoadXml(ret.RetornoWS);
 
+            rtLogResposta.AppendLine("");
             rtLogResposta.AppendLine("Status Serviço");
             rtLogResposta.AppendLine($"tpAmb:     {ret.Resultado.TipoAmbiente.GetDescription()}");
             rtLogResposta.AppendLine($"verAplic:  {ret.Resultado.VersaoAplicacao}");
@@ -111,13 +112,51 @@ namespace ACBr.Net.CTe.Demo
             tbcRespostas.SelectedTab = tabPageRespostas;
         }
 
-        private void loadCTeButton_Click(object sender, EventArgs e)
+        private void btnConsultarRecibo_Click(object sender, EventArgs e)
+        {
+            var recibo = "";
+            InputBox.Show("Consultar recibo.", "Digite o número do recibo", ref recibo);
+
+            if (recibo.IsEmpty()) return;
+
+            var ret = acbrCTe.ConsultaRecibo(recibo);
+            wbbResposta.LoadXml(ret.XmlRetorno);
+            wbbRetorno.LoadXml(ret.RetornoWS);
+
+            rtLogResposta.AppendLine("Consultar Recibo");
+
+            tbcRespostas.SelectedTab = tabPageRespostas;
+        }
+
+        private void btnConsultarXml_Click(object sender, EventArgs e)
         {
             var file = Helpers.OpenFile(@"CTe Xml (CTe*.xml)|CTe*.xml|CTe Xml (*.xml)|*.xml|Todos os Arquivos (*.*)|*.*");
             if (file.IsEmpty()) return;
 
             acbrCTe.Conhecimentos.Load(file);
-            wbbXml.LoadXml(acbrCTe.Conhecimentos.Last().GetXml());
+            var ret = acbrCTe.Consultar();
+            wbbResposta.LoadXml(ret.XmlRetorno);
+            wbbRetorno.LoadXml(ret.RetornoWS);
+
+            rtLogResposta.AppendLine("Consultar CTe");
+
+            tbcRespostas.SelectedTab = tabPageRespostas;
+        }
+
+        private void btnConsultarChave_Click(object sender, EventArgs e)
+        {
+            var chave = "";
+            InputBox.Show("Consultar recibo.", "Digite o número do recibo", ref chave);
+
+            if (chave.IsEmpty()) return;
+
+            var ret = acbrCTe.Consultar(chave);
+            wbbResposta.LoadXml(ret.XmlRetorno);
+            wbbRetorno.LoadXml(ret.RetornoWS);
+
+            rtLogResposta.AppendLine("Consultar CTe");
+
+            tbcRespostas.SelectedTab = tabPageRespostas;
         }
 
         private void listViewServicos_DoubleClick(object sender, EventArgs e)
@@ -217,6 +256,7 @@ namespace ACBr.Net.CTe.Demo
             acbrCTe.Configuracoes.Certificados.Certificado = !txtCertificado.Text.IsEmpty() ? txtCertificado.Text : txtNumeroSerie.Text;
             acbrCTe.Configuracoes.Certificados.Senha = txtSenha.Text;
 
+            acbrCTe.Configuracoes.WebServices.Salvar = chkSalvarSoap.Checked;
             acbrCTe.Configuracoes.WebServices.UF = cbbUfWebservice.GetSelectedValue<DFeCodUF>();
             acbrCTe.Configuracoes.WebServices.Ambiente = rdbProducao.Checked ? DFeTipoAmbiente.Producao : DFeTipoAmbiente.Homologacao;
             acbrCTe.Configuracoes.WebServices.AguardarConsultaRet = (uint)(nudTimeOut.Value / 100);
@@ -234,6 +274,7 @@ namespace ACBr.Net.CTe.Demo
             txtSenha.Text = config.GetCrypt("Senha", string.Empty);
             txtNumeroSerie.Text = config.Get("NumeroSerie", string.Empty);
 
+            chkSalvarSoap.Checked = config.Get("SalvarSoap", chkSalvarArquivos.Checked);
             cbbUfWebservice.SetSelectedValue(config.Get("UF", DFeCodUF.MS));
             rdbProducao.Checked = config.Get("Ambiente", DFeTipoAmbiente.Homologacao) == DFeTipoAmbiente.Producao;
             rdbHomologacao.Checked = config.Get("Ambiente", DFeTipoAmbiente.Homologacao) == DFeTipoAmbiente.Homologacao;
@@ -252,6 +293,7 @@ namespace ACBr.Net.CTe.Demo
             config.SetCrypt("Senha", txtSenha.Text);
             config.Set("NumeroSerie", txtNumeroSerie.Text);
 
+            config.Set("SalvarSoap", chkSalvarSoap.Checked);
             config.Set("UF", (int)cbbUfWebservice.GetSelectedValue<DFeCodUF>());
             config.Set("Ambiente", rdbProducao.Checked ? "1" : "2");
             config.Set("TimeOut", (int)nudTimeOut.Value);

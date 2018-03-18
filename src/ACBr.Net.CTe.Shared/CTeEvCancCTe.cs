@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-09-2018
+// Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="CTeEvCancCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,33 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Serializer;
+
 namespace ACBr.Net.CTe
 {
-    public enum SchemaCTe
+    public class CTeEvCancCTe : IEventoCTe
     {
-        CTe,
-        CTeOS,
-        CancCTe,
-        InutCTe,
-        EventoCTe,
-        ProcCTe,
-        ProcEventoCTe,
-        ConsSitCTe,
-        ConsStatServCTe,
-        ConsCad,
-        CteModalAereo,
-        CteModalAquaviario,
-        CteModalDutoviario,
-        CteModalFerroviario,
-        CteModalRodoviario,
-        CteMultiModal,
-        EvEPECCTe,
-        EvCancCTe,
-        EvRegMultimodal,
-        EvCCeCTe,
-        DistDFeInt,
-        CteModalRodoviarioOS,
-        EvPrestDesacordo,
-        EvGTV,
-        ProcCTeOS,
-        EnviCTe,
-        ConsReciCTe,
+        #region Constructors
+
+        public CTeEvCancCTe()
+        {
+            DescEvento = "Cancelamento";
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        [DFeElement(TipoCampo.Str, "descEvento", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string DescEvento { get; set; }
+
+        [DFeElement(TipoCampo.Str, "nProt", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string NProt { get; set; }
+
+        [DFeElement(TipoCampo.Str, "xJust", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string XJust { get; set; }
+
+        #endregion Properties
     }
 }

@@ -36,28 +36,28 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeRetEventoCTe : GenericClone<CTeRetEventoCTe>
-	{
-		#region Constructors
+    public sealed class CTeRetEventoCTe : GenericClone<CTeRetEventoCTe>
+    {
+        #region Constructors
 
-		public CTeRetEventoCTe()
-		{
-			InfEvento = new CTeInfEvento();
-			Signature = new DFeSignature();
-		}
+        public CTeRetEventoCTe()
+        {
+            InfEvento = new CTeRetInfEvento();
+            Signature = new DFeSignature();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Properties
+        #region Properties
 
-		[DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Versao { get; set; }
+        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Versao { get; set; }
 
-		[DFeElement("infEvento", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeInfEvento InfEvento { get; set; }
+        [DFeElement("infEvento", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeRetInfEvento InfEvento { get; set; }
 
-		public DFeSignature Signature { get; set; }
+        public DFeSignature Signature { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

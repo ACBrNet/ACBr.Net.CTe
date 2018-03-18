@@ -71,7 +71,7 @@ namespace ACBr.Net.CTe
         /// <summary>
         /// Retornas as CTe Autorizadas.
         /// </summary>
-        public IEnumerable<CteProc> Autorizadas
+        public IEnumerable<CteProc> Autorizados
         {
             get { return this.Where(x => !x.ProtCTe.InfProt.NProt.IsEmpty()); }
         }

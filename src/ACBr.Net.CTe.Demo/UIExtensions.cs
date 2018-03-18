@@ -56,9 +56,16 @@ namespace ACBr.Net.CTe.Demo
             cmb.SelectedItem = values.SingleOrDefault(x => x.Content.Equals(value));
         }
 
-        public static void AppendLine(this RichTextBox richText, string line)
+        public static void AppendLine(this RichTextBox textBox, string text)
         {
-            richText.AppendText(line + Environment.NewLine);
+            textBox.AppendText($"{text}{Environment.NewLine}");
+            textBox.ScrollToEnd();
+        }
+
+        public static void ScrollToEnd(this RichTextBox textBox)
+        {
+            textBox.SelectionStart = textBox.Text.Length;
+            textBox.ScrollToCaret();
         }
     }
 }

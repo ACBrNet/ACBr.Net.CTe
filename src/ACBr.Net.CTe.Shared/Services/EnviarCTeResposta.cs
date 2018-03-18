@@ -37,6 +37,8 @@ namespace ACBr.Net.CTe.Services
 
         public RecepcaoCTeResposta RecepcaoResposta { get; set; }
 
+        public CTeRetRecepcaoResposta RetRecepcaoResposta { get; set; }
+
         #endregion Properties
     }
 }

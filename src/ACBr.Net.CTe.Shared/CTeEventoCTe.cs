@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-09-2018
+// Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="CTeEventoCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,35 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.Core.Generics;
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
+
 namespace ACBr.Net.CTe
 {
-    public enum SchemaCTe
+    public sealed class CTeEventoCTe : GenericClone<CTeEventoCTe>
     {
-        CTe,
-        CTeOS,
-        CancCTe,
-        InutCTe,
-        EventoCTe,
-        ProcCTe,
-        ProcEventoCTe,
-        ConsSitCTe,
-        ConsStatServCTe,
-        ConsCad,
-        CteModalAereo,
-        CteModalAquaviario,
-        CteModalDutoviario,
-        CteModalFerroviario,
-        CteModalRodoviario,
-        CteMultiModal,
-        EvEPECCTe,
-        EvCancCTe,
-        EvRegMultimodal,
-        EvCCeCTe,
-        DistDFeInt,
-        CteModalRodoviarioOS,
-        EvPrestDesacordo,
-        EvGTV,
-        ProcCTeOS,
-        EnviCTe,
-        ConsReciCTe,
+        #region Constructors
+
+        public CTeEventoCTe()
+        {
+            InfEvento = new CTeInfEventoEnv();
+            Signature = new DFeSignature();
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Versao { get; set; }
+
+        [DFeElement("infEvento", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeInfEventoEnv InfEvento { get; set; }
+
+        public DFeSignature Signature { get; set; }
+
+        #endregion Properties
     }
 }

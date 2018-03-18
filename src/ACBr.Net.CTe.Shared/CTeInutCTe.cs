@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 03-15-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-09-2018
+// Last Modified On : 03-15-2018
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="CTeInutCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,46 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
+
 namespace ACBr.Net.CTe
 {
-    public enum SchemaCTe
+    [DFeRoot("inutCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeInutCTe : DFeDocument<CTeInutCTe>
     {
-        CTe,
-        CTeOS,
-        CancCTe,
-        InutCTe,
-        EventoCTe,
-        ProcCTe,
-        ProcEventoCTe,
-        ConsSitCTe,
-        ConsStatServCTe,
-        ConsCad,
-        CteModalAereo,
-        CteModalAquaviario,
-        CteModalDutoviario,
-        CteModalFerroviario,
-        CteModalRodoviario,
-        CteMultiModal,
-        EvEPECCTe,
-        EvCancCTe,
-        EvRegMultimodal,
-        EvCCeCTe,
-        DistDFeInt,
-        CteModalRodoviarioOS,
-        EvPrestDesacordo,
-        EvGTV,
-        ProcCTeOS,
-        EnviCTe,
-        ConsReciCTe,
+        #region Constructors
+
+        public CTeInutCTe()
+        {
+            infInut = new CTeInfInutEnv();
+            Signature = new DFeSignature();
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        /// <summary>
+        ///     DP02 - Versão do leiaute
+        /// </summary>
+        [DFeAttribute(TipoCampo.Enum, "versao", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao versao { get; set; }
+
+        /// <summary>
+        ///     DP03 - Dados do Pedido
+        ///     TAG a ser assinada
+        /// </summary>
+        [DFeElement("infInut", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeInfInutEnv infInut { get; set; }
+
+        /// <summary>
+        ///     DP15 - Assinatura XML do grupo identificado pelo atributo “Id”
+        /// </summary>
+        public DFeSignature Signature { get; set; }
+
+        #endregion Properties
     }
 }

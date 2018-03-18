@@ -31,7 +31,10 @@
 
 using System;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Threading;
 
 #if !NETSTANDARD2_0
 
@@ -44,6 +47,8 @@ using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Logging;
 using ACBr.Net.CTe.Services;
+using ACBr.Net.DFe.Core;
+using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe
 {
@@ -54,6 +59,22 @@ namespace ACBr.Net.CTe
 
     public sealed class ACBrCTe : ACBrComponent, IACBrLog
     {
+        #region Fields
+
+        private StatusACBrCTe status;
+        private SecurityProtocolType securityProtocol;
+
+        #endregion Fields
+
+        #region Events
+
+        /// <summary>
+        /// Evento disparado quando o status do componente muda.
+        /// </summary>
+        public event EventHandler<EventArgs> StatusChanged;
+
+        #endregion Events
+
         #region Propriedades
 
         /// <summary>
@@ -67,6 +88,21 @@ namespace ACBr.Net.CTe
         /// </summary>
         [Browsable(false)]
         public ConhecimentosCollection Conhecimentos { get; private set; }
+
+        /// <summary>
+        /// Retorna a situação do componente.
+        /// </summary>
+        public StatusACBrCTe Status
+        {
+            get => status;
+            internal set
+            {
+                if (status == value) return;
+
+                status = value;
+                StatusChanged.Raise(this, EventArgs.Empty);
+            }
+        }
 
         #endregion Propriedades
 
@@ -92,21 +128,21 @@ namespace ACBr.Net.CTe
         public EnviarCTeResposta Enviar(string lote, bool imprimir)
         {
             var oldProtocol = ServicePointManager.SecurityProtocol;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = securityProtocol;
             var cert = Configuracoes.Certificados.ObterCertificado();
+
+            Conhecimentos.Assinar();
+            Conhecimentos.Validar();
+
+            RecepcaoCTeResposta recepcao;
 
             try
             {
-                Conhecimentos.Assinar();
-                Conhecimentos.Validar();
-
-                RecepcaoCTeResposta retRecpcao;
+                Status = StatusACBrCTe.CTeRecepcao;
                 using (var cliente = new CTeRecepcaoServiceClient(Configuracoes, cert))
                 {
-                    retRecpcao = cliente.RecepcaoLote(Conhecimentos.NaoAutorizadas, lote);
+                    recepcao = cliente.RecepcaoLote(Conhecimentos.NaoAutorizadas, lote);
                 }
-
-                return new EnviarCTeResposta() { RecepcaoResposta = retRecpcao };
             }
             catch (Exception exception)
             {
@@ -117,6 +153,85 @@ namespace ACBr.Net.CTe
             {
                 cert.Reset();
                 ServicePointManager.SecurityProtocol = oldProtocol;
+                Status = StatusACBrCTe.CTeIdle;
+            }
+
+            Thread.Sleep((int)Configuracoes.WebServices.AguardarConsultaRet);
+            var retRecepcao = ConsultaRecibo(recepcao.Resultado.InfRec.NRec);
+
+            if (imprimir && Conhecimentos.Autorizados.Any())
+            {
+            }
+
+            return new EnviarCTeResposta() { RecepcaoResposta = recepcao, RetRecepcaoResposta = retRecepcao };
+        }
+
+        /// <summary>
+        /// Consulta o recibo da CTe para saber se o mesmo ofi processado.
+        /// </summary>
+        /// <param name="recibo"></param>
+        /// <returns></returns>
+        public CTeRetRecepcaoResposta ConsultaRecibo(string recibo)
+        {
+            Guard.Against<ArgumentException>(recibo.IsEmpty(), nameof(recibo));
+
+            var oldProtocol = ServicePointManager.SecurityProtocol;
+            ServicePointManager.SecurityProtocol = securityProtocol;
+            var cert = Configuracoes.Certificados.ObterCertificado();
+
+            try
+            {
+                Status = StatusACBrCTe.CTeRetRecepcao;
+                CTeRetRecepcaoResposta retRecepcao;
+                using (var cliente = new CTeRetRecepcaoServiceClient(Configuracoes, cert))
+                {
+                    var tentativas = 0;
+                    var intervaloTentativas = Math.Max(Configuracoes.WebServices.IntervaloTentativas, 1000);
+
+                    do
+                    {
+                        retRecepcao = cliente.RetRecepcao(recibo);
+                        tentativas++;
+                        Thread.Sleep(intervaloTentativas);
+                    } while (retRecepcao.Resultado.CStat != 104 && tentativas < Configuracoes.WebServices.Tentativas);
+                }
+
+                if (retRecepcao.Resultado.CStat != 104) return retRecepcao;
+
+                foreach (var protCTe in retRecepcao.Resultado.ProtCTe)
+                {
+                    var cteProc = Conhecimentos.SingleOrDefault(x => x.CTe.InfCte.Id.OnlyNumbers() == protCTe.InfProt.ChCTe.OnlyNumbers());
+                    if (cteProc == null) continue;
+                    if (Configuracoes.Geral.ValidarDigest)
+                    {
+                        Guard.Against<ACBrDFeException>(!protCTe.InfProt.DigVal.IsEmpty() &&
+                                                        protCTe.InfProt.DigVal != cteProc.CTe.Signature.SignedInfo.Reference.DigestValue,
+                            $"DigestValue do documento {cteProc.CTe.InfCte.Id} não confere.");
+                    }
+
+                    cteProc.ProtCTe = protCTe;
+                    if (!Configuracoes.Arquivos.Salvar) continue;
+                    if (Configuracoes.Arquivos.SalvarApenasCTeProcessados && !cteProc.Processado) continue;
+
+                    var data = Configuracoes.Arquivos.EmissaoPathCTe ? cteProc.CTe.InfCte.Ide.DhEmi : DateTime.Now;
+                    var pathArquivo = Configuracoes.Arquivos.GetPathCTe(data, cteProc.CTe.InfCte.Emit.CNPJ, cteProc.CTe.InfCte.Ide.Mod);
+                    var nomeArquivo = $"{cteProc.CTe.InfCte.Id}-cte.xml";
+
+                    cteProc.Save(Path.Combine(pathArquivo, nomeArquivo), DFeSaveOptions.DisableFormatting);
+                }
+
+                return retRecepcao;
+            }
+            catch (Exception exception)
+            {
+                this.Log().Error("[ConsultaRecibo]", exception);
+                throw;
+            }
+            finally
+            {
+                cert.Reset();
+                ServicePointManager.SecurityProtocol = oldProtocol;
+                Status = StatusACBrCTe.CTeIdle;
             }
         }
 
@@ -124,31 +239,44 @@ namespace ACBr.Net.CTe
         /// Metodo para checar a situação da CTe pela chave.
         /// </summary>
         /// <returns>A situação do serviço de CTe</returns>
-        public ConsultaCTeResposta Consultar(string chave)
+        public ConsultaCTeResposta Consultar(string chave = "")
         {
-            Guard.Against<ArgumentNullException>(chave == null, nameof(chave));
-            Guard.Against<ArgumentException>(chave.IsEmpty(), nameof(chave));
+            Guard.Against<ArgumentException>(chave.IsEmpty() && !Conhecimentos.NaoAutorizadas.Any(), "ERRO: Nenhum CT-e ou Chave Informada!");
 
             var oldProtocol = ServicePointManager.SecurityProtocol;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = securityProtocol;
             var cert = Configuracoes.Certificados.ObterCertificado();
 
             try
             {
+                Status = StatusACBrCTe.CTeConsulta;
+
                 using (var cliente = new CTeConsultaServiceClient(Configuracoes, cert))
                 {
-                    return cliente.Consulta(chave);
+                    if (!chave.IsEmpty())
+                    {
+                        Conhecimentos.Clear();
+                        return cliente.Consulta(chave);
+                    }
+                    else
+                    {
+                        var ret = cliente.Consulta(Conhecimentos.NaoAutorizadas.First().InfCte.Id.OnlyNumbers());
+
+                        return ret;
+                    }
                 }
             }
             catch (Exception exception)
             {
                 this.Log().Error("[Consultar]", exception);
+
                 throw;
             }
             finally
             {
                 cert.Reset();
                 ServicePointManager.SecurityProtocol = oldProtocol;
+                Status = StatusACBrCTe.CTeIdle;
             }
         }
 
@@ -159,11 +287,13 @@ namespace ACBr.Net.CTe
         public ConsultaStatusResposta ConsultarSituacaoServico()
         {
             var oldProtocol = ServicePointManager.SecurityProtocol;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = securityProtocol;
             var cert = Configuracoes.Certificados.ObterCertificado();
 
             try
             {
+                Status = StatusACBrCTe.CTeStatusServico;
+
                 using (var cliente = new CTeStatusServicoServiceClient(Configuracoes, cert))
                 {
                     return cliente.StatusServico();
@@ -178,6 +308,7 @@ namespace ACBr.Net.CTe
             {
                 cert.Reset();
                 ServicePointManager.SecurityProtocol = oldProtocol;
+                Status = StatusACBrCTe.CTeIdle;
             }
         }
 
@@ -186,6 +317,8 @@ namespace ACBr.Net.CTe
         /// <inheritdoc />
         protected override void OnInitialize()
         {
+            status = StatusACBrCTe.CTeIdle;
+            securityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             Configuracoes = new CTeConfig(this);
             Conhecimentos = new ConhecimentosCollection(this);
         }

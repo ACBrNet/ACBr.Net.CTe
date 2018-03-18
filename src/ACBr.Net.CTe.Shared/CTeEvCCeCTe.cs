@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-09-2018
+// Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="DetEvento.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,35 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Collection;
+using ACBr.Net.DFe.Core.Serializer;
+
 namespace ACBr.Net.CTe
 {
-    public enum SchemaCTe
+    public class CteEvCceCTe : IEventoCTe
     {
-        CTe,
-        CTeOS,
-        CancCTe,
-        InutCTe,
-        EventoCTe,
-        ProcCTe,
-        ProcEventoCTe,
-        ConsSitCTe,
-        ConsStatServCTe,
-        ConsCad,
-        CteModalAereo,
-        CteModalAquaviario,
-        CteModalDutoviario,
-        CteModalFerroviario,
-        CteModalRodoviario,
-        CteMultiModal,
-        EvEPECCTe,
-        EvCancCTe,
-        EvRegMultimodal,
-        EvCCeCTe,
-        DistDFeInt,
-        CteModalRodoviarioOS,
-        EvPrestDesacordo,
-        EvGTV,
-        ProcCTeOS,
-        EnviCTe,
-        ConsReciCTe,
+        #region Constructors
+
+        public CteEvCceCTe()
+        {
+            DescEvento = "Carta de Correcao";
+            XCondUso = "A Carta de Correcao e disciplinada pelo Art. 58-B do CONVENIO/SINIEF 06/89: Fica permitida a utilizacao de carta de correcao, para regularizacao de erro ocorrido na emissao de documentos fiscais relativos a prestacao de servico de transporte, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da prestacao;II - a correcao de dados cadastrais que implique mudanca do emitente, tomador, remetente ou do destinatario;III - a data de emissao ou de saida.";
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        [DFeElement(TipoCampo.Str, "descEvento", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string DescEvento { get; set; }
+
+        [DFeCollection("infCorrecao", MinSize = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<CTeInfCorrecao> InfCorrecao { get; set; }
+
+        [DFeElement(TipoCampo.Str, "xCondUso", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string XCondUso { get; set; }
+
+        #endregion Properties
     }
 }

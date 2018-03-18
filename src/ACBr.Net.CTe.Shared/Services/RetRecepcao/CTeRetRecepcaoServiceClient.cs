@@ -31,43 +31,64 @@
 
 using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Xml;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core;
+using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Extensions;
 using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-	public sealed class CTeRetRecepcaoServiceClient : DFeSoap12ServiceClientBase<ICTeRetRecepcao>, ICTeRetRecepcao
-	{
-		#region Constructors
+    public sealed class CTeRetRecepcaoServiceClient : CTeServiceClient<ICTeRetRecepcao>, ICTeRetRecepcao
+    {
+        #region Constructors
 
-		public CTeRetRecepcaoServiceClient(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
-		{
-		}
+        public CTeRetRecepcaoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
+            base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
+        {
+            Schema = SchemaCTe.ConsReciCTe;
+            ArquivoEnvio = "'ped-rec";
+            ArquivoResposta = "pro-rec";
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Methods
+        #region Methods
 
-		public string RetRecepcao(CTeWsCabecalho cabecalho, string mensagem)
-		{
-			Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-			Guard.Against<ArgumentNullException>(mensagem.IsEmpty(), nameof(mensagem));
+        public CTeRetRecepcaoResposta RetRecepcao(string recibo)
+        {
+            Guard.Against<ArgumentNullException>(recibo.IsEmpty(), nameof(recibo));
 
-			var xml = new XmlDocument();
-			xml.LoadXml(mensagem);
+            lock (serviceLock)
+            {
+                var request = new StringBuilder();
+                request.Append($"<consReciCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{Configuracoes.Geral.VersaoDFe.GetDescription()}\">");
+                request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetValue()}</tpAmb>");
+                request.Append($"<nRec>{recibo}</nRec>");
+                request.Append("</consReciCTe>");
 
-			var inValue = new RetRecepcaoRequest(cabecalho, xml);
-			var retVal = ((ICTeRetRecepcao)(this)).RetRecepcao(inValue);
-			return retVal.Result.OuterXml;
-		}
+                var dadosMsg = request.ToString();
 
-		RetRecepcaoResponse ICTeRetRecepcao.RetRecepcao(RetRecepcaoRequest request)
-		{
-			return base.Channel.RetRecepcao(request);
-		}
+                ValidateMessage(dadosMsg);
 
-		#endregion Methods
-	}
+                var doc = new XmlDocument();
+                doc.LoadXml(dadosMsg);
+
+                var inValue = new RetRecepcaoRequest(DefineHeader(), doc);
+                var retVal = ((ICTeRetRecepcao)this).RetRecepcao(inValue);
+                var retorno = new CTeRetRecepcaoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
+                return retorno;
+            }
+        }
+
+        RetRecepcaoResponse ICTeRetRecepcao.RetRecepcao(RetRecepcaoRequest request)
+        {
+            return base.Channel.RetRecepcao(request);
+        }
+
+        #endregion Methods
+    }
 }

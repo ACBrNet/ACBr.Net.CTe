@@ -29,40 +29,44 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe
 {
-	[DFeRoot("cteProc", Namespace = "http://www.portalfiscal.inf.br/cte")]
-	public sealed class CteProc : DFeDocument<CteProc>
-	{
-		#region Constructors
+    [DFeRoot("cteProc", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CteProc : DFeDocument<CteProc>
+    {
+        #region Constructors
 
-		public CteProc()
-		{
-			CTe = new CTe();
-			ProtCTe = new CTeProtCTe();
-		}
+        public CteProc()
+        {
+            CTe = new CTe();
+            ProtCTe = new CTeProtCTe();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeAttribute("versao")]
-		public string Versao { get; set; }
+        [DFeAttribute("versao")]
+        public string Versao { get; set; }
 
-		[DFeAttribute("ipTransmissor")]
-		public string IpTransmissor { get; set; }
+        [DFeAttribute("ipTransmissor")]
+        public string IpTransmissor { get; set; }
 
-		[DFeElement("CTe", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTe CTe { get; set; }
+        [DFeElement("CTe", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTe CTe { get; set; }
 
-		[DFeElement("protCTe", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeProtCTe ProtCTe { get; set; }
+        [DFeElement("protCTe", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeProtCTe ProtCTe { get; set; }
 
-		#endregion Propriedades
-	}
+        [DFeIgnore]
+        public bool Processado => ProtCTe.InfProt.CStat.IsIn(100, 110, 150, 301, 302);
+
+        #endregion Propriedades
+    }
 }
 
 #pragma warning restore

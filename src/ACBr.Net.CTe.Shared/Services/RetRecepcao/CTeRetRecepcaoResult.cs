@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 03-12-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-09-2018
+// Last Modified On : 03-12-2018
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="CTeRetRecepcaoResult.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,27 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace ACBr.Net.CTe
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Collection;
+
+namespace ACBr.Net.CTe.Services
 {
-    public enum SchemaCTe
+    [DFeRoot("retConsReciCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeRetRecepcaoResult : CTeResultaBase<CTeRetRecepcaoResult>
     {
-        CTe,
-        CTeOS,
-        CancCTe,
-        InutCTe,
-        EventoCTe,
-        ProcCTe,
-        ProcEventoCTe,
-        ConsSitCTe,
-        ConsStatServCTe,
-        ConsCad,
-        CteModalAereo,
-        CteModalAquaviario,
-        CteModalDutoviario,
-        CteModalFerroviario,
-        CteModalRodoviario,
-        CteMultiModal,
-        EvEPECCTe,
-        EvCancCTe,
-        EvRegMultimodal,
-        EvCCeCTe,
-        DistDFeInt,
-        CteModalRodoviarioOS,
-        EvPrestDesacordo,
-        EvGTV,
-        ProcCTeOS,
-        EnviCTe,
-        ConsReciCTe,
+        #region Constructors
+
+        public CTeRetRecepcaoResult()
+        {
+            ProtCTe = new DFeCollection<CTeProtCTe>();
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        public DFeCollection<CTeProtCTe> ProtCTe { get; set; }
+
+        #endregion Properties
     }
 }

@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-09-2018
+// Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="DetEvento.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,27 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Serializer;
+
 namespace ACBr.Net.CTe
 {
-    public enum SchemaCTe
+    public class CTeInfCorrecao
     {
-        CTe,
-        CTeOS,
-        CancCTe,
-        InutCTe,
-        EventoCTe,
-        ProcCTe,
-        ProcEventoCTe,
-        ConsSitCTe,
-        ConsStatServCTe,
-        ConsCad,
-        CteModalAereo,
-        CteModalAquaviario,
-        CteModalDutoviario,
-        CteModalFerroviario,
-        CteModalRodoviario,
-        CteMultiModal,
-        EvEPECCTe,
-        EvCancCTe,
-        EvRegMultimodal,
-        EvCCeCTe,
-        DistDFeInt,
-        CteModalRodoviarioOS,
-        EvPrestDesacordo,
-        EvGTV,
-        ProcCTeOS,
-        EnviCTe,
-        ConsReciCTe,
+        #region Properties
+
+        [DFeElement(TipoCampo.Str, "grupoAlterado", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string GrupoAlterado { get; set; }
+
+        [DFeElement(TipoCampo.Str, "campoAlterado", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string campoAlterado { get; set; }
+
+        [DFeElement(TipoCampo.Str, "valorAlterado", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string valorAlterado { get; set; }
+
+        [DFeElement(TipoCampo.Int, "nroItemAlterado", Min = 1, Max = 255, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public int? nroItemAlterado { get; set; }
+
+        #endregion Properties
     }
 }

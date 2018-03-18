@@ -40,7 +40,7 @@ namespace ACBr.Net.CTe.Services
     {
         #region Properties
 
-        [DFeElement(TipoCampo.Str, "tMed", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement(TipoCampo.Str, "nRec", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string NRec { get; set; }
 
         [DFeElement(TipoCampo.DatHorTz, "dhRecbto", Min = 19, Max = 19, Ocorrencia = Ocorrencia.Obrigatoria)]

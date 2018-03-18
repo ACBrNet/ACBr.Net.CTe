@@ -39,57 +39,43 @@ using System.ComponentModel;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeInfProt : GenericClone<CTeInfProt>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeInfProt : GenericClone<CTeInfProt>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeAttribute(TipoCampo.Str, "ID", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Id { get; set; }
+        [DFeAttribute(TipoCampo.Str, "ID", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Id { get; set; }
 
-		[DFeElement(TipoCampo.Enum, "tpAmb", Id = "", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeTipoAmbiente TpAmb { get; set; }
+        [DFeElement(TipoCampo.Enum, "tpAmb", Id = "", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeTipoAmbiente TpAmb { get; set; }
 
-		[DFeElement(TipoCampo.Str, "verAplic", Id = "", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string VerAplic { get; set; }
+        [DFeElement(TipoCampo.Str, "verAplic", Id = "", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string VerAplic { get; set; }
 
-		[DFeElement(TipoCampo.Str, "chCTe", Id = "", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string ChCTe { get; set; }
+        [DFeElement(TipoCampo.Str, "chCTe", Id = "", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string ChCTe { get; set; }
 
-		[DFeElement(TipoCampo.DatHor, "dhRecbto", Id = "", Min = 19, Max = 19, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DateTime DhRecbto { get; set; }
+        [DFeElement(TipoCampo.DatHor, "dhRecbto", Id = "", Min = 19, Max = 19, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTime DhRecbto { get; set; }
 
-		[DFeElement(TipoCampo.Str, "nProt", Id = "", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string NProt { get; set; }
+        [DFeElement(TipoCampo.Str, "nProt", Id = "", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string NProt { get; set; }
 
-		[DFeElement(TipoCampo.Custom, "digVal", Id = "", Min = int.MinValue, Max = int.MaxValue, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public byte[] DigVal { get; set; }
+        [DFeElement(TipoCampo.Str, "digVal", Id = "", Min = int.MinValue, Max = int.MaxValue, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string DigVal { get; set; }
 
-		[DFeElement(TipoCampo.Int, "cStat", Id = "", Min = 1, Max = 3, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public int CStat { get; set; }
+        [DFeElement(TipoCampo.Int, "cStat", Id = "", Min = 1, Max = 3, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public int CStat { get; set; }
 
-		[DFeElement(TipoCampo.Str, "xMotivo", Id = "", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string XMotivo { get; set; }
+        [DFeElement(TipoCampo.Str, "xMotivo", Id = "", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string XMotivo { get; set; }
 
-		#endregion Propriedades
-
-		#region Methods
-
-		private string SerializeDigVal()
-		{
-			return DigVal.ToBase64();
-		}
-
-		private object DeserializeDigVal(string value)
-		{
-			return Convert.FromBase64String(value);
-		}
-
-		#endregion Methods
-	}
+        #endregion Propriedades
+    }
 }

@@ -57,14 +57,14 @@ namespace ACBr.Net.CTe.Services
                 config.WebServices.TimeOut, certificado)
         {
             serviceLock = new object();
-            Config = config;
+            Configuracoes = config;
         }
 
         #endregion Constructors
 
         #region Properties
 
-        public CTeConfig Config { get; }
+        public CTeConfig Configuracoes { get; }
 
         public SchemaCTe Schema { get; protected set; }
 
@@ -82,21 +82,21 @@ namespace ACBr.Net.CTe.Services
 
         protected virtual CTeWsCabecalho DefineHeader()
         {
-            var versao = Config.Geral.VersaoDFe.GetDescription();
+            var versao = Configuracoes.Geral.VersaoDFe.GetDescription();
             return new CTeWsCabecalho
             {
-                CUf = (int)Config.WebServices.UF,
+                CUf = (int)Configuracoes.WebServices.UF,
                 VersaoDados = versao,
             };
         }
 
         protected virtual void ValidateMessage(string xml)
         {
-            var schemaFile = Config.Arquivos.GetSchema(Schema);
+            var schemaFile = Configuracoes.Arquivos.GetSchema(Schema);
             XmlSchemaValidation.ValidarXml(xml, schemaFile, out var erros, out string[] _);
 
             Guard.Against<ACBrDFeException>(erros.Any(), "Erros de validação do xml." +
-                                                         $"{(Config.Geral.ExibirErroSchema ? Environment.NewLine + erros.AsString() : "")}");
+                                                         $"{(Configuracoes.Geral.ExibirErroSchema ? Environment.NewLine + erros.AsString() : "")}");
         }
 
         /// <summary>
@@ -109,10 +109,10 @@ namespace ACBr.Net.CTe.Services
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         protected void GravarCTe(string conteudoArquivo, string nomeArquivo, DateTime data, string cnpj, ModeloCTe modelo)
         {
-            if (!Config.Arquivos.Salvar) return;
+            if (!Configuracoes.Arquivos.Salvar) return;
 
             conteudoArquivo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + conteudoArquivo;
-            nomeArquivo = Path.Combine(Config.Arquivos.GetPathCTe(data, cnpj, modelo), nomeArquivo);
+            nomeArquivo = Path.Combine(Configuracoes.Arquivos.GetPathCTe(data, cnpj, modelo), nomeArquivo);
             File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
         }
 
@@ -126,10 +126,10 @@ namespace ACBr.Net.CTe.Services
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         protected void GravarEvento(string conteudoArquivo, string nomeArquivo, CTeTipoEvento evento, DateTime data, string cnpj)
         {
-            if (!Config.Arquivos.Salvar) return;
+            if (!Configuracoes.Arquivos.Salvar) return;
 
             conteudoArquivo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + conteudoArquivo;
-            nomeArquivo = Path.Combine(Config.Arquivos.GetPathEvento(evento, cnpj, data), nomeArquivo);
+            nomeArquivo = Path.Combine(Configuracoes.Arquivos.GetPathEvento(evento, cnpj, data), nomeArquivo);
             File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
         }
 
@@ -143,9 +143,9 @@ namespace ACBr.Net.CTe.Services
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         protected void GravarSoap(string conteudoArquivo, string nomeArquivo)
         {
-            if (Config.WebServices.Salvar == false) return;
+            if (Configuracoes.WebServices.Salvar == false) return;
 
-            nomeArquivo = Path.Combine(Config.Arquivos.PathSalvar, nomeArquivo);
+            nomeArquivo = Path.Combine(Configuracoes.Arquivos.PathSalvar, nomeArquivo);
             File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
         }
 

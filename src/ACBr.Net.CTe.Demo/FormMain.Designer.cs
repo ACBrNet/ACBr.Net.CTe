@@ -30,25 +30,25 @@
 		{
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageCTe = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.btnConsultarCTe = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.loadCTeButton = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnEnviarEmailEvento = new System.Windows.Forms.Button();
+            this.butbtnEnviarEmail = new System.Windows.Forms.Button();
+            this.btnPDFEvento = new System.Windows.Forms.Button();
+            this.btnPDF = new System.Windows.Forms.Button();
+            this.btnImprimirEvento = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
+            this.btnCancelarXml = new System.Windows.Forms.Button();
+            this.btnEnviarEPEC = new System.Windows.Forms.Button();
+            this.btnConsultarRecibo = new System.Windows.Forms.Button();
+            this.btnValidarXml = new System.Windows.Forms.Button();
+            this.btnConsultarChave = new System.Windows.Forms.Button();
+            this.btnCriarEnviar = new System.Windows.Forms.Button();
+            this.btnCancelarChave = new System.Windows.Forms.Button();
+            this.btnImportarXml = new System.Windows.Forms.Button();
+            this.btnConsultarXml = new System.Windows.Forms.Button();
+            this.btnConsultarCadastro = new System.Windows.Forms.Button();
+            this.btnGerar = new System.Windows.Forms.Button();
+            this.btnInutilizar = new System.Windows.Forms.Button();
             this.btnConsultarSituacao = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.statusServiceButton = new System.Windows.Forms.Button();
             this.tbcRespostas = new System.Windows.Forms.TabControl();
             this.tabPageRespostas = new System.Windows.Forms.TabPage();
             this.rtLogResposta = new System.Windows.Forms.RichTextBox();
@@ -101,6 +101,7 @@
             this.txtIM = new System.Windows.Forms.TextBox();
             this.txtCNPJ = new System.Windows.Forms.TextBox();
             this.tabPageWebservice = new System.Windows.Forms.TabPage();
+            this.chkSalvarSoap = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtProxyPass = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -144,6 +145,7 @@
             this.clhTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clhUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.acbrCTe = new ACBr.Net.CTe.ACBrCTe();
+            this.chkSalvarProcessados = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPageCTe.SuspendLayout();
             this.tbcRespostas.SuspendLayout();
@@ -178,25 +180,25 @@
             // 
             // tabPageCTe
             // 
-            this.tabPageCTe.Controls.Add(this.button1);
-            this.tabPageCTe.Controls.Add(this.button4);
-            this.tabPageCTe.Controls.Add(this.button11);
-            this.tabPageCTe.Controls.Add(this.button15);
-            this.tabPageCTe.Controls.Add(this.button16);
-            this.tabPageCTe.Controls.Add(this.button17);
-            this.tabPageCTe.Controls.Add(this.button14);
-            this.tabPageCTe.Controls.Add(this.button13);
-            this.tabPageCTe.Controls.Add(this.button12);
-            this.tabPageCTe.Controls.Add(this.button10);
-            this.tabPageCTe.Controls.Add(this.btnConsultarCTe);
-            this.tabPageCTe.Controls.Add(this.button8);
-            this.tabPageCTe.Controls.Add(this.button7);
-            this.tabPageCTe.Controls.Add(this.loadCTeButton);
-            this.tabPageCTe.Controls.Add(this.button5);
+            this.tabPageCTe.Controls.Add(this.btnEnviarEmailEvento);
+            this.tabPageCTe.Controls.Add(this.butbtnEnviarEmail);
+            this.tabPageCTe.Controls.Add(this.btnPDFEvento);
+            this.tabPageCTe.Controls.Add(this.btnPDF);
+            this.tabPageCTe.Controls.Add(this.btnImprimirEvento);
+            this.tabPageCTe.Controls.Add(this.btnImprimir);
+            this.tabPageCTe.Controls.Add(this.btnCancelarXml);
+            this.tabPageCTe.Controls.Add(this.btnEnviarEPEC);
+            this.tabPageCTe.Controls.Add(this.btnConsultarRecibo);
+            this.tabPageCTe.Controls.Add(this.btnValidarXml);
+            this.tabPageCTe.Controls.Add(this.btnConsultarChave);
+            this.tabPageCTe.Controls.Add(this.btnCriarEnviar);
+            this.tabPageCTe.Controls.Add(this.btnCancelarChave);
+            this.tabPageCTe.Controls.Add(this.btnImportarXml);
+            this.tabPageCTe.Controls.Add(this.btnConsultarXml);
+            this.tabPageCTe.Controls.Add(this.btnConsultarCadastro);
+            this.tabPageCTe.Controls.Add(this.btnGerar);
+            this.tabPageCTe.Controls.Add(this.btnInutilizar);
             this.tabPageCTe.Controls.Add(this.btnConsultarSituacao);
-            this.tabPageCTe.Controls.Add(this.button3);
-            this.tabPageCTe.Controls.Add(this.button2);
-            this.tabPageCTe.Controls.Add(this.statusServiceButton);
             this.tabPageCTe.Controls.Add(this.tbcRespostas);
             this.tabPageCTe.Controls.Add(this.groupBox1);
             this.tabPageCTe.Location = new System.Drawing.Point(4, 22);
@@ -207,178 +209,180 @@
             this.tabPageCTe.Text = "CTe";
             this.tabPageCTe.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnEnviarEmailEvento
             // 
-            this.button1.Location = new System.Drawing.Point(665, 189);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 23);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "Enviar Evento Email";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEnviarEmailEvento.Location = new System.Drawing.Point(665, 189);
+            this.btnEnviarEmailEvento.Name = "btnEnviarEmailEvento";
+            this.btnEnviarEmailEvento.Size = new System.Drawing.Size(180, 23);
+            this.btnEnviarEmailEvento.TabIndex = 23;
+            this.btnEnviarEmailEvento.Text = "Enviar Evento Email";
+            this.btnEnviarEmailEvento.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // butbtnEnviarEmail
             // 
-            this.button4.Location = new System.Drawing.Point(665, 160);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(180, 23);
-            this.button4.TabIndex = 22;
-            this.button4.Text = "Enviar CTe Email";
-            this.button4.UseVisualStyleBackColor = true;
+            this.butbtnEnviarEmail.Location = new System.Drawing.Point(665, 160);
+            this.butbtnEnviarEmail.Name = "butbtnEnviarEmail";
+            this.butbtnEnviarEmail.Size = new System.Drawing.Size(180, 23);
+            this.butbtnEnviarEmail.TabIndex = 22;
+            this.butbtnEnviarEmail.Text = "Enviar CTe Email";
+            this.butbtnEnviarEmail.UseVisualStyleBackColor = true;
             // 
-            // button11
+            // btnPDFEvento
             // 
-            this.button11.Location = new System.Drawing.Point(479, 189);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(180, 23);
-            this.button11.TabIndex = 21;
-            this.button11.Text = "Gerar PDF Evento";
-            this.button11.UseVisualStyleBackColor = true;
+            this.btnPDFEvento.Location = new System.Drawing.Point(479, 189);
+            this.btnPDFEvento.Name = "btnPDFEvento";
+            this.btnPDFEvento.Size = new System.Drawing.Size(180, 23);
+            this.btnPDFEvento.TabIndex = 21;
+            this.btnPDFEvento.Text = "Gerar PDF Evento";
+            this.btnPDFEvento.UseVisualStyleBackColor = true;
             // 
-            // button15
+            // btnPDF
             // 
-            this.button15.Location = new System.Drawing.Point(479, 160);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(180, 23);
-            this.button15.TabIndex = 20;
-            this.button15.Text = "Gerar PDF";
-            this.button15.UseVisualStyleBackColor = true;
+            this.btnPDF.Location = new System.Drawing.Point(479, 160);
+            this.btnPDF.Name = "btnPDF";
+            this.btnPDF.Size = new System.Drawing.Size(180, 23);
+            this.btnPDF.TabIndex = 20;
+            this.btnPDF.Text = "Gerar PDF";
+            this.btnPDF.UseVisualStyleBackColor = true;
             // 
-            // button16
+            // btnImprimirEvento
             // 
-            this.button16.Location = new System.Drawing.Point(293, 189);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(180, 23);
-            this.button16.TabIndex = 19;
-            this.button16.Text = "Imprimir Evento";
-            this.button16.UseVisualStyleBackColor = true;
+            this.btnImprimirEvento.Location = new System.Drawing.Point(293, 189);
+            this.btnImprimirEvento.Name = "btnImprimirEvento";
+            this.btnImprimirEvento.Size = new System.Drawing.Size(180, 23);
+            this.btnImprimirEvento.TabIndex = 19;
+            this.btnImprimirEvento.Text = "Imprimir Evento";
+            this.btnImprimirEvento.UseVisualStyleBackColor = true;
             // 
-            // button17
+            // btnImprimir
             // 
-            this.button17.Location = new System.Drawing.Point(293, 160);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(180, 23);
-            this.button17.TabIndex = 18;
-            this.button17.Text = "Imprimir DACTe";
-            this.button17.UseVisualStyleBackColor = true;
+            this.btnImprimir.Location = new System.Drawing.Point(293, 160);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(180, 23);
+            this.btnImprimir.TabIndex = 18;
+            this.btnImprimir.Text = "Imprimir DACTe";
+            this.btnImprimir.UseVisualStyleBackColor = true;
             // 
-            // button14
+            // btnCancelarXml
             // 
-            this.button14.Location = new System.Drawing.Point(665, 102);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(180, 23);
-            this.button14.TabIndex = 17;
-            this.button14.Text = "Cancelamento CTe com XML";
-            this.button14.UseVisualStyleBackColor = true;
+            this.btnCancelarXml.Location = new System.Drawing.Point(665, 102);
+            this.btnCancelarXml.Name = "btnCancelarXml";
+            this.btnCancelarXml.Size = new System.Drawing.Size(180, 23);
+            this.btnCancelarXml.TabIndex = 17;
+            this.btnCancelarXml.Text = "Cancelamento CTe com XML";
+            this.btnCancelarXml.UseVisualStyleBackColor = true;
             // 
-            // button13
+            // btnEnviarEPEC
             // 
-            this.button13.Location = new System.Drawing.Point(665, 73);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(180, 23);
-            this.button13.TabIndex = 16;
-            this.button13.Text = "Enviar EPEC";
-            this.button13.UseVisualStyleBackColor = true;
+            this.btnEnviarEPEC.Location = new System.Drawing.Point(665, 73);
+            this.btnEnviarEPEC.Name = "btnEnviarEPEC";
+            this.btnEnviarEPEC.Size = new System.Drawing.Size(180, 23);
+            this.btnEnviarEPEC.TabIndex = 16;
+            this.btnEnviarEPEC.Text = "Enviar EPEC";
+            this.btnEnviarEPEC.UseVisualStyleBackColor = true;
             // 
-            // button12
+            // btnConsultarRecibo
             // 
-            this.button12.Location = new System.Drawing.Point(665, 44);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(180, 23);
-            this.button12.TabIndex = 15;
-            this.button12.Text = "Consultar Recibo Lote";
-            this.button12.UseVisualStyleBackColor = true;
+            this.btnConsultarRecibo.Location = new System.Drawing.Point(665, 44);
+            this.btnConsultarRecibo.Name = "btnConsultarRecibo";
+            this.btnConsultarRecibo.Size = new System.Drawing.Size(180, 23);
+            this.btnConsultarRecibo.TabIndex = 15;
+            this.btnConsultarRecibo.Text = "Consultar Recibo Lote";
+            this.btnConsultarRecibo.UseVisualStyleBackColor = true;
+            this.btnConsultarRecibo.Click += new System.EventHandler(this.btnConsultarRecibo_Click);
             // 
-            // button10
+            // btnValidarXml
             // 
-            this.button10.Location = new System.Drawing.Point(479, 102);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(180, 23);
-            this.button10.TabIndex = 13;
-            this.button10.Text = "Validar XML";
-            this.button10.UseVisualStyleBackColor = true;
+            this.btnValidarXml.Location = new System.Drawing.Point(479, 102);
+            this.btnValidarXml.Name = "btnValidarXml";
+            this.btnValidarXml.Size = new System.Drawing.Size(180, 23);
+            this.btnValidarXml.TabIndex = 13;
+            this.btnValidarXml.Text = "Validar XML";
+            this.btnValidarXml.UseVisualStyleBackColor = true;
             // 
-            // btnConsultarCTe
+            // btnConsultarChave
             // 
-            this.btnConsultarCTe.Location = new System.Drawing.Point(479, 73);
-            this.btnConsultarCTe.Name = "btnConsultarCTe";
-            this.btnConsultarCTe.Size = new System.Drawing.Size(180, 23);
-            this.btnConsultarCTe.TabIndex = 12;
-            this.btnConsultarCTe.Text = "Consultar pela Chave";
-            this.btnConsultarCTe.UseVisualStyleBackColor = true;
+            this.btnConsultarChave.Location = new System.Drawing.Point(479, 73);
+            this.btnConsultarChave.Name = "btnConsultarChave";
+            this.btnConsultarChave.Size = new System.Drawing.Size(180, 23);
+            this.btnConsultarChave.TabIndex = 12;
+            this.btnConsultarChave.Text = "Consultar pela Chave";
+            this.btnConsultarChave.UseVisualStyleBackColor = true;
+            this.btnConsultarChave.Click += new System.EventHandler(this.btnConsultarChave_Click);
             // 
-            // button8
+            // btnCriarEnviar
             // 
-            this.button8.Location = new System.Drawing.Point(479, 44);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(180, 23);
-            this.button8.TabIndex = 11;
-            this.button8.Text = "Criar e Enviar";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btnCriarEnviar.Location = new System.Drawing.Point(479, 44);
+            this.btnCriarEnviar.Name = "btnCriarEnviar";
+            this.btnCriarEnviar.Size = new System.Drawing.Size(180, 23);
+            this.btnCriarEnviar.TabIndex = 11;
+            this.btnCriarEnviar.Text = "Criar e Enviar";
+            this.btnCriarEnviar.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // btnCancelarChave
             // 
-            this.button7.Location = new System.Drawing.Point(292, 131);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(180, 23);
-            this.button7.TabIndex = 10;
-            this.button7.Text = "Cancelamento CTe pela Chave";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnCancelarChave.Location = new System.Drawing.Point(292, 131);
+            this.btnCancelarChave.Name = "btnCancelarChave";
+            this.btnCancelarChave.Size = new System.Drawing.Size(180, 23);
+            this.btnCancelarChave.TabIndex = 10;
+            this.btnCancelarChave.Text = "Cancelamento CTe pela Chave";
+            this.btnCancelarChave.UseVisualStyleBackColor = true;
             // 
-            // loadCTeButton
+            // btnImportarXml
             // 
-            this.loadCTeButton.Location = new System.Drawing.Point(293, 102);
-            this.loadCTeButton.Name = "loadCTeButton";
-            this.loadCTeButton.Size = new System.Drawing.Size(180, 23);
-            this.loadCTeButton.TabIndex = 9;
-            this.loadCTeButton.Text = "Importar XML";
-            this.loadCTeButton.UseVisualStyleBackColor = true;
-            this.loadCTeButton.Click += new System.EventHandler(this.loadCTeButton_Click);
+            this.btnImportarXml.Location = new System.Drawing.Point(293, 102);
+            this.btnImportarXml.Name = "btnImportarXml";
+            this.btnImportarXml.Size = new System.Drawing.Size(180, 23);
+            this.btnImportarXml.TabIndex = 9;
+            this.btnImportarXml.Text = "Importar XML";
+            this.btnImportarXml.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnConsultarXml
             // 
-            this.button5.Location = new System.Drawing.Point(293, 73);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(180, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Consultar carregando XML";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnConsultarXml.Location = new System.Drawing.Point(293, 73);
+            this.btnConsultarXml.Name = "btnConsultarXml";
+            this.btnConsultarXml.Size = new System.Drawing.Size(180, 23);
+            this.btnConsultarXml.TabIndex = 8;
+            this.btnConsultarXml.Text = "Consultar carregando XML";
+            this.btnConsultarXml.UseVisualStyleBackColor = true;
+            this.btnConsultarXml.Click += new System.EventHandler(this.btnConsultarXml_Click);
+            // 
+            // btnConsultarCadastro
+            // 
+            this.btnConsultarCadastro.Location = new System.Drawing.Point(293, 44);
+            this.btnConsultarCadastro.Name = "btnConsultarCadastro";
+            this.btnConsultarCadastro.Size = new System.Drawing.Size(180, 23);
+            this.btnConsultarCadastro.TabIndex = 7;
+            this.btnConsultarCadastro.Text = "Consulta Cadastro";
+            this.btnConsultarCadastro.UseVisualStyleBackColor = true;
+            // 
+            // btnGerar
+            // 
+            this.btnGerar.Location = new System.Drawing.Point(665, 15);
+            this.btnGerar.Name = "btnGerar";
+            this.btnGerar.Size = new System.Drawing.Size(180, 23);
+            this.btnGerar.TabIndex = 6;
+            this.btnGerar.Text = "Gerar CTe";
+            this.btnGerar.UseVisualStyleBackColor = true;
+            // 
+            // btnInutilizar
+            // 
+            this.btnInutilizar.Location = new System.Drawing.Point(479, 15);
+            this.btnInutilizar.Name = "btnInutilizar";
+            this.btnInutilizar.Size = new System.Drawing.Size(180, 23);
+            this.btnInutilizar.TabIndex = 5;
+            this.btnInutilizar.Text = "Inutilizar Numeração";
+            this.btnInutilizar.UseVisualStyleBackColor = true;
             // 
             // btnConsultarSituacao
             // 
-            this.btnConsultarSituacao.Location = new System.Drawing.Point(293, 44);
+            this.btnConsultarSituacao.Location = new System.Drawing.Point(293, 15);
             this.btnConsultarSituacao.Name = "btnConsultarSituacao";
             this.btnConsultarSituacao.Size = new System.Drawing.Size(180, 23);
-            this.btnConsultarSituacao.TabIndex = 7;
-            this.btnConsultarSituacao.Text = "Consulta Cadastro";
+            this.btnConsultarSituacao.TabIndex = 4;
+            this.btnConsultarSituacao.Text = "Status Serviço";
             this.btnConsultarSituacao.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(665, 15);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(180, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Gerar CTe";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(479, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(180, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Inutilizar Numeração";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // statusServiceButton
-            // 
-            this.statusServiceButton.Location = new System.Drawing.Point(293, 15);
-            this.statusServiceButton.Name = "statusServiceButton";
-            this.statusServiceButton.Size = new System.Drawing.Size(180, 23);
-            this.statusServiceButton.TabIndex = 4;
-            this.statusServiceButton.Text = "Status Serviço";
-            this.statusServiceButton.UseVisualStyleBackColor = true;
-            this.statusServiceButton.Click += new System.EventHandler(this.statusServiceButton_Click);
+            this.btnConsultarSituacao.Click += new System.EventHandler(this.btnConsultarSituacao_Click);
             // 
             // tbcRespostas
             // 
@@ -559,6 +563,7 @@
             // 
             // tabPageGeral
             // 
+            this.tabPageGeral.Controls.Add(this.chkSalvarProcessados);
             this.tabPageGeral.Controls.Add(this.btnSelecionarArquivo);
             this.tabPageGeral.Controls.Add(this.txtArquivoServicos);
             this.tabPageGeral.Controls.Add(this.label13);
@@ -576,7 +581,7 @@
             // 
             // btnSelecionarArquivo
             // 
-            this.btnSelecionarArquivo.Location = new System.Drawing.Point(239, 89);
+            this.btnSelecionarArquivo.Location = new System.Drawing.Point(239, 66);
             this.btnSelecionarArquivo.Name = "btnSelecionarArquivo";
             this.btnSelecionarArquivo.Size = new System.Drawing.Size(24, 20);
             this.btnSelecionarArquivo.TabIndex = 19;
@@ -586,7 +591,7 @@
             // 
             // txtArquivoServicos
             // 
-            this.txtArquivoServicos.Location = new System.Drawing.Point(6, 90);
+            this.txtArquivoServicos.Location = new System.Drawing.Point(6, 67);
             this.txtArquivoServicos.Name = "txtArquivoServicos";
             this.txtArquivoServicos.Size = new System.Drawing.Size(227, 20);
             this.txtArquivoServicos.TabIndex = 21;
@@ -594,7 +599,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 74);
+            this.label13.Location = new System.Drawing.Point(3, 51);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(97, 13);
             this.label13.TabIndex = 20;
@@ -603,13 +608,12 @@
             // chkSalvarArquivos
             // 
             this.chkSalvarArquivos.AutoSize = true;
-            this.chkSalvarArquivos.Location = new System.Drawing.Point(6, 54);
+            this.chkSalvarArquivos.Location = new System.Drawing.Point(6, 93);
             this.chkSalvarArquivos.Name = "chkSalvarArquivos";
             this.chkSalvarArquivos.Size = new System.Drawing.Size(122, 17);
             this.chkSalvarArquivos.TabIndex = 18;
             this.chkSalvarArquivos.Text = "Salvar arquivos CTe";
             this.chkSalvarArquivos.UseVisualStyleBackColor = true;
-            this.chkSalvarArquivos.CheckedChanged += new System.EventHandler(this.chkSalvarArquivos_CheckedChanged);
             // 
             // btnSelecionarSchema
             // 
@@ -631,7 +635,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 12);
+            this.label12.Location = new System.Drawing.Point(3, 12);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(81, 13);
             this.label12.TabIndex = 11;
@@ -889,6 +893,7 @@
             // 
             // tabPageWebservice
             // 
+            this.tabPageWebservice.Controls.Add(this.chkSalvarSoap);
             this.tabPageWebservice.Controls.Add(this.groupBox3);
             this.tabPageWebservice.Controls.Add(this.label17);
             this.tabPageWebservice.Controls.Add(this.nudTimeOut);
@@ -902,6 +907,16 @@
             this.tabPageWebservice.TabIndex = 3;
             this.tabPageWebservice.Text = "Webservice";
             this.tabPageWebservice.UseVisualStyleBackColor = true;
+            // 
+            // chkSalvarSoap
+            // 
+            this.chkSalvarSoap.AutoSize = true;
+            this.chkSalvarSoap.Location = new System.Drawing.Point(179, 97);
+            this.chkSalvarSoap.Name = "chkSalvarSoap";
+            this.chkSalvarSoap.Size = new System.Drawing.Size(84, 17);
+            this.chkSalvarSoap.TabIndex = 19;
+            this.chkSalvarSoap.Text = "Salvar Soap";
+            this.chkSalvarSoap.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -1325,22 +1340,39 @@
             // 
             // acbrCTe
             // 
-            this.acbrCTe.Configuracoes.Arquivos.AdicionarLiteral = false;
-            this.acbrCTe.Configuracoes.Arquivos.PathCTe = "C:\\Users\\rften\\AppData\\Local\\Microsoft\\VisualStudio\\15.0_ba1d4182\\ProjectAssembli" +
-    "es\\_djzog3j01\\CTe";
-            this.acbrCTe.Configuracoes.Arquivos.PathEvento = "C:\\Users\\rften\\AppData\\Local\\Microsoft\\VisualStudio\\15.0_ba1d4182\\ProjectAssembli" +
-    "es\\_djzog3j01\\Evento";
+            this.acbrCTe.Configuracoes.Arquivos.ArquivoServicos = "";
+            this.acbrCTe.Configuracoes.Arquivos.EmissaoPathCTe = false;
+            this.acbrCTe.Configuracoes.Arquivos.PathCTe = "";
+            this.acbrCTe.Configuracoes.Arquivos.PathEvento = "";
+            this.acbrCTe.Configuracoes.Arquivos.PathInu = null;
+            this.acbrCTe.Configuracoes.Arquivos.PathSalvar = "C:\\Users\\rften\\AppData\\Local\\Microsoft\\VisualStudio\\15.0_ba1d4182\\ProjectAssembli" +
+    "es\\uee-jont01\\Docs";
+            this.acbrCTe.Configuracoes.Arquivos.PathSchemas = "E:\\Programacao\\ACBr\\ACBr.Net\\ACBr.Net.CTe\\src\\ACBr.Net.CTe.Demo\\bin\\Debug\\Schemas" +
+    "";
             this.acbrCTe.Configuracoes.Arquivos.Salvar = false;
+            this.acbrCTe.Configuracoes.Arquivos.SalvarApenasCTeProcessados = false;
             this.acbrCTe.Configuracoes.Certificados.Certificado = "";
             this.acbrCTe.Configuracoes.Certificados.CertificadoBytes = null;
             this.acbrCTe.Configuracoes.Certificados.Senha = null;
-            this.acbrCTe.Configuracoes.Geral.Salvar = true;
+            this.acbrCTe.Configuracoes.Geral.VersaoDFe = ACBr.Net.CTe.CTeVersao.v300;
             this.acbrCTe.Configuracoes.WebServices.AguardarConsultaRet = ((uint)(1u));
             this.acbrCTe.Configuracoes.WebServices.ProxyHost = "";
             this.acbrCTe.Configuracoes.WebServices.ProxyPass = "";
             this.acbrCTe.Configuracoes.WebServices.ProxyPort = "";
             this.acbrCTe.Configuracoes.WebServices.ProxyUser = "";
+            this.acbrCTe.Configuracoes.WebServices.Salvar = false;
             this.acbrCTe.Configuracoes.WebServices.UF = ACBr.Net.DFe.Core.Common.DFeCodUF.MS;
+            this.acbrCTe.StatusChanged += new System.EventHandler<System.EventArgs>(this.acbrCTe_StatusChanged);
+            // 
+            // chkSalvarProcessados
+            // 
+            this.chkSalvarProcessados.AutoSize = true;
+            this.chkSalvarProcessados.Location = new System.Drawing.Point(6, 116);
+            this.chkSalvarProcessados.Name = "chkSalvarProcessados";
+            this.chkSalvarProcessados.Size = new System.Drawing.Size(162, 17);
+            this.chkSalvarProcessados.TabIndex = 22;
+            this.chkSalvarProcessados.Text = "Salvar arquivos processados";
+            this.chkSalvarProcessados.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -1386,19 +1418,19 @@
 
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.TabPage tabPageCTe;
-		private System.Windows.Forms.Button button14;
-		private System.Windows.Forms.Button button13;
-		private System.Windows.Forms.Button button12;
-		private System.Windows.Forms.Button button10;
-		private System.Windows.Forms.Button btnConsultarCTe;
-		private System.Windows.Forms.Button button8;
-		private System.Windows.Forms.Button button7;
-		private System.Windows.Forms.Button loadCTeButton;
-		private System.Windows.Forms.Button button5;
+		private System.Windows.Forms.Button btnCancelarXml;
+		private System.Windows.Forms.Button btnEnviarEPEC;
+		private System.Windows.Forms.Button btnConsultarRecibo;
+		private System.Windows.Forms.Button btnValidarXml;
+		private System.Windows.Forms.Button btnConsultarChave;
+		private System.Windows.Forms.Button btnCriarEnviar;
+		private System.Windows.Forms.Button btnCancelarChave;
+		private System.Windows.Forms.Button btnImportarXml;
+		private System.Windows.Forms.Button btnConsultarXml;
+		private System.Windows.Forms.Button btnConsultarCadastro;
+		private System.Windows.Forms.Button btnGerar;
+		private System.Windows.Forms.Button btnInutilizar;
 		private System.Windows.Forms.Button btnConsultarSituacao;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button statusServiceButton;
 		private System.Windows.Forms.TabControl tbcRespostas;
 		private System.Windows.Forms.TabPage tabPageRespostas;
 		private System.Windows.Forms.RichTextBox rtLogResposta;
@@ -1466,12 +1498,12 @@
 		private System.Windows.Forms.Button btnCarregar;
 		private System.Windows.Forms.ListView listViewServicos;
 		private System.Windows.Forms.ColumnHeader clhUF;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button4;
-		private System.Windows.Forms.Button button11;
-		private System.Windows.Forms.Button button15;
-		private System.Windows.Forms.Button button16;
-		private System.Windows.Forms.Button button17;
+		private System.Windows.Forms.Button btnEnviarEmailEvento;
+		private System.Windows.Forms.Button butbtnEnviarEmail;
+		private System.Windows.Forms.Button btnPDFEvento;
+		private System.Windows.Forms.Button btnPDF;
+		private System.Windows.Forms.Button btnImprimirEvento;
+		private System.Windows.Forms.Button btnImprimir;
 		private System.Windows.Forms.ColumnHeader clhTipo;
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.ComboBox cbbAmbiente;
@@ -1500,6 +1532,8 @@
         private System.Windows.Forms.TextBox txtProxyPort;
         private System.Windows.Forms.TextBox txtProxyHost;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.CheckBox chkSalvarSoap;
+        private System.Windows.Forms.CheckBox chkSalvarProcessados;
     }
 }
 

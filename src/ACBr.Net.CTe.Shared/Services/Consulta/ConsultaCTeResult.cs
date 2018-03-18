@@ -34,31 +34,31 @@ using ACBr.Net.DFe.Core.Collection;
 
 namespace ACBr.Net.CTe.Services
 {
-	[DFeRoot("cteConsultaCTResult", Namespace = "http://www.portalfiscal.inf.br/cte")]
-	public sealed class ConsultaCTeResult : CTeResultaBase<ConsultaCTeResult>
-	{
-		#region Constructors
+    [DFeRoot("retConsSitCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class ConsultaCTeResult : CTeResultaBase<ConsultaCTeResult>
+    {
+        #region Constructors
 
-		public ConsultaCTeResult()
-		{
-			ProtCTe = new CTeProtCTe();
-			RetCancCte = new CTeRetCancCte();
-			EventoCTe = new DFeCollection<CTeRetEventoCTe>();
-		}
+        public ConsultaCTeResult()
+        {
+            ProtCTe = new CTeProtCTe();
+            RetCancCte = new CTeRetCancCte();
+            EventoCTe = new DFeCollection<CTeProcEvento>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Properties
+        #region Properties
 
-		[DFeElement("protCTe", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public CTeProtCTe ProtCTe { get; set; }
+        [DFeElement("protCTe", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeProtCTe ProtCTe { get; set; }
 
-		[DFeElement("retCancCTe", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public CTeRetCancCte RetCancCte { get; set; }
+        [DFeElement("retCancCTe", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeRetCancCte RetCancCte { get; set; }
 
-		[DFeCollection("procEventoCTe", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DFeCollection<CTeRetEventoCTe> EventoCTe { get; set; }
+        [DFeCollection("procEventoCTe", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeProcEvento> EventoCTe { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

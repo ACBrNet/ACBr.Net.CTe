@@ -50,8 +50,8 @@ namespace ACBr.Net.CTe.Services
             base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
         {
             Schema = SchemaCTe.EnviCTe;
-            ArquivoEnvio = "ped-sta";
-            ArquivoResposta = "sta";
+            ArquivoEnvio = "'env-lot";
+            ArquivoResposta = "rec";
         }
 
         #endregion Constructors
@@ -65,12 +65,12 @@ namespace ACBr.Net.CTe.Services
             lock (serviceLock)
             {
                 var request = new StringBuilder();
-                request.Append($"<enviCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{Config.Geral.VersaoDFe.GetDescription()}\">");
+                request.Append($"<enviCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{Configuracoes.Geral.VersaoDFe.GetDescription()}\">");
                 request.Append($"<idLote>{loteId}</idLote>");
 
                 var saveOptions = DFeSaveOptions.DisableFormatting | DFeSaveOptions.OmitDeclaration;
-                if (Config.Geral.RetirarAcentos) saveOptions |= DFeSaveOptions.RemoveAccents;
-                if (Config.Geral.RetirarEspacos) saveOptions |= DFeSaveOptions.RemoveSpaces;
+                if (Configuracoes.Geral.RetirarAcentos) saveOptions |= DFeSaveOptions.RemoveAccents;
+                if (Configuracoes.Geral.RetirarEspacos) saveOptions |= DFeSaveOptions.RemoveSpaces;
 
                 foreach (var cte in ctes)
                 {

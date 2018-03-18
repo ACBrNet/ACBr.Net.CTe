@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 03-13-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-09-2018
+// Last Modified On : 03-13-2018
 // ***********************************************************************
-// <copyright file="CTeCollection.cs" company="ACBr.Net">
+// <copyright file="CTeProcEvento.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,39 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Serializer;
+
 namespace ACBr.Net.CTe
 {
-    public enum SchemaCTe
+    [DFeRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeProcEvento : DFeDocument<CTeProcEvento>
     {
-        CTe,
-        CTeOS,
-        CancCTe,
-        InutCTe,
-        EventoCTe,
-        ProcCTe,
-        ProcEventoCTe,
-        ConsSitCTe,
-        ConsStatServCTe,
-        ConsCad,
-        CteModalAereo,
-        CteModalAquaviario,
-        CteModalDutoviario,
-        CteModalFerroviario,
-        CteModalRodoviario,
-        CteMultiModal,
-        EvEPECCTe,
-        EvCancCTe,
-        EvRegMultimodal,
-        EvCCeCTe,
-        DistDFeInt,
-        CteModalRodoviarioOS,
-        EvPrestDesacordo,
-        EvGTV,
-        ProcCTeOS,
-        EnviCTe,
-        ConsReciCTe,
+        #region Constructor
+
+        public CTeProcEvento()
+        {
+            EventoCTe = new CTeEventoCTe();
+            RetEventoCTe = new CTeRetEventoCTe();
+        }
+
+        #endregion Constructor
+
+        #region Properties
+
+        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Versao { get; set; }
+
+        [DFeAttribute(TipoCampo.Str, "ipTransmissor", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string IpTransmissor { get; set; }
+
+        [DFeElement("eventoCTe", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeEventoCTe EventoCTe { get; set; }
+
+        [DFeElement("retEventoCTe", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeRetEventoCTe RetEventoCTe { get; set; }
+
+        #endregion Properties
     }
 }
