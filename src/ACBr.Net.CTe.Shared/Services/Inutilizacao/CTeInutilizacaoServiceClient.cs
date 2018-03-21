@@ -31,43 +31,79 @@
 
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Xml;
+using ACBr.Net.DFe.Core;
+using ACBr.Net.DFe.Core.Extensions;
 
 namespace ACBr.Net.CTe.Services
 {
-	public sealed class CTeInutilizacaoServiceClient : DFeSoap12ServiceClientBase<ICTeInutilizacao>, ICTeInutilizacao
-	{
-		#region Constructors
+    public sealed class CTeInutilizacaoServiceClient : CTeServiceClient<ICTeInutilizacao>, ICTeInutilizacao
+    {
+        #region Constructors
 
-		public CTeInutilizacaoServiceClient(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
-		{
-		}
+        public CTeInutilizacaoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
+            base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
+        {
+            Schema = SchemaCTe.InutCTe;
+            ArquivoEnvio = "ped-inu";
+            ArquivoResposta = "inu";
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Methods
+        #region Methods
 
-		public string Inutilizacao(CTeWsCabecalho cabecalho, string mensagem)
-		{
-			Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-			Guard.Against<ArgumentNullException>(mensagem.IsEmpty(), nameof(mensagem));
+        public InutilizaoResposta Inutilizacao(string cnpj, string aJustificativa, int ano, ModeloCTe modelo, int serie, int numeroInicial, int numeroFinal)
+        {
+            Guard.Against<ArgumentNullException>(cnpj.IsEmpty(), "Informar o número do CNPJ");
+            Guard.Against<ArgumentException>(!cnpj.IsCNPJ(), "CNPJ inválido.");
+            Guard.Against<ArgumentNullException>(aJustificativa.IsEmpty(), "Informar uma Justificativa para Inutilização de numeração do Conhecimento Eletronico.");
+            Guard.Against<ArgumentException>(aJustificativa.Length < 15, "A Justificativa para Inutilização de numeração do Conhecimento Eletronico deve ter no minimo 15 caracteres.");
 
-			var xml = new XmlDocument();
-			xml.LoadXml(mensagem);
+            lock (serviceLock)
+            {
+                var idInutilizacao = $"ID{Configuracoes.WebServices.UF.GetValue()}{cnpj.OnlyNumbers()}{modelo.GetValue()}" +
+                                      $"{serie.ZeroFill(3)}{numeroInicial.ZeroFill(9)}{numeroFinal.ZeroFill(9)}";
 
-			var inValue = new InutilizacaoRequest(cabecalho, xml);
-			var retVal = ((ICTeInutilizacao)(this)).CTeInutilizacao(inValue);
-			return retVal.Result.OuterXml;
-		}
+                var request = new StringBuilder();
+                request.Append($"<inutCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{Configuracoes.Geral.VersaoDFe.GetDescription()}\">");
+                request.Append($"<infInut Id=\"{idInutilizacao}\">");
+                request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetValue()}</tpAmb>");
+                request.Append("<xServ>INUTILIZAR</xServ>");
+                request.Append($"<cUF>{Configuracoes.WebServices.UF.GetValue()}</cUF>");
+                request.Append($"<ano>{ano}</ano>");
+                request.Append($"<CNPJ>{cnpj}</CNPJ>");
+                request.Append($"<mod>{modelo.GetValue()}</mod>");
+                request.Append($"<serie>{serie.ZeroFill(3)}</serie>");
+                request.Append($"<nCTIni>{numeroInicial.ZeroFill(9)}</nCTIni>");
+                request.Append($"<nCTFin>{numeroFinal.ZeroFill(9)}</nCTFin>");
+                request.Append($"<xJust>{aJustificativa}</xJust>");
+                request.Append("</infInut>");
+                request.Append("</inutCTe>");
 
-		InutilizacaoResponse ICTeInutilizacao.CTeInutilizacao(InutilizacaoRequest request)
-		{
-			return base.Channel.CTeInutilizacao(request);
-		}
+                var dadosMsg = request.ToString();
+                XmlSigning.AssinarXml(dadosMsg, "inutCTe", "infInut", ClientCredentials.ClientCertificate.Certificate);
+                ValidateMessage(dadosMsg);
 
-		#endregion Methods
-	}
+                var xml = new XmlDocument();
+                xml.LoadXml(dadosMsg);
+
+                var inValue = new InutilizacaoRequest(DefineHeader(), xml);
+                var retVal = ((ICTeInutilizacao)(this)).CTeInutilizacao(inValue);
+
+                var retorno = new InutilizaoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
+                return retorno;
+            }
+        }
+
+        InutilizacaoResponse ICTeInutilizacao.CTeInutilizacao(InutilizacaoRequest request)
+        {
+            return base.Channel.CTeInutilizacao(request);
+        }
+
+        #endregion Methods
+    }
 }

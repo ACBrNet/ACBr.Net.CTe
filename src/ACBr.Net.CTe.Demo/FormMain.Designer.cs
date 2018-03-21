@@ -66,12 +66,14 @@
             this.btnSalvarConfig = new System.Windows.Forms.Button();
             this.tbcConfiguracoes = new System.Windows.Forms.TabControl();
             this.tabPageGeral = new System.Windows.Forms.TabPage();
-            this.btnSelecionarArquivo = new System.Windows.Forms.Button();
+            this.txtSchemas = new System.Windows.Forms.TextBox();
+            this.btnSelecionarSchema = new System.Windows.Forms.Button();
+            this.txtPathCTe = new System.Windows.Forms.TextBox();
             this.txtArquivoServicos = new System.Windows.Forms.TextBox();
+            this.btnPathCTe = new System.Windows.Forms.Button();
+            this.btnSelecionarArquivo = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.chkSalvarArquivos = new System.Windows.Forms.CheckBox();
-            this.btnSelecionarSchema = new System.Windows.Forms.Button();
-            this.txtSchemas = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPageEmitente = new System.Windows.Forms.TabPage();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -101,6 +103,8 @@
             this.txtIM = new System.Windows.Forms.TextBox();
             this.txtCNPJ = new System.Windows.Forms.TextBox();
             this.tabPageWebservice = new System.Windows.Forms.TabPage();
+            this.txtArquivosSoap = new System.Windows.Forms.TextBox();
+            this.btnPathSalvar = new System.Windows.Forms.Button();
             this.chkSalvarSoap = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtProxyPass = new System.Windows.Forms.TextBox();
@@ -145,7 +149,6 @@
             this.clhTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clhUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.acbrCTe = new ACBr.Net.CTe.ACBrCTe();
-            this.chkSalvarProcessados = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPageCTe.SuspendLayout();
             this.tbcRespostas.SuspendLayout();
@@ -563,13 +566,14 @@
             // 
             // tabPageGeral
             // 
-            this.tabPageGeral.Controls.Add(this.chkSalvarProcessados);
-            this.tabPageGeral.Controls.Add(this.btnSelecionarArquivo);
+            this.tabPageGeral.Controls.Add(this.txtSchemas);
+            this.tabPageGeral.Controls.Add(this.btnSelecionarSchema);
+            this.tabPageGeral.Controls.Add(this.txtPathCTe);
             this.tabPageGeral.Controls.Add(this.txtArquivoServicos);
+            this.tabPageGeral.Controls.Add(this.btnPathCTe);
+            this.tabPageGeral.Controls.Add(this.btnSelecionarArquivo);
             this.tabPageGeral.Controls.Add(this.label13);
             this.tabPageGeral.Controls.Add(this.chkSalvarArquivos);
-            this.tabPageGeral.Controls.Add(this.btnSelecionarSchema);
-            this.tabPageGeral.Controls.Add(this.txtSchemas);
             this.tabPageGeral.Controls.Add(this.label12);
             this.tabPageGeral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeral.Name = "tabPageGeral";
@@ -579,27 +583,61 @@
             this.tabPageGeral.Text = "Geral";
             this.tabPageGeral.UseVisualStyleBackColor = true;
             // 
+            // txtSchemas
+            // 
+            this.txtSchemas.Location = new System.Drawing.Point(6, 28);
+            this.txtSchemas.Name = "txtSchemas";
+            this.txtSchemas.Size = new System.Drawing.Size(234, 20);
+            this.txtSchemas.TabIndex = 12;
+            // 
+            // btnSelecionarSchema
+            // 
+            this.btnSelecionarSchema.Location = new System.Drawing.Point(239, 27);
+            this.btnSelecionarSchema.Name = "btnSelecionarSchema";
+            this.btnSelecionarSchema.Size = new System.Drawing.Size(24, 22);
+            this.btnSelecionarSchema.TabIndex = 26;
+            this.btnSelecionarSchema.Text = "...";
+            this.btnSelecionarSchema.UseVisualStyleBackColor = true;
+            this.btnSelecionarSchema.Click += new System.EventHandler(this.btnSelecionarSchema_Click);
+            // 
+            // txtPathCTe
+            // 
+            this.txtPathCTe.Location = new System.Drawing.Point(6, 77);
+            this.txtPathCTe.Name = "txtPathCTe";
+            this.txtPathCTe.Size = new System.Drawing.Size(234, 20);
+            this.txtPathCTe.TabIndex = 25;
+            // 
+            // txtArquivoServicos
+            // 
+            this.txtArquivoServicos.Location = new System.Drawing.Point(6, 116);
+            this.txtArquivoServicos.Name = "txtArquivoServicos";
+            this.txtArquivoServicos.Size = new System.Drawing.Size(234, 20);
+            this.txtArquivoServicos.TabIndex = 21;
+            // 
+            // btnPathCTe
+            // 
+            this.btnPathCTe.Location = new System.Drawing.Point(239, 76);
+            this.btnPathCTe.Name = "btnPathCTe";
+            this.btnPathCTe.Size = new System.Drawing.Size(24, 22);
+            this.btnPathCTe.TabIndex = 23;
+            this.btnPathCTe.Text = "...";
+            this.btnPathCTe.UseVisualStyleBackColor = true;
+            this.btnPathCTe.Click += new System.EventHandler(this.btnPathCTe_Click);
+            // 
             // btnSelecionarArquivo
             // 
-            this.btnSelecionarArquivo.Location = new System.Drawing.Point(239, 66);
+            this.btnSelecionarArquivo.Location = new System.Drawing.Point(239, 115);
             this.btnSelecionarArquivo.Name = "btnSelecionarArquivo";
-            this.btnSelecionarArquivo.Size = new System.Drawing.Size(24, 20);
+            this.btnSelecionarArquivo.Size = new System.Drawing.Size(24, 22);
             this.btnSelecionarArquivo.TabIndex = 19;
             this.btnSelecionarArquivo.Text = "...";
             this.btnSelecionarArquivo.UseVisualStyleBackColor = true;
             this.btnSelecionarArquivo.Click += new System.EventHandler(this.btnSelecionarArquivo_Click);
             // 
-            // txtArquivoServicos
-            // 
-            this.txtArquivoServicos.Location = new System.Drawing.Point(6, 67);
-            this.txtArquivoServicos.Name = "txtArquivoServicos";
-            this.txtArquivoServicos.Size = new System.Drawing.Size(227, 20);
-            this.txtArquivoServicos.TabIndex = 21;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 51);
+            this.label13.Location = new System.Drawing.Point(3, 100);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(97, 13);
             this.label13.TabIndex = 20;
@@ -608,29 +646,12 @@
             // chkSalvarArquivos
             // 
             this.chkSalvarArquivos.AutoSize = true;
-            this.chkSalvarArquivos.Location = new System.Drawing.Point(6, 93);
+            this.chkSalvarArquivos.Location = new System.Drawing.Point(6, 54);
             this.chkSalvarArquivos.Name = "chkSalvarArquivos";
             this.chkSalvarArquivos.Size = new System.Drawing.Size(122, 17);
             this.chkSalvarArquivos.TabIndex = 18;
             this.chkSalvarArquivos.Text = "Salvar arquivos CTe";
             this.chkSalvarArquivos.UseVisualStyleBackColor = true;
-            // 
-            // btnSelecionarSchema
-            // 
-            this.btnSelecionarSchema.Location = new System.Drawing.Point(239, 28);
-            this.btnSelecionarSchema.Name = "btnSelecionarSchema";
-            this.btnSelecionarSchema.Size = new System.Drawing.Size(24, 20);
-            this.btnSelecionarSchema.TabIndex = 10;
-            this.btnSelecionarSchema.Text = "...";
-            this.btnSelecionarSchema.UseVisualStyleBackColor = true;
-            this.btnSelecionarSchema.Click += new System.EventHandler(this.btnSelecionarSchema_Click);
-            // 
-            // txtSchemas
-            // 
-            this.txtSchemas.Location = new System.Drawing.Point(6, 28);
-            this.txtSchemas.Name = "txtSchemas";
-            this.txtSchemas.Size = new System.Drawing.Size(227, 20);
-            this.txtSchemas.TabIndex = 12;
             // 
             // label12
             // 
@@ -893,6 +914,8 @@
             // 
             // tabPageWebservice
             // 
+            this.tabPageWebservice.Controls.Add(this.txtArquivosSoap);
+            this.tabPageWebservice.Controls.Add(this.btnPathSalvar);
             this.tabPageWebservice.Controls.Add(this.chkSalvarSoap);
             this.tabPageWebservice.Controls.Add(this.groupBox3);
             this.tabPageWebservice.Controls.Add(this.label17);
@@ -908,14 +931,31 @@
             this.tabPageWebservice.Text = "Webservice";
             this.tabPageWebservice.UseVisualStyleBackColor = true;
             // 
+            // txtArquivosSoap
+            // 
+            this.txtArquivosSoap.Location = new System.Drawing.Point(6, 144);
+            this.txtArquivosSoap.Name = "txtArquivosSoap";
+            this.txtArquivosSoap.Size = new System.Drawing.Size(227, 20);
+            this.txtArquivosSoap.TabIndex = 27;
+            // 
+            // btnPathSalvar
+            // 
+            this.btnPathSalvar.Location = new System.Drawing.Point(232, 143);
+            this.btnPathSalvar.Name = "btnPathSalvar";
+            this.btnPathSalvar.Size = new System.Drawing.Size(24, 22);
+            this.btnPathSalvar.TabIndex = 26;
+            this.btnPathSalvar.Text = "...";
+            this.btnPathSalvar.UseVisualStyleBackColor = true;
+            this.btnPathSalvar.Click += new System.EventHandler(this.btnPathSalvar_Click);
+            // 
             // chkSalvarSoap
             // 
             this.chkSalvarSoap.AutoSize = true;
-            this.chkSalvarSoap.Location = new System.Drawing.Point(179, 97);
+            this.chkSalvarSoap.Location = new System.Drawing.Point(6, 121);
             this.chkSalvarSoap.Name = "chkSalvarSoap";
-            this.chkSalvarSoap.Size = new System.Drawing.Size(84, 17);
+            this.chkSalvarSoap.Size = new System.Drawing.Size(201, 17);
             this.chkSalvarSoap.TabIndex = 19;
-            this.chkSalvarSoap.Text = "Salvar Soap";
+            this.chkSalvarSoap.Text = "Salvar Arquivos de envio e respostas";
             this.chkSalvarSoap.UseVisualStyleBackColor = true;
             // 
             // groupBox3
@@ -928,7 +968,7 @@
             this.groupBox3.Controls.Add(this.txtProxyPort);
             this.groupBox3.Controls.Add(this.txtProxyHost);
             this.groupBox3.Controls.Add(this.label18);
-            this.groupBox3.Location = new System.Drawing.Point(6, 121);
+            this.groupBox3.Location = new System.Drawing.Point(9, 177);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(257, 100);
             this.groupBox3.TabIndex = 16;
@@ -1349,8 +1389,12 @@
     "es\\uee-jont01\\Docs";
             this.acbrCTe.Configuracoes.Arquivos.PathSchemas = "E:\\Programacao\\ACBr\\ACBr.Net\\ACBr.Net.CTe\\src\\ACBr.Net.CTe.Demo\\bin\\Debug\\Schemas" +
     "";
-            this.acbrCTe.Configuracoes.Arquivos.Salvar = false;
             this.acbrCTe.Configuracoes.Arquivos.SalvarApenasCTeProcessados = false;
+            this.acbrCTe.Configuracoes.Arquivos.SepararPorAno = true;
+            this.acbrCTe.Configuracoes.Arquivos.SepararPorCNPJ = true;
+            this.acbrCTe.Configuracoes.Arquivos.SepararPorDia = true;
+            this.acbrCTe.Configuracoes.Arquivos.SepararPorMes = true;
+            this.acbrCTe.Configuracoes.Arquivos.SepararPorModelo = true;
             this.acbrCTe.Configuracoes.Certificados.Certificado = "";
             this.acbrCTe.Configuracoes.Certificados.CertificadoBytes = null;
             this.acbrCTe.Configuracoes.Certificados.Senha = null;
@@ -1363,16 +1407,6 @@
             this.acbrCTe.Configuracoes.WebServices.Salvar = false;
             this.acbrCTe.Configuracoes.WebServices.UF = ACBr.Net.DFe.Core.Common.DFeCodUF.MS;
             this.acbrCTe.StatusChanged += new System.EventHandler<System.EventArgs>(this.acbrCTe_StatusChanged);
-            // 
-            // chkSalvarProcessados
-            // 
-            this.chkSalvarProcessados.AutoSize = true;
-            this.chkSalvarProcessados.Location = new System.Drawing.Point(6, 116);
-            this.chkSalvarProcessados.Name = "chkSalvarProcessados";
-            this.chkSalvarProcessados.Size = new System.Drawing.Size(162, 17);
-            this.chkSalvarProcessados.TabIndex = 22;
-            this.chkSalvarProcessados.Text = "Salvar arquivos processados";
-            this.chkSalvarProcessados.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -1487,7 +1521,6 @@
 		private System.Windows.Forms.TextBox txtArquivoServicos;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.CheckBox chkSalvarArquivos;
-		private System.Windows.Forms.Button btnSelecionarSchema;
 		private System.Windows.Forms.TextBox txtSchemas;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.TabPage tabPageWebservice;
@@ -1533,7 +1566,11 @@
         private System.Windows.Forms.TextBox txtProxyHost;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.CheckBox chkSalvarSoap;
-        private System.Windows.Forms.CheckBox chkSalvarProcessados;
+        private System.Windows.Forms.Button btnPathCTe;
+        private System.Windows.Forms.TextBox txtPathCTe;
+        private System.Windows.Forms.TextBox txtArquivosSoap;
+        private System.Windows.Forms.Button btnPathSalvar;
+        private System.Windows.Forms.Button btnSelecionarSchema;
     }
 }
 

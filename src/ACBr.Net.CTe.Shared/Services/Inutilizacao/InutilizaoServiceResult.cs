@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 10-12-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 10-12-2016
 // ***********************************************************************
-// <copyright file="CTeWsCabecalho.cs" company="ACBr.Net">
+// <copyright file="InutilizaoServiceResult.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,18 +29,36 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Xml.Serialization;
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe.Services
 {
-    [Serializable]
-    public sealed class CTeWsCabecalho
+    [DFeRoot("retConsStatServCte", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class InutilizaoServiceResult : DFeDocument<InutilizaoServiceResult>
     {
-        [XmlElement(ElementName = "cUF", Order = 0)]
-        public int CUf { get; set; }
+        #region Constructors
 
-        [XmlElement(ElementName = "versaoDados", Order = 1)]
-        public string VersaoDados { get; set; }
+        public InutilizaoServiceResult()
+        {
+            InfInut = new InfInutRet();
+            Signature = new DFeSignature();
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Versao { get; set; }
+
+        [DFeElement("infInut", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public InfInutRet InfInut { get; set; }
+
+        public DFeSignature Signature { get; set; }
+
+        #endregion Properties
     }
 }

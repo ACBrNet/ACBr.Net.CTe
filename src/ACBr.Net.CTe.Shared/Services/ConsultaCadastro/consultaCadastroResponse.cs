@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="CTeWsCabecalho.cs" company="ACBr.Net">
+// <copyright file="ConsultaCadastroResponse.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,18 +29,36 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Xml.Serialization;
+using System.ServiceModel;
+using System.Xml;
 
 namespace ACBr.Net.CTe.Services
 {
-    [Serializable]
-    public sealed class CTeWsCabecalho
+    [MessageContract(WrapperName = "consultaCadastroResponse", IsWrapped = false)]
+    public sealed class ConsultaCadastroResponse
     {
-        [XmlElement(ElementName = "cUF", Order = 0)]
-        public int CUf { get; set; }
+        #region Constructors
 
-        [XmlElement(ElementName = "versaoDados", Order = 1)]
-        public string VersaoDados { get; set; }
+        public ConsultaCadastroResponse()
+        {
+        }
+
+        public ConsultaCadastroResponse(CTeWsCabecalho cabecalho, XmlNode retorno)
+        {
+            Cabecalho = cabecalho;
+            Result = retorno;
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        [MessageHeader(Name = "nfeCabecMsg", Namespace = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro")]
+        public CTeWsCabecalho Cabecalho;
+
+        [MessageBodyMember(Name = "consultaCadastroResult", Namespace = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro", Order = 0)]
+        public XmlNode Result;
+
+        #endregion Properties
     }
 }

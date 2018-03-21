@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 10-12-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 10-12-2016
 // ***********************************************************************
-// <copyright file="CTeWsCabecalho.cs" company="ACBr.Net">
+// <copyright file="InutilizaoResposta.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,18 +29,16 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Xml.Serialization;
-
 namespace ACBr.Net.CTe.Services
 {
-    [Serializable]
-    public sealed class CTeWsCabecalho
+    public class InutilizaoResposta : CTeResposta<InutilizaoServiceResult>
     {
-        [XmlElement(ElementName = "cUF", Order = 0)]
-        public int CUf { get; set; }
+        #region Constructor
 
-        [XmlElement(ElementName = "versaoDados", Order = 1)]
-        public string VersaoDados { get; set; }
+        public InutilizaoResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs) : base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs)
+        {
+        }
+
+        #endregion Constructor
     }
 }

@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 11-10-2016
 // ***********************************************************************
-// <copyright file="CTeWsCabecalho.cs" company="ACBr.Net">
+// <copyright file="ICadConsultaCadastro.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,18 +29,21 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Xml.Serialization;
+using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace ACBr.Net.CTe.Services
 {
-    [Serializable]
-    public sealed class CTeWsCabecalho
+    [ServiceContract(Namespace = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro")]
+    public interface ICadConsultaCadastro
     {
-        [XmlElement(ElementName = "cUF", Order = 0)]
-        public int CUf { get; set; }
+        [OperationContract(Action = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro/consultaCadastro",
+            ReplyAction = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro/CadConsultaCadastroSoap/consultaCadastroResponse")]
+        [XmlSerializerFormat(SupportFaults = true)]
+        ConsultaCadastroResponse consultaCadastro(ConsultaCadastroRequest request);
 
-        [XmlElement(ElementName = "versaoDados", Order = 1)]
-        public string VersaoDados { get; set; }
+        [OperationContract(Action = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro/consultaCadastro",
+            ReplyAction = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro/CadConsultaCadastroSoap/consultaCadastroResponse")]
+        Task<ConsultaCadastroResponse> consultaCadastroAsync(ConsultaCadastroRequest request);
     }
 }

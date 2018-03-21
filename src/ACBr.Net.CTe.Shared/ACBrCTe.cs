@@ -312,6 +312,46 @@ namespace ACBr.Net.CTe
             }
         }
 
+        /// <summary>
+        /// Metodo para inutilizar uma faixa de numeração do CTe.
+        /// </summary>
+        /// <param name="cnpj"></param>
+        /// <param name="aJustificativa"></param>
+        /// <param name="ano"></param>
+        /// <param name="modelo"></param>
+        /// <param name="serie"></param>
+        /// <param name="numeroInicial"></param>
+        /// <param name="numeroFinal"></param>
+        /// <returns></returns>
+        public InutilizaoResposta Inutilizacao(string cnpj, string aJustificativa, int ano, ModeloCTe modelo, int serie,
+            int numeroInicial, int numeroFinal)
+        {
+            var oldProtocol = ServicePointManager.SecurityProtocol;
+            ServicePointManager.SecurityProtocol = securityProtocol;
+            var cert = Configuracoes.Certificados.ObterCertificado();
+
+            try
+            {
+                Status = StatusACBrCTe.CTeInutilizacao;
+
+                using (var cliente = new CTeInutilizacaoServiceClient(Configuracoes, cert))
+                {
+                    return cliente.Inutilizacao(cnpj, aJustificativa, ano, modelo, serie, numeroInicial, numeroFinal);
+                }
+            }
+            catch (Exception exception)
+            {
+                this.Log().Error("[Inutilizacao]", exception);
+                throw;
+            }
+            finally
+            {
+                cert.Reset();
+                ServicePointManager.SecurityProtocol = oldProtocol;
+                Status = StatusACBrCTe.CTeIdle;
+            }
+        }
+
         #region Override
 
         /// <inheritdoc />

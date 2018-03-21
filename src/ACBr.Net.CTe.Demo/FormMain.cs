@@ -76,6 +76,16 @@ namespace ACBr.Net.CTe.Demo
             txtArquivoServicos.Text = Helpers.OpenFile(@"Arquivo de endereços (*.cte)|*.cte|Todos os Arquivos (*.*)|*.*");
         }
 
+        private void btnPathCTe_Click(object sender, EventArgs e)
+        {
+            txtPathCTe.Text = Helpers.SelectFolder();
+        }
+
+        private void btnPathSalvar_Click(object sender, EventArgs e)
+        {
+            txtArquivosSoap.Text = Helpers.SelectFolder();
+        }
+
         private void btnFindCertificate_Click(object sender, EventArgs e)
         {
             var file = Helpers.OpenFile(@"Arquivo de certificado (*.pfx)|*.pfx|Todos os Arquivos (*.*)|*.*");
@@ -161,6 +171,19 @@ namespace ACBr.Net.CTe.Demo
 
         private void listViewServicos_DoubleClick(object sender, EventArgs e)
         {
+            if (listViewServicos.SelectedItems.Count < 1) return;
+
+            var versao = cbbVersao.GetSelectedValue<CTeVersao>();
+            var uf = cbbUF.GetSelectedValue<DFeCodUF>();
+            var ambiente = cbbAmbiente.GetSelectedValue<DFeTipoAmbiente>();
+            var serviceInfo = CTeServiceManager.Servicos[versao][uf][ambiente];
+
+            var tipo = (ServicoCTe)listViewServicos.SelectedItems[0].Tag;
+            var url = serviceInfo[tipo];
+
+            InputBox.Show($"Endereço {tipo.GetDescription()}", "Digite a url.", ref url);
+
+            if (url != serviceInfo[tipo]) serviceInfo[tipo] = url;
         }
 
         private void btnImportar_Click(object sender, EventArgs e)
@@ -241,7 +264,7 @@ namespace ACBr.Net.CTe.Demo
                 item.SubItems.Add(uf.GetDescription());
                 item.SubItems.Add(tipo.GetDescription());
                 item.SubItems.Add(serviceInfo[tipo]);
-                item.Tag = serviceInfo;
+                item.Tag = tipo;
                 serviceList.Add(item);
             }
 
@@ -256,6 +279,7 @@ namespace ACBr.Net.CTe.Demo
             acbrCTe.Configuracoes.Certificados.Certificado = !txtCertificado.Text.IsEmpty() ? txtCertificado.Text : txtNumeroSerie.Text;
             acbrCTe.Configuracoes.Certificados.Senha = txtSenha.Text;
 
+            acbrCTe.Configuracoes.Arquivos.PathSalvar = txtArquivosSoap.Text;
             acbrCTe.Configuracoes.WebServices.Salvar = chkSalvarSoap.Checked;
             acbrCTe.Configuracoes.WebServices.UF = cbbUfWebservice.GetSelectedValue<DFeCodUF>();
             acbrCTe.Configuracoes.WebServices.Ambiente = rdbProducao.Checked ? DFeTipoAmbiente.Producao : DFeTipoAmbiente.Homologacao;
@@ -264,6 +288,10 @@ namespace ACBr.Net.CTe.Demo
             acbrCTe.Configuracoes.WebServices.ProxyPort = txtProxyPort.Text;
             acbrCTe.Configuracoes.WebServices.ProxyUser = txtProxyUser.Text;
             acbrCTe.Configuracoes.WebServices.ProxyPass = txtProxyPass.Text;
+
+            acbrCTe.Configuracoes.Arquivos.PathSchemas = txtSchemas.Text;
+            acbrCTe.Configuracoes.Arquivos.PathCTe = txtPathCTe.Text;
+            acbrCTe.Configuracoes.Arquivos.ArquivoServicos = txtArquivoServicos.Text;
         }
 
         private void LoadConfig()
@@ -274,15 +302,20 @@ namespace ACBr.Net.CTe.Demo
             txtSenha.Text = config.GetCrypt("Senha", string.Empty);
             txtNumeroSerie.Text = config.Get("NumeroSerie", string.Empty);
 
-            chkSalvarSoap.Checked = config.Get("SalvarSoap", chkSalvarArquivos.Checked);
-            cbbUfWebservice.SetSelectedValue(config.Get("UF", DFeCodUF.MS));
-            rdbProducao.Checked = config.Get("Ambiente", DFeTipoAmbiente.Homologacao) == DFeTipoAmbiente.Producao;
-            rdbHomologacao.Checked = config.Get("Ambiente", DFeTipoAmbiente.Homologacao) == DFeTipoAmbiente.Homologacao;
-            nudTimeOut.Value = config.Get("TimeOut", (int)nudTimeOut.Value);
-            txtProxyHost.Text = config.Get("ProxyHost", txtProxyHost.Text);
-            txtProxyPort.Text = config.Get("ProxyPort", txtProxyPort.Text);
-            txtProxyUser.Text = config.Get("ProxyUser", txtProxyUser.Text);
-            txtProxyPass.Text = config.GetCrypt("ProxyPass", string.Empty);
+            chkSalvarSoap.Checked = config.Get("SalvarSoap", acbrCTe.Configuracoes.WebServices.Salvar);
+            txtArquivosSoap.Text = config.Get("PathSoap", acbrCTe.Configuracoes.Arquivos.PathSalvar);
+            cbbUfWebservice.SetSelectedValue(config.Get("UF", acbrCTe.Configuracoes.WebServices.UF));
+            rdbProducao.Checked = config.Get("Ambiente", acbrCTe.Configuracoes.WebServices.Ambiente) == DFeTipoAmbiente.Producao;
+            rdbHomologacao.Checked = config.Get("Ambiente", acbrCTe.Configuracoes.WebServices.Ambiente) == DFeTipoAmbiente.Homologacao;
+            nudTimeOut.Value = config.Get("TimeOut", (int)acbrCTe.Configuracoes.WebServices.AguardarConsultaRet * 100);
+            txtProxyHost.Text = config.Get("ProxyHost", acbrCTe.Configuracoes.WebServices.ProxyHost);
+            txtProxyPort.Text = config.Get("ProxyPort", acbrCTe.Configuracoes.WebServices.ProxyPort);
+            txtProxyUser.Text = config.Get("ProxyUser", acbrCTe.Configuracoes.WebServices.ProxyUser);
+            txtProxyPass.Text = config.GetCrypt("ProxyPass", acbrCTe.Configuracoes.WebServices.ProxyPass);
+
+            txtSchemas.Text = config.Get("PathSchemas", acbrCTe.Configuracoes.Arquivos.PathSchemas);
+            txtPathCTe.Text = config.Get("PathCTe", acbrCTe.Configuracoes.Arquivos.PathCTe);
+            txtArquivoServicos.Text = config.Get("PathServicos", acbrCTe.Configuracoes.Arquivos.ArquivoServicos);
 
             AplicarConfig();
         }
@@ -294,6 +327,7 @@ namespace ACBr.Net.CTe.Demo
             config.Set("NumeroSerie", txtNumeroSerie.Text);
 
             config.Set("SalvarSoap", chkSalvarSoap.Checked);
+            config.Set("PathSoap", txtArquivosSoap.Text);
             config.Set("UF", (int)cbbUfWebservice.GetSelectedValue<DFeCodUF>());
             config.Set("Ambiente", rdbProducao.Checked ? "1" : "2");
             config.Set("TimeOut", (int)nudTimeOut.Value);
@@ -301,6 +335,10 @@ namespace ACBr.Net.CTe.Demo
             config.Set("ProxyPort", txtProxyPort.Text);
             config.Set("ProxyUser", txtProxyUser.Text);
             config.SetCrypt("ProxyPass", txtProxyPass.Text);
+
+            config.Set("PathSchemas", txtSchemas.Text);
+            config.Set("PathCTe", txtPathCTe.Text);
+            config.Set("PathServicos", txtArquivoServicos.Text);
 
             config.Save();
             AplicarConfig();

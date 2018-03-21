@@ -145,6 +145,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)InfCte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModeloCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeProcEvento.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ConsultaCadastro\ConsultaCadastroResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ConsultaCadastro\ConsultaCadastroRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ConsultaCadastro\ICadConsultaCadastro.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ConsultaCTeResposta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ConsultaStatusResposta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ConsultaCTeRequest.cs" />
@@ -163,8 +166,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\EnviarCTeResposta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\CTeInutilizacaoServiceClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\ICTeInutilizacao.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\infInutRet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\InutilizacaoRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\InutilizacaoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\InutilizaoResposta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\CTeRecepcaoEventoServiceClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\ICTeRecepcaoEvento.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RecepcaoEvento\RecepcaoEventoRequest.cs" />
@@ -187,6 +192,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ServicoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\CTeStatusServicoServiceClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\ICTeStatusServico.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\InutilizaoServiceResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\StatusServiceResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\StatusServicoRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StatusServico\StatusServicoResponse.cs" />

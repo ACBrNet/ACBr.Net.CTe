@@ -50,7 +50,7 @@ namespace ACBr.Net.CTe.Services
             base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
         {
             Schema = SchemaCTe.EnviCTe;
-            ArquivoEnvio = "'env-lot";
+            ArquivoEnvio = "env-lot";
             ArquivoResposta = "rec";
         }
 
@@ -60,6 +60,7 @@ namespace ACBr.Net.CTe.Services
 
         public RecepcaoCTeResposta RecepcaoLote(IEnumerable<CTe> ctes, string loteId)
         {
+            Guard.Against<ArgumentNullException>(ctes == null, nameof(ctes));
             Guard.Against<ArgumentException>(ctes.Count() > 50, "So pode enviar 50 conhecimentos por lote.");
 
             lock (serviceLock)
