@@ -24,10 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ACBr.Net.Core" Version="1.2.1-beta4" />
-    <PackageReference Include="ACBr.Net.DFe.Core" Version="1.2.1-beta6" />
-    <PackageReference Include="Fody" Version="2.4.6" />
-    <PackageReference Include="PropertyChanged.Fody" Version="2.2.9" />
+    <PackageReference Include="ACBr.Net.Core" Version="1.2.1-rc1" />
+    <PackageReference Include="ACBr.Net.DFe.Core" Version="1.2.1-rc1" />
+    <PackageReference Include="Fody" Version="3.0.3" />
+    <PackageReference Include="PropertyChanged.Fody" Version="2.5.3" />
   </ItemGroup>
 
   <Import Project="..\ACBr.Net.CTe.Shared\ACBr.Net.CTe.Shared.projitems" Label="Shared" />

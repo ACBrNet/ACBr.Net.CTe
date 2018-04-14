@@ -122,6 +122,10 @@ namespace ACBr.Net.CTe.Demo
             tbcRespostas.SelectedTab = tabPageRespostas;
         }
 
+        private void btnGerar_Click(object sender, EventArgs e)
+        {
+        }
+
         private void btnConsultarRecibo_Click(object sender, EventArgs e)
         {
             var recibo = "";
@@ -296,7 +300,7 @@ namespace ACBr.Net.CTe.Demo
 
         private void LoadConfig()
         {
-            config = ACBrConfig.CreateOrLoad(Path.Combine(Application.StartupPath, "cte.config"));
+            config = ACBrConfig.CreateOrLoad("cte.config");
 
             txtCertificado.Text = config.Get("Certificado", string.Empty);
             txtSenha.Text = config.GetCrypt("Senha", string.Empty);

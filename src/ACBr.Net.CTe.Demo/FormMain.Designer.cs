@@ -367,6 +367,7 @@
             this.btnGerar.TabIndex = 6;
             this.btnGerar.Text = "Gerar CTe";
             this.btnGerar.UseVisualStyleBackColor = true;
+            this.btnGerar.Click += new System.EventHandler(this.btnGerar_Click);
             // 
             // btnInutilizar
             // 
