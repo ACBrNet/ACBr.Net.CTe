@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-24-2016
+// Created          : 06-22-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 06-22-2018
+// Last Modified On : 06-26-2018
 // ***********************************************************************
-// <copyright file="CTeInfCteSub.cs" company="ACBr.Net">
+// <copyright file="CTeTomadorEPEC.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -37,7 +37,7 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeTomaICMS : GenericClone<CTeTomaICMS>, INotifyPropertyChanged
+    public sealed class CTeTomadorEPEC : GenericClone<CTeTomadorEPEC>, INotifyPropertyChanged
     {
         #region Events
 
@@ -45,34 +45,42 @@ namespace ACBr.Net.CTe
 
         #endregion Events
 
-        #region Propriedades
+        #region Properties
 
-        [DFeElement(TipoCampo.StrNumber, "refCte", Id = "#395", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string RefCte { get; set; }
+        [DFeElement(TipoCampo.Enum, "toma", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeTomador Toma { get; set; }
 
-        [DFeElement("refNF", Id = "#398", Ocorrencia = Ocorrencia.Obrigatoria)]
-        public CTeRefNF RefNF { get; set; }
+        [DFeElement(TipoCampo.StrNumberFill, "CPF", Min = 11, Max = 11, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string CPF { get; set; }
 
-        [DFeElement(TipoCampo.StrNumber, "refNFe", Id = "#397", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string RefNFe { get; set; }
+        [DFeElement(TipoCampo.StrNumberFill, "CNPJ", Min = 14, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string CNPJ { get; set; }
 
-        #endregion Propriedades
+        [DFeElement(TipoCampo.Custom, "IE", Min = 0, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string IE { get; set; }
+
+        #endregion Properties
 
         #region Methods
 
-        private bool ShouldSerializeRefCte()
+        private bool ShouldSerializeCPF()
         {
-            return !RefCte.IsEmpty() && RefNFe.IsEmpty();
+            return CNPJ.IsEmpty();
         }
 
-        private bool ShouldSerializeRefNF()
+        private bool ShouldSerializeCNPJ()
         {
-            return RefCte.IsEmpty() && RefNFe.IsEmpty();
+            return CPF.IsEmpty();
         }
 
-        private bool ShouldSerializeRefNFe()
+        private string SerializeIE()
         {
-            return RefCte.IsEmpty() && !RefNFe.IsEmpty();
+            return IE.Trim().ToUpper() == CTeConst.CTeIEIsento ? IE.Trim().ToUpper() : IE.OnlyNumbers();
+        }
+
+        private object DeserializeIE(string value)
+        {
+            return value;
         }
 
         #endregion Methods

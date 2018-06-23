@@ -80,7 +80,7 @@ namespace ACBr.Net.CTe
         public int NCT { get; set; }
 
         [DFeElement(TipoCampo.DatHorTz, "dhEmi", Id = "#013", Min = 25, Max = 25, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public DateTime DhEmi { get; set; }
+        public DateTimeOffset DhEmi { get; set; }
 
         [DFeElement(TipoCampo.Enum, "tpImp", Id = "#014", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
         public DFeTipoImpressao TpImp { get; set; }

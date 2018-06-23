@@ -29,7 +29,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Reflection;
 using System.Text;
 using ACBr.Net.DFe.Core.Common;
 

@@ -34,7 +34,7 @@ using ACBr.Net.DFe.Core.Attributes;
 namespace ACBr.Net.CTe.Services
 {
     [DFeRoot("retEnviCte", Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public sealed class CTeRecepcaoResult : CTeResultaBase<CTeRecepcaoResult>
+    public sealed class CTeRecepcaoResult : CTeResultBase<CTeRecepcaoResult>
     {
         #region Constructors
 

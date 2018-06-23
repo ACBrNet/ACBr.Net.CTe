@@ -29,13 +29,21 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.ComponentModel;
+using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public class CTeInfCorrecao
+    public class CTeInfCorrecao : GenericClone<CTeInfCorrecao>, INotifyPropertyChanged
     {
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
         #region Properties
 
         [DFeElement(TipoCampo.Str, "grupoAlterado", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]

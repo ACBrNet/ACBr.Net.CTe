@@ -4,7 +4,7 @@
 // Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 06-23-2018
 // ***********************************************************************
 // <copyright file="CTeRecepcaoEventoServiceClient.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -31,43 +31,130 @@
 
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core.Service;
 using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Xml;
+using ACBr.Net.DFe.Core;
+using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Extensions;
 
 namespace ACBr.Net.CTe.Services
 {
-	public sealed class CTeRecepcaoEventoServiceClient : DFeSoap12ServiceClientBase<ICTeRecepcaoEvento>, ICTeRecepcaoEvento
-	{
-		#region Constructors
+    public sealed class CTeRecepcaoEventoServiceClient : CTeServiceClient<ICTeRecepcaoEvento>
+    {
+        #region Constructors
 
-		public CTeRecepcaoEventoServiceClient(string url, TimeSpan? timeOut = null, X509Certificate2 certificado = null) : base(url, timeOut, certificado)
-		{
-		}
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="certificado"></param>
+        public CTeRecepcaoEventoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
+            base(config, ServicoCTe.RecepcaoEvento, certificado)
+        {
+            Schema = SchemaCTe.EventoCTe;
+            ArquivoEnvio = "ped-eve";
+            ArquivoResposta = "eve";
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Methods
+        #region Methods
 
-		public string RecepcaoEvento(CTeWsCabecalho cabecalho, string mensagem)
-		{
-			Guard.Against<ArgumentNullException>(cabecalho == null, nameof(cabecalho));
-			Guard.Against<ArgumentNullException>(mensagem.IsEmpty(), nameof(mensagem));
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="lote"></param>
+        /// <param name="nSeqEvento"></param>
+        /// <param name="chave"></param>
+        /// <param name="cnpj"></param>
+        /// <param name="evento"></param>
+        /// <returns></returns>
+        public RecepcaoEventoResposta RecepcaoEvento(int lote, int nSeqEvento, string chave, string cnpj, IEventoCTe evento)
+        {
+            Guard.Against<ArgumentNullException>(chave.IsEmpty(), nameof(chave));
+            Guard.Against<ArgumentNullException>(cnpj.IsEmpty(), nameof(cnpj));
+            Guard.Against<ArgumentNullException>(lote < 0, nameof(lote));
+            Guard.Against<ArgumentNullException>(nSeqEvento < 0, nameof(nSeqEvento));
+            Guard.Against<ArgumentNullException>(evento == null, nameof(evento));
+            lock (serviceLock)
+            {
+                const DFeSaveOptions saveOptions = DFeSaveOptions.DisableFormatting | DFeSaveOptions.OmitDeclaration;
 
-			var xml = new XmlDocument();
-			xml.LoadXml(mensagem);
+                var date = DateTimeOffset.Now;
+                var xmlEvento = string.Empty;
+                var tpEvento = string.Empty;
+                var versao = Configuracoes.Geral.VersaoDFe.GetDescription();
+                switch (evento)
+                {
+                    case CTeEvCancCTe evtCTe:
+                        xmlEvento = evtCTe.GetXml(saveOptions);
+                        tpEvento = CTeTipoEvento.Cancelamento.GetValue();
+                        GravarEvento(xmlEvento, $"{chave}-can-eve.xml", CTeTipoEvento.Cancelamento, date.DateTime, cnpj);
+                        ValidateMessage(xmlEvento, SchemaCTe.EvCancCTe);
+                        break;
 
-			var inValue = new RecepcaoEventoRequest(cabecalho, xml);
-			var retVal = ((ICTeRecepcaoEvento)(this)).RecepcaoEvento(inValue);
-			return retVal.Result.OuterXml;
-		}
+                    case CteEvCceCTe evtCTe:
+                        xmlEvento = evtCTe.GetXml(saveOptions);
+                        tpEvento = CTeTipoEvento.CartaCorrecao.GetValue();
+                        GravarEvento(xmlEvento, $"{chave}-cce-eve.xml", CTeTipoEvento.CartaCorrecao, date.DateTime, cnpj);
+                        ValidateMessage(xmlEvento, SchemaCTe.EvCCeCTe);
+                        break;
 
-		RecepcaoEventoResponse ICTeRecepcaoEvento.RecepcaoEvento(RecepcaoEventoRequest request)
-		{
-			return Channel.RecepcaoEvento(request);
-		}
+                    case CTeEvEPEC evtCTe:
+                        xmlEvento = evtCTe.GetXml(saveOptions);
+                        tpEvento = CTeTipoEvento.EPEC.GetValue();
+                        GravarEvento(xmlEvento, $"{chave}-epec-eve.xml", CTeTipoEvento.EPEC, date.DateTime, cnpj);
+                        ValidateMessage(xmlEvento, SchemaCTe.EvEPECCTe);
+                        break;
 
-		#endregion Methods
-	}
+                    case CTeEvRegMultimodal evtCTe:
+                        xmlEvento = evtCTe.GetXml(saveOptions);
+                        tpEvento = CTeTipoEvento.RegistroMultiModal.GetValue();
+                        GravarEvento(xmlEvento, $"{chave}-rmulti-eve.xml", CTeTipoEvento.RegistroMultiModal, date.DateTime, cnpj);
+                        ValidateMessage(xmlEvento, SchemaCTe.EvRegMultimodal);
+                        break;
+
+                    case CTeEvPrestDesacordo evtCTe:
+                        xmlEvento = evtCTe.GetXml(saveOptions);
+                        tpEvento = CTeTipoEvento.PrestacaoServicoDesacordo.GetValue();
+                        GravarEvento(xmlEvento, $"{chave}-desa-eve.xml", CTeTipoEvento.PrestacaoServicoDesacordo, date.DateTime, cnpj);
+                        ValidateMessage(xmlEvento, SchemaCTe.EvPrestDesacordo);
+                        break;
+                }
+
+                var request = new StringBuilder();
+                request.Append($"<eventoCTe  xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{versao}\">");
+                request.Append($"<infEvento Id=\"{lote}\">");
+                request.Append($"<cOrgao>{Configuracoes.WebServices.UF.GetValue()}</cOrgao>");
+                request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetValue()}</tpAmb>");
+                request.Append($"<CNPJ>{cnpj}</CNPJ>");
+                request.Append($"<chCTe>{chave}</chCTe>");
+                request.Append($"<dhEvento>{date}</dhEvento>");
+                request.Append($"<tpEvento>{tpEvento}</tpEvento>");
+                request.Append($"<nSeqEvento>{nSeqEvento}</nSeqEvento>");
+                request.Append($"<detEvento versaoEvento=\"{versao}\">");
+                request.Append(xmlEvento);
+                request.Append("</detEvento>");
+                request.Append("</infEvento>");
+                request.Append("</eventoCTe>");
+
+                var dadosMsg = request.ToString();
+                XmlSigning.AssinarXml(dadosMsg, "eventoCTe", "infEvento", ClientCredentials.ClientCertificate.Certificate);
+                ValidateMessage(dadosMsg);
+
+                var doc = new XmlDocument();
+                doc.LoadXml(dadosMsg);
+
+                var inValue = new RecepcaoEventoRequest(DefineHeader(), doc);
+                var retVal = Channel.RecepcaoEvento(inValue);
+
+                var retorno = new RecepcaoEventoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
+                return retorno;
+            }
+        }
+
+        #endregion Methods
+    }
 }

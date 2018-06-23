@@ -4,7 +4,7 @@
 // Created          : 10-12-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-12-2016
+// Last Modified On : 06-22-2018
 // ***********************************************************************
 // <copyright file="CteProc.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -29,6 +29,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.ComponentModel;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
@@ -36,11 +37,17 @@ using ACBr.Net.DFe.Core.Common;
 namespace ACBr.Net.CTe
 {
     [DFeRoot("cteProc", Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public sealed class CteProc : DFeDocument<CteProc>
+    public sealed class CTeProc : DFeDocument<CTeProc>, INotifyPropertyChanged
     {
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
         #region Constructors
 
-        public CteProc()
+        public CTeProc()
         {
             CTe = new CTe();
             ProtCTe = new CTeProtCTe();

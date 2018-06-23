@@ -33,16 +33,17 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using ACBr.Net.Core;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Collection;
 using ACBr.Net.DFe.Core.Common;
-using ACBr.Net.DFe.Core.Document;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class ConhecimentosCollection : DFeCollection<CteProc>
+    public sealed class ConhecimentosCollection : DFeCollection<CTeProc>
     {
         #region Constructors
 
@@ -63,17 +64,17 @@ namespace ACBr.Net.CTe
         /// <summary>
         /// Retorna as CTe não autorizadas.
         /// </summary>
-        public IEnumerable<CTe> NaoAutorizadas
+        public CTe[] NaoAutorizadas
         {
-            get { return this.Where(x => x.ProtCTe.InfProt.NProt.IsEmpty()).Select(x => x.CTe); }
+            get { return this.Where(x => x.ProtCTe.InfProt.NProt.IsEmpty()).Select(x => x.CTe).ToArray(); }
         }
 
         /// <summary>
         /// Retornas as CTe Autorizadas.
         /// </summary>
-        public IEnumerable<CteProc> Autorizados
+        public CTeProc[] Autorizados
         {
-            get { return this.Where(x => !x.ProtCTe.InfProt.NProt.IsEmpty()); }
+            get { return this.Where(x => !x.ProtCTe.InfProt.NProt.IsEmpty()).ToArray(); }
         }
 
         #endregion Properties
@@ -103,8 +104,10 @@ namespace ACBr.Net.CTe
 
             using (var reader = new StreamReader(stream))
             {
-                var conteudo = reader.ReadToEnd();
-                var cteProc = conteudo.Contains("cteProc") ? CteProc.Load(conteudo) : new CteProc { CTe = CTe.Load(conteudo) };
+                var conteudo = reader.ReadLine();
+                Guard.Against<ACBrDFeException>(conteudo.IsEmpty(), "Não foi possivel ler o conteudo.");
+
+                var cteProc = conteudo.Contains("cteProc") ? CTeProc.Load(conteudo) : new CTeProc { CTe = CTe.Load(conteudo) };
                 Add(cteProc);
             }
         }
@@ -141,7 +144,7 @@ namespace ACBr.Net.CTe
             foreach (var cte in NaoAutorizadas)
             {
                 var xml = cte.GetXml(DFeSaveOptions.DisableFormatting);
-                XmlSchemaValidation.ValidarXml(xml, pathSchemaCTe, out var erros, out var _);
+                XmlSchemaValidation.ValidarXml(xml, pathSchemaCTe, out var erros, out _);
 
                 listaErros.AddRange(erros);
 
@@ -181,11 +184,11 @@ namespace ACBr.Net.CTe
                 }
 
                 var pathSchemaModal = Parent.Configuracoes.Arquivos.GetSchema(schema);
-                XmlSchemaValidation.ValidarXml(xmlModal, pathSchemaModal, out var errosModal, out var _);
+                XmlSchemaValidation.ValidarXml(xmlModal, pathSchemaModal, out var errosModal, out _);
                 listaErros.AddRange(errosModal);
             }
 
-            Guard.Against<ACBrDFeException>(listaErros.Any(), "Erros de validação do xml." +
+            Guard.Against<ACBrDFeValidationException>(listaErros.Any(), "Erros de validação do xml." +
                                             $"{(Parent.Configuracoes.Geral.ExibirErroSchema ? Environment.NewLine + listaErros.AsString() : "")}");
         }
 

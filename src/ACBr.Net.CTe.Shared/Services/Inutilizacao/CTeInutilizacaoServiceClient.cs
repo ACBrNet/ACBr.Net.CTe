@@ -4,7 +4,7 @@
 // Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 06-23-2018
 // ***********************************************************************
 // <copyright file="CTeInutilizacaoServiceClient.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -40,7 +40,7 @@ using ACBr.Net.DFe.Core.Extensions;
 
 namespace ACBr.Net.CTe.Services
 {
-    public sealed class CTeInutilizacaoServiceClient : CTeServiceClient<ICTeInutilizacao>, ICTeInutilizacao
+    public sealed class CTeInutilizacaoServiceClient : CTeServiceClient<ICTeInutilizacao>
     {
         #region Constructors
 
@@ -88,20 +88,17 @@ namespace ACBr.Net.CTe.Services
                 XmlSigning.AssinarXml(dadosMsg, "inutCTe", "infInut", ClientCredentials.ClientCertificate.Certificate);
                 ValidateMessage(dadosMsg);
 
+                GravarInutilizacao(dadosMsg, $"{idInutilizacao.OnlyNumbers()}-inut-cte.xml", DateTime.Now, cnpj);
+
                 var xml = new XmlDocument();
                 xml.LoadXml(dadosMsg);
 
                 var inValue = new InutilizacaoRequest(DefineHeader(), xml);
-                var retVal = ((ICTeInutilizacao)(this)).CTeInutilizacao(inValue);
+                var retVal = Channel.CTeInutilizacao(inValue);
 
                 var retorno = new InutilizaoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
                 return retorno;
             }
-        }
-
-        InutilizacaoResponse ICTeInutilizacao.CTeInutilizacao(InutilizacaoRequest request)
-        {
-            return base.Channel.CTeInutilizacao(request);
         }
 
         #endregion Methods

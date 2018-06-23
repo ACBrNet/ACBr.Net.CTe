@@ -99,7 +99,7 @@ namespace ACBr.Net.CTe
 
         private string SerializeIE()
         {
-            return IE.Trim().ToUpper() == CTeStrings.CTeIEIsento ? IE.Trim().ToUpper() : IE.OnlyNumbers();
+            return IE.Trim().ToUpper() == CTeConst.CTeIEIsento ? IE.Trim().ToUpper() : IE.OnlyNumbers();
         }
 
         private object DeserializeIE(string value)
@@ -109,7 +109,7 @@ namespace ACBr.Net.CTe
 
         private string SerializeXNome()
         {
-            return Parent.Ide.TpAmb == DFeTipoAmbiente.Homologacao ? CTeStrings.CTeHomologação : XNome;
+            return Parent.Ide.TpAmb == DFeTipoAmbiente.Homologacao ? CTeConst.CTeHomologação : XNome;
         }
 
         private object DeserializeXNome(string value)

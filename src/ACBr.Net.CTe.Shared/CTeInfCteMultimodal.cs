@@ -36,19 +36,19 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeInfCteMultimodal : GenericClone<CTeInfCteMultimodal>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeInfCTeMultimodal : GenericClone<CTeInfCTeMultimodal>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Properties
 
-		[DFeElement(TipoCampo.Str, "chCTeMultimodal", Id = "#390", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string ChCTeMultimodal { get; set; }
+        [DFeElement(TipoCampo.Str, "chCTeMultimodal", Id = "#390", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string ChCTeMultimodal { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

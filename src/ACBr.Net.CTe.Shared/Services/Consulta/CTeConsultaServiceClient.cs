@@ -39,7 +39,7 @@ using ACBr.Net.DFe.Core.Extensions;
 
 namespace ACBr.Net.CTe.Services
 {
-    public sealed class CTeConsultaServiceClient : CTeServiceClient<ICTeConsulta>, ICTeConsulta
+    public sealed class CTeConsultaServiceClient : CTeServiceClient<ICTeConsulta>
     {
         #region Constructors
 
@@ -75,16 +75,11 @@ namespace ACBr.Net.CTe.Services
                 doc.LoadXml(dadosMsg);
 
                 var inValue = new ConsultaCTeRequest(DefineHeader(), doc);
-                var retVal = ((ICTeConsulta)this).ConsultaCTe(inValue);
+                var retVal = Channel.ConsultaCTe(inValue);
 
                 var retorno = new ConsultaCTeResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
                 return retorno;
             }
-        }
-
-        ConsultaResponse ICTeConsulta.ConsultaCTe(ConsultaCTeRequest request)
-        {
-            return Channel.ConsultaCTe(request);
         }
 
         #endregion Methods

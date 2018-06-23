@@ -4,7 +4,7 @@
 // Created          : 10-14-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-14-2016
+// Last Modified On : 06-22-2018
 // ***********************************************************************
 // <copyright file="CTeToma03.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -29,15 +29,26 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.ComponentModel;
 using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeToma03 : GenericClone<CTeToma03>, ICTeTomador
-	{
-		[DFeElement(TipoCampo.Enum, "toma", Id = "#036", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeTomador Toma { get; set; }
-	}
+    public sealed class CTeToma03 : GenericClone<CTeToma03>, ICTeTomador, INotifyPropertyChanged
+    {
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
+        #region Properties
+
+        [DFeElement(TipoCampo.Enum, "toma", Id = "#036", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeTomador Toma { get; set; }
+
+        #endregion Properties
+    }
 }

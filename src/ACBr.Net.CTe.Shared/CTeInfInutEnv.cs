@@ -4,7 +4,7 @@
 // Created          : 03-15-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-15-2018
+// Last Modified On : 06-22-2018
 // ***********************************************************************
 // <copyright file="CTeInfInutEnv.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -29,6 +29,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.ComponentModel;
 using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
@@ -36,8 +37,14 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeInfInutEnv : GenericClone<CTeInfInutEnv>
+    public sealed class CTeInfInutEnv : GenericClone<CTeInfInutEnv>, INotifyPropertyChanged
     {
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
         #region Constructors
 
         public CTeInfInutEnv()

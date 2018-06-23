@@ -29,6 +29,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.CTe.Services;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
@@ -50,16 +51,14 @@ namespace ACBr.Net.CTe
 
         #region Properties
 
-        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string Versao { get; set; }
+        [DFeAttribute(TipoCampo.Enum, "versao", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
 
         [DFeAttribute(TipoCampo.Str, "ipTransmissor", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string IpTransmissor { get; set; }
 
-        [DFeElement("eventoCTe", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeEventoCTe EventoCTe { get; set; }
 
-        [DFeElement("retEventoCTe", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeRetEventoCTe RetEventoCTe { get; set; }
 
         #endregion Properties

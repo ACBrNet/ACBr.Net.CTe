@@ -4,7 +4,7 @@
 // Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-22-2017
+// Last Modified On : 06-22-2018
 // ***********************************************************************
 // <copyright file="CTeRetCancCte.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -29,6 +29,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.ComponentModel;
 using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Document;
@@ -36,28 +37,34 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeRetCancCte : GenericClone<CTeRetCancCte>
-	{
-		#region Constructors
+    public sealed class CTeRetCancCte : GenericClone<CTeRetCancCte>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public CTeRetCancCte()
-		{
-			InfCanc = new CTeInfCanc();
-			Signature = new DFeSignature();
-		}
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Constructors
+        #endregion Events
 
-		#region Properties
+        #region Constructors
 
-		[DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Versao { get; set; }
+        public CTeRetCancCte()
+        {
+            InfCanc = new CTeInfCanc();
+            Signature = new DFeSignature();
+        }
 
-		[DFeElement("infCanc", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeInfCanc InfCanc { get; set; }
+        #endregion Constructors
 
-		public DFeSignature Signature { get; set; }
+        #region Properties
 
-		#endregion Properties
-	}
+        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Versao { get; set; }
+
+        [DFeElement("infCanc", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeInfCanc InfCanc { get; set; }
+
+        public DFeSignature Signature { get; set; }
+
+        #endregion Properties
+    }
 }

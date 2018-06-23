@@ -29,15 +29,27 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.ComponentModel;
 using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public class CTeEvCancCTe : IEventoCTe
+    [DFeRoot("evCancCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeEvCancCTe : DFeDocument<CTeEvCancCTe>, IEventoCTe, INotifyPropertyChanged
     {
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
         #region Constructors
 
+        /// <summary>
+		/// Inicializa uma nova instância da classe <see cref="CTeEvCancCTe"/> class.
+		/// </summary>
         public CTeEvCancCTe()
         {
             DescEvento = "Cancelamento";
@@ -47,6 +59,9 @@ namespace ACBr.Net.CTe
 
         #region Properties
 
+        /// <summary>
+        /// Define/retorna a descrição do evento, não alterar.
+        /// </summary>
         [DFeElement(TipoCampo.Str, "descEvento", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string DescEvento { get; set; }
 

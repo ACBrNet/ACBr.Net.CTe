@@ -31,11 +31,11 @@
 
 namespace ACBr.Net.CTe.Services
 {
-    public sealed class CTeRetRecepcaoResposta : CTeResposta<CTeRetRecepcaoResult>
+    public sealed class RetRecepcaoResposta : CTeResposta<CTeRetRecepcaoResult>
     {
         #region Constructor
 
-        public CTeRetRecepcaoResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs) : base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs)
+        public RetRecepcaoResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs) : base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs)
         {
         }
 

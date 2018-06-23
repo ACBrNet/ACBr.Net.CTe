@@ -42,7 +42,7 @@ using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe.Services
 {
-    public sealed class CTeRecepcaoServiceClient : CTeServiceClient<ICteRecepcao>, ICteRecepcao
+    public sealed class CTeRecepcaoServiceClient : CTeServiceClient<ICteRecepcao>
     {
         #region Constructors
 
@@ -58,10 +58,11 @@ namespace ACBr.Net.CTe.Services
 
         #region Methods
 
-        public RecepcaoCTeResposta RecepcaoLote(IEnumerable<CTe> ctes, string loteId)
+        public RecepcaoCTeResposta RecepcaoLote(CTe[] ctes, string loteId)
         {
             Guard.Against<ArgumentNullException>(ctes == null, nameof(ctes));
-            Guard.Against<ArgumentException>(ctes.Count() > 50, "So pode enviar 50 conhecimentos por lote.");
+            Guard.Against<ArgumentException>(ctes.Length < 1, "Precisa de pelo menos 1 conhecimento por lote.");
+            Guard.Against<ArgumentException>(ctes.Length > 50, "So pode enviar 50 conhecimentos por lote.");
 
             lock (serviceLock)
             {
@@ -76,7 +77,7 @@ namespace ACBr.Net.CTe.Services
                 foreach (var cte in ctes)
                 {
                     var cteXml = cte.GetXml(saveOptions);
-                    GravarCTe(cteXml, cte.GetXmlName(), cte.InfCte.Ide.DhEmi, cte.InfCte.Emit.CNPJ, cte.InfCte.Ide.Mod);
+                    GravarCTe(cteXml, cte.GetXmlName(), cte.InfCte.Ide.DhEmi.DateTime, cte.InfCte.Emit.CNPJ, cte.InfCte.Ide.Mod);
                     request.Append(cteXml);
                 }
 
@@ -85,7 +86,7 @@ namespace ACBr.Net.CTe.Services
                 var dadosMsg = request.ToString();
 
                 Guard.Against<ACBrDFeException>(dadosMsg.Length > (500 * 1024),
-                    $"Tamanho do XML de Dados superior a 500 Kbytes. Tamanho atual: {Math.Truncate(dadosMsg.Length / 1024M)} Kbytes");
+                    $"Tamanho do XML de Dados superior a 500 Kbytes. Tamanho atual: {(dadosMsg.Length / 1024M).Trunc()} Kbytes");
 
                 ValidateMessage(dadosMsg);
 
@@ -93,15 +94,10 @@ namespace ACBr.Net.CTe.Services
                 doc.LoadXml(dadosMsg);
 
                 var inValue = new RecepcaoRequest(DefineHeader(), doc);
-                var retVal = ((ICteRecepcao)this).RecepcaoLote(inValue);
+                var retVal = Channel.RecepcaoLote(inValue);
                 var retorno = new RecepcaoCTeResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
                 return retorno;
             }
-        }
-
-        RecepcaoResponse ICteRecepcao.RecepcaoLote(RecepcaoRequest request)
-        {
-            return Channel.RecepcaoLote(request);
         }
 
         #endregion Methods

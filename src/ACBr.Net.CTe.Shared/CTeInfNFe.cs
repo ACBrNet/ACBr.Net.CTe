@@ -4,7 +4,7 @@
 // Created          : 10-15-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-16-2016
+// Last Modified On : 06-22-2018
 // ***********************************************************************
 // <copyright file="CTeInfNFe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -34,35 +34,42 @@ using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Collection;
 using ACBr.Net.DFe.Core.Serializer;
 using System;
+using System.ComponentModel;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeInfNFe : GenericClone<CTeInfNFe>, ICTeInfDoc
-	{
-		#region Constructors
+    public sealed class CTeInfNFe : GenericClone<CTeInfNFe>, ICTeInfDoc, INotifyPropertyChanged
+    {
+        #region Events
 
-		public CTeInfNFe()
-		{
-			Infos = new DFeCollection<IInfoUnidade>();
-		}
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Constructors
+        #endregion Events
 
-		#region Propriedades
+        #region Constructors
 
-		[DFeElement(TipoCampo.Str, "chave", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Chave { get; set; }
+        public CTeInfNFe()
+        {
+            Infos = new DFeCollection<IInfoUnidade>();
+        }
 
-		[DFeElement(TipoCampo.Str, "PIN", Min = 2, Max = 9, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string PIN { get; set; }
+        #endregion Constructors
 
-		[DFeElement(TipoCampo.Dat, "dPrev", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DateTime? DPrev { get; set; }
+        #region Propriedades
 
-		[DFeItem(typeof(CTeTUnidCarga), "infUnidCarga")]
-		[DFeItem(typeof(CTeUnidadeTransp), "infUnidTransp")]
-		public DFeCollection<IInfoUnidade> Infos { get; set; }
+        [DFeElement(TipoCampo.Str, "chave", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Chave { get; set; }
 
-		#endregion Propriedades
-	}
+        [DFeElement(TipoCampo.Str, "PIN", Min = 2, Max = 9, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string PIN { get; set; }
+
+        [DFeElement(TipoCampo.Dat, "dPrev", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DateTime? DPrev { get; set; }
+
+        [DFeItem(typeof(CTeTUnidCarga), "infUnidCarga")]
+        [DFeItem(typeof(CTeUnidadeTransp), "infUnidTransp")]
+        public DFeCollection<IInfoUnidade> Infos { get; set; }
+
+        #endregion Propriedades
+    }
 }

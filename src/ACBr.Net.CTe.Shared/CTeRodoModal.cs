@@ -71,7 +71,7 @@ namespace ACBr.Net.CTe
         private string SerializeRNTRC()
         {
             ;
-            return RNTRC.Trim().ToUpper() == CTeStrings.CTeIEIsento ? RNTRC.Trim().ToUpper() : RNTRC.OnlyNumbers();
+            return RNTRC.Trim().ToUpper() == CTeConst.CTeIEIsento ? RNTRC.Trim().ToUpper() : RNTRC.OnlyNumbers();
         }
 
         private object DeserializeRNTRC(string value)

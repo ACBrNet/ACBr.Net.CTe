@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-24-2016
+// Created          : 06-22-2018
 //
 // Last Modified By : RFTD
 // Last Modified On : 06-22-2018
 // ***********************************************************************
-// <copyright file="CTeInfCteSub.cs" company="ACBr.Net">
+// <copyright file="CTeEvRegMultimodal.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -30,14 +30,14 @@
 // ***********************************************************************
 
 using System.ComponentModel;
-using ACBr.Net.Core.Extensions;
-using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeTomaICMS : GenericClone<CTeTomaICMS>, INotifyPropertyChanged
+    [DFeRoot("evRegMultimodal", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeEvRegMultimodal : DFeDocument<CTeEvRegMultimodal>, IEventoCTe, INotifyPropertyChanged
     {
         #region Events
 
@@ -45,36 +45,32 @@ namespace ACBr.Net.CTe
 
         #endregion Events
 
-        #region Propriedades
+        #region Constructors
 
-        [DFeElement(TipoCampo.StrNumber, "refCte", Id = "#395", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string RefCte { get; set; }
-
-        [DFeElement("refNF", Id = "#398", Ocorrencia = Ocorrencia.Obrigatoria)]
-        public CTeRefNF RefNF { get; set; }
-
-        [DFeElement(TipoCampo.StrNumber, "refNFe", Id = "#397", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string RefNFe { get; set; }
-
-        #endregion Propriedades
-
-        #region Methods
-
-        private bool ShouldSerializeRefCte()
+        /// <summary>
+        /// Inicializa uma nova instância da classe <see cref="CTeEvRegMultimodal"/> class.
+        /// </summary>
+        public CTeEvRegMultimodal()
         {
-            return !RefCte.IsEmpty() && RefNFe.IsEmpty();
+            DescEvento = "Registro Multimodal";
         }
 
-        private bool ShouldSerializeRefNF()
-        {
-            return RefCte.IsEmpty() && RefNFe.IsEmpty();
-        }
+        #endregion Constructors
 
-        private bool ShouldSerializeRefNFe()
-        {
-            return RefCte.IsEmpty() && !RefNFe.IsEmpty();
-        }
+        #region Properties
 
-        #endregion Methods
+        /// <summary>
+        /// Define/retorna a descrição do evento, não alterar.
+        /// </summary>
+        [DFeElement(TipoCampo.Str, "descEvento", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string DescEvento { get; set; }
+
+        [DFeElement(TipoCampo.Str, "xRegistro", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Registro { get; set; }
+
+        [DFeElement(TipoCampo.Str, "nDoc", Min = 0, Max = 255, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string NDoc { get; set; }
+
+        #endregion Properties
     }
 }

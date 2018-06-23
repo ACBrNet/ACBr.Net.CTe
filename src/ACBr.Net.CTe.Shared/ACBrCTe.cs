@@ -35,13 +35,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
-
-#if !NETSTANDARD2_0
-
-using System.Drawing;
-
-#endif
-
 using ACBr.Net.Core;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
@@ -49,6 +42,12 @@ using ACBr.Net.Core.Logging;
 using ACBr.Net.CTe.Services;
 using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Common;
+
+#if !NETSTANDARD2_0
+
+using System.Drawing;
+
+#endif
 
 namespace ACBr.Net.CTe
 {
@@ -61,7 +60,7 @@ namespace ACBr.Net.CTe
     {
         #region Fields
 
-        private StatusACBrCTe status;
+        private StatusCTe status;
         private SecurityProtocolType securityProtocol;
 
         #endregion Fields
@@ -92,7 +91,7 @@ namespace ACBr.Net.CTe
         /// <summary>
         /// Retorna a situação do componente.
         /// </summary>
-        public StatusACBrCTe Status
+        public StatusCTe Status
         {
             get => status;
             internal set
@@ -125,7 +124,7 @@ namespace ACBr.Net.CTe
         /// <param name="lote">Número do lote.</param>
         /// <param name="imprimir">True se deve imprimir os CTe retornado com sucesso.</param>
         /// <returns></returns>
-        public EnviarCTeResposta Enviar(string lote, bool imprimir)
+        public EnviarCTeResposta Enviar(string lote, bool imprimir = true)
         {
             var oldProtocol = ServicePointManager.SecurityProtocol;
             ServicePointManager.SecurityProtocol = securityProtocol;
@@ -138,7 +137,7 @@ namespace ACBr.Net.CTe
 
             try
             {
-                Status = StatusACBrCTe.CTeRecepcao;
+                Status = StatusCTe.Recepcao;
                 using (var cliente = new CTeRecepcaoServiceClient(Configuracoes, cert))
                 {
                     recepcao = cliente.RecepcaoLote(Conhecimentos.NaoAutorizadas, lote);
@@ -153,7 +152,7 @@ namespace ACBr.Net.CTe
             {
                 cert.Reset();
                 ServicePointManager.SecurityProtocol = oldProtocol;
-                Status = StatusACBrCTe.CTeIdle;
+                Status = StatusCTe.EmEspera;
             }
 
             Thread.Sleep((int)Configuracoes.WebServices.AguardarConsultaRet);
@@ -171,7 +170,7 @@ namespace ACBr.Net.CTe
         /// </summary>
         /// <param name="recibo"></param>
         /// <returns></returns>
-        public CTeRetRecepcaoResposta ConsultaRecibo(string recibo)
+        public RetRecepcaoResposta ConsultaRecibo(string recibo)
         {
             Guard.Against<ArgumentException>(recibo.IsEmpty(), nameof(recibo));
 
@@ -181,8 +180,8 @@ namespace ACBr.Net.CTe
 
             try
             {
-                Status = StatusACBrCTe.CTeRetRecepcao;
-                CTeRetRecepcaoResposta retRecepcao;
+                Status = StatusCTe.RetRecepcao;
+                RetRecepcaoResposta retRecepcao;
                 using (var cliente = new CTeRetRecepcaoServiceClient(Configuracoes, cert))
                 {
                     var tentativas = 0;
@@ -213,7 +212,7 @@ namespace ACBr.Net.CTe
                     if (!Configuracoes.Arquivos.Salvar) continue;
                     if (Configuracoes.Arquivos.SalvarApenasCTeProcessados && !cteProc.Processado) continue;
 
-                    var data = Configuracoes.Arquivos.EmissaoPathCTe ? cteProc.CTe.InfCte.Ide.DhEmi : DateTime.Now;
+                    var data = Configuracoes.Arquivos.EmissaoPathCTe ? cteProc.CTe.InfCte.Ide.DhEmi.DateTime : DateTime.Now;
                     var pathArquivo = Configuracoes.Arquivos.GetPathCTe(data, cteProc.CTe.InfCte.Emit.CNPJ, cteProc.CTe.InfCte.Ide.Mod);
                     var nomeArquivo = $"{cteProc.CTe.InfCte.Id}-cte.xml";
 
@@ -231,7 +230,7 @@ namespace ACBr.Net.CTe
             {
                 cert.Reset();
                 ServicePointManager.SecurityProtocol = oldProtocol;
-                Status = StatusACBrCTe.CTeIdle;
+                Status = StatusCTe.EmEspera;
             }
         }
 
@@ -249,7 +248,7 @@ namespace ACBr.Net.CTe
 
             try
             {
-                Status = StatusACBrCTe.CTeConsulta;
+                Status = StatusCTe.Consulta;
 
                 using (var cliente = new CTeConsultaServiceClient(Configuracoes, cert))
                 {
@@ -276,7 +275,7 @@ namespace ACBr.Net.CTe
             {
                 cert.Reset();
                 ServicePointManager.SecurityProtocol = oldProtocol;
-                Status = StatusACBrCTe.CTeIdle;
+                Status = StatusCTe.EmEspera;
             }
         }
 
@@ -292,7 +291,7 @@ namespace ACBr.Net.CTe
 
             try
             {
-                Status = StatusACBrCTe.CTeStatusServico;
+                Status = StatusCTe.StatusServico;
 
                 using (var cliente = new CTeStatusServicoServiceClient(Configuracoes, cert))
                 {
@@ -308,7 +307,7 @@ namespace ACBr.Net.CTe
             {
                 cert.Reset();
                 ServicePointManager.SecurityProtocol = oldProtocol;
-                Status = StatusACBrCTe.CTeIdle;
+                Status = StatusCTe.EmEspera;
             }
         }
 
@@ -332,7 +331,7 @@ namespace ACBr.Net.CTe
 
             try
             {
-                Status = StatusACBrCTe.CTeInutilizacao;
+                Status = StatusCTe.Inutilizacao;
 
                 using (var cliente = new CTeInutilizacaoServiceClient(Configuracoes, cert))
                 {
@@ -348,7 +347,44 @@ namespace ACBr.Net.CTe
             {
                 cert.Reset();
                 ServicePointManager.SecurityProtocol = oldProtocol;
-                Status = StatusACBrCTe.CTeIdle;
+                Status = StatusCTe.EmEspera;
+            }
+        }
+
+        /// <summary>
+        /// Metodo para enviar eventos da CTe.
+        /// </summary>
+        /// <param name="lote"></param>
+        /// <param name="nSeqEvento"></param>
+        /// <param name="chave"></param>
+        /// <param name="cnpj"></param>
+        /// <param name="evento"></param>
+        /// <returns></returns>
+        public RecepcaoEventoResposta EnviarEvento(int lote, int nSeqEvento, string chave, string cnpj, IEventoCTe evento)
+        {
+            var oldProtocol = ServicePointManager.SecurityProtocol;
+            ServicePointManager.SecurityProtocol = securityProtocol;
+            var cert = Configuracoes.Certificados.ObterCertificado();
+
+            try
+            {
+                Status = StatusCTe.Evento;
+
+                using (var cliente = new CTeRecepcaoEventoServiceClient(Configuracoes, cert))
+                {
+                    return cliente.RecepcaoEvento(lote, nSeqEvento, chave, cnpj, evento);
+                }
+            }
+            catch (Exception exception)
+            {
+                this.Log().Error("[EnviarEvento]", exception);
+                throw;
+            }
+            finally
+            {
+                cert.Reset();
+                ServicePointManager.SecurityProtocol = oldProtocol;
+                Status = StatusCTe.EmEspera;
             }
         }
 
@@ -357,7 +393,7 @@ namespace ACBr.Net.CTe
         /// <inheritdoc />
         protected override void OnInitialize()
         {
-            status = StatusACBrCTe.CTeIdle;
+            status = StatusCTe.EmEspera;
             securityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             Configuracoes = new CTeConfig(this);
             Conhecimentos = new ConhecimentosCollection(this);

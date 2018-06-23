@@ -31,76 +31,76 @@ namespace ACBr.Net.CTe.Demo
 
         #region Methods
 
-        public static async void ShowStatus(StatusACBrCTe status)
+        public static async void ShowStatus(StatusCTe status)
         {
             switch (status)
             {
-                case StatusACBrCTe.CTeIdle:
+                case StatusCTe.EmEspera:
                     instance?.Invoke(new Action(() => instance?.Close()));
                     instance = null;
                     return;
 
-                case StatusACBrCTe.CTeStatusServico:
+                case StatusCTe.StatusServico:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Verificando Status do servico...";
                     break;
 
-                case StatusACBrCTe.CTeRecepcao:
+                case StatusCTe.Recepcao:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Enviando dados do CTe...";
                     break;
 
-                case StatusACBrCTe.CTeRetRecepcao:
+                case StatusCTe.RetRecepcao:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Recebendo dados do CTe...";
                     break;
 
-                case StatusACBrCTe.CTeConsulta:
+                case StatusCTe.Consulta:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Consultando CTe...";
                     break;
 
-                case StatusACBrCTe.CTeCancelamento:
+                case StatusCTe.Cancelamento:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Enviando cancelamento de CTe...";
                     break;
 
-                case StatusACBrCTe.CTeInutilizacao:
+                case StatusCTe.Inutilizacao:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Enviando pedido de Inutilização...";
                     break;
 
-                case StatusACBrCTe.CTeRecibo:
+                case StatusCTe.Recibo:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Consultando Recibo de Lote...";
                     break;
 
-                case StatusACBrCTe.CTeCadastro:
+                case StatusCTe.Cadastro:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Consultando Cadastro...";
                     break;
 
-                case StatusACBrCTe.CTeEmail:
+                case StatusCTe.Email:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Enviando Email...";
                     break;
 
-                case StatusACBrCTe.CTeCCe:
+                case StatusCTe.CCe:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Enviando CCe...";
                     break;
 
-                case StatusACBrCTe.CTeEvento:
+                case StatusCTe.Evento:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Enviando Evento...";
                     break;
 
-                case StatusACBrCTe.CTeDistDFeInt:
+                case StatusCTe.DistDFeInt:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Consultando Distribuição DFe...";
                     break;
 
-                case StatusACBrCTe.CTeEnvioWebService:
+                case StatusCTe.EnvioWebService:
                     instance = new FormStatus();
                     instance.lblMenssagem.Text = @"Enviando para o webservice...";
                     break;

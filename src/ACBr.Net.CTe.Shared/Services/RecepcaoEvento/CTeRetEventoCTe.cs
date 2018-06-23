@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-24-2016
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 06-22-2018
+// Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="CTeInfCteSub.cs" company="ACBr.Net">
+// <copyright file="CTeRetEventoCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,52 +29,36 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ComponentModel;
-using ACBr.Net.Core.Extensions;
-using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Services
 {
-    public sealed class CTeTomaICMS : GenericClone<CTeTomaICMS>, INotifyPropertyChanged
+    [DFeRoot("retEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeRetEventoCTe : DFeDocument<CTeRetEventoCTe>
     {
-        #region Events
+        #region Constructors
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Events
-
-        #region Propriedades
-
-        [DFeElement(TipoCampo.StrNumber, "refCte", Id = "#395", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string RefCte { get; set; }
-
-        [DFeElement("refNF", Id = "#398", Ocorrencia = Ocorrencia.Obrigatoria)]
-        public CTeRefNF RefNF { get; set; }
-
-        [DFeElement(TipoCampo.StrNumber, "refNFe", Id = "#397", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string RefNFe { get; set; }
-
-        #endregion Propriedades
-
-        #region Methods
-
-        private bool ShouldSerializeRefCte()
+        public CTeRetEventoCTe()
         {
-            return !RefCte.IsEmpty() && RefNFe.IsEmpty();
+            InfEvento = new CTeRetInfEvento();
+            Signature = new DFeSignature();
         }
 
-        private bool ShouldSerializeRefNF()
-        {
-            return RefCte.IsEmpty() && RefNFe.IsEmpty();
-        }
+        #endregion Constructors
 
-        private bool ShouldSerializeRefNFe()
-        {
-            return RefCte.IsEmpty() && !RefNFe.IsEmpty();
-        }
+        #region Properties
 
-        #endregion Methods
+        [DFeAttribute(TipoCampo.Enum, "versao", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
+
+        [DFeElement("infEvento", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeRetInfEvento InfEvento { get; set; }
+
+        public DFeSignature Signature { get; set; }
+
+        #endregion Properties
     }
 }

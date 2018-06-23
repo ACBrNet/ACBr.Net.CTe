@@ -50,8 +50,9 @@ namespace ACBr.Net.CTe
 
         #region Constructor
 
+        /// <inheritdoc />
         /// <summary>
-        /// Inicializa uma nova instancia da classe <see cref="CTeConfigArquivos"/>.
+        /// Inicializa uma nova instancia da classe <see cref="T:ACBr.Net.CTe.CTeConfigArquivos" />.
         /// </summary>
         internal CTeConfigArquivos(ACBrCTe parent) : base(parent)
         {
@@ -83,8 +84,16 @@ namespace ACBr.Net.CTe
         [Browsable(true)]
         public string PathEvento { get; set; }
 
+        /// <summary>
+        ///
+        /// </summary>
+        [Browsable(true)]
         public bool EmissaoPathCTe { get; set; }
 
+        /// <summary>
+        ///
+        /// </summary>
+        [Browsable(true)]
         public bool SalvarApenasCTeProcessados { get; set; }
 
         #endregion Properties

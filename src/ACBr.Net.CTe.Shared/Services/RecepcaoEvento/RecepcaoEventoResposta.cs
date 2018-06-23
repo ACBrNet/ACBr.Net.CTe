@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-22-2017
+// Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-22-2017
+// Last Modified On : 03-05-2018
 // ***********************************************************************
-// <copyright file="CTeResultaBase.cs" company="ACBr.Net">
+// <copyright file="ConsultaCTeResposta.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,30 +29,16 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.DFe.Core.Attributes;
-using ACBr.Net.DFe.Core.Common;
-using ACBr.Net.DFe.Core.Serializer;
-
 namespace ACBr.Net.CTe.Services
 {
-    public abstract class CTeResultaBase<T> : DFeDocument<T> where T : class
+    public class RecepcaoEventoResposta : CTeResposta<CTeRetEventoCTe>
     {
-        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string Versao { get; set; }
+        #region Constructor
 
-        [DFeElement(TipoCampo.Enum, "tpAmb", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public DFeTipoAmbiente TipoAmbiente { get; set; }
+        public RecepcaoEventoResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs) : base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs)
+        {
+        }
 
-        [DFeElement(TipoCampo.Str, "verAplic", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string VersaoAplicacao { get; set; }
-
-        [DFeElement(TipoCampo.Int, "cStat", Min = 1, Max = 3, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public int CStat { get; set; }
-
-        [DFeElement(TipoCampo.Str, "xMotivo", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string Motivo { get; set; }
-
-        [DFeElement(TipoCampo.Enum, "cUF", Min = 1, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public DFeCodUF UF { get; set; }
+        #endregion Constructor
     }
 }

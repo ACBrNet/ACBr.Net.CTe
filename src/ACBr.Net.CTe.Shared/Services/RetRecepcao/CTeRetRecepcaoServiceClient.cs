@@ -35,14 +35,11 @@ using System.Text;
 using System.Xml;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core;
-using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Extensions;
-using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-    public sealed class CTeRetRecepcaoServiceClient : CTeServiceClient<ICTeRetRecepcao>, ICTeRetRecepcao
+    public sealed class CTeRetRecepcaoServiceClient : CTeServiceClient<ICTeRetRecepcao>
     {
         #region Constructors
 
@@ -58,7 +55,7 @@ namespace ACBr.Net.CTe.Services
 
         #region Methods
 
-        public CTeRetRecepcaoResposta RetRecepcao(string recibo)
+        public RetRecepcaoResposta RetRecepcao(string recibo)
         {
             Guard.Against<ArgumentNullException>(recibo.IsEmpty(), nameof(recibo));
 
@@ -78,15 +75,10 @@ namespace ACBr.Net.CTe.Services
                 doc.LoadXml(dadosMsg);
 
                 var inValue = new RetRecepcaoRequest(DefineHeader(), doc);
-                var retVal = ((ICTeRetRecepcao)this).RetRecepcao(inValue);
-                var retorno = new CTeRetRecepcaoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
+                var retVal = Channel.RetRecepcao(inValue);
+                var retorno = new RetRecepcaoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
                 return retorno;
             }
-        }
-
-        RetRecepcaoResponse ICTeRetRecepcao.RetRecepcao(RetRecepcaoRequest request)
-        {
-            return base.Channel.RetRecepcao(request);
         }
 
         #endregion Methods

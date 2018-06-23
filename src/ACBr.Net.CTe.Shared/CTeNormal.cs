@@ -49,7 +49,7 @@ namespace ACBr.Net.CTe
 
 		public CTeNormal()
 		{
-			InfServVinc = new DFeCollection<CTeInfCteMultimodal>();
+			InfServVinc = new DFeCollection<CTeInfCTeMultimodal>();
 			InfGlobalizado = new CTeInfGlobalizado();
 			InfCteSub = new CTeInfCteSub();
 			Cobr = new CTeCobranca();
@@ -93,8 +93,8 @@ namespace ACBr.Net.CTe
 		public CTeInfGlobalizado InfGlobalizado { get; set; }
 
 		[DFeElement("infServVinc", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		[DFeItem(typeof(CTeInfCteMultimodal), "infCTeMultimodal")]
-		public DFeCollection<CTeInfCteMultimodal> InfServVinc { get; set; }
+		[DFeItem(typeof(CTeInfCTeMultimodal), "infCTeMultimodal")]
+		public DFeCollection<CTeInfCTeMultimodal> InfServVinc { get; set; }
 
 		#endregion Propriedades
 

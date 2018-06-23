@@ -36,7 +36,7 @@ using ACBr.Net.DFe.Core.Serializer;
 namespace ACBr.Net.CTe.Services
 {
     [DFeRoot("retConsStatServCte", Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public sealed class StatusServiceResult : CTeResultaBase<StatusServiceResult>
+    public sealed class StatusServiceResult : CTeResultBase<StatusServiceResult>
     {
         [DFeElement(TipoCampo.DatHorTz, "dhRecbto", Min = 19, Max = 19, Ocorrencia = Ocorrencia.Obrigatoria)]
         public DateTimeOffset DhRecbto { get; set; }

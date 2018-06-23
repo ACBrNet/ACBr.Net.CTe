@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 07-23-2016
+// Created          : 03-09-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 07-23-2016
+// Last Modified On : 03-09-2018
 // ***********************************************************************
-// <copyright file="StatusACBrCTe.cs" company="ACBr.Net">
+// <copyright file="EnviarCTeResposta.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,23 +29,18 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace ACBr.Net.CTe
+using ACBr.Net.Core.Generics;
+
+namespace ACBr.Net.CTe.Services
 {
-    public enum StatusACBrCTe
+    public sealed class EnviarCTeResposta : GenericClone<EnviarCTeResposta>
     {
-        CTeIdle,
-        CTeStatusServico,
-        CTeRecepcao,
-        CTeRetRecepcao,
-        CTeConsulta,
-        CTeCancelamento,
-        CTeInutilizacao,
-        CTeRecibo,
-        CTeCadastro,
-        CTeEmail,
-        CTeCCe,
-        CTeEvento,
-        CTeDistDFeInt,
-        CTeEnvioWebService
+        #region Properties
+
+        public RecepcaoCTeResposta RecepcaoResposta { get; set; }
+
+        public RetRecepcaoResposta RetRecepcaoResposta { get; set; }
+
+        #endregion Properties
     }
 }

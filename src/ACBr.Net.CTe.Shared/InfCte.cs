@@ -4,7 +4,7 @@
 // Created          : 10-12-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-12-2016
+// Last Modified On : 06-22-2018
 // ***********************************************************************
 // <copyright file="InfCte.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -31,13 +31,14 @@
 
 using System.ComponentModel;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Collection;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class InfCte : INotifyPropertyChanged
+    public sealed class InfCte : GenericClone<InfCte>, INotifyPropertyChanged
     {
         #region Events
 

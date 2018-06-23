@@ -33,12 +33,11 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Extensions;
 
 namespace ACBr.Net.CTe.Services
 {
-    public sealed class CTeStatusServicoServiceClient : CTeServiceClient<ICTeStatusServico>, ICTeStatusServico
+    public sealed class CTeStatusServicoServiceClient : CTeServiceClient<ICTeStatusServico>
     {
         #region Constructors
 
@@ -75,16 +74,11 @@ namespace ACBr.Net.CTe.Services
                 doc.LoadXml(dadosMsg);
 
                 var inValue = new StatusServicoRequest(DefineHeader(), doc);
-                var retVal = ((ICTeStatusServico)this).StatusServico(inValue);
+                var retVal = Channel.StatusServico(inValue);
 
                 var retorno = new ConsultaStatusResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
                 return retorno;
             }
-        }
-
-        StatusServicoResponse ICTeStatusServico.StatusServico(StatusServicoRequest request)
-        {
-            return Channel.StatusServico(request);
         }
 
         #endregion Methods

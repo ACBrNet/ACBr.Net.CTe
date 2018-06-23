@@ -34,14 +34,14 @@ using ACBr.Net.DFe.Core.Attributes;
 
 namespace ACBr.Net.CTe
 {
-	public enum CTeVersao
-	{
-		[DFeEnum("2.00")]
-		[Description("2.00")]
-		v200,
+    public enum CTeVersao
+    {
+        [DFeEnum("2.00")]
+        [Description("2.00")]
+        v200,
 
-		[DFeEnum("3.00")]
-		[Description("3.00")]
-		v300
-	}
+        [DFeEnum("3.00")]
+        [Description("3.00")]
+        v300
+    }
 }

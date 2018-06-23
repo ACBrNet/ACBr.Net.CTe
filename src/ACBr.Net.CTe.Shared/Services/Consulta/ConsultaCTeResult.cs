@@ -35,7 +35,7 @@ using ACBr.Net.DFe.Core.Collection;
 namespace ACBr.Net.CTe.Services
 {
     [DFeRoot("retConsSitCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public sealed class ConsultaCTeResult : CTeResultaBase<ConsultaCTeResult>
+    public sealed class ConsultaCTeResult : CTeResultBase<ConsultaCTeResult>
     {
         #region Constructors
 

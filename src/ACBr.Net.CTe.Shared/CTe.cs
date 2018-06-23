@@ -30,6 +30,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using ACBr.Net.Core.Exceptions;
@@ -78,7 +79,7 @@ namespace ACBr.Net.CTe
         {
             Guard.Against<ArgumentNullException>(certificado == null, "Certificado não pode ser nulo.");
 
-            InfCte.Id = "CTe" + ChaveDFe.Gerar(InfCte.Ide.CUF, InfCte.Ide.DhEmi,
+            InfCte.Id = "CTe" + ChaveDFe.Gerar(InfCte.Ide.CUF, InfCte.Ide.DhEmi.DateTime,
                             InfCte.Emit.CNPJ, (int)InfCte.Ide.Mod, InfCte.Ide.Serie,
                             InfCte.Ide.NCT, InfCte.Ide.TpEmis, InfCte.Ide.CCT);
 
@@ -87,7 +88,7 @@ namespace ACBr.Net.CTe
             Signature = DFeSignature.Load(xml);
         }
 
-        internal string GetXmlName()
+        public string GetXmlName()
         {
             Guard.Against<ACBrDFeException>(InfCte.Id.IsEmpty(), "Chave do CTe inválida. Impossível salvar XML.");
 

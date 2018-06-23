@@ -33,5 +33,14 @@ namespace ACBr.Net.CTe
 {
     public interface IEventoCTe
     {
+        string DescEvento { get; set; }
+    }
+
+    public static class EventoCTe
+    {
+        public static CTeEvCancCTe Cancelamento(string nProt, string xJust)
+        {
+            return new CTeEvCancCTe() { NProt = nProt, XJust = xJust };
+        }
     }
 }
