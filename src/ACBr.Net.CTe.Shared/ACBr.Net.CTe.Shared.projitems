@@ -16,7 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigCertificados.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigGeral.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigWebServices.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Configuracao\SchemaCTe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SchemaCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeAereoModal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeAereoNatCarga.cs" />
@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CTeCompl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeComplemento.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeComplEntrega.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeConst.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeDest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeDirecao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeDuplicata.cs" />
@@ -114,7 +115,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)CTeRodoModal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeRodoOcc.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeSeguro.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CTeConst.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeTipo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeTipoDocumento.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeTipoDocumentoAnterior.cs" />

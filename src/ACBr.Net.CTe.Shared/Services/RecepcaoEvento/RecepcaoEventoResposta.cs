@@ -4,7 +4,7 @@
 // Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-05-2018
+// Last Modified On : 06-23-2018
 // ***********************************************************************
 // <copyright file="ConsultaCTeResposta.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -31,12 +31,20 @@
 
 namespace ACBr.Net.CTe.Services
 {
-    public class RecepcaoEventoResposta : CTeResposta<CTeRetEventoCTe>
+    public class RecepcaoEventoResposta : CTeResposta<CTeProcEvento>
     {
         #region Constructor
 
-        public RecepcaoEventoResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs) : base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs)
+        public RecepcaoEventoResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs) :
+            base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs)
         {
+            Resultado = new CTeProcEvento
+            {
+                EventoCTe = CTeEventoCTe.Load(xmlEnvio),
+                RetEventoCTe = CTeRetEventoCTe.Load(xmlRetorno)
+            };
+
+            Resultado.Versao = Resultado.EventoCTe.Versao;
         }
 
         #endregion Constructor

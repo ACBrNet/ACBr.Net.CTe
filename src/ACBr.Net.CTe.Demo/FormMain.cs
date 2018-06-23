@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Logging;
 using ACBr.Net.CTe.Services;
+using System.Diagnostics;
 
 namespace ACBr.Net.CTe.Demo
 {
@@ -104,8 +105,10 @@ namespace ACBr.Net.CTe.Demo
         private void btnConsultarSituacao_Click(object sender, EventArgs e)
         {
             var ret = acbrCTe.ConsultarSituacaoServico();
+
             wbbResposta.LoadXml(ret.XmlRetorno);
             wbbRetorno.LoadXml(ret.RetornoWS);
+            wbbDados.LoadXml(ret.XmlEnvio);
 
             rtLogResposta.AppendLine("");
             rtLogResposta.AppendLine("Status Serviço");
@@ -136,6 +139,7 @@ namespace ACBr.Net.CTe.Demo
             var ret = acbrCTe.ConsultaRecibo(recibo);
             wbbResposta.LoadXml(ret.XmlRetorno);
             wbbRetorno.LoadXml(ret.RetornoWS);
+            wbbDados.LoadXml(ret.XmlEnvio);
 
             rtLogResposta.AppendLine("Consultar Recibo");
 
@@ -151,6 +155,7 @@ namespace ACBr.Net.CTe.Demo
             var ret = acbrCTe.Consultar();
             wbbResposta.LoadXml(ret.XmlRetorno);
             wbbRetorno.LoadXml(ret.RetornoWS);
+            wbbDados.LoadXml(ret.XmlEnvio);
 
             rtLogResposta.AppendLine("Consultar CTe");
 
@@ -167,6 +172,7 @@ namespace ACBr.Net.CTe.Demo
             var ret = acbrCTe.Consultar(chave);
             wbbResposta.LoadXml(ret.XmlRetorno);
             wbbRetorno.LoadXml(ret.RetornoWS);
+            wbbDados.LoadXml(ret.XmlEnvio);
 
             rtLogResposta.AppendLine("Consultar CTe");
 
@@ -195,7 +201,7 @@ namespace ACBr.Net.CTe.Demo
             var file = Helpers.OpenFile(@"Ini ACBr (*.ini)|*.ini|Todos os Arquivos (*.*)|*.*");
             if (file.IsEmpty()) return;
 
-            CTeServiceManager.ImportIni(file);
+            CTeServiceManager.ImportIniACBr(file);
             LoadServices();
             MessageBox.Show(@"Importação realizada com sucesso.", @"ACBrCTe");
         }

@@ -29,14 +29,15 @@
 // <summary></summary>
 // ***********************************************************************
 
-using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeEventoCTe : GenericClone<CTeEventoCTe>
+    [DFeRoot("eventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeEventoCTe : DFeDocument<CTeEventoCTe>
     {
         #region Constructors
 
@@ -50,8 +51,8 @@ namespace ACBr.Net.CTe
 
         #region Properties
 
-        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string Versao { get; set; }
+        [DFeAttribute(TipoCampo.Enum, "versao", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
 
         [DFeElement("infEvento", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeInfEventoEnv InfEvento { get; set; }

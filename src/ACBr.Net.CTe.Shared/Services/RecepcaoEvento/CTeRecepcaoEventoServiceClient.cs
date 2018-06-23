@@ -78,50 +78,54 @@ namespace ACBr.Net.CTe.Services
             Guard.Against<ArgumentNullException>(lote < 0, nameof(lote));
             Guard.Against<ArgumentNullException>(nSeqEvento < 0, nameof(nSeqEvento));
             Guard.Against<ArgumentNullException>(evento == null, nameof(evento));
+
             lock (serviceLock)
             {
                 const DFeSaveOptions saveOptions = DFeSaveOptions.DisableFormatting | DFeSaveOptions.OmitDeclaration;
 
+                CTeTipoEvento tipo;
+                string xmlEvento;
                 var date = DateTimeOffset.Now;
-                var xmlEvento = string.Empty;
-                var tpEvento = string.Empty;
                 var versao = Configuracoes.Geral.VersaoDFe.GetDescription();
                 switch (evento)
                 {
                     case CTeEvCancCTe evtCTe:
                         xmlEvento = evtCTe.GetXml(saveOptions);
-                        tpEvento = CTeTipoEvento.Cancelamento.GetValue();
-                        GravarEvento(xmlEvento, $"{chave}-can-eve.xml", CTeTipoEvento.Cancelamento, date.DateTime, cnpj);
+                        tipo = CTeTipoEvento.Cancelamento;
+                        GravarEvento(xmlEvento, $"{chave}-can-eve.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvCancCTe);
                         break;
 
                     case CteEvCceCTe evtCTe:
                         xmlEvento = evtCTe.GetXml(saveOptions);
-                        tpEvento = CTeTipoEvento.CartaCorrecao.GetValue();
-                        GravarEvento(xmlEvento, $"{chave}-cce-eve.xml", CTeTipoEvento.CartaCorrecao, date.DateTime, cnpj);
+                        tipo = CTeTipoEvento.CartaCorrecao;
+                        GravarEvento(xmlEvento, $"{chave}-cce-eve.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvCCeCTe);
                         break;
 
                     case CTeEvEPEC evtCTe:
                         xmlEvento = evtCTe.GetXml(saveOptions);
-                        tpEvento = CTeTipoEvento.EPEC.GetValue();
-                        GravarEvento(xmlEvento, $"{chave}-epec-eve.xml", CTeTipoEvento.EPEC, date.DateTime, cnpj);
+                        tipo = CTeTipoEvento.EPEC;
+                        GravarEvento(xmlEvento, $"{chave}-ped-epec.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvEPECCTe);
                         break;
 
                     case CTeEvRegMultimodal evtCTe:
                         xmlEvento = evtCTe.GetXml(saveOptions);
-                        tpEvento = CTeTipoEvento.RegistroMultiModal.GetValue();
-                        GravarEvento(xmlEvento, $"{chave}-rmulti-eve.xml", CTeTipoEvento.RegistroMultiModal, date.DateTime, cnpj);
+                        tipo = CTeTipoEvento.RegistroMultiModal;
+                        GravarEvento(xmlEvento, $"{chave}-rmulti-eve.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvRegMultimodal);
                         break;
 
                     case CTeEvPrestDesacordo evtCTe:
                         xmlEvento = evtCTe.GetXml(saveOptions);
-                        tpEvento = CTeTipoEvento.PrestacaoServicoDesacordo.GetValue();
-                        GravarEvento(xmlEvento, $"{chave}-desa-eve.xml", CTeTipoEvento.PrestacaoServicoDesacordo, date.DateTime, cnpj);
+                        tipo = CTeTipoEvento.PrestacaoServicoDesacordo;
+                        GravarEvento(xmlEvento, $"{chave}-desa-eve.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvPrestDesacordo);
                         break;
+
+                    default:
+                        throw new ArgumentException("O evento informado é desconhecido.");
                 }
 
                 var request = new StringBuilder();
@@ -132,7 +136,7 @@ namespace ACBr.Net.CTe.Services
                 request.Append($"<CNPJ>{cnpj}</CNPJ>");
                 request.Append($"<chCTe>{chave}</chCTe>");
                 request.Append($"<dhEvento>{date}</dhEvento>");
-                request.Append($"<tpEvento>{tpEvento}</tpEvento>");
+                request.Append($"<tpEvento>{tipo.GetValue()}</tpEvento>");
                 request.Append($"<nSeqEvento>{nSeqEvento}</nSeqEvento>");
                 request.Append($"<detEvento versaoEvento=\"{versao}\">");
                 request.Append(xmlEvento);
@@ -151,6 +155,7 @@ namespace ACBr.Net.CTe.Services
                 var retVal = Channel.RecepcaoEvento(inValue);
 
                 var retorno = new RecepcaoEventoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
+                GravarEvento(xmlEvento, $"{chave}-procEventoCTe.xml", tipo, date.DateTime, cnpj);
                 return retorno;
             }
         }

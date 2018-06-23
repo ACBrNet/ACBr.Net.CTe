@@ -4,7 +4,7 @@
 // Created          : 10-12-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-12-2016
+// Last Modified On : 06-23-2018
 // ***********************************************************************
 // <copyright file="CTeResposta.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -30,11 +30,12 @@
 // ***********************************************************************
 
 using System.Text;
+using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe.Services
 {
-    public abstract class CTeResposta<T> where T : DFeDocument<T>
+    public abstract class CTeResposta<T> : GenericClone<CTeResposta<T>> where T : class
     {
         #region Constructors
 
@@ -45,7 +46,10 @@ namespace ACBr.Net.CTe.Services
             EnvelopeSoap = envelopeSoap;
             RetornoWS = respostaWs;
 
-            Resultado = DFeDocument<T>.Load(xmlRetorno, Encoding.UTF8);
+            if (typeof(DFeDocument<T>).IsAssignableFrom(typeof(T)))
+            {
+                Resultado = DFeDocument<T>.Load(xmlRetorno, Encoding.UTF8);
+            }
         }
 
         #endregion Constructors
@@ -60,7 +64,7 @@ namespace ACBr.Net.CTe.Services
 
         public string RetornoWS { get; }
 
-        public T Resultado { get; }
+        public T Resultado { get; protected set; }
 
         #endregion Properties
     }

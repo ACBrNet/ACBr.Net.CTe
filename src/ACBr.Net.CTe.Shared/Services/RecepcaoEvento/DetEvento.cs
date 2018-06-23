@@ -4,7 +4,7 @@
 // Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-22-2017
+// Last Modified On : 06-23-2018
 // ***********************************************************************
 // <copyright file="DetEvento.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -37,11 +37,14 @@ namespace ACBr.Net.CTe
 {
     public sealed class DetEvento : GenericClone<DetEvento>
     {
-        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public CTeVersao versaoEvento { get; set; }
+        [DFeAttribute(TipoCampo.Enum, "versaoEvento", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao VersaoEvento { get; set; }
 
-        [DFeItem(typeof(CTeEvCancCTe), "evCancCTe", NameSpace = "http://www.portalfiscal.inf.br/cte")]
-        [DFeItem(typeof(CteEvCceCTe), "evCCeCTe")]
+        [DFeItem(typeof(CTeEvCancCTe), "evCancCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+        [DFeItem(typeof(CteEvCceCTe), "evCCeCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+        [DFeItem(typeof(CTeEvEPEC), "evEPECCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+        [DFeItem(typeof(CTeEvRegMultimodal), "evRegMultimodal", Namespace = "http://www.portalfiscal.inf.br/cte")]
+        [DFeItem(typeof(CTeEvPrestDesacordo), "evPrestDesacordo", Namespace = "http://www.portalfiscal.inf.br/cte")]
         public IEventoCTe Evento { get; set; }
     }
 }

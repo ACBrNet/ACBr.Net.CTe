@@ -4,7 +4,7 @@
 // Created          : 11-10-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 06-22-2018
 // ***********************************************************************
 // <copyright file="CTeServiceManager.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -52,10 +52,10 @@ namespace ACBr.Net.CTe.Services
 
         static CTeServiceManager()
         {
-            Servicos = new Dictionary<CTeVersao, CTeServiceCollection>(2);
-
-            Servicos.Clear();
-            Servicos.Add(CTeVersao.v300, new CTeServiceCollection());
+            Servicos = new Dictionary<CTeVersao, CTeServiceCollection>(1)
+            {
+                {CTeVersao.v300, new CTeServiceCollection()}
+            };
 
             Load();
         }
@@ -180,11 +180,11 @@ namespace ACBr.Net.CTe.Services
         /// Função para importar endereços no padrão de Ini do ACBr.
         /// </summary>
         /// <param name="path">Caminho para o ini</param>
-        public static void ImportIni(string path = "")
+        public static void ImportIniACBr(string path = "")
         {
             using (var stream = new FileStream(path, FileMode.Open))
             {
-                ImportIni(stream);
+                ImportIniACBr(stream);
             }
         }
 
@@ -192,7 +192,7 @@ namespace ACBr.Net.CTe.Services
         /// Função para importar endereços no padrão de Ini do ACBr.
         /// </summary>
         /// <param name="stream"></param>
-        public static void ImportIni(Stream stream)
+        public static void ImportIniACBr(Stream stream)
         {
             var ini = ACBrIniFile.Load(stream);
 
