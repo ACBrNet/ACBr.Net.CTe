@@ -38,41 +38,41 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeUnidadeTransp : GenericClone<CTeUnidadeTransp>, IInfoUnidade, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeUnidadeTransp : GenericClone<CTeUnidadeTransp>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeUnidadeTransp()
-		{
-			InfUnidCarga = new DFeCollection<CTeTUnidCarga>();
-			LacUnidTransp = new DFeCollection<CTeLacre>();
-		}
+        public CTeUnidadeTransp()
+        {
+            InfUnidCarga = new DFeCollection<CTeTUnidCarga>();
+            LacUnidTransp = new DFeCollection<CTeLacre>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.Enum, "tpUnidTransp", Id = "#280", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeUnidTransp TpUnidTransp { get; set; }
+        [DFeElement(TipoCampo.Enum, "tpUnidTransp", Id = "#280", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeUnidTransp TpUnidTransp { get; set; }
 
-		[DFeElement(TipoCampo.StrNumber, "idUnidTransp", Id = "#281", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string IdUnidTransp { get; set; }
+        [DFeElement(TipoCampo.StrNumber, "idUnidTransp", Id = "#281", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string IdUnidTransp { get; set; }
 
-		[DFeCollection("lacUnidTransp", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeCollection<CTeLacre> LacUnidTransp { get; set; }
+        [DFeCollection("lacUnidTransp", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<CTeLacre> LacUnidTransp { get; set; }
 
-		[DFeCollection("infUnidCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeCollection<CTeTUnidCarga> InfUnidCarga { get; set; }
+        [DFeCollection("infUnidCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<CTeTUnidCarga> InfUnidCarga { get; set; }
 
-		[DFeElement(TipoCampo.De2, "qtdRat", Id = "#280", Min = 1, Max = 5, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public decimal? QtdRat { get; set; }
+        [DFeElement(TipoCampo.De2, "qtdRat", Id = "#280", Min = 1, Max = 5, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? QtdRat { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }
