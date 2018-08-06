@@ -40,78 +40,95 @@ using System.Xml.Serialization;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeInfNF : GenericClone<CTeInfNF>, ICTeInfDoc, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeInfNF : GenericClone<CTeInfNF>, ICTeInfDoc, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeInfNF()
-		{
-			Infos = new DFeCollection<IInfoUnidade>();
-		}
+        public CTeInfNF()
+        {
+            InfUnidCarga = new DFeCollection<CTeTUnidCarga>();
+            InfUnidTransp = new DFeCollection<CTeUnidadeTransp>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.Str, "nRoma", Id = "#263", Min = 1, Max = 20, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string NRoma { get; set; }
+        [DFeElement(TipoCampo.Str, "nRoma", Id = "#263", Min = 1, Max = 20, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string NRoma { get; set; }
 
-		[DFeElement(TipoCampo.Str, "nPed", Id = "#264", Min = 1, Max = 20, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string NPed { get; set; }
+        [DFeElement(TipoCampo.Str, "nPed", Id = "#264", Min = 1, Max = 20, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string NPed { get; set; }
 
-		[DFeElement(TipoCampo.Enum, "mod", Id = "#265", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeModeloNF Mod { get; set; }
+        [DFeElement(TipoCampo.Enum, "mod", Id = "#265", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeModeloNF Mod { get; set; }
 
-		[DFeElement(TipoCampo.Str, "serie", Id = "#266", Min = 1, Max = 3, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Serie { get; set; }
+        [DFeElement(TipoCampo.Str, "serie", Id = "#266", Min = 1, Max = 3, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Serie { get; set; }
 
-		[DFeElement(TipoCampo.StrNumber, "nDoc", Id = "#267", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string NDoc { get; set; }
+        [DFeElement(TipoCampo.StrNumber, "nDoc", Id = "#267", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string NDoc { get; set; }
 
-		[DFeElement(TipoCampo.Dat, "dEmi", Id = "#268", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DateTime DEmi { get; set; }
+        [DFeElement(TipoCampo.Dat, "dEmi", Id = "#268", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTime DEmi { get; set; }
 
-		[XmlElement(Order = 6, ElementName = "vBC")]
-		[DFeElement(TipoCampo.De2, "vBC", Id = "#269", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VBC { get; set; }
+        [XmlElement(Order = 6, ElementName = "vBC")]
+        [DFeElement(TipoCampo.De2, "vBC", Id = "#269", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VBC { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vICMS", Id = "#270", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VICMS { get; set; }
+        [DFeElement(TipoCampo.De2, "vICMS", Id = "#270", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VICMS { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vBCST", Id = "#271", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VBCST { get; set; }
+        [DFeElement(TipoCampo.De2, "vBCST", Id = "#271", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VBCST { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vST", Id = "#272", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VST { get; set; }
+        [DFeElement(TipoCampo.De2, "vST", Id = "#272", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VST { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vProd", Id = "#273", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VProd { get; set; }
+        [DFeElement(TipoCampo.De2, "vProd", Id = "#273", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VProd { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vNF", Id = "#274", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VNF { get; set; }
+        [DFeElement(TipoCampo.De2, "vNF", Id = "#274", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VNF { get; set; }
 
-		[DFeElement(TipoCampo.Int, "nCFOP", Id = "#275", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public int NCFOP { get; set; }
+        [DFeElement(TipoCampo.Int, "nCFOP", Id = "#275", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public int NCFOP { get; set; }
 
-		[DFeElement(TipoCampo.De3, "nPeso", Id = "#276", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public decimal NPeso { get; set; }
+        [DFeElement(TipoCampo.De3, "nPeso", Id = "#276", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal NPeso { get; set; }
 
-		[DFeElement(TipoCampo.Str, "PIN", Id = "#277", Min = 2, Max = 9, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string PIN { get; set; }
+        [DFeElement(TipoCampo.Str, "PIN", Id = "#277", Min = 2, Max = 9, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string PIN { get; set; }
 
-		[DFeElement(TipoCampo.Dat, "dPrev", Id = "#278", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DateTime? DPrev { get; set; }
+        [DFeElement(TipoCampo.Dat, "dPrev", Id = "#278", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DateTime? DPrev { get; set; }
 
-		[DFeItem(typeof(CTeTUnidCarga), "infUnidCarga")]
-		[DFeItem(typeof(CTeUnidadeTransp), "infUnidTransp")]
-		public DFeCollection<IInfoUnidade> Infos { get; set; }
+        [DFeCollection("infUnidCarga", Id = "#279", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeTUnidCarga> InfUnidCarga { get; set; }
 
-		#endregion Propriedades
-	}
+        [DFeCollection("infUnidTransp", Id = "#279", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeUnidadeTransp> InfUnidTransp { get; set; }
+
+        #endregion Propriedades
+
+        #region Methods
+
+        private bool ShouldSerializeInfUnidCarga()
+        {
+            return InfUnidTransp.Count == 0;
+        }
+
+        private bool ShouldSerializeInfUnidTransp()
+        {
+            return InfUnidCarga.Count == 0;
+        }
+
+        #endregion Methods
+    }
 }

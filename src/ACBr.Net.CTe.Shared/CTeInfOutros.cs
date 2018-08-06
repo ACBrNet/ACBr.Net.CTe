@@ -39,48 +39,65 @@ using System.Xml.Serialization;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeInfOutros : GenericClone<CTeInfOutros>, ICTeInfDoc, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeInfOutros : GenericClone<CTeInfOutros>, ICTeInfDoc, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeInfOutros()
-		{
-			Infos = new DFeCollection<IInfoUnidade>();
-		}
+        public CTeInfOutros()
+        {
+            InfUnidCarga = new DFeCollection<CTeTUnidCarga>();
+            InfUnidTransp = new DFeCollection<CTeUnidadeTransp>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.Enum, "tpDoc", Id = "#320", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeTipoDocumento TpDoc { get; set; }
+        [DFeElement(TipoCampo.Enum, "tpDoc", Id = "#320", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeTipoDocumento TpDoc { get; set; }
 
-		[DFeElement(TipoCampo.Str, "descOutros", Id = "#321", Min = 1, Max = 100, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string DescOutros { get; set; }
+        [DFeElement(TipoCampo.Str, "descOutros", Id = "#321", Min = 1, Max = 100, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string DescOutros { get; set; }
 
-		[DFeElement(TipoCampo.Str, "nDoc", Id = "#322", Min = 1, Max = 20, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string NDoc { get; set; }
+        [DFeElement(TipoCampo.Str, "nDoc", Id = "#322", Min = 1, Max = 20, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string NDoc { get; set; }
 
-		[XmlElement(Order = 3, ElementName = "dEmi")]
-		[DFeElement(TipoCampo.Dat, "dEmi", Id = "#323", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DateTime? DEmi { get; set; }
+        [XmlElement(Order = 3, ElementName = "dEmi")]
+        [DFeElement(TipoCampo.Dat, "dEmi", Id = "#323", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DateTime? DEmi { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vDocFisc", Id = "#324", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public decimal? VDocFisc { get; set; }
+        [DFeElement(TipoCampo.De2, "vDocFisc", Id = "#324", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? VDocFisc { get; set; }
 
-		[DFeElement(TipoCampo.Dat, "dPrev", Id = "#325", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DateTime? DPrev { get; set; }
+        [DFeElement(TipoCampo.Dat, "dPrev", Id = "#325", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DateTime? DPrev { get; set; }
 
-		[DFeItem(typeof(CTeTUnidCarga), "infUnidCarga")]
-		[DFeItem(typeof(CTeUnidadeTransp), "infUnidTransp")]
-		public DFeCollection<IInfoUnidade> Infos { get; set; }
+        [DFeCollection("infUnidCarga", Id = "#279", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeTUnidCarga> InfUnidCarga { get; set; }
 
-		#endregion Propriedades
-	}
+        [DFeCollection("infUnidTransp", Id = "#279", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeUnidadeTransp> InfUnidTransp { get; set; }
+
+        #endregion Propriedades
+
+        #region Methods
+
+        private bool ShouldSerializeInfUnidCarga()
+        {
+            return InfUnidTransp.Count == 0;
+        }
+
+        private bool ShouldSerializeInfUnidTransp()
+        {
+            return InfUnidCarga.Count == 0;
+        }
+
+        #endregion Methods
+    }
 }

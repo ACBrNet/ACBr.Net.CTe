@@ -145,7 +145,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ICTeTomador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IEventoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IInfoCTe.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IInfoUnidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfCorrecao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfCte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModeloCTe.cs" />

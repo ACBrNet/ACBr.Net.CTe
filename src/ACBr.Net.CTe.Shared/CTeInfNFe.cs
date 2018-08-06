@@ -50,7 +50,8 @@ namespace ACBr.Net.CTe
 
         public CTeInfNFe()
         {
-            Infos = new DFeCollection<IInfoUnidade>();
+            InfUnidCarga = new DFeCollection<CTeTUnidCarga>();
+            InfUnidTransp = new DFeCollection<CTeUnidadeTransp>();
         }
 
         #endregion Constructors
@@ -66,11 +67,26 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Dat, "dPrev", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DateTime? DPrev { get; set; }
 
-        [DFeCollection("infDoc")]
-        [DFeItem(typeof(CTeTUnidCarga), "infUnidCarga")]
-        [DFeItem(typeof(CTeUnidadeTransp), "infUnidTransp")]
-        public DFeCollection<IInfoUnidade> Infos { get; set; }
+        [DFeCollection("infUnidCarga", Id = "#279", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeTUnidCarga> InfUnidCarga { get; set; }
+
+        [DFeCollection("infUnidTransp", Id = "#279", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeUnidadeTransp> InfUnidTransp { get; set; }
 
         #endregion Propriedades
+
+        #region Methods
+
+        private bool ShouldSerializeInfUnidCarga()
+        {
+            return InfUnidTransp.Count == 0;
+        }
+
+        private bool ShouldSerializeInfUnidTransp()
+        {
+            return InfUnidCarga.Count == 0;
+        }
+
+        #endregion Methods
     }
 }

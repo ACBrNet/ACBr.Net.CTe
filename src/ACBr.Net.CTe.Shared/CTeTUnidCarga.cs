@@ -38,37 +38,37 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeTUnidCarga : GenericClone<CTeTUnidCarga>, IInfoUnidade, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeTUnidCarga : GenericClone<CTeTUnidCarga>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeTUnidCarga()
-		{
-			LacUnidCarga = new DFeCollection<CTeLacre>();
-		}
+        public CTeTUnidCarga()
+        {
+            LacUnidCarga = new DFeCollection<CTeLacre>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.Enum, "tpUnidCarga", Id = "#285", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeUnidCarga TpUnidCarga { get; set; }
+        [DFeElement(TipoCampo.Enum, "tpUnidCarga", Id = "#285", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeUnidCarga TpUnidCarga { get; set; }
 
-		[DFeElement(TipoCampo.Str, "idUnidCarga", Id = "#286", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string IdUnidCarga { get; set; }
+        [DFeElement(TipoCampo.Str, "idUnidCarga", Id = "#286", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string IdUnidCarga { get; set; }
 
-		[DFeCollection("lacUnidCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeCollection<CTeLacre> LacUnidCarga { get; set; }
+        [DFeCollection("lacUnidCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<CTeLacre> LacUnidCarga { get; set; }
 
-		[DFeElement(TipoCampo.De2, "qtdRat", Id = "#289", Min = 1, Max = 5, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public decimal? QtdRat { get; set; }
+        [DFeElement(TipoCampo.De2, "qtdRat", Id = "#289", Min = 1, Max = 5, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? QtdRat { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }
