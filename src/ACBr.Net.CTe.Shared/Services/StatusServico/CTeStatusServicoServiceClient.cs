@@ -33,6 +33,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.CTe.Configuracao;
 using ACBr.Net.DFe.Core.Extensions;
 
 namespace ACBr.Net.CTe.Services
@@ -63,7 +64,7 @@ namespace ACBr.Net.CTe.Services
             {
                 var request = new StringBuilder();
                 request.Append($"<consStatServCte xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{Configuracoes.Geral.VersaoDFe.GetDescription()}\">");
-                request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetValue()}</tpAmb>");
+                request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetDFeValue()}</tpAmb>");
                 request.Append("<xServ>STATUS</xServ>");
                 request.Append("</consStatServCte>");
 

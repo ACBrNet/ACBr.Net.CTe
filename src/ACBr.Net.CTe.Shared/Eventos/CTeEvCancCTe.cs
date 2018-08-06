@@ -1,12 +1,12 @@
-ï»¿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-12-2016
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 06-23-2018
+// Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="CTeResposta.cs" company="ACBr.Net">
+// <copyright file="CTeEvCancCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,42 +29,48 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Text;
-using ACBr.Net.Core.Generics;
+using System.ComponentModel;
+using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe.Services
+namespace ACBr.Net.CTe.Eventos
 {
-    public abstract class CTeResposta<T> : GenericClone<CTeResposta<T>> where T : class
+    [DFeRoot("evCancCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeEvCancCTe : DFeDocument<CTeEvCancCTe>, IEventoCTe, INotifyPropertyChanged
     {
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
         #region Constructors
 
-        protected CTeResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs)
+        /// <summary>
+		/// Inicializa uma nova instância da classe <see cref="CTeEvCancCTe"/> class.
+		/// </summary>
+        public CTeEvCancCTe()
         {
-            XmlEnvio = xmlEnvio;
-            XmlRetorno = xmlRetorno;
-            EnvelopeSoap = envelopeSoap;
-            RetornoWS = respostaWs;
-
-            if (typeof(DFeDocument<T>).IsAssignableFrom(typeof(T)))
-            {
-                Resultado = DFeDocument<T>.Load(xmlRetorno, Encoding.UTF8);
-            }
+            DescEvento = "Cancelamento";
         }
 
         #endregion Constructors
 
         #region Properties
 
-        public string XmlEnvio { get; }
+        /// <summary>
+        /// Define/retorna a descrição do evento, não alterar.
+        /// </summary>
+        [DFeElement(TipoCampo.Str, "descEvento", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string DescEvento { get; set; }
 
-        public string XmlRetorno { get; }
+        [DFeElement(TipoCampo.Str, "nProt", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string NProt { get; set; }
 
-        public string EnvelopeSoap { get; }
-
-        public string RetornoWS { get; }
-
-        public T Resultado { get; protected set; }
+        [DFeElement(TipoCampo.Str, "xJust", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string XJust { get; set; }
 
         #endregion Properties
     }

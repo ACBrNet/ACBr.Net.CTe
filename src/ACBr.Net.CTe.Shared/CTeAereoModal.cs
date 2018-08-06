@@ -37,6 +37,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
 
 namespace ACBr.Net.CTe
 {

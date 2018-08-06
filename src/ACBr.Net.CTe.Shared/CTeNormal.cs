@@ -37,74 +37,74 @@ using ACBr.Net.DFe.Core.Collection;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeNormal : GenericClone<CTeNormal>, IInfoCTe, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeNormal : GenericClone<CTeNormal>, IInfoCTe, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeNormal()
-		{
-			InfServVinc = new DFeCollection<CTeInfCTeMultimodal>();
-			InfGlobalizado = new CTeInfGlobalizado();
-			InfCteSub = new CTeInfCteSub();
-			Cobr = new CTeCobranca();
-			VeicNovos = new DFeCollection<CTeVeicNovos>();
-			InfModal = new CTeInfModal();
-			DocAnt = new DFeCollection<CTeEmiDocAnt>();
-			InfDoc = new DFeCollection<ICTeInfDoc>();
-			InfCarga = new CTeInfCarga();
-		}
+        public CTeNormal()
+        {
+            InfServVinc = new DFeCollection<CTeInfCTeMultimodal>();
+            InfGlobalizado = new CTeInfGlobalizado();
+            InfCteSub = new CTeInfCteSub();
+            Cobr = new CTeCobranca();
+            VeicNovos = new DFeCollection<CTeVeicNovos>();
+            InfModal = new CTeInfModal();
+            DocAnt = new DFeCollection<CTeEmiDocAnt>();
+            InfDoc = new DFeCollection<ICTeInfDoc>();
+            InfCarga = new CTeInfCarga();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement("infCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeInfCarga InfCarga { get; set; }
+        [DFeElement("infCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeInfCarga InfCarga { get; set; }
 
-		[DFeElement("infDoc", Ocorrencia = Ocorrencia.Obrigatoria)]
-		[DFeItem(typeof(CTeInfNF), "infNF")]
-		[DFeItem(typeof(CTeInfNFe), "infNFe")]
-		[DFeItem(typeof(CTeInfOutros), "infOutros")]
-		public DFeCollection<ICTeInfDoc> InfDoc { get; set; }
+        [DFeItem(typeof(CTeInfNF), "infNF")]
+        [DFeItem(typeof(CTeInfNFe), "infNFe")]
+        [DFeItem(typeof(CTeInfOutros), "infOutros")]
+        [DFeCollection("infDoc", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<ICTeInfDoc> InfDoc { get; set; }
 
-		[DFeElement("docAnt", Ocorrencia = Ocorrencia.Obrigatoria)]
-		[DFeItem(typeof(CTeEmiDocAnt), "emiDocAnt")]
-		public DFeCollection<CTeEmiDocAnt> DocAnt { get; set; }
+        [DFeItem(typeof(CTeEmiDocAnt), "emiDocAnt")]
+        [DFeCollection("docAnt", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<CTeEmiDocAnt> DocAnt { get; set; }
 
-		[DFeElement("infModal", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeInfModal InfModal { get; set; }
+        [DFeElement("infModal", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeInfModal InfModal { get; set; }
 
-		[DFeElement("veicNovos", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeCollection<CTeVeicNovos> VeicNovos { get; set; }
+        [DFeCollection("veicNovos", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<CTeVeicNovos> VeicNovos { get; set; }
 
-		[DFeElement("cobr", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeCobranca Cobr { get; set; }
+        [DFeElement("cobr", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeCobranca Cobr { get; set; }
 
-		[DFeElement("infCteSub", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeInfCteSub InfCteSub { get; set; }
+        [DFeElement("infCteSub", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeInfCteSub InfCteSub { get; set; }
 
-		[DFeElement("infGlobalizado", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public CTeInfGlobalizado InfGlobalizado { get; set; }
+        [DFeElement("infGlobalizado", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeInfGlobalizado InfGlobalizado { get; set; }
 
-		[DFeElement("infServVinc", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		[DFeItem(typeof(CTeInfCTeMultimodal), "infCTeMultimodal")]
-		public DFeCollection<CTeInfCTeMultimodal> InfServVinc { get; set; }
+        [DFeItem(typeof(CTeInfCTeMultimodal), "infCTeMultimodal")]
+        [DFeCollection("infServVinc", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeInfCTeMultimodal> InfServVinc { get; set; }
 
-		#endregion Propriedades
+        #endregion Propriedades
 
-		#region Methods
+        #region Methods
 
-		private bool ShouldSerializeInfGlobalizado()
-		{
-			return !InfGlobalizado.XObs.IsEmpty();
-		}
+        private bool ShouldSerializeInfGlobalizado()
+        {
+            return !InfGlobalizado.XObs.IsEmpty();
+        }
 
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }

@@ -48,10 +48,13 @@ namespace ACBr.Net.CTe.Services
 
         #region Constructors
 
+        /// <summary>
+        /// Inicializa uma nova instância da classe <see cref="CTeServiceCollection"/>.
+        /// </summary>
         public CTeServiceCollection()
         {
             var dataSource = (from DFeCodUF value in Enum.GetValues(typeof(DFeCodUF))
-                              where !value.IsIn(DFeCodUF.EX, DFeCodUF.AN)
+                              where !value.IsIn(DFeCodUF.EX, DFeCodUF.AN, DFeCodUF.SU)
                               orderby value.GetDescription()
                               select value).ToArray();
 
@@ -66,6 +69,11 @@ namespace ACBr.Net.CTe.Services
 
         #region Propriedades
 
+        /// <summary>
+        /// Retorna o <see cref="CTeService"/> relacionado a UF.
+        /// </summary>
+        /// <param name="uf">The uf.</param>
+        /// <returns>CTeService.</returns>
         public CTeService this[DFeCodUF uf] => services[uf];
 
         #endregion Propriedades

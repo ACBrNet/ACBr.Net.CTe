@@ -31,16 +31,17 @@
 
 using System.ServiceModel;
 using System.Xml;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-	[MessageContract]
-	public abstract class RequestBase
-	{
-		[MessageHeader(Name = "cteCabecMsg")]
-		public CTeWsCabecalho Cabecalho;
+    [MessageContract]
+    public abstract class RequestBase
+    {
+        [MessageHeader(Name = "cteCabecMsg")]
+        public DFeWsCabecalho Cabecalho;
 
-		[MessageBodyMember(Name = "cteDadosMsg", Order = 0)]
-		public XmlNode Mensagem;
-	}
+        [MessageBodyMember(Name = "cteDadosMsg", Order = 0)]
+        public XmlNode Mensagem;
+    }
 }

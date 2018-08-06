@@ -35,6 +35,8 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml;
+using ACBr.Net.CTe.Configuracao;
+using ACBr.Net.CTe.Eventos;
 using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Extensions;
@@ -96,7 +98,7 @@ namespace ACBr.Net.CTe.Services
                         ValidateMessage(xmlEvento, SchemaCTe.EvCancCTe);
                         break;
 
-                    case CteEvCceCTe evtCTe:
+                    case CTeEvCCeCTe evtCTe:
                         xmlEvento = evtCTe.GetXml(saveOptions);
                         tipo = CTeTipoEvento.CartaCorrecao;
                         GravarEvento(xmlEvento, $"{chave}-cce-eve.xml", tipo, date.DateTime, cnpj);
@@ -125,18 +127,18 @@ namespace ACBr.Net.CTe.Services
                         break;
 
                     default:
-                        throw new ArgumentException("O evento informado é desconhecido.");
+                        throw new ArgumentException("O evento informado é desconhecido ou não está implementado.");
                 }
 
                 var request = new StringBuilder();
                 request.Append($"<eventoCTe  xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{versao}\">");
                 request.Append($"<infEvento Id=\"{lote}\">");
-                request.Append($"<cOrgao>{Configuracoes.WebServices.UF.GetValue()}</cOrgao>");
-                request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetValue()}</tpAmb>");
+                request.Append($"<cOrgao>{Configuracoes.WebServices.UF.GetDFeValue()}</cOrgao>");
+                request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetDFeValue()}</tpAmb>");
                 request.Append($"<CNPJ>{cnpj}</CNPJ>");
                 request.Append($"<chCTe>{chave}</chCTe>");
                 request.Append($"<dhEvento>{date}</dhEvento>");
-                request.Append($"<tpEvento>{tipo.GetValue()}</tpEvento>");
+                request.Append($"<tpEvento>{tipo.GetDFeValue()}</tpEvento>");
                 request.Append($"<nSeqEvento>{nSeqEvento}</nSeqEvento>");
                 request.Append($"<detEvento versaoEvento=\"{versao}\">");
                 request.Append(xmlEvento);

@@ -31,6 +31,7 @@
 
 using System.ServiceModel;
 using System.Xml;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
@@ -39,7 +40,7 @@ namespace ACBr.Net.CTe.Services
     {
         #region Constructors
 
-        public RecepcaoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
+        public RecepcaoRequest(DFeWsCabecalho cabecalho, XmlNode mensagem)
         {
             Cabecalho = cabecalho;
             Mensagem = mensagem;

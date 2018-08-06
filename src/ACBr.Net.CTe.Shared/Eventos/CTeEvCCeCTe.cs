@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 06-22-2018
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 06-22-2018
+// Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="CTeEvRegMultimodal.cs" company="ACBr.Net">
+// <copyright file="DetEvento.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -31,13 +31,15 @@
 
 using System.ComponentModel;
 using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Collection;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Eventos
 {
-    [DFeRoot("evRegMultimodal", Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public sealed class CTeEvRegMultimodal : DFeDocument<CTeEvRegMultimodal>, IEventoCTe, INotifyPropertyChanged
+    [DFeRoot("evCCeCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeEvCCeCTe : DFeDocument<CTeEvCCeCTe>, IEventoCTe, INotifyPropertyChanged
     {
         #region Events
 
@@ -48,11 +50,12 @@ namespace ACBr.Net.CTe
         #region Constructors
 
         /// <summary>
-        /// Inicializa uma nova instância da classe <see cref="CTeEvRegMultimodal"/> class.
-        /// </summary>
-        public CTeEvRegMultimodal()
+		/// Inicializa uma nova instância da classe <see cref="CTeEvCCeCTe"/> class.
+		/// </summary>
+        public CTeEvCCeCTe()
         {
-            DescEvento = "Registro Multimodal";
+            DescEvento = "Carta de Correcao";
+            XCondUso = "A Carta de Correcao e disciplinada pelo Art. 58-B do CONVENIO/SINIEF 06/89: Fica permitida a utilizacao de carta de correcao, para regularizacao de erro ocorrido na emissao de documentos fiscais relativos a prestacao de servico de transporte, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da prestacao;II - a correcao de dados cadastrais que implique mudanca do emitente, tomador, remetente ou do destinatario;III - a data de emissao ou de saida.";
         }
 
         #endregion Constructors
@@ -65,11 +68,14 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Str, "descEvento", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string DescEvento { get; set; }
 
-        [DFeElement(TipoCampo.Str, "xRegistro", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string Registro { get; set; }
+        [DFeCollection("infCorrecao", MinSize = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<CTeInfCorrecao> InfCorrecao { get; set; }
 
-        [DFeElement(TipoCampo.Str, "nDoc", Min = 0, Max = 255, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-        public string NDoc { get; set; }
+        /// <summary>
+        /// Define/retorna a condição de uso, não alterar.
+        /// </summary>
+        [DFeElement(TipoCampo.Str, "xCondUso", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string XCondUso { get; set; }
 
         #endregion Properties
     }

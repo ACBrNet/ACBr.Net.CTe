@@ -31,12 +31,10 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core;
+using ACBr.Net.CTe.Configuracao;
 using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
@@ -44,15 +42,10 @@ namespace ACBr.Net.CTe.Services
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class CTeServiceClient<T> : DFeSoap12ServiceClientBase<T> where T : class
+    /// <typeparam name="TService"></typeparam>
+    public abstract class CTeServiceClient<TService> : DFeServiceClient<CTeConfig, ACBrCTe, CTeConfigGeral,
+        CTeVersao, CTeConfigWebServices, CTeConfigCertificados, CTeConfigArquivos, SchemaCTe, TService> where TService : class
     {
-        #region Fields
-
-        protected readonly object serviceLock;
-
-        #endregion Fields
-
         #region Constructors
 
         /// <inheritdoc />
@@ -62,48 +55,23 @@ namespace ACBr.Net.CTe.Services
         ///  <param name="service"></param>
         ///  <param name="certificado"></param>
         protected CTeServiceClient(CTeConfig config, ServicoCTe service, X509Certificate2 certificado = null) :
-            base(CTeServiceManager.GetServiceAndress(config.Geral.VersaoDFe, config.WebServices.UF, service, config.WebServices.Ambiente),
-                config.WebServices.TimeOut, certificado)
+            base(config, CTeServiceManager.GetServiceAndress(config.Geral.VersaoDFe, config.WebServices.UF, service, config.WebServices.Ambiente),
+                certificado)
         {
-            serviceLock = new object();
-            Configuracoes = config;
         }
 
         #endregion Constructors
 
-        #region Properties
+        #region Propriedades
 
         /// <summary>
-        ///
+        /// Retorna o certificado usado no serviço.
         /// </summary>
-        public CTeConfig Configuracoes { get; }
+        /// <value>The certificado.</value>
+        public X509Certificate2 Certificado => ClientCredentials?.ClientCertificate.Certificate ??
+                                               Configuracoes.Certificados.ObterCertificado();
 
-        /// <summary>
-        ///
-        /// </summary>
-        public SchemaCTe Schema { get; protected set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public string ArquivoEnvio { get; protected set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public string ArquivoResposta { get; protected set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public string EnvelopeSoap { get; protected set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public string RetornoWS { get; protected set; }
-
-        #endregion Properties
+        #endregion Propriedades
 
         #region Methods
 
@@ -111,37 +79,14 @@ namespace ACBr.Net.CTe.Services
         /// Retorna o cabeçalho para usar no envelope SOAP.
         /// </summary>
         /// <returns></returns>
-        protected virtual CTeWsCabecalho DefineHeader()
+        protected virtual DFeWsCabecalho DefineHeader()
         {
             var versao = Configuracoes.Geral.VersaoDFe.GetDescription();
-            return new CTeWsCabecalho
+            return new DFeWsCabecalho
             {
                 CUf = (int)Configuracoes.WebServices.UF,
                 VersaoDados = versao,
             };
-        }
-
-        /// <summary>
-        /// Função para validar a menssagem a ser enviada para o webservice.
-        /// </summary>
-        /// <param name="xml"></param>
-        protected virtual void ValidateMessage(string xml)
-        {
-            ValidateMessage(xml, Schema);
-        }
-
-        /// <summary>
-        /// Função para validar a menssagem a ser enviada para o webservice.
-        /// </summary>
-        /// <param name="xml"></param>
-        /// <param name="schema"></param>
-        protected virtual void ValidateMessage(string xml, SchemaCTe schema)
-        {
-            var schemaFile = Configuracoes.Arquivos.GetSchema(schema);
-            XmlSchemaValidation.ValidarXml(xml, schemaFile, out var erros, out _);
-
-            Guard.Against<ACBrDFeValidationException>(erros.Any(), "Erros de validação do xml." +
-                                                         $"{(Configuracoes.Geral.ExibirErroSchema ? Environment.NewLine + erros.AsString() : "")}");
         }
 
         /// <summary>
@@ -194,36 +139,6 @@ namespace ACBr.Net.CTe.Services
             conteudoArquivo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + conteudoArquivo;
             nomeArquivo = Path.Combine(Configuracoes.Arquivos.GetPathInu(data, cnpj), nomeArquivo);
             File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
-        }
-
-        /// <summary>
-        /// Salvar o arquivo xml no disco de acordo com as propriedades.
-        /// </summary>
-        /// <param name="tipo"></param>
-        /// <param name="conteudoArquivo"></param>
-        /// <param name="nomeArquivo"></param>
-        /// <param name="data"></param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected void GravarSoap(string conteudoArquivo, string nomeArquivo)
-        {
-            if (Configuracoes.WebServices.Salvar == false) return;
-
-            nomeArquivo = Path.Combine(Configuracoes.Arquivos.PathSalvar, nomeArquivo);
-            File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
-        }
-
-        /// <inheritdoc />
-        protected override void BeforeSendDFeRequest(string message)
-        {
-            EnvelopeSoap = message;
-            GravarSoap(message, $"{DateTime.Now:yyyyMMddHHmmsszzz}_{ArquivoEnvio}_env.xml");
-        }
-
-        /// <inheritdoc />
-        protected override void AfterReceiveDFeReply(string message)
-        {
-            RetornoWS = message;
-            GravarSoap(message, $"{DateTime.Now:yyyyMMddHHmmsszzz}_{ArquivoResposta}_ret.xml");
         }
 
         #endregion Methods

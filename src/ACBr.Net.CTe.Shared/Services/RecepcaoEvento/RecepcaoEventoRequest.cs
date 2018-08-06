@@ -31,19 +31,20 @@
 
 using System.ServiceModel;
 using System.Xml;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-	[MessageContract(WrapperName = "cteRecepcaoEventoRequest", IsWrapped = false)]
-	public sealed class RecepcaoEventoRequest : RequestBase
-	{
-		#region Constructors
+    [MessageContract(WrapperName = "cteRecepcaoEventoRequest", IsWrapped = false)]
+    public sealed class RecepcaoEventoRequest : RequestBase
+    {
+        #region Constructors
 
-		public RecepcaoEventoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
-		{
-			Cabecalho = cabecalho;
-		}
+        public RecepcaoEventoRequest(DFeWsCabecalho cabecalho, XmlNode mensagem)
+        {
+            Cabecalho = cabecalho;
+        }
 
-		#endregion Constructors
-	}
+        #endregion Constructors
+    }
 }

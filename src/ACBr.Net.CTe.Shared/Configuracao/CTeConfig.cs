@@ -31,7 +31,7 @@
 
 using ACBr.Net.DFe.Core.Common;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Configuracao
 {
     public sealed class CTeConfig : DFeConfigBase<ACBrCTe, CTeConfigGeral, CTeVersao, CTeConfigWebServices, CTeConfigCertificados, CTeConfigArquivos, SchemaCTe>
     {

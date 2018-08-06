@@ -1,12 +1,12 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="ICadConsultaCadastro.cs" company="ACBr.Net">
+// <copyright file="CTeRetEventoCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,21 +29,36 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ServiceModel;
-using System.Threading.Tasks;
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe.Services
+namespace ACBr.Net.CTe.Eventos
 {
-    [ServiceContract(Namespace = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro")]
-    public interface ICadConsultaCadastro
+    [DFeRoot("retEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeRetEventoCTe : DFeDocument<CTeRetEventoCTe>
     {
-        [OperationContract(Action = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro/consultaCadastro",
-            ReplyAction = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro/CadConsultaCadastroSoap/consultaCadastroResponse")]
-        [XmlSerializerFormat(SupportFaults = true)]
-        ConsultaCadastroResponse consultaCadastro(ConsultaCadastroRequest request);
+        #region Constructors
 
-        [OperationContract(Action = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro/consultaCadastro",
-            ReplyAction = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro/CadConsultaCadastroSoap/consultaCadastroResponse")]
-        Task<ConsultaCadastroResponse> consultaCadastroAsync(ConsultaCadastroRequest request);
+        public CTeRetEventoCTe()
+        {
+            InfEvento = new CTeRetInfEvento();
+            Signature = new DFeSignature();
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        [DFeAttribute(TipoCampo.Enum, "versao", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
+
+        [DFeElement("infEvento", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeRetInfEvento InfEvento { get; set; }
+
+        public DFeSignature Signature { get; set; }
+
+        #endregion Properties
     }
 }

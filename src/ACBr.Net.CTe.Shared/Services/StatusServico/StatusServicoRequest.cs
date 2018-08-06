@@ -31,24 +31,25 @@
 
 using System.ServiceModel;
 using System.Xml;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-	[MessageContract(WrapperName = "cteStatusServicoCTRequest", IsWrapped = false)]
-	public sealed class StatusServicoRequest : RequestBase
-	{
-		#region Constructors
+    [MessageContract(WrapperName = "cteStatusServicoCTRequest", IsWrapped = false)]
+    public sealed class StatusServicoRequest : RequestBase
+    {
+        #region Constructors
 
-		public StatusServicoRequest()
-		{
-		}
+        public StatusServicoRequest()
+        {
+        }
 
-		public StatusServicoRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
-		{
-			Cabecalho = cabecalho;
-			Mensagem = mensagem;
-		}
+        public StatusServicoRequest(DFeWsCabecalho cabecalho, XmlNode mensagem)
+        {
+            Cabecalho = cabecalho;
+            Mensagem = mensagem;
+        }
 
-		#endregion Constructors
-	}
+        #endregion Constructors
+    }
 }

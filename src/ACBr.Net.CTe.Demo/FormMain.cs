@@ -294,10 +294,6 @@ namespace ACBr.Net.CTe.Demo
             acbrCTe.Configuracoes.WebServices.UF = cbbUfWebservice.GetSelectedValue<DFeCodUF>();
             acbrCTe.Configuracoes.WebServices.Ambiente = rdbProducao.Checked ? DFeTipoAmbiente.Producao : DFeTipoAmbiente.Homologacao;
             acbrCTe.Configuracoes.WebServices.AguardarConsultaRet = (uint)(nudTimeOut.Value / 100);
-            acbrCTe.Configuracoes.WebServices.ProxyHost = txtProxyHost.Text;
-            acbrCTe.Configuracoes.WebServices.ProxyPort = txtProxyPort.Text;
-            acbrCTe.Configuracoes.WebServices.ProxyUser = txtProxyUser.Text;
-            acbrCTe.Configuracoes.WebServices.ProxyPass = txtProxyPass.Text;
 
             acbrCTe.Configuracoes.Arquivos.PathSchemas = txtSchemas.Text;
             acbrCTe.Configuracoes.Arquivos.PathCTe = txtPathCTe.Text;
@@ -318,10 +314,6 @@ namespace ACBr.Net.CTe.Demo
             rdbProducao.Checked = config.Get("Ambiente", acbrCTe.Configuracoes.WebServices.Ambiente) == DFeTipoAmbiente.Producao;
             rdbHomologacao.Checked = config.Get("Ambiente", acbrCTe.Configuracoes.WebServices.Ambiente) == DFeTipoAmbiente.Homologacao;
             nudTimeOut.Value = config.Get("TimeOut", (int)acbrCTe.Configuracoes.WebServices.AguardarConsultaRet * 100);
-            txtProxyHost.Text = config.Get("ProxyHost", acbrCTe.Configuracoes.WebServices.ProxyHost);
-            txtProxyPort.Text = config.Get("ProxyPort", acbrCTe.Configuracoes.WebServices.ProxyPort);
-            txtProxyUser.Text = config.Get("ProxyUser", acbrCTe.Configuracoes.WebServices.ProxyUser);
-            txtProxyPass.Text = config.GetCrypt("ProxyPass", acbrCTe.Configuracoes.WebServices.ProxyPass);
 
             txtSchemas.Text = config.Get("PathSchemas", acbrCTe.Configuracoes.Arquivos.PathSchemas);
             txtPathCTe.Text = config.Get("PathCTe", acbrCTe.Configuracoes.Arquivos.PathCTe);

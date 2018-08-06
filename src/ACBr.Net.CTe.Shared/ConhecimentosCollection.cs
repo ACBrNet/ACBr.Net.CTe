@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
 using ACBr.Net.Core;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
@@ -82,9 +83,9 @@ namespace ACBr.Net.CTe
         #region Methods
 
         /// <summary>
-        ///
+        /// Carrega a CTe informada.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">Caminho da CTe.</param>
         public void Load(string path)
         {
             Guard.Against<ArgumentNullException>(path.IsEmpty(), nameof(path));
@@ -94,9 +95,9 @@ namespace ACBr.Net.CTe
         }
 
         /// <summary>
-        ///
+        /// Carrega a CTe informada.
         /// </summary>
-        /// <param name="stream"></param>
+        /// <param name="stream">Stream da CTe.</param>
         public void Load(Stream stream)
         {
             Guard.Against<ArgumentNullException>(stream == null, nameof(stream));
@@ -104,10 +105,10 @@ namespace ACBr.Net.CTe
 
             using (var reader = new StreamReader(stream))
             {
-                var conteudo = reader.ReadLine();
+                var conteudo = reader.ReadToEnd();
                 Guard.Against<ACBrDFeException>(conteudo.IsEmpty(), "Não foi possivel ler o conteudo.");
 
-                var cteProc = conteudo.Contains("cteProc") ? CTeProc.Load(conteudo) : new CTeProc { CTe = CTe.Load(conteudo) };
+                var cteProc = conteudo.Contains("cteProc") ? CTeProc.Load(stream) : new CTeProc { CTe = CTe.Load(stream) };
                 Add(cteProc);
             }
         }
@@ -119,16 +120,29 @@ namespace ACBr.Net.CTe
         {
             var cert = Parent.Configuracoes.Certificados.ObterCertificado();
 
+            var saveOptions = DFeSaveOptions.DisableFormatting | DFeSaveOptions.OmitDeclaration;
+            if (Parent.Configuracoes.Geral.RetirarAcentos) saveOptions |= DFeSaveOptions.RemoveAccents;
+            if (Parent.Configuracoes.Geral.RetirarEspacos) saveOptions |= DFeSaveOptions.RemoveSpaces;
+
             try
             {
-                foreach (var cte in NaoAutorizadas)
-                {
-                    cte.Assinar(cert);
-                }
+                Assinar(cert, saveOptions);
             }
             finally
             {
                 cert.Reset();
+            }
+        }
+
+        /// <summary>
+        /// Assina as CTe não autorizadas.
+        /// </summary>
+        /// <param name="certificado">O certificado.</param>
+        public void Assinar(X509Certificate2 certificado, DFeSaveOptions options)
+        {
+            foreach (var cte in NaoAutorizadas)
+            {
+                cte.Assinar(certificado, options);
             }
         }
 

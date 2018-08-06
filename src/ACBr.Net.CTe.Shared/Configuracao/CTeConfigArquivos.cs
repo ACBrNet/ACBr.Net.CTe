@@ -37,7 +37,7 @@ using ACBr.Net.Core.Extensions;
 using ACBr.Net.CTe.Services;
 using ACBr.Net.DFe.Core.Common;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Configuracao
 {
     [TypeConverter(typeof(ACBrExpandableObjectConverter))]
     public sealed class CTeConfigArquivos : DFeArquivosConfigBase<ACBrCTe, SchemaCTe>, INotifyPropertyChanged
@@ -52,7 +52,7 @@ namespace ACBr.Net.CTe
 
         /// <inheritdoc />
         /// <summary>
-        /// Inicializa uma nova instancia da classe <see cref="T:ACBr.Net.CTe.CTeConfigArquivos" />.
+        /// Inicializa uma nova instancia da classe <see cref="T:ACBr.Net.CTe.Configuracao.CTeConfigArquivos" />.
         /// </summary>
         internal CTeConfigArquivos(ACBrCTe parent) : base(parent)
         {

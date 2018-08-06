@@ -1,12 +1,12 @@
 // ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-22-2017
+// Created          : 06-22-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-22-2017
+// Last Modified On : 06-22-2018
 // ***********************************************************************
-// <copyright file="CTeEventoCTe.cs" company="ACBr.Net">
+// <copyright file="CTeEvPrestDesacordo.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,64 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+using System.ComponentModel;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Eventos
 {
-    [DFeRoot("eventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public sealed class CTeEventoCTe : DFeDocument<CTeEventoCTe>
+    [DFeRoot("evPrestDesacordo", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeEvPrestDesacordo : DFeDocument<CTeEvPrestDesacordo>, IEventoCTe, INotifyPropertyChanged
     {
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
         #region Constructors
 
-        public CTeEventoCTe()
+        /// <summary>
+        /// Inicializa uma nova instância da classe <see cref="CTeEvRegMultimodal"/> class.
+        /// </summary>
+        public CTeEvPrestDesacordo()
         {
-            InfEvento = new CTeInfEventoEnv();
-            Signature = new DFeSignature();
+            DescEvento = "Prestacao do Servico em Desacordo";
         }
 
         #endregion Constructors
 
         #region Properties
 
-        [DFeAttribute(TipoCampo.Enum, "versao", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public CTeVersao Versao { get; set; }
+        /// <summary>
+        /// Define/retorna a descrição do evento, não alterar.
+        /// </summary>
+        [DFeElement(TipoCampo.Str, "descEvento", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string DescEvento { get; set; }
 
-        [DFeElement("infEvento", Ocorrencia = Ocorrencia.Obrigatoria)]
-        public CTeInfEventoEnv InfEvento { get; set; }
+        [DFeElement(TipoCampo.Custom, "indDesacordoOper", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public bool IndDesacordoOper { get; set; }
 
-        public DFeSignature Signature { get; set; }
+        [DFeElement(TipoCampo.Str, "xObs", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Obs { get; set; }
 
         #endregion Properties
+
+        #region Methods
+
+        private string SerializeIndDesacordoOper()
+        {
+            return IndDesacordoOper ? "1" : "0";
+        }
+
+        private object DeserializeIndDesacordoOper(string value)
+        {
+            return Convert.ToBoolean(Convert.ToInt32(value));
+        }
+
+        #endregion Methods
     }
 }

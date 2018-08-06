@@ -29,6 +29,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.CTe.Eventos;
+
 namespace ACBr.Net.CTe
 {
     public interface IEventoCTe

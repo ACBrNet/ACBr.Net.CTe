@@ -31,31 +31,32 @@
 
 using System.ServiceModel;
 using System.Xml;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-	[MessageContract(WrapperName = "cteConsultaCTResponse", IsWrapped = false)]
-	public sealed class ConsultaResponse : ResponseBase
-	{
-		#region Constructors
+    [MessageContract(WrapperName = "cteConsultaCTResponse", IsWrapped = false)]
+    public sealed class ConsultaResponse : ResponseBase
+    {
+        #region Constructors
 
-		public ConsultaResponse()
-		{
-		}
+        public ConsultaResponse()
+        {
+        }
 
-		public ConsultaResponse(CTeWsCabecalho cabecalho, XmlNode result)
-		{
-			Cabecalho = cabecalho;
-			Result = result;
-		}
+        public ConsultaResponse(DFeWsCabecalho cabecalho, XmlNode result)
+        {
+            Cabecalho = cabecalho;
+            Result = result;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[MessageBodyMember(Name = "cteConsultaCTResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta", Order = 0)]
-		public XmlNode Result;
+        [MessageBodyMember(Name = "cteConsultaCTResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta", Order = 0)]
+        public XmlNode Result;
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }

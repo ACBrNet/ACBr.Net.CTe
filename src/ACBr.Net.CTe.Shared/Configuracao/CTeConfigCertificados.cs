@@ -33,7 +33,7 @@ using System.ComponentModel;
 using ACBr.Net.Core;
 using ACBr.Net.DFe.Core.Common;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Configuracao
 {
     [TypeConverter(typeof(ACBrExpandableObjectConverter))]
     public sealed class CTeConfigCertificados : DFeCertificadosConfigBase<ACBrCTe>, INotifyPropertyChanged

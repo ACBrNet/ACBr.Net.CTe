@@ -1,12 +1,12 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 06-23-2018
 // ***********************************************************************
-// <copyright file="ConsultaCadastroResponse.cs" company="ACBr.Net">
+// <copyright file="DetEvento.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,36 +29,22 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ServiceModel;
-using System.Xml;
+using ACBr.Net.Core.Generics;
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe.Services
+namespace ACBr.Net.CTe.Eventos
 {
-    [MessageContract(WrapperName = "consultaCadastroResponse", IsWrapped = false)]
-    public sealed class ConsultaCadastroResponse
+    public sealed class DetEvento : GenericClone<DetEvento>
     {
-        #region Constructors
+        [DFeAttribute(TipoCampo.Enum, "versaoEvento", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao VersaoEvento { get; set; }
 
-        public ConsultaCadastroResponse()
-        {
-        }
-
-        public ConsultaCadastroResponse(CTeWsCabecalho cabecalho, XmlNode retorno)
-        {
-            Cabecalho = cabecalho;
-            Result = retorno;
-        }
-
-        #endregion Constructors
-
-        #region Properties
-
-        [MessageHeader(Name = "nfeCabecMsg", Namespace = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro")]
-        public CTeWsCabecalho Cabecalho;
-
-        [MessageBodyMember(Name = "consultaCadastroResult", Namespace = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro", Order = 0)]
-        public XmlNode Result;
-
-        #endregion Properties
+        [DFeItem(typeof(CTeEvCancCTe), "evCancCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+        [DFeItem(typeof(CTeEvCCeCTe), "evCCeCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+        [DFeItem(typeof(CTeEvEPEC), "evEPECCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+        [DFeItem(typeof(CTeEvRegMultimodal), "evRegMultimodal", Namespace = "http://www.portalfiscal.inf.br/cte")]
+        [DFeItem(typeof(CTeEvPrestDesacordo), "evPrestDesacordo", Namespace = "http://www.portalfiscal.inf.br/cte")]
+        public IEventoCTe Evento { get; set; }
     }
 }

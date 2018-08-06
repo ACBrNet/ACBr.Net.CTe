@@ -29,9 +29,11 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Service;
+
 namespace ACBr.Net.CTe.Services
 {
-    public class InutilizaoResposta : CTeResposta<InutilizaoServiceResult>
+    public class InutilizaoResposta : DFeResposta<InutilizaoServiceResult>
     {
         #region Constructor
 

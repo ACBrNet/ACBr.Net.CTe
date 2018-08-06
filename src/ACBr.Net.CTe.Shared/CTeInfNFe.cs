@@ -60,12 +60,13 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Str, "chave", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string Chave { get; set; }
 
-        [DFeElement(TipoCampo.Str, "PIN", Min = 2, Max = 9, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement(TipoCampo.Str, "PIN", Min = 2, Max = 9, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public string PIN { get; set; }
 
         [DFeElement(TipoCampo.Dat, "dPrev", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DateTime? DPrev { get; set; }
 
+        [DFeCollection("infDoc")]
         [DFeItem(typeof(CTeTUnidCarga), "infUnidCarga")]
         [DFeItem(typeof(CTeUnidadeTransp), "infUnidTransp")]
         public DFeCollection<IInfoUnidade> Infos { get; set; }

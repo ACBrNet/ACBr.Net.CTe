@@ -29,9 +29,12 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.CTe.Eventos;
+using ACBr.Net.DFe.Core.Service;
+
 namespace ACBr.Net.CTe.Services
 {
-    public class RecepcaoEventoResposta : CTeResposta<CTeProcEvento>
+    public class RecepcaoEventoResposta : DFeResposta<CTeProcEvento>
     {
         #region Constructor
 

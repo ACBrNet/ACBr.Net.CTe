@@ -34,6 +34,7 @@ using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Collection;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
@@ -58,7 +59,7 @@ namespace ACBr.Net.CTe
 
         #region Propriedades
 
-        [DFeElement(TipoCampo.Custom, "", Id = "", Min = 6, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement(TipoCampo.Custom, "RNTRC", Id = "", Min = 6, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string RNTRC { get; set; }
 
         [DFeElement("occ", Ocorrencia = Ocorrencia.Obrigatoria)]
@@ -70,7 +71,6 @@ namespace ACBr.Net.CTe
 
         private string SerializeRNTRC()
         {
-            ;
             return RNTRC.Trim().ToUpper() == CTeConst.CTeIEIsento ? RNTRC.Trim().ToUpper() : RNTRC.OnlyNumbers();
         }
 

@@ -39,9 +39,12 @@ using ACBr.Net.Core;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Logging;
+using ACBr.Net.CTe.Configuracao;
 using ACBr.Net.CTe.Services;
 using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Extensions;
+using ACBr.Net.DFe.Core.Service;
 
 #if !NETSTANDARD2_0
 
@@ -108,10 +111,10 @@ namespace ACBr.Net.CTe
         #region Methods
 
         /// <summary>
-        /// Metodo para enviar a CTe carregadas na coleção.
+        /// Metodo para enviar a(s) CTe(d) carregada(s) na coleção.
         /// </summary>
         /// <param name="lote">Número do lote.</param>
-        /// <param name="imprimir">True se deve imprimir os CTe retornado com sucesso.</param>
+        /// <param name="imprimir">Verdadeiro para imprimir o(s) CTe(s) retornado(s) com sucesso.</param>
         /// <returns></returns>
         public EnviarCTeResposta Enviar(int lote, bool imprimir = true)
         {
@@ -119,10 +122,10 @@ namespace ACBr.Net.CTe
         }
 
         /// <summary>
-        /// Metodo para enviar a CTe carregadas na coleção.
+        /// Metodo para enviar a(s) CTe(d) carregada(s) na coleção.
         /// </summary>
         /// <param name="lote">Número do lote.</param>
-        /// <param name="imprimir">True se deve imprimir os CTe retornado com sucesso.</param>
+        /// <param name="imprimir">Verdadeiro para imprimir o(s) CTe(s) retornado(s) com sucesso.</param>
         /// <returns></returns>
         public EnviarCTeResposta Enviar(string lote, bool imprimir = true)
         {
@@ -130,7 +133,11 @@ namespace ACBr.Net.CTe
             ServicePointManager.SecurityProtocol = securityProtocol;
             var cert = Configuracoes.Certificados.ObterCertificado();
 
-            Conhecimentos.Assinar();
+            var saveOptions = DFeSaveOptions.DisableFormatting | DFeSaveOptions.OmitDeclaration;
+            if (Configuracoes.Geral.RetirarAcentos) saveOptions |= DFeSaveOptions.RemoveAccents;
+            if (Configuracoes.Geral.RetirarEspacos) saveOptions |= DFeSaveOptions.RemoveSpaces;
+
+            Conhecimentos.Assinar(cert, saveOptions);
             Conhecimentos.Validar();
 
             RecepcaoCTeResposta recepcao;
@@ -378,6 +385,38 @@ namespace ACBr.Net.CTe
             catch (Exception exception)
             {
                 this.Log().Error("[EnviarEvento]", exception);
+                throw;
+            }
+            finally
+            {
+                cert.Reset();
+                ServicePointManager.SecurityProtocol = oldProtocol;
+                Status = StatusCTe.EmEspera;
+            }
+        }
+
+        /// <summary>
+        /// Consulta Cadastro do contribuinte na SEFAZ.
+        /// </summary>
+        /// <returns></returns>
+        public DFeConsultaCadastroResposta ConsultaCadastro(DFeCodUF uf, string cpfCNPJ = "", string ie = "")
+        {
+            var oldProtocol = ServicePointManager.SecurityProtocol;
+            ServicePointManager.SecurityProtocol = securityProtocol;
+            var cert = Configuracoes.Certificados.ObterCertificado();
+
+            try
+            {
+                Status = StatusCTe.Cadastro;
+
+                using (var cliente = new ConsultaCadastroServiceClient(Configuracoes, uf, cert))
+                {
+                    return cliente.ConsultaCadastro(uf.ToSiglaUF(), uf, cpfCNPJ, ie);
+                }
+            }
+            catch (Exception exception)
+            {
+                this.Log().Error("[ConsultaCadastro]", exception);
                 throw;
             }
             finally

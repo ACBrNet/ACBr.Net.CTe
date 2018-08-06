@@ -29,9 +29,11 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Service;
+
 namespace ACBr.Net.CTe.Services
 {
-    public sealed class RecepcaoCTeResposta : CTeResposta<CTeRecepcaoResult>
+    public sealed class RecepcaoCTeResposta : DFeResposta<CTeRecepcaoResult>
     {
         #region Constructor
 
