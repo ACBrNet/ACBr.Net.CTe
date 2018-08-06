@@ -31,31 +31,32 @@
 
 using System.ServiceModel;
 using System.Xml;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-	[MessageContract(WrapperName = "cteRetRecepcaoResponse", IsWrapped = false)]
-	public sealed class RetRecepcaoResponse : ResponseBase
-	{
-		#region Constructors
+    [MessageContract(WrapperName = "cteRetRecepcaoResponse", IsWrapped = false)]
+    public sealed class RetRecepcaoResponse : ResponseBase
+    {
+        #region Constructors
 
-		public RetRecepcaoResponse()
-		{
-		}
+        public RetRecepcaoResponse()
+        {
+        }
 
-		public RetRecepcaoResponse(CTeWsCabecalho cabecalho, XmlNode result)
-		{
-			Cabecalho = cabecalho;
-			Result = result;
-		}
+        public RetRecepcaoResponse(DFeWsCabecalho cabecalho, XmlNode result)
+        {
+            Cabecalho = cabecalho;
+            Result = result;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[MessageBodyMember(Name = "cteRetRecepcaoResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRetRecepcao", Order = 0)]
-		public XmlNode Result;
+        [MessageBodyMember(Name = "cteRetRecepcaoResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRetRecepcao", Order = 0)]
+        public XmlNode Result;
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }

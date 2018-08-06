@@ -36,7 +36,7 @@ using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core.Common;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Configuracao
 {
     [TypeConverter(typeof(ACBrExpandableObjectConverter))]
     public sealed class CTeConfigWebServices : DFeWebserviceConfigBase<ACBrCTe>, INotifyPropertyChanged
@@ -66,18 +66,6 @@ namespace ACBr.Net.CTe
         #endregion Constructor
 
         #region Properties
-
-        public TimeSpan? TimeOut
-        {
-            get
-            {
-                TimeSpan? timeOut = null;
-                if (AjustaAguardaConsultaRet)
-                    timeOut = TimeSpan.FromSeconds((int)AguardarConsultaRet);
-
-                return timeOut;
-            }
-        }
 
         [Browsable(true)]
         public DFeCodUF UF

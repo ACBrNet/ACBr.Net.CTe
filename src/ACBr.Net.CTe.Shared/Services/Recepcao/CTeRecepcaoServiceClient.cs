@@ -30,13 +30,12 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.CTe.Configuracao;
 using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Common;
 
@@ -61,6 +60,8 @@ namespace ACBr.Net.CTe.Services
         public RecepcaoCTeResposta RecepcaoLote(CTe[] ctes, string loteId)
         {
             Guard.Against<ArgumentNullException>(ctes == null, nameof(ctes));
+            Guard.Against<ArgumentNullException>(loteId.IsEmpty(), "Número do lote vazio.");
+            Guard.Against<ArgumentException>(!loteId.IsNumeric(), "Número do lote incorreto.");
             Guard.Against<ArgumentException>(ctes.Length < 1, "Precisa de pelo menos 1 conhecimento por lote.");
             Guard.Against<ArgumentException>(ctes.Length > 50, "So pode enviar 50 conhecimentos por lote.");
 
@@ -76,8 +77,8 @@ namespace ACBr.Net.CTe.Services
 
                 foreach (var cte in ctes)
                 {
-                    var cteXml = cte.GetXml(saveOptions);
-                    GravarCTe(cteXml, cte.GetXmlName(), cte.InfCte.Ide.DhEmi.DateTime, cte.InfCte.Emit.CNPJ, cte.InfCte.Ide.Mod);
+                    var cteXml = cte.Xml.IsEmpty() ? cte.GetXml(saveOptions) : cte.Xml;
+                    GravarCTe(cteXml, cte.GetXmlName(), cte.InfCTe.Ide.DhEmi.DateTime, cte.InfCTe.Emit.CNPJ, cte.InfCTe.Ide.Mod);
                     request.Append(cteXml);
                 }
 

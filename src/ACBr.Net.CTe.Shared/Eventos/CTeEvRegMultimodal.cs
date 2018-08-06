@@ -1,12 +1,12 @@
-ï»¿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 06-22-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 06-22-2018
 // ***********************************************************************
-// <copyright file="ConsultaCadastroResponse.cs" company="ACBr.Net">
+// <copyright file="CTeEvRegMultimodal.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,35 +29,47 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ServiceModel;
-using System.Xml;
+using System.ComponentModel;
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe.Services
+namespace ACBr.Net.CTe.Eventos
 {
-    [MessageContract(WrapperName = "consultaCadastroResponse", IsWrapped = false)]
-    public sealed class ConsultaCadastroResponse
+    [DFeRoot("evRegMultimodal", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeEvRegMultimodal : DFeDocument<CTeEvRegMultimodal>, IEventoCTe, INotifyPropertyChanged
     {
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
         #region Constructors
 
-        public ConsultaCadastroResponse()
+        /// <summary>
+        /// Inicializa uma nova instância da classe <see cref="CTeEvRegMultimodal"/> class.
+        /// </summary>
+        public CTeEvRegMultimodal()
         {
-        }
-
-        public ConsultaCadastroResponse(CTeWsCabecalho cabecalho, XmlNode retorno)
-        {
-            Cabecalho = cabecalho;
-            Result = retorno;
+            DescEvento = "Registro Multimodal";
         }
 
         #endregion Constructors
 
         #region Properties
 
-        [MessageHeader(Name = "nfeCabecMsg", Namespace = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro")]
-        public CTeWsCabecalho Cabecalho;
+        /// <summary>
+        /// Define/retorna a descrição do evento, não alterar.
+        /// </summary>
+        [DFeElement(TipoCampo.Str, "descEvento", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string DescEvento { get; set; }
 
-        [MessageBodyMember(Name = "consultaCadastroResult", Namespace = "http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro", Order = 0)]
-        public XmlNode Result;
+        [DFeElement(TipoCampo.Str, "xRegistro", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Registro { get; set; }
+
+        [DFeElement(TipoCampo.Str, "nDoc", Min = 0, Max = 255, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string NDoc { get; set; }
 
         #endregion Properties
     }

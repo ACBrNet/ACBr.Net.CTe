@@ -30,7 +30,6 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using ACBr.Net.Core.Exceptions;
@@ -42,8 +41,9 @@ using ACBr.Net.DFe.Core.Document;
 
 namespace ACBr.Net.CTe
 {
+    [DFeSignInfoElement("infCte")]
     [DFeRoot("CTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public sealed class CTe : DFeDocument<CTe>, INotifyPropertyChanged
+    public sealed class CTe : DFeSignDocument<CTe>, INotifyPropertyChanged
     {
         #region Events
 
@@ -56,7 +56,7 @@ namespace ACBr.Net.CTe
         public CTe()
         {
             Signature = new DFeSignature();
-            InfCte = new InfCte();
+            InfCTe = new InfCTe();
         }
 
         #endregion Constructors
@@ -64,9 +64,7 @@ namespace ACBr.Net.CTe
         #region Propriedades
 
         [DFeElement("infCte", Ocorrencia = Ocorrencia.Obrigatoria)]
-        public InfCte InfCte { get; set; }
-
-        public DFeSignature Signature { get; set; }
+        public InfCTe InfCTe { get; set; }
 
         [DFeIgnore]
         public bool Cancelada { get; set; }
@@ -75,24 +73,29 @@ namespace ACBr.Net.CTe
 
         #region Methods
 
-        public void Assinar(X509Certificate2 certificado)
+        /// <summary>
+        /// Assina o CTe.
+        /// </summary>
+        /// <param name="certificado">The certificado.</param>
+        /// <param name="saveOptions">The save options.</param>
+        public void Assinar(X509Certificate2 certificado, DFeSaveOptions saveOptions)
         {
             Guard.Against<ArgumentNullException>(certificado == null, "Certificado não pode ser nulo.");
 
-            InfCte.Id = "CTe" + ChaveDFe.Gerar(InfCte.Ide.CUF, InfCte.Ide.DhEmi.DateTime,
-                            InfCte.Emit.CNPJ, (int)InfCte.Ide.Mod, InfCte.Ide.Serie,
-                            InfCte.Ide.NCT, InfCte.Ide.TpEmis, InfCte.Ide.CCT);
+            InfCTe.Id = "CTe" + ChaveDFe.Gerar(InfCTe.Ide.CUF, InfCTe.Ide.DhEmi.DateTime,
+                            InfCTe.Emit.CNPJ, (int)InfCTe.Ide.Mod, InfCTe.Ide.Serie,
+                            InfCTe.Ide.NCT, InfCTe.Ide.TpEmis, InfCTe.Ide.CCT);
 
-            var xml = GetXml(DFeSaveOptions.DisableFormatting);
-            xml = XmlSigning.AssinarXml(xml, "CTe", "infCte", certificado);
-            Signature = DFeSignature.Load(xml);
+            AssinarDocumento(certificado, saveOptions, false, SignDigest.SHA1);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         public string GetXmlName()
         {
-            Guard.Against<ACBrDFeException>(InfCte.Id.IsEmpty(), "Chave do CTe inválida. Impossível salvar XML.");
-
-            return $"{InfCte.Id}-cte.xml";
+            return $"{InfCTe.Id.OnlyNumbers()}-cte.xml";
         }
 
         #endregion Methods

@@ -31,19 +31,20 @@
 
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe.Services
 {
     public abstract class CTeResultBase<T> : DFeDocument<T> where T : class
     {
-        [DFeAttribute(TipoCampo.Str, "versao", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string Versao { get; set; }
+        [DFeAttribute(TipoCampo.Enum, "versao", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
 
         [DFeElement(TipoCampo.Enum, "tpAmb", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
         public DFeTipoAmbiente TipoAmbiente { get; set; }
 
-        [DFeElement(TipoCampo.Str, "verAplic", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement(TipoCampo.Str, "verAplic", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string VersaoAplicacao { get; set; }
 
         [DFeElement(TipoCampo.Int, "cStat", Min = 1, Max = 3, Ocorrencia = Ocorrencia.Obrigatoria)]

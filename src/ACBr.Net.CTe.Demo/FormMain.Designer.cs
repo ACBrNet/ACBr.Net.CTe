@@ -1401,10 +1401,6 @@
             this.acbrCTe.Configuracoes.Certificados.Senha = null;
             this.acbrCTe.Configuracoes.Geral.VersaoDFe = ACBr.Net.CTe.CTeVersao.v300;
             this.acbrCTe.Configuracoes.WebServices.AguardarConsultaRet = ((uint)(1u));
-            this.acbrCTe.Configuracoes.WebServices.ProxyHost = "";
-            this.acbrCTe.Configuracoes.WebServices.ProxyPass = "";
-            this.acbrCTe.Configuracoes.WebServices.ProxyPort = "";
-            this.acbrCTe.Configuracoes.WebServices.ProxyUser = "";
             this.acbrCTe.Configuracoes.WebServices.Salvar = false;
             this.acbrCTe.Configuracoes.WebServices.UF = ACBr.Net.DFe.Core.Common.DFeCodUF.MS;
             this.acbrCTe.StatusChanged += new System.EventHandler<System.EventArgs>(this.acbrCTe_StatusChanged);

@@ -33,8 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using ACBr.Net.Core;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core;
@@ -81,22 +81,51 @@ namespace ACBr.Net.CTe
 
         #region Methods
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="path"></param>
-        public void Load(string path)
+        /// <summary>Adds an object to the end of the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" />.</summary>
+        /// <param name="item">The object to be added to the end of the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" />. The value can be null for reference types.</param>
+        public void Add(CTe item)
         {
-            Guard.Against<ArgumentNullException>(path.IsEmpty(), nameof(path));
-            Guard.Against<ArgumentException>(!File.Exists(path), "Arquivo não encontrado");
+            Add(new CTeProc { CTe = item });
+        }
 
-            Load(File.Open(path, FileMode.Open));
+        /// <summary>Inserts an element into the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" /> at the specified index.</summary>
+        /// <param name="index">The zero-based index at which <paramref name="item" /> should be inserted.</param>
+        /// <param name="item">The object to insert. The value can be null for reference types.</param>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// <paramref name="index" /> is less than 0.-or-<paramref name="index" /> is greater than <see cref="!:DFeCollection&lt;T&gt;.Count" />.</exception>
+        public void Insert(int index, CTe item)
+        {
+            Insert(index, new CTeProc { CTe = item });
+        }
+
+        /// <summary>Inserts the elements of a collection into the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" /> at the specified index.</summary>
+        /// <param name="index">The zero-based index at which the new elements should be inserted.</param>
+        /// <param name="collection">The collection whose elements should be inserted into the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" />. The collection itself cannot be null, but it can contain elements that are null, if type <paramref name="T" /> is a reference type.</param>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// <paramref name="collection" /> is null.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// <paramref name="index" /> is less than 0.-or-<paramref name="index" /> is greater than <see cref="!:DFeCollection&lt;T&gt;.Count" />.</exception>
+        public void InsertRange(int index, IEnumerable<CTe> collection)
+        {
+            InsertRange(index, collection.Select(x => new CTeProc { CTe = x }));
         }
 
         /// <summary>
-        ///
+        /// Carrega a CTe informada.
         /// </summary>
-        /// <param name="stream"></param>
+        /// <param name="path">Caminho da CTe.</param>
+        public void Load(string path)
+        {
+            Guard.Against<ArgumentNullException>(path.IsEmpty(), nameof(path));
+
+            var xml = File.Exists(path) ? File.ReadAllText(path, Encoding.UTF8) : path;
+            LoadXml(xml);
+        }
+
+        /// <summary>
+        /// Carrega a CTe informada.
+        /// </summary>
+        /// <param name="stream">Stream da CTe.</param>
         public void Load(Stream stream)
         {
             Guard.Against<ArgumentNullException>(stream == null, nameof(stream));
@@ -104,12 +133,17 @@ namespace ACBr.Net.CTe
 
             using (var reader = new StreamReader(stream))
             {
-                var conteudo = reader.ReadLine();
-                Guard.Against<ACBrDFeException>(conteudo.IsEmpty(), "Não foi possivel ler o conteudo.");
-
-                var cteProc = conteudo.Contains("cteProc") ? CTeProc.Load(conteudo) : new CTeProc { CTe = CTe.Load(conteudo) };
-                Add(cteProc);
+                LoadXml(reader.ReadToEnd());
             }
+        }
+
+        private void LoadXml(string xml)
+        {
+            Guard.Against<ACBrDFeException>(xml.IsEmpty(), "Não foi possivel ler o conteudo.");
+            Guard.Against<ACBrDFeException>(!xml.Contains("cteProc") && !xml.Contains("CTe"), "Arquivo xml incorreto.");
+
+            var cteProc = xml.Contains("cteProc") ? CTeProc.Load(xml) : new CTeProc { CTe = CTe.Load(xml) };
+            Add(cteProc);
         }
 
         /// <summary>
@@ -119,16 +153,30 @@ namespace ACBr.Net.CTe
         {
             var cert = Parent.Configuracoes.Certificados.ObterCertificado();
 
+            var saveOptions = DFeSaveOptions.DisableFormatting | DFeSaveOptions.OmitDeclaration;
+            if (Parent.Configuracoes.Geral.RetirarAcentos) saveOptions |= DFeSaveOptions.RemoveAccents;
+            if (Parent.Configuracoes.Geral.RetirarEspacos) saveOptions |= DFeSaveOptions.RemoveSpaces;
+
             try
             {
-                foreach (var cte in NaoAutorizadas)
-                {
-                    cte.Assinar(cert);
-                }
+                Assinar(cert, saveOptions);
             }
             finally
             {
                 cert.Reset();
+            }
+        }
+
+        /// <summary>
+        /// Assina as CTe não autorizadas.
+        /// </summary>
+        /// <param name="certificado">O certificado.</param>
+        /// <param name="options"></param>
+        public void Assinar(X509Certificate2 certificado, DFeSaveOptions options)
+        {
+            foreach (var cte in NaoAutorizadas)
+            {
+                cte.Assinar(certificado, options);
             }
         }
 
@@ -148,35 +196,35 @@ namespace ACBr.Net.CTe
 
                 listaErros.AddRange(erros);
 
-                if (cte.InfCte.Ide.TpCTe == CTeTipo.Anulacao || cte.InfCte.Ide.TpCTe == CTeTipo.Complemento) continue;
+                if (cte.InfCTe.Ide.TpCTe == CTeTipo.Anulacao || cte.InfCTe.Ide.TpCTe == CTeTipo.Complemento) continue;
 
-                var xmlModal = ((CTeNormal)cte.InfCte.InfoCTe).InfModal.Modal.GetXml(DFeSaveOptions.DisableFormatting);
+                var xmlModal = ((CTeNormal)cte.InfCTe.InfoCTe).InfModal.Modal.GetXml(DFeSaveOptions.DisableFormatting);
                 SchemaCTe schema;
 
-                switch (((CTeNormal)cte.InfCte.InfoCTe).InfModal.Modal)
+                switch (((CTeNormal)cte.InfCTe.InfoCTe).InfModal.Modal)
                 {
                     case CTeAereoModal _:
-                        schema = SchemaCTe.CteModalAereo;
+                        schema = SchemaCTe.CTeModalAereo;
                         break;
 
                     case CTeAquavModal _:
-                        schema = SchemaCTe.CteModalAquaviario;
+                        schema = SchemaCTe.CTeModalAquaviario;
                         break;
 
-                    case CteDutoModal _:
-                        schema = SchemaCTe.CteModalDutoviario;
+                    case CTeDutoModal _:
+                        schema = SchemaCTe.CTeModalDutoviario;
                         break;
 
                     case CTeFerrovModal _:
-                        schema = SchemaCTe.CteModalFerroviario;
+                        schema = SchemaCTe.CTeModalFerroviario;
                         break;
 
                     case CTeMultimodal _:
-                        schema = SchemaCTe.CteMultiModal;
+                        schema = SchemaCTe.CTeMultiModal;
                         break;
 
                     case CTeRodoModal _:
-                        schema = SchemaCTe.CteModalRodoviario;
+                        schema = SchemaCTe.CTeModalRodoviario;
                         break;
 
                     default:

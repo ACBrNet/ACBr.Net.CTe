@@ -1,12 +1,12 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 11-10-2016
+// Created          : 10-22-2017
 //
 // Last Modified By : RFTD
-// Last Modified On : 11-10-2016
+// Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="CTeWsCabecalho.cs" company="ACBr.Net">
+// <copyright file="CTeRetEventoCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,18 +29,35 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Xml.Serialization;
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe.Services
+namespace ACBr.Net.CTe.Eventos
 {
-    [Serializable]
-    public sealed class CTeWsCabecalho
+    [DFeRoot("retEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeRetEventoCTe : DFeDocument<CTeRetEventoCTe>
     {
-        [XmlElement(ElementName = "cUF", Order = 0)]
-        public int CUf { get; set; }
+        #region Constructors
 
-        [XmlElement(ElementName = "versaoDados", Order = 1)]
-        public string VersaoDados { get; set; }
+        public CTeRetEventoCTe()
+        {
+            InfEvento = new CTeRetInfEvento();
+            Signature = new DFeSignature();
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        [DFeAttribute(TipoCampo.Enum, "versao", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
+
+        [DFeElement("infEvento", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeRetInfEvento InfEvento { get; set; }
+
+        public DFeSignature Signature { get; set; }
+
+        #endregion Properties
     }
 }

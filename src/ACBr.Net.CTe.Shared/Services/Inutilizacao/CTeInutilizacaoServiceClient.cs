@@ -35,6 +35,7 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml;
+using ACBr.Net.CTe.Configuracao;
 using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Extensions;
 
@@ -65,18 +66,18 @@ namespace ACBr.Net.CTe.Services
 
             lock (serviceLock)
             {
-                var idInutilizacao = $"ID{Configuracoes.WebServices.UF.GetValue()}{cnpj.OnlyNumbers()}{modelo.GetValue()}" +
+                var idInutilizacao = $"ID{Configuracoes.WebServices.UF.GetDFeValue()}{cnpj.OnlyNumbers()}{modelo.GetDFeValue()}" +
                                       $"{serie.ZeroFill(3)}{numeroInicial.ZeroFill(9)}{numeroFinal.ZeroFill(9)}";
 
                 var request = new StringBuilder();
                 request.Append($"<inutCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{Configuracoes.Geral.VersaoDFe.GetDescription()}\">");
                 request.Append($"<infInut Id=\"{idInutilizacao}\">");
-                request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetValue()}</tpAmb>");
+                request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetDFeValue()}</tpAmb>");
                 request.Append("<xServ>INUTILIZAR</xServ>");
-                request.Append($"<cUF>{Configuracoes.WebServices.UF.GetValue()}</cUF>");
+                request.Append($"<cUF>{Configuracoes.WebServices.UF.GetDFeValue()}</cUF>");
                 request.Append($"<ano>{ano}</ano>");
                 request.Append($"<CNPJ>{cnpj}</CNPJ>");
-                request.Append($"<mod>{modelo.GetValue()}</mod>");
+                request.Append($"<mod>{modelo.GetDFeValue()}</mod>");
                 request.Append($"<serie>{serie.ZeroFill(3)}</serie>");
                 request.Append($"<nCTIni>{numeroInicial.ZeroFill(9)}</nCTIni>");
                 request.Append($"<nCTFin>{numeroFinal.ZeroFill(9)}</nCTFin>");

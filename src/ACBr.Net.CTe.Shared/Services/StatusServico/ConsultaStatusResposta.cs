@@ -29,9 +29,11 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Service;
+
 namespace ACBr.Net.CTe.Services
 {
-    public class ConsultaStatusResposta : CTeResposta<StatusServiceResult>
+    public class ConsultaStatusResposta : DFeResposta<StatusServiceResult>
     {
         #region Constructor
 

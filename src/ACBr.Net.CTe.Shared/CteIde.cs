@@ -39,7 +39,7 @@ using ACBr.Net.DFe.Core.Collection;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeIde : DFeParentItem<CTeIde, InfCte>, INotifyPropertyChanged
+    public sealed class CTeIde : DFeParentItem<CTeIde, InfCTe>, INotifyPropertyChanged
     {
         #region Events
 
@@ -61,7 +61,7 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Enum, "cUF", Id = "#005", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
         public DFeCodUF CUF { get; set; }
 
-        [DFeElement(TipoCampo.StrNumberFill, "cCT", Id = "#006", Min = 8, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement(TipoCampo.Int, "cCT", Id = "#006", Min = 8, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
         public int CCT { get; set; }
 
         [DFeElement(TipoCampo.Int, "CFOP", Id = "#007", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]

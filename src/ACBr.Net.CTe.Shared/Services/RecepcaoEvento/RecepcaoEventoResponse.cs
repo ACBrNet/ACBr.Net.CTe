@@ -31,31 +31,32 @@
 
 using System.ServiceModel;
 using System.Xml;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-	[MessageContract(WrapperName = "cteRecepcaoEventoResponse", IsWrapped = false)]
-	public sealed class RecepcaoEventoResponse : ResponseBase
-	{
-		#region Constructors
+    [MessageContract(WrapperName = "cteRecepcaoEventoResponse", IsWrapped = false)]
+    public sealed class RecepcaoEventoResponse : ResponseBase
+    {
+        #region Constructors
 
-		public RecepcaoEventoResponse()
-		{
-		}
+        public RecepcaoEventoResponse()
+        {
+        }
 
-		public RecepcaoEventoResponse(CTeWsCabecalho cabecalho, XmlNode result)
-		{
-			Cabecalho = cabecalho;
-			Result = result;
-		}
+        public RecepcaoEventoResponse(DFeWsCabecalho cabecalho, XmlNode result)
+        {
+            Cabecalho = cabecalho;
+            Result = result;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[MessageBodyMember(Name = "cteRecepcaoEventoResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoEvento", Order = 0)]
-		public XmlNode Result;
+        [MessageBodyMember(Name = "cteRecepcaoEventoResult", Namespace = "http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoEvento", Order = 0)]
+        public XmlNode Result;
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }

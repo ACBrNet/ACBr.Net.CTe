@@ -4,9 +4,9 @@
 // Created          : 06-22-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 06-22-2018
+// Last Modified On : 06-26-2018
 // ***********************************************************************
-// <copyright file="CTeEvPrestDesacordo.cs" company="ACBr.Net">
+// <copyright file="CTeEvEPEC.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,15 +29,17 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.ComponentModel;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe
+namespace ACBr.Net.CTe.Eventos
 {
-    [DFeRoot("evPrestDesacordo", Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public sealed class CTeEvPrestDesacordo : DFeDocument<CTeEvPrestDesacordo>, IEventoCTe, INotifyPropertyChanged
+    [DFeRoot("evEPECCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeEvEPEC : DFeDocument<CTeEvEPEC>, IEventoCTe, INotifyPropertyChanged
     {
         #region Events
 
@@ -48,11 +50,11 @@ namespace ACBr.Net.CTe
         #region Constructors
 
         /// <summary>
-        /// Inicializa uma nova instância da classe <see cref="CTeEvRegMultimodal"/> class.
+        /// Inicializa uma nova instância da classe <see cref="CTeEvEPEC"/> class.
         /// </summary>
-        public CTeEvPrestDesacordo()
+        public CTeEvEPEC()
         {
-            DescEvento = "Prestacao do Servico em Desacordo";
+            DescEvento = "EPEC";
         }
 
         #endregion Constructors
@@ -65,26 +67,39 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Str, "descEvento", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string DescEvento { get; set; }
 
-        [DFeElement(TipoCampo.Custom, "indDesacordoOper", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public bool IndDesacordoOper { get; set; }
+        /// <summary>
+		/// Define/retorna a justificativa.
+		/// </summary>
+        [DFeElement(TipoCampo.Str, "xJust", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string XJust { get; set; }
 
-        [DFeElement(TipoCampo.Str, "xObs", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string Obs { get; set; }
+        [DFeElement(TipoCampo.De2, "vICMS", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VICMS { get; set; }
+
+        [DFeElement(TipoCampo.De2, "vTPrest", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VTPrest { get; set; }
+
+        [DFeElement(TipoCampo.De2, "vCarga", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VCarga { get; set; }
+
+        [DFeElement("toma4", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeTomadorEPEC Tomador { get; set; }
+
+        [DFeElement(TipoCampo.Enum, "modal", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeModal Modal { get; set; }
+
+        [DFeElement(TipoCampo.Enum, "UFIni", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeSiglaUF UFIni { get; set; }
+
+        [DFeElement(TipoCampo.Enum, "UFFim", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeSiglaUF UFFim { get; set; }
+
+        [DFeElement(TipoCampo.Enum, "tpCTe", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeTipo TpCTe { get; set; }
+
+        [DFeElement(TipoCampo.DatHorTz, "dhEmi", Min = 25, Max = 25, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTimeOffset DhEmi { get; set; }
 
         #endregion Properties
-
-        #region Methods
-
-        private string SerializeIndDesacordoOper()
-        {
-            return IndDesacordoOper ? "1" : "0";
-        }
-
-        private object DeserializeIndDesacordoOper(string value)
-        {
-            return value == "1";
-        }
-
-        #endregion Methods
     }
 }

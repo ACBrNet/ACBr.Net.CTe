@@ -59,10 +59,10 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Enum, "toma", Id = "#038", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeTomador Toma { get; set; }
 
-        [DFeElement(TipoCampo.StrNumberFill, "CPF", Id = "#039", Min = 11, Max = 11, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement(TipoCampo.StrNumberFill, "CPF", Id = "#039", Min = 11, Max = 11, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public string CPF { get; set; }
 
-        [DFeElement(TipoCampo.StrNumberFill, "CNPJ", Id = "#040", Min = 14, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement(TipoCampo.StrNumberFill, "CNPJ", Id = "#040", Min = 14, Max = 14, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public string CNPJ { get; set; }
 
         [DFeElement(TipoCampo.Custom, "IE", Id = "#041", Min = 0, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]

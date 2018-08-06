@@ -36,29 +36,30 @@ using ACBr.Net.DFe.Core.Collection;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeAquavInfDoc : GenericClone<CTeAquavInfDoc>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeAquavInfDoc : GenericClone<CTeAquavInfDoc>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeAquavInfDoc()
-		{
-			Infos = new DFeCollection<ICTeAquavInfDoc>();
-		}
+        public CTeAquavInfDoc()
+        {
+            Infos = new DFeCollection<ICTeAquavInfDoc>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeItem(typeof(CTeAquavInfNF), "infNF")]
-		[DFeItem(typeof(CTeAquavInfNFe), "infNFe")]
-		public DFeCollection<ICTeAquavInfDoc> Infos { get; set; }
+        [DFeCollection("infDoc")]
+        [DFeItem(typeof(CTeAquavInfNF), "infNF")]
+        [DFeItem(typeof(CTeAquavInfNFe), "infNFe")]
+        public DFeCollection<ICTeAquavInfDoc> Infos { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }

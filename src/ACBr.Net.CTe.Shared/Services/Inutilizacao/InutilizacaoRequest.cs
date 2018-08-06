@@ -30,19 +30,20 @@
 // ***********************************************************************
 
 using System.ServiceModel;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-	[MessageContract(WrapperName = "cteInutilizacaoCTRequest", IsWrapped = false)]
-	public sealed class InutilizacaoRequest : RequestBase
-	{
-		public InutilizacaoRequest()
-		{
-		}
+    [MessageContract(WrapperName = "cteInutilizacaoCTRequest", IsWrapped = false)]
+    public sealed class InutilizacaoRequest : RequestBase
+    {
+        public InutilizacaoRequest()
+        {
+        }
 
-		public InutilizacaoRequest(CTeWsCabecalho cabecalho, System.Xml.XmlNode mensagem)
-		{
-			Cabecalho = cabecalho;
-		}
-	}
+        public InutilizacaoRequest(DFeWsCabecalho cabecalho, System.Xml.XmlNode mensagem)
+        {
+            Cabecalho = cabecalho;
+        }
+    }
 }

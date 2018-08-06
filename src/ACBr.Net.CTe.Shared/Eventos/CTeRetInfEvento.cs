@@ -34,7 +34,7 @@ using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 
-namespace ACBr.Net.CTe.Services
+namespace ACBr.Net.CTe.Eventos
 {
     public sealed class CTeRetInfEvento
     {

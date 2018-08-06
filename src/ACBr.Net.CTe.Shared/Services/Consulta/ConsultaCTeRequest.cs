@@ -31,24 +31,25 @@
 
 using System.ServiceModel;
 using System.Xml;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-	[MessageContract(WrapperName = "cteConsultaCTRequest", IsWrapped = false)]
-	public sealed class ConsultaCTeRequest : RequestBase
-	{
-		#region Constructors
+    [MessageContract(WrapperName = "cteConsultaCTRequest", IsWrapped = false)]
+    public sealed class ConsultaCTeRequest : RequestBase
+    {
+        #region Constructors
 
-		public ConsultaCTeRequest()
-		{
-		}
+        public ConsultaCTeRequest()
+        {
+        }
 
-		public ConsultaCTeRequest(CTeWsCabecalho cabecalho, XmlNode mensagem)
-		{
-			Cabecalho = cabecalho;
-			Mensagem = mensagem;
-		}
+        public ConsultaCTeRequest(DFeWsCabecalho cabecalho, XmlNode mensagem)
+        {
+            Cabecalho = cabecalho;
+            Mensagem = mensagem;
+        }
 
-		#endregion Constructors
-	}
+        #endregion Constructors
+    }
 }

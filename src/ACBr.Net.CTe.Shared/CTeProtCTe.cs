@@ -31,41 +31,38 @@
 
 using System.ComponentModel;
 using ACBr.Net.DFe.Core.Attributes;
-using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	[DFeRoot("protCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
-	public sealed class CTeProtCTe : DFeDocument<CTeProtCTe>, INotifyPropertyChanged
-	{
-		#region Events
+    [DFeRoot("protCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    public sealed class CTeProtCTe : DFeSignDocument<CTeProtCTe>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeProtCTe()
-		{
-			Signature = new DFeSignature();
-			InfProt = new CTeInfProt();
-		}
+        public CTeProtCTe()
+        {
+            Signature = new DFeSignature();
+            InfProt = new CTeInfProt();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeAttribute(TipoCampo.Str, "versao")]
-		public string Versao { get; set; }
+        [DFeAttribute(TipoCampo.Str, "versao")]
+        public string Versao { get; set; }
 
-		[DFeElement("infProt", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeInfProt InfProt { get; set; }
+        [DFeElement("infProt", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeInfProt InfProt { get; set; }
 
-		public DFeSignature Signature { get; set; }
-
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }
