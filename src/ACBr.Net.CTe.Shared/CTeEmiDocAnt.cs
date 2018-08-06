@@ -73,7 +73,7 @@ namespace ACBr.Net.CTe
 		[DFeElement(TipoCampo.Str, "xNome", Id = "#350", Min = 2, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public string XNome { get; set; }
 
-		[DFeElement("idDocAnt")]
+		[DFeCollection("idDocAnt")]
 		[DFeItem(typeof(CTeIdDocAntEle), "idDocAntEle")]
 		[DFeItem(typeof(CTeIdDocAntPap), "idDocAntPap")]
 		public DFeCollection<ICTeIdDocAnt> IdDocAnt { get; set; }

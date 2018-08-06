@@ -64,10 +64,10 @@ namespace ACBr.Net.CTe
 		[DFeElement(TipoCampo.StrNumber, "idUnidTransp", Id = "#281", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public string IdUnidTransp { get; set; }
 
-		[DFeElement("lacUnidTransp", Ocorrencia = Ocorrencia.Obrigatoria)]
+		[DFeCollection("lacUnidTransp", Ocorrencia = Ocorrencia.Obrigatoria)]
 		public DFeCollection<CTeLacre> LacUnidTransp { get; set; }
 
-		[DFeElement("infUnidCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
+		[DFeCollection("infUnidCarga", Ocorrencia = Ocorrencia.Obrigatoria)]
 		public DFeCollection<CTeTUnidCarga> InfUnidCarga { get; set; }
 
 		[DFeElement(TipoCampo.De2, "qtdRat", Id = "#280", Min = 1, Max = 5, Ocorrencia = Ocorrencia.NaoObrigatoria)]

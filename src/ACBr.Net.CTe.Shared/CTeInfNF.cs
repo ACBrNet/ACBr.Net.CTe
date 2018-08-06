@@ -108,8 +108,8 @@ namespace ACBr.Net.CTe
 		[DFeElement(TipoCampo.Dat, "dPrev", Id = "#278", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public DateTime? DPrev { get; set; }
 
-		[DFeItem(typeof(CTeTUnidCarga), "infUnidCarga")]
-		[DFeItem(typeof(CTeUnidadeTransp), "infUnidTransp")]
+		[DFeCollection(typeof(CTeTUnidCarga), "infUnidCarga")]
+		[DFeCollection(typeof(CTeUnidadeTransp), "infUnidTransp")]
 		public DFeCollection<IInfoUnidade> Infos { get; set; }
 
 		#endregion Propriedades

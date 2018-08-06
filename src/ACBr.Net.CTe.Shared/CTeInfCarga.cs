@@ -65,7 +65,7 @@ namespace ACBr.Net.CTe
 		[DFeElement(TipoCampo.Str, "xOutCat", Id = "#256", Min = 1, Max = 30, Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public string XOutCat { get; set; }
 
-		[DFeElement("infQ", Min = 1, Max = 990, Ocorrencia = Ocorrencia.Obrigatoria)]
+		[DFeCollection("infQ", Min = 1, Max = 990, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public DFeCollection<CTeInfQ> InfQ { get; set; }
 
 		[DFeElement(TipoCampo.De2, "vCargaAverb", Id = "#", Min = 1, Max = 15, Ocorrencia = Ocorrencia.MaiorQueZero)]

@@ -85,10 +85,10 @@ namespace ACBr.Net.CTe
 		[DFeElement(TipoCampo.Str, "xObs", Id = "#090", Min = 1, Max = 2000, Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public string XObs { get; set; }
 
-		[DFeElement("ObsCont")]
+		[DFeCollection("ObsCont", Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public DFeCollection<CTeObsCont> ObsCont { get; set; }
 
-		[DFeElement("ObsFisco")]
+        [DFeCollection("ObsFisco", Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public DFeCollection<CTeObsFisco> ObsFisco { get; set; }
 
 		#endregion Propriedades
@@ -98,13 +98,13 @@ namespace ACBr.Net.CTe
 		private bool ShouldSerializeFluxo()
 		{
 			return !Fluxo.XOrig.IsEmpty() || !Fluxo.XDest.IsEmpty() ||
-				   !Fluxo.XRota.IsEmail() || Fluxo.Pass.Any();
+				   /*!Fluxo.XRota.IsEmail() ||*/ Fluxo.Pass.Any();
 		}
 
 		private bool ShouldSerializeEntrega()
 		{
 			return !Fluxo.XOrig.IsEmpty() || !Fluxo.XDest.IsEmpty() ||
-				   !Fluxo.XRota.IsEmail() || Fluxo.Pass.Any();
+				   /*!Fluxo.XRota.IsEmail() ||*/ Fluxo.Pass.Any();
 		}
 
 		#endregion Methods

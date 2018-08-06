@@ -175,7 +175,7 @@ namespace ACBr.Net.CTe
         [DFeItem(typeof(CTeComplemento), "infCteComp")]
         public IInfoCTe InfoCTe { get; set; }
 
-        [DFeElement("autXML", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        [DFeCollection("autXML", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeAutXML> AutXml { get; set; }
 
         #endregion Propriedades

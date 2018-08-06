@@ -61,7 +61,7 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Custom, "RNTRC", Id = "", Min = 6, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string RNTRC { get; set; }
 
-        [DFeElement("occ", Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeCollection("occ", Ocorrencia = Ocorrencia.Obrigatoria)]
         public DFeCollection<CTeRodoOcc> Occ { get; set; }
 
         #endregion Propriedades

@@ -57,10 +57,10 @@ namespace ACBr.Net.CTe
 
 		#region Propriedades
 
-		[DFeElement("fat", Ocorrencia = Ocorrencia.Obrigatoria)]
+		[DFeCollection("fat", Ocorrencia = Ocorrencia.Obrigatoria)]
 		public CTeFaturamento Fat { get; set; }
 
-		[DFeElement("dup", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+		[DFeCollection("dup", Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public DFeCollection<CTeDuplicata> Dup { get; set; }
 
 		#endregion Propriedades
