@@ -53,7 +53,7 @@ namespace ACBr.Net.CTe
 		[DFeItem(typeof(CTeAereoModal), "aereo")]
 		[DFeItem(typeof(CTeAquavModal), "aquav")]
 		[DFeItem(typeof(CTeFerrovModal), "ferrov")]
-		[DFeItem(typeof(CteDutoModal), "duto")]
+		[DFeItem(typeof(CTeDutoModal), "duto")]
 		[DFeItem(typeof(CTeMultimodal), "multimodal")]
 		public ICTeModal Modal { get; set; }
 

@@ -51,7 +51,7 @@ namespace ACBr.Net.CTe
         {
             InfServVinc = new DFeCollection<CTeInfCTeMultimodal>();
             InfGlobalizado = new CTeInfGlobalizado();
-            InfCteSub = new CTeInfCteSub();
+            InfCTeSub = new CTeInfCTeSub();
             Cobr = new CTeCobranca();
             VeicNovos = new DFeCollection<CTeVeicNovos>();
             InfModal = new CTeInfModal();
@@ -87,7 +87,7 @@ namespace ACBr.Net.CTe
         public CTeCobranca Cobr { get; set; }
 
         [DFeElement("infCteSub", Ocorrencia = Ocorrencia.Obrigatoria)]
-        public CTeInfCteSub InfCteSub { get; set; }
+        public CTeInfCTeSub InfCTeSub { get; set; }
 
         [DFeElement("infGlobalizado", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public CTeInfGlobalizado InfGlobalizado { get; set; }

@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 10-24-2016
 // ***********************************************************************
-// <copyright file="CTeInfCteSub.cs" company="ACBr.Net">
+// <copyright file="CTeInfCTeSub.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -37,56 +37,56 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeInfCteSub : GenericClone<CTeInfCteSub>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeInfCTeSub : GenericClone<CTeInfCTeSub>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeInfCteSub()
-		{
-			IndAlteraToma = CTeIndicador.Nao;
-		}
+        public CTeInfCTeSub()
+        {
+            IndAlteraToma = CTeIndicador.Nao;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.Str, "chCte", Id = "", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string ChCte { get; set; }
+        [DFeElement(TipoCampo.Str, "chCte", Id = "", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string ChCte { get; set; }
 
-		[DFeElement(TipoCampo.Str, "refCteAnu", Id = "", Min = 44, Max = 44, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string RefCteAnu { get; set; }
+        [DFeElement(TipoCampo.Str, "refCteAnu", Id = "", Min = 44, Max = 44, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string RefCteAnu { get; set; }
 
-		[DFeElement("tomaICMS", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public CTeTomaICMS TomaIcms { get; set; }
+        [DFeElement("tomaICMS", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeTomaICMS TomaIcms { get; set; }
 
-		[DFeElement("indAlteraToma", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeIndicador IndAlteraToma { get; set; }
+        [DFeElement("indAlteraToma", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeIndicador IndAlteraToma { get; set; }
 
-		#endregion Propriedades
+        #endregion Propriedades
 
-		#region Methods
+        #region Methods
 
-		private bool ShouldSerializeRefCteAnu()
-		{
-			return !RefCteAnu.IsEmpty();
-		}
+        private bool ShouldSerializeRefCteAnu()
+        {
+            return !RefCteAnu.IsEmpty();
+        }
 
-		private bool ShouldSerializeTomaIcms()
-		{
-			return RefCteAnu.IsEmpty();
-		}
+        private bool ShouldSerializeTomaIcms()
+        {
+            return RefCteAnu.IsEmpty();
+        }
 
-		private bool ShouldSerializeIndAlteraToma()
-		{
-			return IndAlteraToma == CTeIndicador.Sim;
-		}
+        private bool ShouldSerializeIndAlteraToma()
+        {
+            return IndAlteraToma == CTeIndicador.Sim;
+        }
 
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }

@@ -206,22 +206,22 @@ namespace ACBr.Net.CTe
 
                 foreach (var protCTe in retRecepcao.Resultado.ProtCTe)
                 {
-                    var cteProc = Conhecimentos.SingleOrDefault(x => x.CTe.InfCte.Id.OnlyNumbers() == protCTe.InfProt.ChCTe.OnlyNumbers());
+                    var cteProc = Conhecimentos.SingleOrDefault(x => x.CTe.InfCTe.Id.OnlyNumbers() == protCTe.InfProt.ChCTe.OnlyNumbers());
                     if (cteProc == null) continue;
                     if (Configuracoes.Geral.ValidarDigest)
                     {
                         Guard.Against<ACBrDFeException>(!protCTe.InfProt.DigVal.IsEmpty() &&
                                                         protCTe.InfProt.DigVal != cteProc.CTe.Signature.SignedInfo.Reference.DigestValue,
-                            $"DigestValue do documento {cteProc.CTe.InfCte.Id} não confere.");
+                            $"DigestValue do documento {cteProc.CTe.InfCTe.Id} não confere.");
                     }
 
                     cteProc.ProtCTe = protCTe;
                     if (!Configuracoes.Arquivos.Salvar) continue;
                     if (Configuracoes.Arquivos.SalvarApenasCTeProcessados && !cteProc.Processado) continue;
 
-                    var data = Configuracoes.Arquivos.EmissaoPathCTe ? cteProc.CTe.InfCte.Ide.DhEmi.DateTime : DateTime.Now;
-                    var pathArquivo = Configuracoes.Arquivos.GetPathCTe(data, cteProc.CTe.InfCte.Emit.CNPJ, cteProc.CTe.InfCte.Ide.Mod);
-                    var nomeArquivo = $"{cteProc.CTe.InfCte.Id}-cte.xml";
+                    var data = Configuracoes.Arquivos.EmissaoPathCTe ? cteProc.CTe.InfCTe.Ide.DhEmi.DateTime : DateTime.Now;
+                    var pathArquivo = Configuracoes.Arquivos.GetPathCTe(data, cteProc.CTe.InfCTe.Emit.CNPJ, cteProc.CTe.InfCTe.Ide.Mod);
+                    var nomeArquivo = $"{cteProc.CTe.InfCTe.Id}-cte.xml";
 
                     cteProc.Save(Path.Combine(pathArquivo, nomeArquivo), DFeSaveOptions.DisableFormatting);
                 }
@@ -266,7 +266,7 @@ namespace ACBr.Net.CTe
                     }
                     else
                     {
-                        var ret = cliente.Consulta(Conhecimentos.NaoAutorizadas.First().InfCte.Id.OnlyNumbers());
+                        var ret = cliente.Consulta(Conhecimentos.NaoAutorizadas.First().InfCTe.Id.OnlyNumbers());
 
                         return ret;
                     }

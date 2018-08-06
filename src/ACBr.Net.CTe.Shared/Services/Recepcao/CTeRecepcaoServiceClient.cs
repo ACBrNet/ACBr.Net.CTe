@@ -30,8 +30,6 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml;
@@ -80,7 +78,7 @@ namespace ACBr.Net.CTe.Services
                 foreach (var cte in ctes)
                 {
                     var cteXml = cte.Xml.IsEmpty() ? cte.GetXml(saveOptions) : cte.Xml;
-                    GravarCTe(cteXml, cte.GetXmlName(), cte.InfCte.Ide.DhEmi.DateTime, cte.InfCte.Emit.CNPJ, cte.InfCte.Ide.Mod);
+                    GravarCTe(cteXml, cte.GetXmlName(), cte.InfCTe.Ide.DhEmi.DateTime, cte.InfCTe.Emit.CNPJ, cte.InfCTe.Ide.Mod);
                     request.Append(cteXml);
                 }
 

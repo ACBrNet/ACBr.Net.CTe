@@ -30,9 +30,7 @@
 // ***********************************************************************
 
 using ACBr.Net.CTe.Eventos;
-using ACBr.Net.CTe.Services;
 using ACBr.Net.DFe.Core.Attributes;
-using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 

@@ -32,7 +32,6 @@
 using System;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core;
@@ -57,7 +56,7 @@ namespace ACBr.Net.CTe
         public CTe()
         {
             Signature = new DFeSignature();
-            InfCte = new InfCte();
+            InfCTe = new InfCTe();
         }
 
         #endregion Constructors
@@ -65,7 +64,7 @@ namespace ACBr.Net.CTe
         #region Propriedades
 
         [DFeElement("infCte", Ocorrencia = Ocorrencia.Obrigatoria)]
-        public InfCte InfCte { get; set; }
+        public InfCTe InfCTe { get; set; }
 
         [DFeIgnore]
         public bool Cancelada { get; set; }
@@ -83,9 +82,9 @@ namespace ACBr.Net.CTe
         {
             Guard.Against<ArgumentNullException>(certificado == null, "Certificado não pode ser nulo.");
 
-            InfCte.Id = "CTe" + ChaveDFe.Gerar(InfCte.Ide.CUF, InfCte.Ide.DhEmi.DateTime,
-                            InfCte.Emit.CNPJ, (int)InfCte.Ide.Mod, InfCte.Ide.Serie,
-                            InfCte.Ide.NCT, InfCte.Ide.TpEmis, InfCte.Ide.CCT);
+            InfCTe.Id = "CTe" + ChaveDFe.Gerar(InfCTe.Ide.CUF, InfCTe.Ide.DhEmi.DateTime,
+                            InfCTe.Emit.CNPJ, (int)InfCTe.Ide.Mod, InfCTe.Ide.Serie,
+                            InfCTe.Ide.NCT, InfCTe.Ide.TpEmis, InfCTe.Ide.CCT);
 
             AssinarDocumento(certificado, saveOptions, false, SignDigest.SHA1);
         }
@@ -96,7 +95,7 @@ namespace ACBr.Net.CTe
         /// <returns></returns>
         public string GetXmlName()
         {
-            return $"{InfCte.Id.OnlyNumbers()}-cte.xml";
+            return $"{InfCTe.Id.OnlyNumbers()}-cte.xml";
         }
 
         #endregion Methods

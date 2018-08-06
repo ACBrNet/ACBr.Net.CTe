@@ -210,27 +210,27 @@ namespace ACBr.Net.CTe.Configuracao
                     schemaPath = Path.Combine(PathSchemas, "consCad_v2.00.xsd");
                     break;
 
-                case SchemaCTe.CteModalAereo:
+                case SchemaCTe.CTeModalAereo:
                     schemaPath = Path.Combine(PathSchemas, $"cteModalAereo_v{versao.GetDescription()}.xsd");
                     break;
 
-                case SchemaCTe.CteModalAquaviario:
+                case SchemaCTe.CTeModalAquaviario:
                     schemaPath = Path.Combine(PathSchemas, $"cteModalAquaviario_v{versao.GetDescription()}.xsd");
                     break;
 
-                case SchemaCTe.CteModalDutoviario:
+                case SchemaCTe.CTeModalDutoviario:
                     schemaPath = Path.Combine(PathSchemas, $"cteModalDutoviario_v{versao.GetDescription()}.xsd");
                     break;
 
-                case SchemaCTe.CteModalFerroviario:
+                case SchemaCTe.CTeModalFerroviario:
                     schemaPath = Path.Combine(PathSchemas, $"cteModalFerroviario_v{versao.GetDescription()}.xsd");
                     break;
 
-                case SchemaCTe.CteModalRodoviario:
+                case SchemaCTe.CTeModalRodoviario:
                     schemaPath = Path.Combine(PathSchemas, $"cteModalRodoviario_v{versao.GetDescription()}.xsd");
                     break;
 
-                case SchemaCTe.CteMultiModal:
+                case SchemaCTe.CTeMultiModal:
                     schemaPath = Path.Combine(PathSchemas, $"cteMultiModal_v{versao.GetDescription()}.xsd");
                     break;
 
@@ -254,7 +254,7 @@ namespace ACBr.Net.CTe.Configuracao
                     schemaPath = Path.Combine(PathSchemas, "distDFeInt_v1.00.xsd");
                     break;
 
-                case SchemaCTe.CteModalRodoviarioOS:
+                case SchemaCTe.CTeModalRodoviarioOS:
                     schemaPath = Path.Combine(PathSchemas, $"cteModalRodoviarioOS_v{versao.GetDescription()}.xsd");
                     break;
 

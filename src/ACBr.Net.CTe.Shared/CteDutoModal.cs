@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 10-19-2016
 // ***********************************************************************
-// <copyright file="CteDutoModal.cs" company="ACBr.Net">
+// <copyright file="CTeDutoModal.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -38,7 +38,7 @@ using ACBr.Net.DFe.Core.Serializer;
 namespace ACBr.Net.CTe
 {
     [DFeRoot("duto")]
-    public sealed class CteDutoModal : DFeDocument<CteDutoModal>, ICTeModal, INotifyPropertyChanged
+    public sealed class CTeDutoModal : DFeDocument<CTeDutoModal>, ICTeModal, INotifyPropertyChanged
     {
         #region Events
 
