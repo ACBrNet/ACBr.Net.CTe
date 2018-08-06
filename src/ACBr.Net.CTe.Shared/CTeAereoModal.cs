@@ -77,7 +77,7 @@ namespace ACBr.Net.CTe
         [DFeElement("tarifa", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeAereoTarifa Tarifa { get; set; }
 
-        [DFeElement("peri", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        [DFeCollection("peri", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeAereoPeri> Peri { get; set; }
 
         #endregion Propriedades

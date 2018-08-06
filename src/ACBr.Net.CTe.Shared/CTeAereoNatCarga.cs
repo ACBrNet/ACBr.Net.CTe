@@ -59,7 +59,7 @@ namespace ACBr.Net.CTe
 		[DFeElement(TipoCampo.Str, "xDime", Id = "#12", Min = 5, Max = 14, Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public string XDime { get; set; }
 
-		[DFeElement(TipoCampo.Enum, "cInfManu", Id = "#13", Min = 2, Max = 2, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+		[DFeCollection(TipoCampo.Enum, "cInfManu", Id = "#13", Min = 2, Max = 2, Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public DFeCollection<CTeInfManu> CInfManu { get; set; }
 
 		#endregion Propriedades

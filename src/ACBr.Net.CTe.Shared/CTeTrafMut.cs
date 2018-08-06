@@ -66,10 +66,10 @@ namespace ACBr.Net.CTe
 		[DFeElement(TipoCampo.De2, "vFrete", Id = "#06", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public decimal VFrete { get; set; }
 
-		[DFeElement(TipoCampo.Str, "chCTeFerroOrigem", Id = "#07", Min = 44, Max = 44, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+		[DFeCollection(TipoCampo.Str, "chCTeFerroOrigem", Id = "#07", Min = 44, Max = 44, Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public string ChCTeFerroOrigem { get; set; }
 
-		[XmlElement("ferroEnv", ElementName = "ferroEnv")]
+		[DFeCollection("ferroEnv")]
 		public DFeCollection<CTeFerrovEnv> FerroEnv { get; set; }
 
 		#endregion Propriedades

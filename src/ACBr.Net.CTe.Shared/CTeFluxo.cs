@@ -59,7 +59,7 @@ namespace ACBr.Net.CTe
 		[DFeElement(TipoCampo.Str, "xOrig", Id = "#064", Min = 1, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public string XOrig { get; set; }
 
-		[DFeElement("pass", Min = 0, Max = 990)]
+		[DFeCollection("pass", Min = 0, Max = 990)]
 		public DFeCollection<CTeFluxoPass> Pass { get; set; }
 
 		[DFeElement(TipoCampo.Str, "xDest", Id = "#065", Min = 1, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]

@@ -62,7 +62,7 @@ namespace ACBr.Net.CTe
 		[DFeElement(TipoCampo.De2, "vTPrest", Id = "#210", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public decimal VRec { get; set; }
 
-		[DFeElement("Comp", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+		[DFeCollection("Comp", Ocorrencia = Ocorrencia.NaoObrigatoria)]
 		public DFeCollection<CTePrestComp> Comp { get; set; }
 
 		#endregion Propriedades

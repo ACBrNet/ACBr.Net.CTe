@@ -67,7 +67,7 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Str, "xNavio", Id = "#04", Min = 1, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string XNavio { get; set; }
 
-        [DFeElement("balsa", Id = "#05", Min = 0, Max = 3, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        [DFeCollection("balsa", Id = "#05", Min = 0, Max = 3, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeBalsa> Balsa { get; set; }
 
         [DFeElement(TipoCampo.Int, "nViag", Id = "#07", Min = 1, Max = 10, Ocorrencia = Ocorrencia.MaiorQueZero)]
@@ -79,7 +79,7 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Str, "irin", Id = "#09", Min = 1, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string Irin { get; set; }
 
-        [DFeElement("detCont", Id = "#10", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        [DFeCollection("detCont", Id = "#10", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<AquavDetCont> DetCont { get; set; }
 
         #endregion Propriedades
