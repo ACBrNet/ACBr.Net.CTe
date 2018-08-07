@@ -89,7 +89,7 @@ namespace ACBr.Net.CTe.Services
                 dadosMsg = XmlSigning.AssinarXml(dadosMsg, "inutCTe", "infInut", ClientCredentials.ClientCertificate.Certificate);
                 ValidateMessage(dadosMsg);
 
-                GravarInutilizacao(dadosMsg, $"{idInutilizacao.OnlyNumbers()}-inut-cte.xml", DateTime.Now, cnpj);
+                GravarInutilizacao(dadosMsg, $"{idInutilizacao.OnlyNumbers()}-inut-cte-env.xml", DateTime.Now, cnpj);
 
                 var xml = new XmlDocument();
                 xml.LoadXml(dadosMsg);
@@ -98,6 +98,7 @@ namespace ACBr.Net.CTe.Services
                 var retVal = Channel.CTeInutilizacao(inValue);
 
                 var retorno = new InutilizaoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
+                GravarInutilizacao(retVal.Result.OuterXml, $"{idInutilizacao.OnlyNumbers()}-inut-cte-ret.xml", DateTime.Now, cnpj);
                 return retorno;
             }
         }

@@ -132,9 +132,10 @@ namespace ACBr.Net.CTe.Services
                     ? date.ToString("yyyy-MM-ddTHH:mm:dd")
                     : date.ToString("yyyy-MM-ddTHH:mm:sszzz");
 
+                var eventoId = $"ID{(int)tipo}{chave}{nSeqEvento:D2}";
                 var request = new StringBuilder();
                 request.Append($"<eventoCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{versao}\">");
-                request.Append($"<infEvento Id=\"ID{(int)tipo}{chave}{nSeqEvento:D2}\">");
+                request.Append($"<infEvento Id=\"{eventoId}\">");
                 request.Append($"<cOrgao>{Configuracoes.WebServices.UF.GetDFeValue()}</cOrgao>");
                 request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetDFeValue()}</tpAmb>");
                 request.Append($"<CNPJ>{cnpj}</CNPJ>");
@@ -159,7 +160,7 @@ namespace ACBr.Net.CTe.Services
                 var retVal = Channel.RecepcaoEvento(inValue);
 
                 var retorno = new RecepcaoEventoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
-                GravarEvento(xmlEvento, $"{chave}-procEventoCTe.xml", tipo, date.DateTime, cnpj);
+                GravarEvento(retVal.Result.OuterXml, $"{eventoId}-procEventoCTe.xml", tipo, date.DateTime, cnpj);
                 return retorno;
             }
         }
