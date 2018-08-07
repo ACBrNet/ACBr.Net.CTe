@@ -68,7 +68,6 @@
     <Compile Include="..\Shared\ACBr.Net.CTe.AssemblyInfo.cs">
       <Link>Properties\ACBr.Net.CTe.AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CTeInfCTeSub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
