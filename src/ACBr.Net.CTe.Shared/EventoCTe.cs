@@ -29,7 +29,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Net;
 using ACBr.Net.CTe.Eventos;
 
 namespace ACBr.Net.CTe
@@ -39,6 +38,36 @@ namespace ACBr.Net.CTe
         public static CTeEvCancCTe Cancelamento(string nProt, string xJust)
         {
             return new CTeEvCancCTe() { NProt = nProt, XJust = xJust };
+        }
+
+        public static CTeEvCCeCTe CCe(CTeInfCorrecao[] correcoes)
+        {
+            var cceCTe = new CTeEvCCeCTe();
+            cceCTe.InfCorrecao.AddRange(correcoes);
+            return cceCTe;
+        }
+
+        public static CTeEvPrestDesacordo PrestacaoDesacordo(bool indicadorDesacordo, string observacao)
+        {
+            return new CTeEvPrestDesacordo
+            {
+                IndDesacordoOper = indicadorDesacordo,
+                Obs = observacao
+            };
+        }
+
+        public static CTeEvRegMultimodal RegMultimodal(string registro, string nDoc)
+        {
+            return new CTeEvRegMultimodal
+            {
+                Registro = registro,
+                NDoc = nDoc
+            };
+        }
+
+        public static CTeEvEPEC EPEC()
+        {
+            return new CTeEvEPEC();
         }
     }
 }

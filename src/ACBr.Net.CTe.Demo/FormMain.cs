@@ -199,27 +199,32 @@ namespace ACBr.Net.CTe.Demo
         {
             var chave = "";
             InputBox.Show("Cancelar CTe.", "Digite a chave da CTe", ref chave);
-
             if (chave.IsEmpty()) return;
 
             var protocolo = "";
             InputBox.Show("Cancelar CTe.", "Digite o protocolo do CTe", ref protocolo);
-
             if (protocolo.IsEmpty()) return;
 
             var justificativa = "";
             InputBox.Show("Cancelar CTe.", "Digite a justificativa", ref justificativa);
-
             if (justificativa.IsEmpty()) return;
 
-            var evento = EventoCTe.Cancelamento(protocolo, justificativa);
+            var cnpj = "";
+            InputBox.Show("Cancelar CTe.", "Digite o CNPJ.", ref cnpj);
+            if (cnpj.IsEmpty()) return;
 
-            var ret = acbrCTe.EnviarEvento(1, chave, "11111111111111", evento);
+            var nSeq = "";
+            InputBox.Show("Cancelar CTe.", "Digite o número sequencial do evento.", ref nSeq);
+            if (nSeq.IsEmpty()) return;
+
+            var cancCTe = EventoCTe.Cancelamento(protocolo, justificativa);
+
+            var ret = acbrCTe.EnviarEvento(nSeq.ToInt32(), chave, cnpj, cancCTe);
             wbbResposta.LoadXml(ret.XmlRetorno);
             wbbRetorno.LoadXml(ret.RetornoWS);
             wbbDados.LoadXml(ret.XmlEnvio);
 
-            rtLogResposta.AppendLine("Consultar CTe");
+            rtLogResposta.AppendLine("Cancelar CTe");
 
             tbcRespostas.SelectedTab = tabPageRespostas;
         }
