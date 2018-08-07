@@ -57,8 +57,8 @@ namespace ACBr.Net.CTe
 
         #region Propriedades
 
-        [DFeAttribute(TipoCampo.Str, "versao")]
-        public string Versao { get; set; }
+        [DFeAttribute(TipoCampo.Enum, "versao", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
 
         [DFeElement("infProt", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeInfProt InfProt { get; set; }

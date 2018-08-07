@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 10-22-2017
 // ***********************************************************************
-// <copyright file="IEventoCTe.cs" company="ACBr.Net">
+// <copyright file="EventoCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,10 +29,16 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Net;
+using ACBr.Net.CTe.Eventos;
+
 namespace ACBr.Net.CTe
 {
-    public interface IEventoCTe
+    public static class EventoCTe
     {
-        string DescEvento { get; set; }
+        public static CTeEvCancCTe Cancelamento(string nProt, string xJust)
+        {
+            return new CTeEvCancCTe() { NProt = nProt, XJust = xJust };
+        }
     }
 }

@@ -367,7 +367,7 @@ namespace ACBr.Net.CTe
         /// <param name="cnpj"></param>
         /// <param name="evento"></param>
         /// <returns></returns>
-        public RecepcaoEventoResposta EnviarEvento(int lote, int nSeqEvento, string chave, string cnpj, IEventoCTe evento)
+        public RecepcaoEventoResposta EnviarEvento(int nSeqEvento, string chave, string cnpj, IEventoCTe evento)
         {
             var oldProtocol = ServicePointManager.SecurityProtocol;
             ServicePointManager.SecurityProtocol = securityProtocol;
@@ -379,7 +379,7 @@ namespace ACBr.Net.CTe
 
                 using (var cliente = new CTeRecepcaoEventoServiceClient(Configuracoes, cert))
                 {
-                    return cliente.RecepcaoEvento(lote, nSeqEvento, chave, cnpj, evento);
+                    return cliente.RecepcaoEvento(nSeqEvento, chave.OnlyNumbers(), cnpj.OnlyNumbers(), evento);
                 }
             }
             catch (Exception exception)

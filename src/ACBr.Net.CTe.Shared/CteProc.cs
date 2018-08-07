@@ -33,6 +33,7 @@ using System.ComponentModel;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
@@ -57,8 +58,8 @@ namespace ACBr.Net.CTe
 
         #region Propriedades
 
-        [DFeAttribute("versao")]
-        public string Versao { get; set; }
+        [DFeAttribute(TipoCampo.Enum, "versao", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
 
         [DFeAttribute("ipTransmissor")]
         public string IpTransmissor { get; set; }
@@ -70,7 +71,7 @@ namespace ACBr.Net.CTe
         public CTeProtCTe ProtCTe { get; set; }
 
         [DFeIgnore]
-        public bool Processado => ProtCTe.InfProt.CStat.IsIn(100, 110, 150, 301, 302);
+        public bool Processado => ProtCTe?.InfProt?.CStat.IsIn(100, 110, 150, 301, 302) ?? false;
 
         #endregion Propriedades
     }

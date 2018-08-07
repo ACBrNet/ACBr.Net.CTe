@@ -94,13 +94,13 @@ namespace ACBr.Net.CTe
         public string CNPJ { get; set; }
 
         /// <summary>
-        ///     DP10 - Modelo da NF-e (55)
+        ///     DP10 - Modelo da CT-e (57)
         /// </summary>
         [DFeElement(TipoCampo.Enum, "mod", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
         public ModeloCTe Mod { get; set; }
 
         /// <summary>
-        ///     DP11 - Série da NF-e
+        ///     DP11 - Série da CT-e
         /// </summary>
         [DFeElement(TipoCampo.Int, "serie", Min = 1, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
         public int Serie { get; set; }
