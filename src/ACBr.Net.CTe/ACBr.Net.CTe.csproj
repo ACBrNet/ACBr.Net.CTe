@@ -47,7 +47,7 @@
       <HintPath>..\packages\ACBr.Net.Core.1.2.1\lib\net452\ACBr.Net.Core.dll</HintPath>
     </Reference>
     <Reference Include="ACBr.Net.DFe.Core, Version=1.2.2.0, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\ACBr.Net.DFe.Core.1.2.2-beta3\lib\net452\ACBr.Net.DFe.Core.dll</HintPath>
+      <HintPath>..\packages\ACBr.Net.DFe.Core.1.2.2-beta4\lib\net452\ACBr.Net.DFe.Core.dll</HintPath>
     </Reference>
     <Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
@@ -68,6 +68,7 @@
     <Compile Include="..\Shared\ACBr.Net.CTe.AssemblyInfo.cs">
       <Link>Properties\ACBr.Net.CTe.AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CTeInfCTeSub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

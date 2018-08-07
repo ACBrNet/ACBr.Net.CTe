@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigCertificados.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigGeral.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigWebServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SchemaCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeAereoModal.cs" />
@@ -82,7 +83,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfCanc.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfCarga.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfCTeMultimodal.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CTeInfCteSub.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfCTeSub.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Eventos\CTeInfEventoEnv.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfInutEnv.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeInutCTe.cs" />

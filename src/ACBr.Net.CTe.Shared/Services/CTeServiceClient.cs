@@ -116,11 +116,11 @@ namespace ACBr.Net.CTe.Services
         /// <param name="data"></param>
         /// <param name="cnpj"></param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected void GravarEvento(string conteudoArquivo, string nomeArquivo, CTeTipoEvento evento, DateTime data, string cnpj)
+        protected void GravarEvento(string conteudoArquivo, string nomeArquivo, CTeTipoEvento evento, DateTime data, string cnpj, bool addDeclaration = true)
         {
             if (!Configuracoes.Arquivos.Salvar) return;
 
-            conteudoArquivo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + conteudoArquivo;
+            if (addDeclaration) conteudoArquivo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + conteudoArquivo;
             nomeArquivo = Path.Combine(Configuracoes.Arquivos.GetPathEvento(evento, cnpj, data), nomeArquivo);
             File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
         }
@@ -132,11 +132,11 @@ namespace ACBr.Net.CTe.Services
         /// <param name="nomeArquivo"></param>
         /// <param name="data"></param>
         /// <param name="cnpj"></param>
-        protected void GravarInutilizacao(string conteudoArquivo, string nomeArquivo, DateTime data, string cnpj)
+        protected void GravarInutilizacao(string conteudoArquivo, string nomeArquivo, DateTime data, string cnpj, bool addDeclaration = true)
         {
             if (!Configuracoes.Arquivos.Salvar) return;
 
-            conteudoArquivo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + conteudoArquivo;
+            if (addDeclaration) conteudoArquivo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + conteudoArquivo;
             nomeArquivo = Path.Combine(Configuracoes.Arquivos.GetPathInu(data, cnpj), nomeArquivo);
             File.WriteAllText(nomeArquivo, conteudoArquivo, Encoding.UTF8);
         }

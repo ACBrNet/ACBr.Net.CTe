@@ -67,17 +67,15 @@ namespace ACBr.Net.CTe.Services
         /// <summary>
         ///
         /// </summary>
-        /// <param name="lote"></param>
         /// <param name="nSeqEvento"></param>
         /// <param name="chave"></param>
         /// <param name="cnpj"></param>
         /// <param name="evento"></param>
         /// <returns></returns>
-        public RecepcaoEventoResposta RecepcaoEvento(int lote, int nSeqEvento, string chave, string cnpj, IEventoCTe evento)
+        public RecepcaoEventoResposta RecepcaoEvento(int nSeqEvento, string chave, string cnpj, IEventoCTe evento)
         {
             Guard.Against<ArgumentNullException>(chave.IsEmpty(), nameof(chave));
             Guard.Against<ArgumentNullException>(cnpj.IsEmpty(), nameof(cnpj));
-            Guard.Against<ArgumentNullException>(lote < 0, nameof(lote));
             Guard.Against<ArgumentNullException>(nSeqEvento < 0, nameof(nSeqEvento));
             Guard.Against<ArgumentNullException>(evento == null, nameof(evento));
 
@@ -130,14 +128,20 @@ namespace ACBr.Net.CTe.Services
                         throw new ArgumentException("O evento informado é desconhecido ou não está implementado.");
                 }
 
+                var data = Configuracoes.Geral.VersaoDFe == CTeVersao.v200
+                    ? date.ToString("yyyy-MM-ddTHH:mm:dd")
+                    : date.ToString("yyyy-MM-ddTHH:mm:sszzz");
+
+                var idEvento = $"ID{(int)tipo}{chave}{nSeqEvento:D2}";
+
                 var request = new StringBuilder();
-                request.Append($"<eventoCTe  xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{versao}\">");
-                request.Append($"<infEvento Id=\"{lote}\">");
+                request.Append($"<eventoCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"{versao}\">");
+                request.Append($"<infEvento Id=\"{idEvento}\">");
                 request.Append($"<cOrgao>{Configuracoes.WebServices.UF.GetDFeValue()}</cOrgao>");
                 request.Append($"<tpAmb>{Configuracoes.WebServices.Ambiente.GetDFeValue()}</tpAmb>");
                 request.Append($"<CNPJ>{cnpj}</CNPJ>");
                 request.Append($"<chCTe>{chave}</chCTe>");
-                request.Append($"<dhEvento>{date}</dhEvento>");
+                request.Append($"<dhEvento>{data}</dhEvento > ");
                 request.Append($"<tpEvento>{tipo.GetDFeValue()}</tpEvento>");
                 request.Append($"<nSeqEvento>{nSeqEvento}</nSeqEvento>");
                 request.Append($"<detEvento versaoEvento=\"{versao}\">");
@@ -147,7 +151,7 @@ namespace ACBr.Net.CTe.Services
                 request.Append("</eventoCTe>");
 
                 var dadosMsg = request.ToString();
-                XmlSigning.AssinarXml(dadosMsg, "eventoCTe", "infEvento", ClientCredentials.ClientCertificate.Certificate);
+                dadosMsg = XmlSigning.AssinarXml(dadosMsg, "eventoCTe", "infEvento", ClientCredentials.ClientCertificate.Certificate);
                 ValidateMessage(dadosMsg);
 
                 var doc = new XmlDocument();
@@ -157,7 +161,7 @@ namespace ACBr.Net.CTe.Services
                 var retVal = Channel.RecepcaoEvento(inValue);
 
                 var retorno = new RecepcaoEventoResposta(dadosMsg, retVal.Result.OuterXml, EnvelopeSoap, RetornoWS);
-                GravarEvento(xmlEvento, $"{chave}-procEventoCTe.xml", tipo, date.DateTime, cnpj);
+                GravarEvento(retVal.Result.OuterXml, $"{idEvento.OnlyNumbers()}-procEventoCTe.xml", tipo, date.DateTime, cnpj);
                 return retorno;
             }
         }

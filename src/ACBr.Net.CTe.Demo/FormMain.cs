@@ -179,6 +179,56 @@ namespace ACBr.Net.CTe.Demo
             tbcRespostas.SelectedTab = tabPageRespostas;
         }
 
+        private void btnEnviarEPEC_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnImportarXml_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnValidarXml_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnCancelarXml_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnCancelarChave_Click(object sender, EventArgs e)
+        {
+            var chave = "";
+            InputBox.Show("Cancelar CTe.", "Digite a chave da CTe", ref chave);
+            if (chave.IsEmpty()) return;
+
+            var protocolo = "";
+            InputBox.Show("Cancelar CTe.", "Digite o protocolo do CTe", ref protocolo);
+            if (protocolo.IsEmpty()) return;
+
+            var justificativa = "";
+            InputBox.Show("Cancelar CTe.", "Digite a justificativa", ref justificativa);
+            if (justificativa.IsEmpty()) return;
+
+            var cnpj = "";
+            InputBox.Show("Cancelar CTe.", "Digite o CNPJ.", ref cnpj);
+            if (cnpj.IsEmpty()) return;
+
+            var nSeq = "";
+            InputBox.Show("Cancelar CTe.", "Digite o número sequencial do evento.", ref nSeq);
+            if (nSeq.IsEmpty()) return;
+
+            var cancCTe = EventoCTe.Cancelamento(protocolo, justificativa);
+
+            var ret = acbrCTe.EnviarEvento(nSeq.ToInt32(), chave, cnpj, cancCTe);
+            wbbResposta.LoadXml(ret.XmlRetorno);
+            wbbRetorno.LoadXml(ret.RetornoWS);
+            wbbDados.LoadXml(ret.XmlEnvio);
+
+            rtLogResposta.AppendLine("Cancelar CTe");
+
+            tbcRespostas.SelectedTab = tabPageRespostas;
+        }
+
         private void listViewServicos_DoubleClick(object sender, EventArgs e)
         {
             if (listViewServicos.SelectedItems.Count < 1) return;

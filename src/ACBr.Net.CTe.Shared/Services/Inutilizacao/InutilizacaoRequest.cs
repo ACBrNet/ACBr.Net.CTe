@@ -30,6 +30,7 @@
 // ***********************************************************************
 
 using System.ServiceModel;
+using System.Xml;
 using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
@@ -41,9 +42,10 @@ namespace ACBr.Net.CTe.Services
         {
         }
 
-        public InutilizacaoRequest(DFeWsCabecalho cabecalho, System.Xml.XmlNode mensagem)
+        public InutilizacaoRequest(DFeWsCabecalho cabecalho, XmlNode mensagem)
         {
             Cabecalho = cabecalho;
+            Mensagem = mensagem;
         }
     }
 }

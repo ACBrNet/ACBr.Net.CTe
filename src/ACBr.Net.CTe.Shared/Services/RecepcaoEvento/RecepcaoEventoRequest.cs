@@ -43,6 +43,7 @@ namespace ACBr.Net.CTe.Services
         public RecepcaoEventoRequest(DFeWsCabecalho cabecalho, XmlNode mensagem)
         {
             Cabecalho = cabecalho;
+            Mensagem = mensagem;
         }
 
         #endregion Constructors

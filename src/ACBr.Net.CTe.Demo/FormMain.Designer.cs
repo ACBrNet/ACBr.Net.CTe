@@ -274,6 +274,7 @@
             this.btnCancelarXml.TabIndex = 17;
             this.btnCancelarXml.Text = "Cancelamento CTe com XML";
             this.btnCancelarXml.UseVisualStyleBackColor = true;
+            this.btnCancelarXml.Click += new System.EventHandler(this.btnCancelarXml_Click);
             // 
             // btnEnviarEPEC
             // 
@@ -283,6 +284,7 @@
             this.btnEnviarEPEC.TabIndex = 16;
             this.btnEnviarEPEC.Text = "Enviar EPEC";
             this.btnEnviarEPEC.UseVisualStyleBackColor = true;
+            this.btnEnviarEPEC.Click += new System.EventHandler(this.btnEnviarEPEC_Click);
             // 
             // btnConsultarRecibo
             // 
@@ -302,6 +304,7 @@
             this.btnValidarXml.TabIndex = 13;
             this.btnValidarXml.Text = "Validar XML";
             this.btnValidarXml.UseVisualStyleBackColor = true;
+            this.btnValidarXml.Click += new System.EventHandler(this.btnValidarXml_Click);
             // 
             // btnConsultarChave
             // 
@@ -330,6 +333,7 @@
             this.btnCancelarChave.TabIndex = 10;
             this.btnCancelarChave.Text = "Cancelamento CTe pela Chave";
             this.btnCancelarChave.UseVisualStyleBackColor = true;
+            this.btnCancelarChave.Click += new System.EventHandler(this.btnCancelarChave_Click);
             // 
             // btnImportarXml
             // 
@@ -339,6 +343,7 @@
             this.btnImportarXml.TabIndex = 9;
             this.btnImportarXml.Text = "Importar XML";
             this.btnImportarXml.UseVisualStyleBackColor = true;
+            this.btnImportarXml.Click += new System.EventHandler(this.btnImportarXml_Click);
             // 
             // btnConsultarXml
             // 

@@ -37,6 +37,7 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
+    /// <inheritdoc />
     public sealed class CTeInfCTeSub : GenericClone<CTeInfCTeSub>, INotifyPropertyChanged
     {
         #region Events
