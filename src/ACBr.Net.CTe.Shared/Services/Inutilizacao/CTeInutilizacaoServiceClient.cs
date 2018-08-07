@@ -61,8 +61,8 @@ namespace ACBr.Net.CTe.Services
         {
             Guard.Against<ArgumentNullException>(cnpj.IsEmpty(), "Informar o número do CNPJ");
             Guard.Against<ArgumentException>(!cnpj.IsCNPJ(), "CNPJ inválido.");
-            Guard.Against<ArgumentNullException>(aJustificativa.IsEmpty(), "Informar uma Justificativa para Inutilização de numeração do Conhecimento Eletronico.");
-            Guard.Against<ArgumentException>(aJustificativa.Length < 15, "A Justificativa para Inutilização de numeração do Conhecimento Eletronico deve ter no minimo 15 caracteres.");
+            Guard.Against<ArgumentNullException>(aJustificativa.IsEmpty(), "Informar uma Justificativa para Inutilização de numeração do Conhecimento Eletrônico.");
+            Guard.Against<ArgumentException>(aJustificativa.Length < 15, "A Justificativa para Inutilização de numeração do Conhecimento Eletrônico deve ter no minimo 15 caracteres.");
 
             lock (serviceLock)
             {
@@ -78,15 +78,15 @@ namespace ACBr.Net.CTe.Services
                 request.Append($"<ano>{ano}</ano>");
                 request.Append($"<CNPJ>{cnpj}</CNPJ>");
                 request.Append($"<mod>{modelo.GetDFeValue()}</mod>");
-                request.Append($"<serie>{serie.ZeroFill(3)}</serie>");
-                request.Append($"<nCTIni>{numeroInicial.ZeroFill(9)}</nCTIni>");
-                request.Append($"<nCTFin>{numeroFinal.ZeroFill(9)}</nCTFin>");
+                request.Append($"<serie>{serie}</serie>");
+                request.Append($"<nCTIni>{numeroInicial}</nCTIni>");
+                request.Append($"<nCTFin>{numeroFinal}</nCTFin>");
                 request.Append($"<xJust>{aJustificativa}</xJust>");
                 request.Append("</infInut>");
                 request.Append("</inutCTe>");
 
                 var dadosMsg = request.ToString();
-                XmlSigning.AssinarXml(dadosMsg, "inutCTe", "infInut", ClientCredentials.ClientCertificate.Certificate);
+                dadosMsg = XmlSigning.AssinarXml(dadosMsg, "inutCTe", "infInut", ClientCredentials.ClientCertificate.Certificate);
                 ValidateMessage(dadosMsg);
 
                 GravarInutilizacao(dadosMsg, $"{idInutilizacao.OnlyNumbers()}-inut-cte.xml", DateTime.Now, cnpj);

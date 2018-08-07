@@ -67,7 +67,6 @@ namespace ACBr.Net.CTe.Services
         /// <summary>
         ///
         /// </summary>
-        /// <param name="lote"></param>
         /// <param name="nSeqEvento"></param>
         /// <param name="chave"></param>
         /// <param name="cnpj"></param>
