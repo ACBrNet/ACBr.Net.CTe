@@ -48,7 +48,7 @@ namespace ACBr.Net.CTe.Services
             base(config, ServicoCTe.CTeRetRecepcao, certificado)
         {
             Schema = SchemaCTe.ConsReciCTe;
-            ArquivoEnvio = "'ped-rec";
+            ArquivoEnvio = "ped-rec";
             ArquivoResposta = "pro-rec";
         }
 

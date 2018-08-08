@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigGeral.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigWebServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeEnderecoEmit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SchemaCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTe.cs" />
@@ -201,7 +202,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)StatusCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoDataPeriodo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoHorarioIntervalo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CTeUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)ACBrCTe.bmp" />
