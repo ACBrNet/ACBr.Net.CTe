@@ -33,7 +33,7 @@ using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
-    public class InutilizaoResposta : DFeResposta<InutilizaoServiceResult>
+    public sealed class InutilizaoResposta : DFeResposta<InutilizaoServiceResult>
     {
         #region Constructor
 

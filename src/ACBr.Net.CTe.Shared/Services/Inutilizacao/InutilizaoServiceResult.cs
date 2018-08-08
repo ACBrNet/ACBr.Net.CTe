@@ -35,7 +35,7 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe.Services
 {
-    [DFeRoot("retConsStatServCte", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    [DFeRoot("retInutCTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
     public sealed class InutilizaoServiceResult : DFeDocument<InutilizaoServiceResult>
     {
         #region Constructors
