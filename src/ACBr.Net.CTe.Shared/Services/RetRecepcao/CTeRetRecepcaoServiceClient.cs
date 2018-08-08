@@ -45,7 +45,7 @@ namespace ACBr.Net.CTe.Services
         #region Constructors
 
         public CTeRetRecepcaoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
-            base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
+            base(config, ServicoCTe.CTeRetRecepcao, certificado)
         {
             Schema = SchemaCTe.ConsReciCTe;
             ArquivoEnvio = "'ped-rec";

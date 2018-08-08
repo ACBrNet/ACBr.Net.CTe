@@ -40,6 +40,7 @@ using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Logging;
 using ACBr.Net.CTe.Configuracao;
+using ACBr.Net.CTe.Eventos;
 using ACBr.Net.CTe.Services;
 using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Common;
@@ -375,7 +376,31 @@ namespace ACBr.Net.CTe
 
             try
             {
-                using (var cliente = new CTeRecepcaoEventoServiceClient(Configuracoes, cert))
+                ServicoCTe service;
+                switch (evento)
+                {
+                    case CTeEvCancCTe _:
+                        service = ServicoCTe.RecepcaoEvento;
+                        Status = StatusCTe.Cancelamento;
+                        break;
+
+                    case CTeEvCCeCTe _:
+                        service = ServicoCTe.RecepcaoEvento;
+                        Status = StatusCTe.CCe;
+                        break;
+
+                    case CTeEvEPEC _:
+                        service = ServicoCTe.RecepcaoEventoAN;
+                        Status = StatusCTe.Evento;
+                        break;
+
+                    default:
+                        service = ServicoCTe.RecepcaoEvento;
+                        Status = StatusCTe.Evento;
+                        break;
+                }
+
+                using (var cliente = new CTeRecepcaoEventoServiceClient(Configuracoes, service, cert))
                 {
                     return cliente.RecepcaoEvento(nSeqEvento, chave.OnlyNumbers(), cnpj.OnlyNumbers(), evento);
                 }
