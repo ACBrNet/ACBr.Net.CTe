@@ -48,6 +48,7 @@ namespace ACBr.Net.CTe.Services
 
         #region Properties
 
+        [DFeCollection("protCTe", MinSize = 0, MaxSize = 50, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeProtCTe> ProtCTe { get; set; }
 
         #endregion Properties
