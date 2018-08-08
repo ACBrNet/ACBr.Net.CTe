@@ -47,13 +47,14 @@ namespace ACBr.Net.CTe.Services
     {
         #region Constructors
 
-        /// <summary>
+        ///  <summary>
         ///
-        /// </summary>
-        /// <param name="config"></param>
+        ///  </summary>
+        ///  <param name="config"></param>
+        /// <param name="service"></param>
         /// <param name="certificado"></param>
-        public CTeRecepcaoEventoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
-            base(config, ServicoCTe.RecepcaoEvento, certificado)
+        public CTeRecepcaoEventoServiceClient(CTeConfig config, ServicoCTe service, X509Certificate2 certificado = null) :
+            base(config, service, certificado)
         {
             Schema = SchemaCTe.EventoCTe;
             ArquivoEnvio = "ped-eve";
@@ -95,7 +96,6 @@ namespace ACBr.Net.CTe.Services
                         tipo = CTeTipoEvento.Cancelamento;
                         GravarEvento(xmlEvento, $"{chave}-can-eve.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvCancCTe);
-                        Configuracoes.Parent.Status = StatusCTe.Cancelamento;
                         break;
 
                     case CTeEvCCeCTe evtCTe:
@@ -103,7 +103,6 @@ namespace ACBr.Net.CTe.Services
                         tipo = CTeTipoEvento.CartaCorrecao;
                         GravarEvento(xmlEvento, $"{chave}-cce-eve.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvCCeCTe);
-                        Configuracoes.Parent.Status = StatusCTe.CCe;
                         break;
 
                     case CTeEvEPEC evtCTe:
@@ -111,7 +110,6 @@ namespace ACBr.Net.CTe.Services
                         tipo = CTeTipoEvento.EPEC;
                         GravarEvento(xmlEvento, $"{chave}-ped-epec.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvEPECCTe);
-                        Configuracoes.Parent.Status = StatusCTe.Evento;
                         break;
 
                     case CTeEvRegMultimodal evtCTe:
@@ -119,7 +117,6 @@ namespace ACBr.Net.CTe.Services
                         tipo = CTeTipoEvento.RegistroMultiModal;
                         GravarEvento(xmlEvento, $"{chave}-rmulti-eve.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvRegMultimodal);
-                        Configuracoes.Parent.Status = StatusCTe.Evento;
                         break;
 
                     case CTeEvPrestDesacordo evtCTe:
@@ -127,7 +124,6 @@ namespace ACBr.Net.CTe.Services
                         tipo = CTeTipoEvento.PrestacaoServicoDesacordo;
                         GravarEvento(xmlEvento, $"{chave}-desa-eve.xml", tipo, date.DateTime, cnpj);
                         ValidateMessage(xmlEvento, SchemaCTe.EvPrestDesacordo);
-                        Configuracoes.Parent.Status = StatusCTe.Evento;
                         break;
 
                     default:

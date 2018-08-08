@@ -46,7 +46,7 @@ namespace ACBr.Net.CTe.Services
         #region Constructors
 
         public CTeRecepcaoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
-            base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
+            base(config, ServicoCTe.CTeRecepcao, certificado)
         {
             Schema = SchemaCTe.EnviCTe;
             ArquivoEnvio = "env-lot";
@@ -79,7 +79,7 @@ namespace ACBr.Net.CTe.Services
                 {
                     var cteXml = cte.Xml.IsEmpty() ? cte.GetXml(saveOptions) : cte.Xml;
                     GravarCTe(cteXml, cte.GetXmlName(), cte.InfCTe.Ide.DhEmi.DateTime, cte.InfCTe.Emit.CNPJ, cte.InfCTe.Ide.Mod);
-                    request.Append(cteXml);
+                    request.Append(cteXml.Trim());
                 }
 
                 request.Append("</enviCTe>");
