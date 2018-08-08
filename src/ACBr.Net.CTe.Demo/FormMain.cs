@@ -125,7 +125,19 @@ namespace ACBr.Net.CTe.Demo
             tbcRespostas.SelectedTab = tabPageRespostas;
         }
 
+        private void btnInutilizar_Click(object sender, EventArgs e)
+        {
+        }
+
         private void btnGerar_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnConsultarCadastro_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnCriarEnviar_Click(object sender, EventArgs e)
         {
         }
 
@@ -185,6 +197,10 @@ namespace ACBr.Net.CTe.Demo
 
         private void btnImportarXml_Click(object sender, EventArgs e)
         {
+            var xml = Helpers.OpenFile(@"Arquivo de endereços (*.xml)|*.xml|Todos os Arquivos (*.*)|*.*");
+            if (xml.IsEmpty()) return;
+
+            acbrCTe.Conhecimentos.Load(xml);
         }
 
         private void btnValidarXml_Click(object sender, EventArgs e)

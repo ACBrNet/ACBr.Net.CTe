@@ -36,47 +36,47 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeImp : GenericClone<CTeImp>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeImp : GenericClone<CTeImp>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeImp()
-		{
-			ICMSUFFim = new CTeICMSUFFim();
-			ICMS = new CTeICMS();
-		}
+        public CTeImp()
+        {
+            ICMSUFFim = new CTeICMSUFFim();
+            ICMS = new CTeICMS();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement("ICMS", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeICMS ICMS { get; set; }
+        [DFeElement("ICMS", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeICMS ICMS { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vTotTrib", Id = "#250", Min = 1, Max = 15, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public decimal VTotTrib { get; set; }
+        [DFeElement(TipoCampo.De2, "vTotTrib", Id = "#250", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? VTotTrib { get; set; }
 
-		[DFeElement(TipoCampo.Str, "infAdFisco", Id = "#251", Min = 1, Max = 2000, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string InfAdFisco { get; set; }
+        [DFeElement(TipoCampo.Str, "infAdFisco", Id = "#251", Min = 1, Max = 2000, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string InfAdFisco { get; set; }
 
-		[DFeElement("ICMSUFFim", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public CTeICMSUFFim ICMSUFFim { get; set; }
+        [DFeElement("ICMSUFFim", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeICMSUFFim ICMSUFFim { get; set; }
 
-		#endregion Propriedades
+        #endregion Propriedades
 
-		#region Methods
+        #region Methods
 
-		private bool ShouldSerializeICMSUFFim()
-		{
-			return ICMSUFFim.PICMSInterPart > 0;
-		}
+        private bool ShouldSerializeICMSUFFim()
+        {
+            return ICMSUFFim.PICMSInterPart > 0;
+        }
 
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }

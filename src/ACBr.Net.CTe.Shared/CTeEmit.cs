@@ -36,43 +36,43 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeEmit : GenericClone<CTeEmit>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeEmit : GenericClone<CTeEmit>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeEmit()
-		{
-			EnderEmit = new CTeEndereco();
-		}
+        public CTeEmit()
+        {
+            EnderEmit = new CTeEnderecoEmit();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.StrNumberFill, "CNPJ", Id = "#098", Min = 14, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string CNPJ { get; set; }
+        [DFeElement(TipoCampo.StrNumberFill, "CNPJ", Id = "#098", Min = 14, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string CNPJ { get; set; }
 
-		[DFeElement(TipoCampo.StrNumber, "IE", Id = "#099", Min = 2, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string IE { get; set; }
+        [DFeElement(TipoCampo.StrNumber, "IE", Id = "#099", Min = 2, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string IE { get; set; }
 
-		[DFeElement(TipoCampo.StrNumber, "IEST", Id = "#100", Min = 2, Max = 14, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string IEST { get; set; }
+        [DFeElement(TipoCampo.StrNumber, "IEST", Id = "#100", Min = 2, Max = 14, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string IEST { get; set; }
 
-		[DFeElement(TipoCampo.Str, "xNome", Id = "#101", Min = 2, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string XNome { get; set; }
+        [DFeElement(TipoCampo.Str, "xNome", Id = "#101", Min = 2, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string XNome { get; set; }
 
-		[DFeElement(TipoCampo.Str, "xFant", Id = "#102", Min = 2, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string XFant { get; set; }
+        [DFeElement(TipoCampo.Str, "xFant", Id = "#102", Min = 2, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string XFant { get; set; }
 
-		[DFeElement("enderEmit", Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeEndereco EnderEmit { get; set; }
+        [DFeElement("enderEmit", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeEnderecoEmit EnderEmit { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }

@@ -33,15 +33,15 @@ using ACBr.Net.DFe.Core.Attributes;
 
 namespace ACBr.Net.CTe
 {
-	public enum CTeIndIEToma
-	{
-		[DFeEnum("1")]
-		Contribuinte,
+    public enum CTeIndIEToma
+    {
+        [DFeEnum("1")]
+        Contribuinte,
 
-		[DFeEnum("2")]
-		Isento,
+        [DFeEnum("2")]
+        Isento,
 
-		[DFeEnum("9")]
-		NaoContribuinte,
-	}
+        [DFeEnum("9")]
+        NaoContribuinte,
+    }
 }

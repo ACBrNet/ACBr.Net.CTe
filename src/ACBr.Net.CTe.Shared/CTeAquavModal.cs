@@ -70,8 +70,8 @@ namespace ACBr.Net.CTe
         [DFeCollection("balsa", Id = "#05", Min = 0, Max = 3, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeBalsa> Balsa { get; set; }
 
-        [DFeElement(TipoCampo.Int, "nViag", Id = "#07", Min = 1, Max = 10, Ocorrencia = Ocorrencia.MaiorQueZero)]
-        public int NViag { get; set; }
+        [DFeElement(TipoCampo.Int, "nViag", Id = "#07", Min = 1, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public int? NViag { get; set; }
 
         [DFeElement(TipoCampo.Enum, "direc", Id = "#08", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeDirecao Direc { get; set; }

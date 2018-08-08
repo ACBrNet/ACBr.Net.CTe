@@ -139,8 +139,8 @@ namespace ACBr.Net.CTe
 
         private void LoadXml(string xml)
         {
-            Guard.Against<ACBrDFeException>(xml.IsEmpty(), "Não foi possivel ler o conteudo.");
-            Guard.Against<ACBrDFeException>(!xml.Contains("cteProc") && !xml.Contains("CTe"), "Arquivo xml incorreto.");
+            Guard.Against<ACBrDFeException>(xml.IsEmpty(), "Carregamento falhou: Não foi possivel ler o conteudo.");
+            Guard.Against<ACBrDFeException>(!xml.Contains("cteProc") && !xml.Contains("CTe"), "Carregamento falhou: Arquivo xml incorreto.");
 
             var cteProc = xml.Contains("cteProc") ? CTeProc.Load(xml) : new CTeProc { CTe = CTe.Load(xml) };
             Add(cteProc);

@@ -36,22 +36,22 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeAquavInfNFe : GenericClone<CTeAquavInfNFe>, ICTeAquavInfDoc, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeAquavInfNFe : GenericClone<CTeAquavInfNFe>, ICTeAquavInfDoc, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Properties
 
-		[DFeElement(TipoCampo.Str, "chave", Id = "#20", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Chave { get; set; }
+        [DFeElement(TipoCampo.Str, "chave", Id = "#20", Min = 44, Max = 44, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Chave { get; set; }
 
-		[DFeElement(TipoCampo.De2, "unidRat", Id = "#21", Min = 3, Max = 5, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public decimal UnidRat { get; set; }
+        [DFeElement(TipoCampo.De2, "unidRat", Id = "#21", Min = 3, Max = 5, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? UnidRat { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

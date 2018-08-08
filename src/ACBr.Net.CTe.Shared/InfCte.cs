@@ -30,6 +30,7 @@
 // ***********************************************************************
 
 using System.ComponentModel;
+using System.Linq;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
@@ -98,7 +99,7 @@ namespace ACBr.Net.CTe
             }
         }
 
-        [DFeElement("compl", Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement("compl", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public CTeCompl Compl { get; set; }
 
         [DFeElement("emit", Ocorrencia = Ocorrencia.Obrigatoria)]
@@ -181,6 +182,20 @@ namespace ACBr.Net.CTe
         #endregion Propriedades
 
         #region Methods
+
+        private bool ShouldSerializeCompl()
+        {
+            return !Compl.XCaracAd.IsEmpty() ||
+                   !Compl.XCaracSer.IsEmpty() ||
+                   !Compl.XEmi.IsEmpty() ||
+                   !Compl.OrigCalc.IsEmpty() ||
+                   !Compl.DestCalc.IsEmpty() ||
+                   !Compl.XObs.IsEmpty() ||
+                   Compl.ShouldSerializeFluxo() ||
+                   Compl.ShouldSerializeEntrega() ||
+                   Compl.ObsCont.Any() ||
+                   Compl.ObsFisco.Any();
+        }
 
         private bool ShouldSerializeRem()
         {

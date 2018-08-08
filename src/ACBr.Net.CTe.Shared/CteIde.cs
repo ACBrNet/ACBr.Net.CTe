@@ -113,7 +113,7 @@ namespace ACBr.Net.CTe
         public string XMunEnv { get; set; }
 
         [DFeElement(TipoCampo.Enum, "UFEnv", Id = "#024", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public DFeCodUF UFEnv { get; set; }
+        public DFeSiglaUF UFEnv { get; set; }
 
         [DFeElement(TipoCampo.Enum, "modal", Id = "#025", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeModal Modal { get; set; }
@@ -166,11 +166,6 @@ namespace ACBr.Net.CTe
         private bool ShouldSerializeIndGlobalizado()
         {
             return Parent.Versao == CTeVersao.v300 && Mod == ModeloCTe.CTe && IndGlobalizado == CTeIndicador.Sim;
-        }
-
-        private bool ShouldSerializeIndIEToma()
-        {
-            return Parent.Versao == CTeVersao.v300 && Mod == ModeloCTe.CTeOS;
         }
 
         private bool ShouldSerializeRetira()

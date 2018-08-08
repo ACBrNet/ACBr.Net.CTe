@@ -74,7 +74,7 @@ namespace ACBr.Net.CTe
         public DFeCollection<ICTeInfDoc> InfDoc { get; set; }
 
         [DFeItem(typeof(CTeEmiDocAnt), "emiDocAnt")]
-        [DFeCollection("docAnt", Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeCollection("docAnt", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeEmiDocAnt> DocAnt { get; set; }
 
         [DFeElement("infModal", Ocorrencia = Ocorrencia.Obrigatoria)]
@@ -86,7 +86,7 @@ namespace ACBr.Net.CTe
         [DFeElement("cobr", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeCobranca Cobr { get; set; }
 
-        [DFeElement("infCteSub", Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement("infCteSub", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public CTeInfCTeSub InfCTeSub { get; set; }
 
         [DFeElement("infGlobalizado", Ocorrencia = Ocorrencia.NaoObrigatoria)]
@@ -103,6 +103,11 @@ namespace ACBr.Net.CTe
         private bool ShouldSerializeInfGlobalizado()
         {
             return !InfGlobalizado.XObs.IsEmpty();
+        }
+
+        private bool ShouldSerializeInfCTeSub()
+        {
+            return !InfCTeSub.ChCte.IsEmpty();
         }
 
         #endregion Methods

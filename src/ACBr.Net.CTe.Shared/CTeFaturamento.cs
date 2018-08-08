@@ -36,28 +36,28 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeFaturamento : GenericClone<CTeFaturamento>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeFaturamento : GenericClone<CTeFaturamento>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Properties
 
-		[DFeElement(TipoCampo.Str, "nFat", Id = "#386", Min = 1, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string NFat { get; set; }
+        [DFeElement(TipoCampo.Str, "nFat", Id = "#386", Min = 1, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string NFat { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vOrig", Id = "#387", Min = 1, Max = 15, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public decimal VOrig { get; set; }
+        [DFeElement(TipoCampo.De2, "vOrig", Id = "#387", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? VOrig { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vDesc", Id = "#388", Min = 1, Max = 15, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public decimal VDesc { get; set; }
+        [DFeElement(TipoCampo.De2, "vDesc", Id = "#388", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? VDesc { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vLiq", Id = "#389", Min = 1, Max = 15, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public decimal VLiq { get; set; }
+        [DFeElement(TipoCampo.De2, "vLiq", Id = "#389", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? VLiq { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

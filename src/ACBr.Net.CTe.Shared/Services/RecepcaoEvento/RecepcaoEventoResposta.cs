@@ -39,7 +39,7 @@ namespace ACBr.Net.CTe.Services
         #region Constructor
 
         public RecepcaoEventoResposta(string xmlEnvio, string xmlRetorno, string envelopeSoap, string respostaWs) :
-            base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs)
+            base(xmlEnvio, xmlRetorno, envelopeSoap, respostaWs, false)
         {
             Resultado = new CTeProcEvento
             {

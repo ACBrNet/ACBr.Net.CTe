@@ -37,34 +37,34 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeVPrest : GenericClone<CTeVPrest>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeVPrest : GenericClone<CTeVPrest>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeVPrest()
-		{
-			Comp = new DFeCollection<CTePrestComp>();
-		}
+        public CTeVPrest()
+        {
+            Comp = new DFeCollection<CTePrestComp>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.De2, "vTPrest", Id = "#209", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VTPrest { get; set; }
+        [DFeElement(TipoCampo.De2, "vTPrest", Id = "#209", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VTPrest { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vTPrest", Id = "#210", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VRec { get; set; }
+        [DFeElement(TipoCampo.De2, "vRec", Id = "#210", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VRec { get; set; }
 
-		[DFeCollection("Comp", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DFeCollection<CTePrestComp> Comp { get; set; }
+        [DFeCollection("Comp", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTePrestComp> Comp { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }

@@ -37,40 +37,40 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeInfCarga : GenericClone<CTeInfCarga>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeInfCarga : GenericClone<CTeInfCarga>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeInfCarga()
-		{
-			InfQ = new DFeCollection<CTeInfQ>();
-		}
+        public CTeInfCarga()
+        {
+            InfQ = new DFeCollection<CTeInfQ>();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.De2, "vCarga", Id = "#254", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VCarga { get; set; }
+        [DFeElement(TipoCampo.De2, "vCarga", Id = "#254", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VCarga { get; set; }
 
-		[DFeElement(TipoCampo.Str, "proPred", Id = "#255", Min = 1, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string ProPred { get; set; }
+        [DFeElement(TipoCampo.Str, "proPred", Id = "#255", Min = 1, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string ProPred { get; set; }
 
-		[DFeElement(TipoCampo.Str, "xOutCat", Id = "#256", Min = 1, Max = 30, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string XOutCat { get; set; }
+        [DFeElement(TipoCampo.Str, "xOutCat", Id = "#256", Min = 1, Max = 30, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string XOutCat { get; set; }
 
-		[DFeCollection("infQ", Min = 1, Max = 990, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeCollection<CTeInfQ> InfQ { get; set; }
+        [DFeCollection("infQ", Min = 1, Max = 990, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeCollection<CTeInfQ> InfQ { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vCargaAverb", Id = "#", Min = 1, Max = 15, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public decimal VCargaAverb { get; set; }
+        [DFeElement(TipoCampo.De2, "vCargaAverb", Id = "#", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? VCargaAverb { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }
