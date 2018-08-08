@@ -324,6 +324,7 @@
             this.btnCriarEnviar.TabIndex = 11;
             this.btnCriarEnviar.Text = "Criar e Enviar";
             this.btnCriarEnviar.UseVisualStyleBackColor = true;
+            this.btnCriarEnviar.Click += new System.EventHandler(this.btnCriarEnviar_Click);
             // 
             // btnCancelarChave
             // 
@@ -363,6 +364,7 @@
             this.btnConsultarCadastro.TabIndex = 7;
             this.btnConsultarCadastro.Text = "Consulta Cadastro";
             this.btnConsultarCadastro.UseVisualStyleBackColor = true;
+            this.btnConsultarCadastro.Click += new System.EventHandler(this.btnConsultarCadastro_Click);
             // 
             // btnGerar
             // 
@@ -382,6 +384,7 @@
             this.btnInutilizar.TabIndex = 5;
             this.btnInutilizar.Text = "Inutilizar Numeração";
             this.btnInutilizar.UseVisualStyleBackColor = true;
+            this.btnInutilizar.Click += new System.EventHandler(this.btnInutilizar_Click);
             // 
             // btnConsultarSituacao
             // 

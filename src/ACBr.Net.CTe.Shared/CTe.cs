@@ -69,6 +69,9 @@ namespace ACBr.Net.CTe
         [DFeIgnore]
         public bool Cancelada { get; set; }
 
+        [DFeIgnore]
+        public bool Assinado => ShouldSerializeSignature();
+
         #endregion Propriedades
 
         #region Methods
@@ -87,6 +90,12 @@ namespace ACBr.Net.CTe
                             InfCTe.Ide.NCT, InfCTe.Ide.TpEmis, InfCTe.Ide.CCT);
 
             AssinarDocumento(certificado, saveOptions, false, SignDigest.SHA1);
+        }
+
+        public bool ValidarAssinatura(bool gerarXml = true)
+        {
+            Guard.Against<ACBrDFeException>(!Assinado, "Documento não esta assinado.");
+            return ValidarAssinaturaDocumento(gerarXml);
         }
 
         /// <summary>

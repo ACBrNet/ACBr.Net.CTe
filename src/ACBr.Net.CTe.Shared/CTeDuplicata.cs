@@ -37,25 +37,25 @@ using System.ComponentModel;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeDuplicata : GenericClone<CTeDuplicata>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeDuplicata : GenericClone<CTeDuplicata>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Properties
 
-		[DFeElement(TipoCampo.Str, "nDup", Id = "#391", Min = 1, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public string NDup { get; set; }
+        [DFeElement(TipoCampo.Str, "nDup", Id = "#391", Min = 1, Max = 60, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string NDup { get; set; }
 
-		[DFeElement(TipoCampo.Dat, "dVenc", Id = "#392", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-		public DateTime? DVenc { get; set; }
+        [DFeElement(TipoCampo.Dat, "dVenc", Id = "#392", Min = 10, Max = 10, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DateTime? DVenc { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vDup", Id = "#393", Min = 1, Max = 15, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public decimal VDup { get; set; }
+        [DFeElement(TipoCampo.De2, "vDup", Id = "#393", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? VDup { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

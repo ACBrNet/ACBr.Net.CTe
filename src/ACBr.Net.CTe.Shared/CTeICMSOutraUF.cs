@@ -60,19 +60,15 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Enum, "CST", Id = "#243", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
         public DFeICMSCst CST { get; set; }
 
-        [XmlElementAttribute(Order = 1, ElementName = "pRedBCOutraUF")]
-        [DFeElement(TipoCampo.De2, "pRedBCOutraUF", Id = "#244", Min = 1, Max = 5, Ocorrencia = Ocorrencia.MaiorQueZero)]
-        public decimal PRedBCOutraUF { get; set; }
+        [DFeElement(TipoCampo.De2, "pRedBCOutraUF", Id = "#244", Min = 1, Max = 5, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? PRedBCOutraUF { get; set; }
 
-        [XmlElementAttribute(Order = 2, ElementName = "vBCOutraUF")]
         [DFeElement(TipoCampo.De2, "vBCOutraUF", Id = "#245", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
         public decimal VBCOutraUF { get; set; }
 
-        [XmlElementAttribute(Order = 3, ElementName = "pICMSOutraUF")]
         [DFeElement(TipoCampo.De2, "pICMSOutraUF", Id = "#246", Min = 1, Max = 5, Ocorrencia = Ocorrencia.Obrigatoria)]
         public decimal PICMSOutraUF { get; set; }
 
-        [XmlElementAttribute(Order = 4, ElementName = "vICMSOutraUF")]
         [DFeElement(TipoCampo.De2, "vICMSOutraUF", Id = "#247", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
         public decimal VICMSOutraUF { get; set; }
 

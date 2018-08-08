@@ -375,8 +375,6 @@ namespace ACBr.Net.CTe
 
             try
             {
-                Status = StatusCTe.Evento;
-
                 using (var cliente = new CTeRecepcaoEventoServiceClient(Configuracoes, cert))
                 {
                     return cliente.RecepcaoEvento(nSeqEvento, chave.OnlyNumbers(), cnpj.OnlyNumbers(), evento);

@@ -37,40 +37,40 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeICMS60 : GenericClone<CTeICMS60>, ICTeICMS, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeICMS60 : GenericClone<CTeICMS60>, ICTeICMS, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Constructors
+        #region Constructors
 
-		public CTeICMS60()
-		{
-			CST = DFeICMSCst.Cst60;
-		}
+        public CTeICMS60()
+        {
+            CST = DFeICMSCst.Cst60;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Propriedades
+        #region Propriedades
 
-		[DFeElement(TipoCampo.Enum, "CST", Id = "#230", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DFeICMSCst CST { get; set; }
+        [DFeElement(TipoCampo.Enum, "CST", Id = "#230", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeICMSCst CST { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vBCSTRet", Id = "#231", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VBCSTRet { get; set; }
+        [DFeElement(TipoCampo.De2, "vBCSTRet", Id = "#231", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VBCSTRet { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vICMSSTRet", Id = "#232", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal VICMSSTRet { get; set; }
+        [DFeElement(TipoCampo.De2, "vICMSSTRet", Id = "#232", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal VICMSSTRet { get; set; }
 
-		[DFeElement(TipoCampo.De2, "pICMSSTRet", Id = "#233", Min = 1, Max = 5, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public decimal PICMSSTRet { get; set; }
+        [DFeElement(TipoCampo.De2, "pICMSSTRet", Id = "#233", Min = 1, Max = 5, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public decimal PICMSSTRet { get; set; }
 
-		[DFeElement(TipoCampo.De2, "vCred", Id = "#234", Min = 1, Max = 15, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public decimal VCred { get; set; }
+        [DFeElement(TipoCampo.De2, "vCred", Id = "#234", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? VCred { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }

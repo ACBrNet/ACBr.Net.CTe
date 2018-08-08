@@ -36,25 +36,25 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeAquavInfNF : GenericClone<CTeAquavInfNF>, ICTeAquavInfDoc, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeAquavInfNF : GenericClone<CTeAquavInfNF>, ICTeAquavInfDoc, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Properties
 
-		[DFeElement(TipoCampo.Str, "serie", Id = "#16", Min = 1, Max = 3, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string Serie { get; set; }
+        [DFeElement(TipoCampo.Str, "serie", Id = "#16", Min = 1, Max = 3, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Serie { get; set; }
 
-		[DFeElement(TipoCampo.Str, "nDoc", Id = "#17", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public string NDoc { get; set; }
+        [DFeElement(TipoCampo.Str, "nDoc", Id = "#17", Min = 1, Max = 20, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string NDoc { get; set; }
 
-		[DFeElement(TipoCampo.De2, "unidRat", Id = "#18", Min = 3, Max = 5, Ocorrencia = Ocorrencia.MaiorQueZero)]
-		public decimal UnidRat { get; set; }
+        [DFeElement(TipoCampo.De2, "unidRat", Id = "#18", Min = 3, Max = 5, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public decimal? UnidRat { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }
