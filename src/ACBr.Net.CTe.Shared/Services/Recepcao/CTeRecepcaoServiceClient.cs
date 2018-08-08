@@ -93,6 +93,7 @@ namespace ACBr.Net.CTe.Services
 
                 var doc = new XmlDocument();
                 doc.LoadXml(dadosMsg);
+                doc.RemoveDuplicateNamespaceDeclarations();
 
                 var inValue = new RecepcaoRequest(DefineHeader(), doc);
                 var retVal = Channel.RecepcaoLote(inValue);

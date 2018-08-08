@@ -201,6 +201,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)StatusCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoDataPeriodo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoHorarioIntervalo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)ACBrCTe.bmp" />
