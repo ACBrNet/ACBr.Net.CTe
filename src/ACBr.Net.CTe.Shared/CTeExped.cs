@@ -38,7 +38,7 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeExped : DFeParentItem<CTeExped, InfCTe>, INotifyPropertyChanged
+    public sealed class CTeExped : DFeParentItem<CTeExped, CTeInfCTe>, INotifyPropertyChanged
     {
         #region Events
 
@@ -53,7 +53,7 @@ namespace ACBr.Net.CTe
             EnderExped = new CTeEndereco();
         }
 
-        public CTeExped(InfCTe parent) : this()
+        public CTeExped(CTeInfCTe parent) : this()
         {
             Parent = parent;
         }

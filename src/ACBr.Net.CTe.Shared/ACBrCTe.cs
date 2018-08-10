@@ -30,6 +30,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -148,7 +149,7 @@ namespace ACBr.Net.CTe
                 Status = StatusCTe.Recepcao;
                 using (var cliente = new CTeRecepcaoServiceClient(Configuracoes, cert))
                 {
-                    recepcao = cliente.RecepcaoLote(Conhecimentos.NaoAutorizadas, lote);
+                    recepcao = cliente.RecepcaoLote(Conhecimentos.ToArray(), lote);
                 }
             }
             catch (Exception exception)
@@ -166,11 +167,43 @@ namespace ACBr.Net.CTe
             Thread.Sleep((int)Configuracoes.WebServices.AguardarConsultaRet);
             var retRecepcao = ConsultaRecibo(recepcao.Resultado.InfRec.NRec);
 
-            if (imprimir && Conhecimentos.Autorizados.Any())
+            var retorno = new EnviarCTeResposta(recepcao, retRecepcao);
+            if (retorno.RetRecepcaoResposta.Resultado.CStat.IsIn(100, 150) && retorno.RetRecepcaoResposta.Resultado.ProtCTe.Any())
+            {
+                var cteAutorizados = new List<CTeProc>();
+                foreach (var protCTe in retorno.RetRecepcaoResposta.Resultado.ProtCTe)
+                {
+                    var cte = Conhecimentos.SingleOrDefault(x => x.InfCTe.Id == protCTe.InfProt.ChCTe);
+                    if (cte == null) continue;
+
+                    if (Configuracoes.Geral.ValidarDigest)
+                    {
+                        Guard.Against<ACBrDFeException>(!protCTe.InfProt.DigVal.IsEmpty() &&
+                                                        protCTe.InfProt.DigVal != cte.Signature.SignedInfo.Reference.DigestValue,
+                            $"DigestValue do documento {cte.InfCTe.Id} não confere.");
+                    }
+
+                    var cteProc = new CTeProc { Versao = cte.InfCTe.Versao, CTe = cte, ProtCTe = protCTe };
+                    cteAutorizados.Add(cteProc);
+
+                    if (!Configuracoes.Arquivos.Salvar) continue;
+                    if (Configuracoes.Arquivos.SalvarApenasCTeProcessados && !cteProc.Processado) continue;
+
+                    var data = Configuracoes.Arquivos.EmissaoPathCTe ? cteProc.CTe.InfCTe.Ide.DhEmi.DateTime : DateTime.Now;
+                    var pathArquivo = Configuracoes.Arquivos.GetPathCTe(data, cteProc.CTe.InfCTe.Emit.CNPJ, cteProc.CTe.InfCTe.Ide.Mod);
+                    var nomeArquivo = $"{cteProc.CTe.InfCTe.Id}-cte.xml";
+
+                    cteProc.Save(Path.Combine(pathArquivo, nomeArquivo));
+                }
+
+                retorno.CTeAutorizados = cteAutorizados.ToArray();
+            }
+
+            if (imprimir && retorno.CTeAutorizados.Any())
             {
             }
 
-            return new EnviarCTeResposta() { RecepcaoResposta = recepcao, RetRecepcaoResposta = retRecepcao };
+            return retorno;
         }
 
         /// <summary>
@@ -203,30 +236,6 @@ namespace ACBr.Net.CTe
                     } while (retRecepcao.Resultado.CStat != 104 && tentativas < Configuracoes.WebServices.Tentativas);
                 }
 
-                if (retRecepcao.Resultado.CStat != 104) return retRecepcao;
-
-                foreach (var protCTe in retRecepcao.Resultado.ProtCTe)
-                {
-                    var cteProc = Conhecimentos.SingleOrDefault(x => x.CTe.InfCTe.Id.OnlyNumbers() == protCTe.InfProt.ChCTe.OnlyNumbers());
-                    if (cteProc == null) continue;
-                    if (Configuracoes.Geral.ValidarDigest)
-                    {
-                        Guard.Against<ACBrDFeException>(!protCTe.InfProt.DigVal.IsEmpty() &&
-                                                        protCTe.InfProt.DigVal != cteProc.CTe.Signature.SignedInfo.Reference.DigestValue,
-                            $"DigestValue do documento {cteProc.CTe.InfCTe.Id} não confere.");
-                    }
-
-                    cteProc.ProtCTe = protCTe;
-                    if (!Configuracoes.Arquivos.Salvar) continue;
-                    if (Configuracoes.Arquivos.SalvarApenasCTeProcessados && !cteProc.Processado) continue;
-
-                    var data = Configuracoes.Arquivos.EmissaoPathCTe ? cteProc.CTe.InfCTe.Ide.DhEmi.DateTime : DateTime.Now;
-                    var pathArquivo = Configuracoes.Arquivos.GetPathCTe(data, cteProc.CTe.InfCTe.Emit.CNPJ, cteProc.CTe.InfCTe.Ide.Mod);
-                    var nomeArquivo = $"{cteProc.CTe.InfCTe.Id}-cte.xml";
-
-                    cteProc.Save(Path.Combine(pathArquivo, nomeArquivo), DFeSaveOptions.DisableFormatting);
-                }
-
                 return retRecepcao;
             }
             catch (Exception exception)
@@ -248,7 +257,7 @@ namespace ACBr.Net.CTe
         /// <returns>A situação do serviço de CTe</returns>
         public ConsultaCTeResposta Consultar(string chave = "")
         {
-            Guard.Against<ArgumentException>(chave.IsEmpty() && !Conhecimentos.NaoAutorizadas.Any(), "ERRO: Nenhum CT-e ou Chave Informada!");
+            Guard.Against<ArgumentException>(chave.IsEmpty() && !Conhecimentos.Any(), "ERRO: Nenhum CT-e ou Chave Informada!");
 
             var oldProtocol = ServicePointManager.SecurityProtocol;
             ServicePointManager.SecurityProtocol = securityProtocol;
@@ -260,17 +269,7 @@ namespace ACBr.Net.CTe
 
                 using (var cliente = new CTeConsultaServiceClient(Configuracoes, cert))
                 {
-                    if (!chave.IsEmpty())
-                    {
-                        Conhecimentos.Clear();
-                        return cliente.Consulta(chave);
-                    }
-                    else
-                    {
-                        var ret = cliente.Consulta(Conhecimentos.NaoAutorizadas.First().InfCTe.Id.OnlyNumbers());
-
-                        return ret;
-                    }
+                    return cliente.Consulta(!chave.IsEmpty() ? chave : Conhecimentos.First().InfCTe.Id.OnlyNumbers());
                 }
             }
             catch (Exception exception)

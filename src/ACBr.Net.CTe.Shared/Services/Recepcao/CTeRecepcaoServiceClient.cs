@@ -79,7 +79,7 @@ namespace ACBr.Net.CTe.Services
                 {
                     var cteXml = cte.Xml.IsEmpty() ? cte.GetXml(saveOptions) : cte.Xml;
                     GravarCTe(cteXml, cte.GetXmlName(), cte.InfCTe.Ide.DhEmi.DateTime, cte.InfCTe.Emit.CNPJ, cte.InfCTe.Ide.Mod);
-                    request.Append(cteXml.RemoverNamespace("xmlns=\"http://www.portalfiscal.inf.br/cte\""));
+                    request.Append(cteXml);
                 }
 
                 request.Append("</enviCTe>");

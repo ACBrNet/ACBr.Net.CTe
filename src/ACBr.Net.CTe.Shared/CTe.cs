@@ -31,6 +31,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
@@ -56,7 +57,7 @@ namespace ACBr.Net.CTe
         public CTe()
         {
             Signature = new DFeSignature();
-            InfCTe = new InfCTe();
+            InfCTe = new CTeInfCTe();
         }
 
         #endregion Constructors
@@ -64,7 +65,7 @@ namespace ACBr.Net.CTe
         #region Propriedades
 
         [DFeElement("infCte", Ocorrencia = Ocorrencia.Obrigatoria)]
-        public InfCTe InfCTe { get; set; }
+        public CTeInfCTe InfCTe { get; set; }
 
         [DFeIgnore]
         public bool Cancelada { get; set; }
@@ -84,10 +85,17 @@ namespace ACBr.Net.CTe
         public void Assinar(X509Certificate2 certificado, DFeSaveOptions saveOptions)
         {
             Guard.Against<ArgumentNullException>(certificado == null, "Certificado não pode ser nulo.");
+            Guard.Against<ArgumentException>(!Enum.IsDefined(typeof(DFeSaveOptions), saveOptions), "Valor não encontrado no enum.");
 
-            InfCTe.Id = "CTe" + ChaveDFe.Gerar(InfCTe.Ide.CUF, InfCTe.Ide.DhEmi.DateTime,
-                            InfCTe.Emit.CNPJ, (int)InfCTe.Ide.Mod, InfCTe.Ide.Serie,
-                            InfCTe.Ide.NCT, InfCTe.Ide.TpEmis, InfCTe.Ide.CCT);
+            if (InfCTe.Id.IsEmpty() || InfCTe.Id.Length < 44)
+            {
+                var chave = ChaveDFe.Gerar(InfCTe.Ide.CUF, InfCTe.Ide.DhEmi.DateTime,
+                    InfCTe.Emit.CNPJ, (int)InfCTe.Ide.Mod, InfCTe.Ide.Serie,
+                    InfCTe.Ide.NCT, InfCTe.Ide.TpEmis, InfCTe.Ide.CCT);
+
+                InfCTe.Id = $"CTe{chave.Chave}";
+                InfCTe.Ide.CDV = chave.Digito;
+            }
 
             AssinarDocumento(certificado, saveOptions, false, SignDigest.SHA1);
         }
