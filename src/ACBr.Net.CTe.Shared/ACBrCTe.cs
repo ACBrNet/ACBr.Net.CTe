@@ -164,11 +164,13 @@ namespace ACBr.Net.CTe
                 Status = StatusCTe.EmEspera;
             }
 
+            if (recepcao.Resultado.CStat != 103) return new EnviarCTeResposta(recepcao, null);
+
             Thread.Sleep((int)Configuracoes.WebServices.AguardarConsultaRet);
             var retRecepcao = ConsultaRecibo(recepcao.Resultado.InfRec.NRec);
 
             var retorno = new EnviarCTeResposta(recepcao, retRecepcao);
-            if (retorno.RetRecepcaoResposta.Resultado.CStat.IsIn(100, 150) && retorno.RetRecepcaoResposta.Resultado.ProtCTe.Any())
+            if (retorno.RetRecepcaoResposta.Resultado.CStat == 104 && retorno.RetRecepcaoResposta.Resultado.ProtCTe.Any())
             {
                 var cteAutorizados = new List<CTeProc>();
                 foreach (var protCTe in retorno.RetRecepcaoResposta.Resultado.ProtCTe)
