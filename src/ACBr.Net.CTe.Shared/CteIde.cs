@@ -39,7 +39,7 @@ using ACBr.Net.DFe.Core.Collection;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeIde : DFeParentItem<CTeIde, InfCTe>, INotifyPropertyChanged
+    public sealed class CTeIde : DFeParentItem<CTeIde, CTeInfCTe>, INotifyPropertyChanged
     {
         #region Events
 

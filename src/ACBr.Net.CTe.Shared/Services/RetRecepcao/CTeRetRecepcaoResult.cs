@@ -30,7 +30,6 @@
 // ***********************************************************************
 
 using ACBr.Net.DFe.Core.Attributes;
-using ACBr.Net.DFe.Core.Collection;
 
 namespace ACBr.Net.CTe.Services
 {
@@ -41,7 +40,7 @@ namespace ACBr.Net.CTe.Services
 
         public CTeRetRecepcaoResult()
         {
-            ProtCTe = new DFeCollection<CTeProtCTe>();
+            ProtCTe = new CTeProtCTe[0];
         }
 
         #endregion Constructors
@@ -49,7 +48,7 @@ namespace ACBr.Net.CTe.Services
         #region Properties
 
         [DFeCollection("protCTe", MinSize = 0, MaxSize = 50, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-        public DFeCollection<CTeProtCTe> ProtCTe { get; set; }
+        public CTeProtCTe[] ProtCTe { get; set; }
 
         #endregion Properties
     }

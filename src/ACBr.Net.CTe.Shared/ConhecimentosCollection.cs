@@ -43,7 +43,7 @@ using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class ConhecimentosCollection : DFeCollection<CTeProc>
+    public sealed class ConhecimentosCollection : DFeCollection<CTe>
     {
         #region Constructors
 
@@ -61,53 +61,16 @@ namespace ACBr.Net.CTe
         /// </summary>
         public ACBrCTe Parent { get; }
 
-        /// <summary>
-        /// Retorna as CTe não autorizadas.
-        /// </summary>
-        public CTe[] NaoAutorizadas
-        {
-            get { return this.Where(x => x.ProtCTe.InfProt.NProt.IsEmpty()).Select(x => x.CTe).ToArray(); }
-        }
-
-        /// <summary>
-        /// Retornas as CTe Autorizadas.
-        /// </summary>
-        public CTeProc[] Autorizados
-        {
-            get { return this.Where(x => !x.ProtCTe.InfProt.NProt.IsEmpty()).ToArray(); }
-        }
-
         #endregion Properties
 
         #region Methods
 
-        /// <summary>Adds an object to the end of the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" />.</summary>
-        /// <param name="item">The object to be added to the end of the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" />. The value can be null for reference types.</param>
-        public void Add(CTe item)
+        /// <inheritdoc />
+        public override CTe AddNew()
         {
-            Add(new CTeProc { CTe = item });
-        }
-
-        /// <summary>Inserts an element into the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" /> at the specified index.</summary>
-        /// <param name="index">The zero-based index at which <paramref name="item" /> should be inserted.</param>
-        /// <param name="item">The object to insert. The value can be null for reference types.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
-        /// <paramref name="index" /> is less than 0.-or-<paramref name="index" /> is greater than <see cref="!:DFeCollection&lt;T&gt;.Count" />.</exception>
-        public void Insert(int index, CTe item)
-        {
-            Insert(index, new CTeProc { CTe = item });
-        }
-
-        /// <summary>Inserts the elements of a collection into the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" /> at the specified index.</summary>
-        /// <param name="index">The zero-based index at which the new elements should be inserted.</param>
-        /// <param name="collection">The collection whose elements should be inserted into the <see cref="T:ACBr.Net.DFe.Core.Collection.DFeCollection`1" />. The collection itself cannot be null, but it can contain elements that are null, if type <paramref name="T" /> is a reference type.</param>
-        /// <exception cref="T:System.ArgumentNullException">
-        /// <paramref name="collection" /> is null.</exception>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
-        /// <paramref name="index" /> is less than 0.-or-<paramref name="index" /> is greater than <see cref="!:DFeCollection&lt;T&gt;.Count" />.</exception>
-        public void InsertRange(int index, IEnumerable<CTe> collection)
-        {
-            InsertRange(index, collection.Select(x => new CTeProc { CTe = x }));
+            var instance = base.AddNew();
+            instance.InfCTe.Versao = Parent.Configuracoes.Geral.VersaoDFe;
+            return instance;
         }
 
         /// <summary>
@@ -140,10 +103,8 @@ namespace ACBr.Net.CTe
         private void LoadXml(string xml)
         {
             Guard.Against<ACBrDFeException>(xml.IsEmpty(), "Carregamento falhou: Não foi possivel ler o conteudo.");
-            Guard.Against<ACBrDFeException>(!xml.Contains("cteProc") && !xml.Contains("CTe"), "Carregamento falhou: Arquivo xml incorreto.");
-
-            var cteProc = xml.Contains("cteProc") ? CTeProc.Load(xml) : new CTeProc { CTe = CTe.Load(xml) };
-            Add(cteProc);
+            Guard.Against<ACBrDFeException>(!xml.Contains("</CTe>"), "Carregamento falhou: Arquivo xml incorreto.");
+            Add(CTe.Load(xml));
         }
 
         /// <summary>
@@ -174,7 +135,7 @@ namespace ACBr.Net.CTe
         /// <param name="options"></param>
         public void Assinar(X509Certificate2 certificado, DFeSaveOptions options)
         {
-            foreach (var cte in NaoAutorizadas)
+            foreach (var cte in this)
             {
                 cte.Assinar(certificado, options);
             }
@@ -189,9 +150,9 @@ namespace ACBr.Net.CTe
 
             var pathSchemaCTe = Parent.Configuracoes.Arquivos.GetSchema(SchemaCTe.CTe);
 
-            foreach (var cte in NaoAutorizadas)
+            foreach (var cte in this)
             {
-                var xml = cte.GetXml(DFeSaveOptions.DisableFormatting);
+                var xml = cte.GetXml();
                 XmlSchemaValidation.ValidarXml(xml, pathSchemaCTe, out var erros, out _);
 
                 listaErros.AddRange(erros);

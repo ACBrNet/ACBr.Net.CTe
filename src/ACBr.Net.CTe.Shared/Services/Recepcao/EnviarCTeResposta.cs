@@ -35,11 +35,20 @@ namespace ACBr.Net.CTe.Services
 {
     public sealed class EnviarCTeResposta : GenericClone<EnviarCTeResposta>
     {
+        public EnviarCTeResposta(RecepcaoCTeResposta recepcaoResposta, RetRecepcaoResposta retRecepcaoResposta)
+        {
+            RecepcaoResposta = recepcaoResposta;
+            RetRecepcaoResposta = retRecepcaoResposta;
+            CTeAutorizados = new CTeProc[0];
+        }
+
         #region Properties
 
-        public RecepcaoCTeResposta RecepcaoResposta { get; set; }
+        public CTeProc[] CTeAutorizados { get; internal set; }
 
-        public RetRecepcaoResposta RetRecepcaoResposta { get; set; }
+        public RecepcaoCTeResposta RecepcaoResposta { get; }
+
+        public RetRecepcaoResposta RetRecepcaoResposta { get; }
 
         #endregion Properties
     }

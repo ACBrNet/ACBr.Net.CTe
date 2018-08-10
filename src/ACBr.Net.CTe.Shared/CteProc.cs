@@ -52,6 +52,8 @@ namespace ACBr.Net.CTe
         {
             CTe = new CTe();
             ProtCTe = new CTeProtCTe();
+
+            Versao = CTeVersao.v300;
         }
 
         #endregion Constructors
@@ -61,7 +63,7 @@ namespace ACBr.Net.CTe
         [DFeAttribute(TipoCampo.Enum, "versao", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeVersao Versao { get; set; }
 
-        [DFeAttribute("ipTransmissor")]
+        [DFeAttribute(TipoCampo.Str, "ipTransmissor", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public string IpTransmissor { get; set; }
 
         [DFeElement("CTe", Ocorrencia = Ocorrencia.Obrigatoria)]

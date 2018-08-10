@@ -39,7 +39,7 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class InfCTe : GenericClone<InfCTe>, INotifyPropertyChanged
+    public sealed class CTeInfCTe : GenericClone<CTeInfCTe>, INotifyPropertyChanged
     {
         #region Events
 
@@ -59,7 +59,7 @@ namespace ACBr.Net.CTe
 
         #region Contructors
 
-        public InfCTe()
+        public CTeInfCTe()
         {
             AutXml = new DFeCollection<CTeAutXML>();
             Imp = new CTeImp();

@@ -139,6 +139,14 @@ namespace ACBr.Net.CTe.Demo
 
         private void btnCriarEnviar_Click(object sender, EventArgs e)
         {
+            var nCTe = "";
+            InputBox.Show("WebServices Enviar", "Numero do Conhecimento", ref nCTe);
+
+            var lote = "";
+            InputBox.Show("WebServices Enviar", "Numero do Lote", ref lote);
+
+            acbrCTe.Conhecimentos.Clear();
+            GerarCTe(nCTe.ToInt32(1));
         }
 
         private void btnConsultarRecibo_Click(object sender, EventArgs e)
@@ -286,6 +294,12 @@ namespace ACBr.Net.CTe.Demo
         }
 
         #endregion EventHandlers
+
+        private void GerarCTe(int nCTe)
+        {
+            var cte = acbrCTe.Conhecimentos.AddNew();
+            cte.InfCTe.Ide.NCT = nCTe;
+        }
 
         private void InitializeLog()
         {
