@@ -30,6 +30,7 @@
 // ***********************************************************************
 
 using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe.Services
 {
@@ -46,6 +47,9 @@ namespace ACBr.Net.CTe.Services
         #endregion Constructors
 
         #region Properties
+
+        [DFeElement(TipoCampo.Str, "nRec", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Recibo { get; set; }
 
         [DFeCollection("protCTe", MinSize = 0, MaxSize = 50, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public CTeProtCTe[] ProtCTe { get; set; }

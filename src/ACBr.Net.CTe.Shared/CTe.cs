@@ -31,7 +31,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
@@ -85,7 +84,6 @@ namespace ACBr.Net.CTe
         public void Assinar(X509Certificate2 certificado, DFeSaveOptions saveOptions)
         {
             Guard.Against<ArgumentNullException>(certificado == null, "Certificado não pode ser nulo.");
-            Guard.Against<ArgumentException>(!Enum.IsDefined(typeof(DFeSaveOptions), saveOptions), "Valor não encontrado no enum.");
 
             if (InfCTe.Id.IsEmpty() || InfCTe.Id.Length < 44)
             {

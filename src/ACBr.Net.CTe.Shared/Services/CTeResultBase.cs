@@ -38,6 +38,8 @@ namespace ACBr.Net.CTe.Services
 {
     public abstract class CTeResultBase<T> : DFeDocument<T> where T : class
     {
+        #region Properties
+
         [DFeAttribute(TipoCampo.Enum, "versao", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeVersao Versao { get; set; }
 
@@ -55,5 +57,7 @@ namespace ACBr.Net.CTe.Services
 
         [DFeElement(TipoCampo.Enum, "cUF", Min = 1, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
         public DFeCodUF UF { get; set; }
+
+        #endregion Properties
     }
 }
