@@ -175,7 +175,7 @@ namespace ACBr.Net.CTe
                 var cteAutorizados = new List<CTeProc>();
                 foreach (var protCTe in retorno.RetRecepcaoResposta.Resultado.ProtCTe)
                 {
-                    var cte = Conhecimentos.SingleOrDefault(x => x.InfCTe.Id == protCTe.InfProt.ChCTe);
+                    var cte = Conhecimentos.SingleOrDefault(x => x.InfCTe.Id.Substring(3) == protCTe.InfProt.ChCTe);
                     if (cte == null) continue;
 
                     if (Configuracoes.Geral.ValidarDigest)
