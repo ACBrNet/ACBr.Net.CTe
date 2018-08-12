@@ -33,24 +33,21 @@ using ACBr.Net.DFe.Core.Attributes;
 
 namespace ACBr.Net.CTe
 {
-	public enum TipoHorarioIntervalo
-	{
-		[DFeEnum("0")]
-		SemHorario,
+    public enum TipoHorarioIntervalo
+    {
+        [DFeEnum("0")]
+        NaoDefinido,
 
-		[DFeEnum("1")]
-		NoHorario,
+        [DFeEnum("1")]
+        NoHorario,
 
-		[DFeEnum("2")]
-		AteHorario,
+        [DFeEnum("2")]
+        AteHorario,
 
-		[DFeEnum("3")]
-		ApartirHorario,
+        [DFeEnum("3")]
+        ApartirHorario,
 
-		[DFeEnum("4")]
-		NoIntervalo,
-
-		[DFeEnum("N")]
-		NaoInformado
-	}
+        [DFeEnum("4")]
+        NoIntervalo
+    }
 }

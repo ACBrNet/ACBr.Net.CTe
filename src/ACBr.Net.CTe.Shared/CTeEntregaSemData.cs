@@ -36,21 +36,30 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeEntregaSemData : GenericClone<CTeEntregaSemData>, ICTeTipoData, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeEntregaSemData : GenericClone<CTeEntregaSemData>, ICTeTipoData, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Constructors
 
-		[DFeElement(TipoCampo.Enum, "tpPer", Id = "#071", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public TipoDataPeriodo TpPer { get; set; }
+        public CTeEntregaSemData()
+        {
+            TpPer = TipoDataPeriodo.NaoDefinido;
+        }
 
-		#endregion Properties
-	}
+        #endregion Constructors
+
+        #region Properties
+
+        [DFeElement(TipoCampo.Enum, "tpPer", Id = "#071", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public TipoDataPeriodo TpPer { get; set; }
+
+        #endregion Properties
+    }
 }
 
 #pragma warning restore

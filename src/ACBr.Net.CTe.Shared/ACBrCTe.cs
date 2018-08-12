@@ -451,6 +451,8 @@ namespace ACBr.Net.CTe
             }
         }
 
+        #endregion Methods
+
         #region Override
 
         /// <inheritdoc />
@@ -468,7 +470,5 @@ namespace ACBr.Net.CTe
         }
 
         #endregion Override
-
-        #endregion Methods
     }
 }

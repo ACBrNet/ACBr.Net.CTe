@@ -40,7 +40,7 @@ namespace ACBr.Net.CTe.Eventos
     {
         #region Properties
 
-        [DFeAttribute(TipoCampo.Str, "id", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeAttribute(TipoCampo.Str, "id", Min = 1, Max = 1, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public string Id { get; set; }
 
         [DFeElement(TipoCampo.Enum, "tpAmb", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]

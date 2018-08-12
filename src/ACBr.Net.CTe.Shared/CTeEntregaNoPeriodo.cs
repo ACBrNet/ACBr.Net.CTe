@@ -36,25 +36,34 @@ using System.ComponentModel;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeEntregaNoPeriodo : GenericClone<CTeEntregaNoPeriodo>, ICTeTipoData, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeEntregaNoPeriodo : GenericClone<CTeEntregaNoPeriodo>, ICTeTipoData, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Constructors
 
-		[DFeElement(TipoCampo.Enum, "tpPer", Id = "#076", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public TipoDataPeriodo TpPer { get; set; }
+        public CTeEntregaNoPeriodo()
+        {
+            TpPer = TipoDataPeriodo.NoPeriodo;
+        }
 
-		[DFeElement(TipoCampo.Dat, "dIni", Id = "#077", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DateTime DIni { get; set; }
+        #endregion Constructors
 
-		[DFeElement(TipoCampo.Dat, "dFim", Id = "#078", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DateTime DFim { get; set; }
+        #region Properties
 
-		#endregion Properties
-	}
+        [DFeElement(TipoCampo.Enum, "tpPer", Id = "#076", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public TipoDataPeriodo TpPer { get; set; }
+
+        [DFeElement(TipoCampo.Dat, "dIni", Id = "#077", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTime DIni { get; set; }
+
+        [DFeElement(TipoCampo.Dat, "dFim", Id = "#078", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTime DFim { get; set; }
+
+        #endregion Properties
+    }
 }

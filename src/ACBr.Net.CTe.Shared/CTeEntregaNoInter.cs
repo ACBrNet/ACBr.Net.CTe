@@ -37,25 +37,34 @@ using System.ComponentModel;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeEntregaNoInter : GenericClone<CTeEntregaNoInter>, ICTeTipoHora, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeEntregaNoInter : GenericClone<CTeEntregaNoInter>, ICTeTipoHora, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Constructors
 
-		[DFeElement(TipoCampo.Enum, "tpHor", Id = "#085", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public TipoHorarioIntervalo TpHor { get; set; }
+        public CTeEntregaNoInter()
+        {
+            TpHor = TipoHorarioIntervalo.NoIntervalo;
+        }
 
-		[DFeElement(TipoCampo.Hor, "hIni", Id = "#086", Min = 8, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DateTime HIni { get; set; }
+        #endregion Constructors
 
-		[DFeElement(TipoCampo.Hor, "hFim", Id = "#087", Min = 8, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public DateTime HFim { get; set; }
+        #region Properties
 
-		#endregion Properties
-	}
+        [DFeElement(TipoCampo.Enum, "tpHor", Id = "#085", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public TipoHorarioIntervalo TpHor { get; set; }
+
+        [DFeElement(TipoCampo.Hor, "hIni", Id = "#086", Min = 8, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTime HIni { get; set; }
+
+        [DFeElement(TipoCampo.Hor, "hFim", Id = "#087", Min = 8, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DateTime HFim { get; set; }
+
+        #endregion Properties
+    }
 }
