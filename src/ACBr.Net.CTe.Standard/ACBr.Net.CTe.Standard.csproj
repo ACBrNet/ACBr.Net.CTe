@@ -11,12 +11,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\..\bin\Debug\</OutputPath>
-    <DocumentationFile>..\..\bin\Debug\netstandard2.0\ACBr.Net.CTe.Standard.xml</DocumentationFile>
+    <DocumentationFile>..\..\bin\Debug\netstandard2.0\ACBr.Net.CTe.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\..\bin\Release\</OutputPath>
-    <DocumentationFile>..\..\bin\Release\netstandard2.0\ACBr.Net.CTe.Standard.xml</DocumentationFile>
+    <DocumentationFile>..\..\bin\Release\netstandard2.0\ACBr.Net.CTe.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <PackageReference Include="ACBr.Net.Core" Version="1.2.1" />
-    <PackageReference Include="ACBr.Net.DFe.Core" Version="1.2.2-rc2" />
+    <PackageReference Include="ACBr.Net.DFe.Core" Version="1.2.2" />
     <PackageReference Include="Fody" Version="3.1.4" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.5.9" />
     <PackageReference Include="System.ServiceModel.Http" Version="4.5.3" />

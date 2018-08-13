@@ -48,20 +48,9 @@ using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Extensions;
 using ACBr.Net.DFe.Core.Service;
 
-#if !NETSTANDARD2_0
-
-using System.Drawing;
-
-#endif
-
 namespace ACBr.Net.CTe
 {
-#if !NETSTANDARD2_0
-
-    [ToolboxBitmap(typeof(ACBrCTe), "ACBr.Net.CTe.ACBrCTe.bmp")]
-#endif
-
-    public sealed class ACBrCTe : ACBrComponent, IACBrLog
+    public sealed partial class ACBrCTe : ACBrComponent, IACBrLog
     {
         #region Fields
 

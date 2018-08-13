@@ -19,21 +19,21 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Net45\</OutputPath>
+    <OutputPath>..\..\bin\Debug\Net452\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\bin\Debug\Net45\ACBr.Net.CTe.xml</DocumentationFile>
+    <DocumentationFile>..\..\bin\Debug\Net452\ACBr.Net.CTe.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\Net45\</OutputPath>
+    <OutputPath>..\..\bin\Release\Net452\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\bin\Release\Net45\ACBr.Net.CTe.xml</DocumentationFile>
+    <DocumentationFile>..\..\bin\Release\Net452\ACBr.Net.CTe.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
@@ -47,7 +47,7 @@
       <HintPath>..\packages\ACBr.Net.Core.1.2.1\lib\net452\ACBr.Net.Core.dll</HintPath>
     </Reference>
     <Reference Include="ACBr.Net.DFe.Core, Version=1.2.2.0, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\ACBr.Net.DFe.Core.1.2.2-rc2\lib\net452\ACBr.Net.DFe.Core.dll</HintPath>
+      <HintPath>..\packages\ACBr.Net.DFe.Core.1.2.2\lib\net452\ACBr.Net.DFe.Core.dll</HintPath>
     </Reference>
     <Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
@@ -67,6 +67,9 @@
   <ItemGroup>
     <Compile Include="..\Shared\ACBr.Net.CTe.AssemblyInfo.cs">
       <Link>Properties\ACBr.Net.CTe.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ACBrCTe.cs">
+      <SubType>ACBr.Net</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
