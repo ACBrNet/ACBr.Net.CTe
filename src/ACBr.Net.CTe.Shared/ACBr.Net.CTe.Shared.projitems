@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigWebServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeEnderecoEmit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DACTeBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SchemaCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTe.cs" />

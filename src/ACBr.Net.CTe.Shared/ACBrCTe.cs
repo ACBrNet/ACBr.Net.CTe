@@ -56,6 +56,7 @@ namespace ACBr.Net.CTe
 
         private StatusCTe status;
         private SecurityProtocolType securityProtocol;
+        private DACTeBase dacTe;
 
         #endregion Fields
 
@@ -94,6 +95,19 @@ namespace ACBr.Net.CTe
 
                 status = value;
                 StatusChanged.Raise(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Componente para impressão do DACTe
+        /// </summary>
+        public DACTeBase DACTe
+        {
+            get => dacTe;
+            set
+            {
+                dacTe = value;
+                if (dacTe != null && dacTe.Parent != this) dacTe.Parent = this;
             }
         }
 
@@ -149,6 +163,7 @@ namespace ACBr.Net.CTe
             finally
             {
                 cert.Reset();
+                cert = null;
                 ServicePointManager.SecurityProtocol = oldProtocol;
                 Status = StatusCTe.EmEspera;
             }
@@ -192,6 +207,7 @@ namespace ACBr.Net.CTe
 
             if (imprimir && retorno.CTeAutorizados.Any())
             {
+                DACTe?.Imprimir(retorno.CTeAutorizados);
             }
 
             return retorno;
