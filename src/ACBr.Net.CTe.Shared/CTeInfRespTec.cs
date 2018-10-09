@@ -22,14 +22,6 @@ namespace ACBr.Net.CTe
 
         #endregion Events
 
-        #region Constructors
-
-        public CTeInfRespTec()
-        {            
-        }
-
-        #endregion Constructors
-
         #region Propriedades
 
         [DFeElement(TipoCampo.StrNumberFill, "CNPJ", Min = 14, Max = 14, Ocorrencia = Ocorrencia.Obrigatoria)]
