@@ -33,26 +33,23 @@ using ACBr.Net.DFe.Core.Attributes;
 
 namespace ACBr.Net.CTe
 {
-	public enum TipoDataPeriodo
-	{
-		[DFeEnum("0")]
-		SemData,
+    public enum TipoDataPeriodo
+    {
+        [DFeEnum("0")]
+        NaoDefinido,
 
-		[DFeEnum("1")]
-		NaData,
+        [DFeEnum("1")]
+        NaData,
 
-		[DFeEnum("2")]
-		AteData,
+        [DFeEnum("2")]
+        AteData,
 
-		[DFeEnum("3")]
-		ApartirData,
+        [DFeEnum("3")]
+        ApartirData,
 
-		[DFeEnum("4")]
-		NoPeriodo,
-
-		[DFeEnum("N")]
-		NaoInformado
-	}
+        [DFeEnum("4")]
+        NoPeriodo,
+    }
 }
 
 #pragma warning restore

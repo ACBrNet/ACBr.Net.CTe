@@ -36,19 +36,28 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeEntregaSemHora : GenericClone<CTeEntregaSemHora>, ICTeTipoHora, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeEntregaSemHora : GenericClone<CTeEntregaSemHora>, ICTeTipoHora, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Constructors
 
-		[DFeElement(TipoCampo.Enum, "tpHor", Id = "#080", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public TipoHorarioIntervalo TpHor { get; set; }
+        public CTeEntregaSemHora()
+        {
+            TpHor = TipoHorarioIntervalo.NaoDefinido;
+        }
 
-		#endregion Properties
-	}
+        #endregion Constructors
+
+        #region Properties
+
+        [DFeElement(TipoCampo.Enum, "tpHor", Id = "#080", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public TipoHorarioIntervalo TpHor { get; set; }
+
+        #endregion Properties
+    }
 }

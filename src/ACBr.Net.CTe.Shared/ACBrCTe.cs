@@ -48,25 +48,15 @@ using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Extensions;
 using ACBr.Net.DFe.Core.Service;
 
-#if !NETSTANDARD2_0
-
-using System.Drawing;
-
-#endif
-
 namespace ACBr.Net.CTe
 {
-#if !NETSTANDARD2_0
-
-    [ToolboxBitmap(typeof(ACBrCTe), "ACBr.Net.CTe.ACBrCTe.bmp")]
-#endif
-
-    public sealed class ACBrCTe : ACBrComponent, IACBrLog
+    public sealed partial class ACBrCTe : ACBrComponent, IACBrLog
     {
         #region Fields
 
         private StatusCTe status;
         private SecurityProtocolType securityProtocol;
+        private DACTeBase dacTe;
 
         #endregion Fields
 
@@ -105,6 +95,19 @@ namespace ACBr.Net.CTe
 
                 status = value;
                 StatusChanged.Raise(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Componente para impressão do DACTe
+        /// </summary>
+        public DACTeBase DACTe
+        {
+            get => dacTe;
+            set
+            {
+                dacTe = value;
+                if (dacTe != null && dacTe.Parent != this) dacTe.Parent = this;
             }
         }
 
@@ -160,6 +163,7 @@ namespace ACBr.Net.CTe
             finally
             {
                 cert.Reset();
+                cert = null;
                 ServicePointManager.SecurityProtocol = oldProtocol;
                 Status = StatusCTe.EmEspera;
             }
@@ -203,6 +207,7 @@ namespace ACBr.Net.CTe
 
             if (imprimir && retorno.CTeAutorizados.Any())
             {
+                DACTe?.Imprimir(retorno.CTeAutorizados);
             }
 
             return retorno;
@@ -451,6 +456,8 @@ namespace ACBr.Net.CTe
             }
         }
 
+        #endregion Methods
+
         #region Override
 
         /// <inheritdoc />
@@ -468,7 +475,5 @@ namespace ACBr.Net.CTe
         }
 
         #endregion Override
-
-        #endregion Methods
     }
 }

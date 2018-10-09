@@ -74,7 +74,7 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Custom, "xNome", Id = "#146", Min = 2, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string XNome { get; set; }
 
-        [DFeElement(TipoCampo.StrNumber, "fone", Id = "#147", Min = 7, Max = 12, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeElement(TipoCampo.StrNumber, "fone", Id = "#147", Min = 7, Max = 12, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public string Fone { get; set; }
 
         [DFeElement("enderExped", Ocorrencia = Ocorrencia.Obrigatoria)]
