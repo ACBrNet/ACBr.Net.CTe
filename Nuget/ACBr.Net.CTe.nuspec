@@ -1,33 +1,118 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
-    <metadata>
-        <id>ACBr.Net.CTe</id>
-        <version>0.9.0.0-beta2</version>
-        <title>ACBr.Net.CTe</title>
-        <authors>Grupo ACBr.Net</authors>
-        <owners>Grupo ACBr.Net</owners>
-        <projectUrl>https://acbrnet.github.io</projectUrl>
-        <iconUrl>https://avatars2.githubusercontent.com/u/7342977?v=3&amp;s=200</iconUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Biblioteca para geração e envio de CTe</description>
-        <copyright>Copyright © Grupo ACBr.Net 2014 - 2018</copyright>
-        <language>pt-BR</language>
-        <tags>ACBr ACBr.Net Automação Comercial</tags>
-        <dependencies>
-             <group targetFramework="net452">
-				<dependency id="ACBr.Net.Core" version="1.2.1-rc1" />
-				<dependency id="ACBr.Net.DFe.Core" version="1.2.1-rc1" />
-			</group>
-			<group targetFramework=".NETStandard2.0">
-                <dependency id="ACBr.Net.Core" version="1.2.1-rc1" exclude="Build,Analyzers" />
-                <dependency id="ACBr.Net.DFe.Core" version="1.2.1-rc1" exclude="Build,Analyzers" />
-            </group>
-        </dependencies>
-    </metadata>
-    <files>
-        <file src="..\bin\Release\Net452\ACBr.Net.CTe.dll" target="lib\net452\ACBr.Net.CTe.dll" />
-        <file src="..\bin\Release\Net452\ACBr.Net.CTe.XML" target="lib\net452\ACBr.Net.CTe.XML" />
-		<file src="..\bin\Release\netstandard2.0\ACBr.Net.CTe.dll" target="lib\netstandard2.0\ACBr.Net.CTe.dll" />
-        <file src="..\bin\Release\netstandard2.0\ACBr.Net.CTe.XML" target="lib\netstandard2.0\ACBr.Net.CTe.XML" />
-    </files>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ACBr.Net.CTe</id>
+    <version>1.0.0-rc1</version>
+    <title>ACBr.Net.CTe</title>
+    <authors>Grupo ACBr.Net</authors>
+    <owners>Grupo ACBr.Net</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://acbrnet.github.io/</projectUrl>
+    <iconUrl>https://avatars2.githubusercontent.com/u/7342977?v=3&amp;s=200</iconUrl>
+    <description>Biblioteca para geração e envio de CTe</description>
+    <copyright>Copyright © Grupo ACBr.Net 2014 - 2018</copyright>
+    <language>pt-BR</language>
+    <tags>ACBr ACBr.Net Automação Comercial</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.2">
+        <dependency id="ACBr.Net.Core" version="1.2.1" />
+        <dependency id="ACBr.Net.DFe.Core" version="1.2.2" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="ACBr.Net.Core" version="1.2.1" exclude="Build,Analyzers" />
+        <dependency id="ACBr.Net.DFe.Core" version="1.2.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cancCTeTiposBasico_v2.00.xsd" target="content\Schemas\cancCTeTiposBasico_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cancCTeTiposBasico_v3.00.xsd" target="content\Schemas\cancCTeTiposBasico_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consCad_v1.01.xsd" target="content\Schemas\consCad_v1.01.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consCad_v2.00.xsd" target="content\Schemas\consCad_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consReciCTeTiposBasico_v2.00.xsd" target="content\Schemas\consReciCTeTiposBasico_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consReciCTeTiposBasico_v3.00.xsd" target="content\Schemas\consReciCTeTiposBasico_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consReciCTe_v2.00.xsd" target="content\Schemas\consReciCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consReciCTe_v3.00.xsd" target="content\Schemas\consReciCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consSitCTeTiposBasico_v2.00.xsd" target="content\Schemas\consSitCTeTiposBasico_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consSitCTeTiposBasico_v3.00.xsd" target="content\Schemas\consSitCTeTiposBasico_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consSitCTe_v2.00.xsd" target="content\Schemas\consSitCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consSitCTe_v3.00.xsd" target="content\Schemas\consSitCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consStatServCTe_v2.00.xsd" target="content\Schemas\consStatServCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consStatServCTe_v3.00.xsd" target="content\Schemas\consStatServCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consStatServTiposBasico_v2.00.xsd" target="content\Schemas\consStatServTiposBasico_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\consStatServTiposBasico_v3.00.xsd" target="content\Schemas\consStatServTiposBasico_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalAereo_v2.00.xsd" target="content\Schemas\cteModalAereo_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalAereo_v3.00.xsd" target="content\Schemas\cteModalAereo_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalAquaviario_v2.00.xsd" target="content\Schemas\cteModalAquaviario_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalAquaviario_v3.00.xsd" target="content\Schemas\cteModalAquaviario_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalDutoviario_v2.00.xsd" target="content\Schemas\cteModalDutoviario_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalDutoviario_v3.00.xsd" target="content\Schemas\cteModalDutoviario_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalFerroviario_v2.00.xsd" target="content\Schemas\cteModalFerroviario_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalFerroviario_v3.00.xsd" target="content\Schemas\cteModalFerroviario_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalRodoviarioOS_v3.00.xsd" target="content\Schemas\cteModalRodoviarioOS_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalRodoviario_v2.00.xsd" target="content\Schemas\cteModalRodoviario_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteModalRodoviario_v3.00.xsd" target="content\Schemas\cteModalRodoviario_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteMultiModal_v2.00.xsd" target="content\Schemas\cteMultiModal_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteMultiModal_v3.00.xsd" target="content\Schemas\cteMultiModal_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteOS_v3.00.xsd" target="content\Schemas\cteOS_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteTiposBasico_v2.00.xsd" target="content\Schemas\cteTiposBasico_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cteTiposBasico_v3.00.xsd" target="content\Schemas\cteTiposBasico_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cte_v2.00.xsd" target="content\Schemas\cte_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\cte_v3.00.xsd" target="content\Schemas\cte_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\distDFeInt_v1.00.xsd" target="content\Schemas\distDFeInt_v1.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\enviCTe_v2.00.xsd" target="content\Schemas\enviCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\enviCTe_v3.00.xsd" target="content\Schemas\enviCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evCancCTe_v2.00.xsd" target="content\Schemas\evCancCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evCancCTe_v3.00.xsd" target="content\Schemas\evCancCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evCCeCTe_v2.00.xsd" target="content\Schemas\evCCeCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evCCeCTe_v3.00.xsd" target="content\Schemas\evCCeCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\eventoCTeTiposBasico_v2.00.xsd" target="content\Schemas\eventoCTeTiposBasico_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\eventoCTeTiposBasico_v3.00.xsd" target="content\Schemas\eventoCTeTiposBasico_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\eventoCTe_v2.00.xsd" target="content\Schemas\eventoCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\eventoCTe_v3.00.xsd" target="content\Schemas\eventoCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evEPECCTe_v2.00.xsd" target="content\Schemas\evEPECCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evEPECCTe_v3.00.xsd" target="content\Schemas\evEPECCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evGTV_v3.00.xsd" target="content\Schemas\evGTV_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evPrestDesacordo_v3.00.xsd" target="content\Schemas\evPrestDesacordo_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evRegMultimodal_v2.00.xsd" target="content\Schemas\evRegMultimodal_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\evRegMultimodal_v3.00.xsd" target="content\Schemas\evRegMultimodal_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\inutCTeTiposBasico_v2.00.xsd" target="content\Schemas\inutCTeTiposBasico_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\inutCTeTiposBasico_v3.00.xsd" target="content\Schemas\inutCTeTiposBasico_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\inutCTe_v2.00.xsd" target="content\Schemas\inutCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\inutCTe_v3.00.xsd" target="content\Schemas\inutCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\leiauteConsultaCadastro_v1.01.xsd" target="content\Schemas\leiauteConsultaCadastro_v1.01.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\leiauteConsultaCadastro_v2.00.xsd" target="content\Schemas\leiauteConsultaCadastro_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\procCTeOS_v3.00.xsd" target="content\Schemas\procCTeOS_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\procCTe_v2.00.xsd" target="content\Schemas\procCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\procCTe_v3.00.xsd" target="content\Schemas\procCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\procEventoCTe_v2.00.xsd" target="content\Schemas\procEventoCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\procEventoCTe_v3.00.xsd" target="content\Schemas\procEventoCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\procInutCTe_v2.00.xsd" target="content\Schemas\procInutCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\procInutCTe_v3.00.xsd" target="content\Schemas\procInutCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retConsCad_v1.01.xsd" target="content\Schemas\retConsCad_v1.01.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retConsCad_v2.00.xsd" target="content\Schemas\retConsCad_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retConsReciCTe_v2.00.xsd" target="content\Schemas\retConsReciCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retConsReciCTe_v3.00.xsd" target="content\Schemas\retConsReciCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retConsSitCTe_v2.00.xsd" target="content\Schemas\retConsSitCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retConsSitCTe_v3.00.xsd" target="content\Schemas\retConsSitCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retConsStatServCTe_v2.00.xsd" target="content\Schemas\retConsStatServCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retConsStatServCTe_v3.00.xsd" target="content\Schemas\retConsStatServCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retCTeOS_v3.00.xsd" target="content\Schemas\retCTeOS_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retDistDFeInt_v1.00.xsd" target="content\Schemas\retDistDFeInt_v1.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retEnviCTe_v2.00.xsd" target="content\Schemas\retEnviCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retEnviCTe_v3.00.xsd" target="content\Schemas\retEnviCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retEventoCTe_v2.00.xsd" target="content\Schemas\retEventoCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retEventoCTe_v3.00.xsd" target="content\Schemas\retEventoCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retInutCTe_v2.00.xsd" target="content\Schemas\retInutCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\retInutCTe_v3.00.xsd" target="content\Schemas\retInutCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\tiposBasico_v1.03.xsd" target="content\Schemas\tiposBasico_v1.03.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\tiposDistDFe_v1.00.xsd" target="content\Schemas\tiposDistDFe_v1.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\tiposGeralCTe_v2.00.xsd" target="content\Schemas\tiposGeralCTe_v2.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\tiposGeralCTe_v3.00.xsd" target="content\Schemas\tiposGeralCTe_v3.00.xsd" />
+    <file src="..\src\ACBr.Net.CTe.Shared\Schemas\xmldsig-core-schema_v1.01.xsd" target="content\Schemas\xmldsig-core-schema_v1.01.xsd" />
+    <file src="..\bin\Release\Net452\ACBr.Net.CTe.dll" target="lib\net452\ACBr.Net.CTe.dll" />
+    <file src="..\bin\Release\Net452\ACBr.Net.CTe.XML" target="lib\net452\ACBr.Net.CTe.XML" />
+    <file src="..\bin\Release\netstandard2.0\ACBr.Net.CTe.dll" target="lib\netstandard2.0\ACBr.Net.CTe.dll" />
+    <file src="..\bin\Release\netstandard2.0\ACBr.Net.CTe.XML" target="lib\netstandard2.0\ACBr.Net.CTe.XML" />
+  </files>
 </package>

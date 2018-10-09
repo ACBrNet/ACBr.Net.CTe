@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 10-15-2016
+// Created          : 07-23-2016
 //
 // Last Modified By : RFTD
-// Last Modified On : 10-15-2016
+// Last Modified On : 07-23-2016
 // ***********************************************************************
-// <copyright file="CTeEntregaNoPeriodo.cs" company="ACBr.Net">
+// <copyright file="ACBrCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -27,43 +27,14 @@
 // DEALINGS IN THE SOFTWARE.
 // </copyright>
 // <summary></summary>
+// ***********************************************************************
 
-using ACBr.Net.Core.Generics;
-using ACBr.Net.DFe.Core.Attributes;
-using ACBr.Net.DFe.Core.Serializer;
-using System;
-using System.ComponentModel;
+using System.Drawing;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeEntregaNoPeriodo : GenericClone<CTeEntregaNoPeriodo>, ICTeTipoData, INotifyPropertyChanged
+    [ToolboxBitmap(typeof(ACBrCTe), "ACBr.Net.CTe.ACBrCTe.bmp")]
+    public sealed partial class ACBrCTe
     {
-        #region Events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Events
-
-        #region Constructors
-
-        public CTeEntregaNoPeriodo()
-        {
-            TpPer = TipoDataPeriodo.NoPeriodo;
-        }
-
-        #endregion Constructors
-
-        #region Properties
-
-        [DFeElement(TipoCampo.Enum, "tpPer", Id = "#076", Min = 1, Max = 1, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public TipoDataPeriodo TpPer { get; set; }
-
-        [DFeElement(TipoCampo.Dat, "dIni", Id = "#077", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public DateTime DIni { get; set; }
-
-        [DFeElement(TipoCampo.Dat, "dFim", Id = "#078", Min = 10, Max = 10, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public DateTime DFim { get; set; }
-
-        #endregion Properties
     }
 }
