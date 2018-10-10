@@ -61,6 +61,7 @@ namespace ACBr.Net.CTe
 
         public CTeInfCTe()
         {
+            InfRespTec = new CTeInfRespTec();
             AutXml = new DFeCollection<CTeAutXML>();
             Imp = new CTeImp();
             VPrest = new CTeVPrest();
@@ -179,6 +180,9 @@ namespace ACBr.Net.CTe
         [DFeCollection("autXML", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeAutXML> AutXml { get; set; }
 
+        [DFeElement("infRespTec", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeInfRespTec InfRespTec { get; set; }
+
         #endregion Propriedades
 
         #region Methods
@@ -216,6 +220,8 @@ namespace ACBr.Net.CTe
         {
             return Ide.Mod == ModeloCTe.CTe && (!Dest.CNPJ.IsEmpty() || !Dest.CPF.IsEmpty() || !Dest.XNome.IsEmpty());
         }
+
+        private bool ShouldSerializeInfRespTec() => !string.IsNullOrEmpty(InfRespTec.CNPJ) || !string.IsNullOrEmpty(InfRespTec.XNome);
 
         #endregion Methods
     }
