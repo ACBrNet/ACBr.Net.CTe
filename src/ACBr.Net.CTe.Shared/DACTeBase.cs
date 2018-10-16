@@ -46,13 +46,13 @@ namespace ACBr.Net.CTe
         /// Imprime o DACTe do CTe.
         /// </summary>
         /// <param name="conhecimentos"></param>
-        public abstract void Imprimir(CTeProc[] conhecimentos = null);
+        public abstract void Imprimir(CTeProc[] conhecimentos);
 
         /// <summary>
         /// Imprime o DACTe do CTe em PDF.
         /// </summary>
         /// <param name="conhecimentos"></param>
-        public abstract void ImprimirPDF(CTeProc[] conhecimentos = null);
+        public abstract void ImprimirPDF(CTeProc[] conhecimentos);
 
         /// <summary>
         /// Imprime um evento do CTe.
