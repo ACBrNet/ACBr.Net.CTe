@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>ACBr.Net.CTe</id>
-    <version>1.0.0-rc2</version>
+    <version>1.0.0-rc3</version>
     <title>ACBr.Net.CTe</title>
     <authors>Grupo ACBr.Net</authors>
     <owners>Grupo ACBr.Net</owners>
@@ -15,12 +15,12 @@
     <tags>ACBr ACBr.Net Automação Comercial</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.5.2">
-        <dependency id="ACBr.Net.Core" version="1.2.1" />
-        <dependency id="ACBr.Net.DFe.Core" version="1.2.2" />
+        <dependency id="ACBr.Net.Core" version="1.2.3" />
+        <dependency id="ACBr.Net.DFe.Core" version="1.2.3.1" />
       </group>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="ACBr.Net.Core" version="1.2.1" exclude="Build,Analyzers" />
-        <dependency id="ACBr.Net.DFe.Core" version="1.2.2" exclude="Build,Analyzers" />
+        <dependency id="ACBr.Net.Core" version="1.2.3" exclude="Build,Analyzers" />
+        <dependency id="ACBr.Net.DFe.Core" version="1.2.3.1" exclude="Build,Analyzers" />
       </group>
     </dependencies>
   </metadata>

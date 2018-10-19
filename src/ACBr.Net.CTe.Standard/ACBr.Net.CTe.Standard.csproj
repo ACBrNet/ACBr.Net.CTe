@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ACBr.Net.Core" Version="1.2.2" />
-    <PackageReference Include="ACBr.Net.DFe.Core" Version="1.2.3" />
-    <PackageReference Include="Fody" Version="3.2.9">
+    <PackageReference Include="ACBr.Net.Core" Version="1.2.3" />
+    <PackageReference Include="ACBr.Net.DFe.Core" Version="1.2.3.1" />
+    <PackageReference Include="Fody" Version="3.2.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

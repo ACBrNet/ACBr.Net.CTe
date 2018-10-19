@@ -40,6 +40,16 @@ namespace ACBr.Net.CTe
     // ReSharper disable once InconsistentNaming
     public abstract class DACTeBase : DFeReportClass<ACBrCTe>
     {
+        #region Properties
+
+        public bool Cancelado { get; set; }
+
+        public bool QuebrarLinhasObservacao { get; set; }
+
+        public DACTeLayout LayoutImpressao { get; set; }
+
+        #endregion Properties
+
         #region Methods
 
         /// <summary>
@@ -77,6 +87,18 @@ namespace ACBr.Net.CTe
         /// </summary>
         /// <param name="inutilizao"></param>
         public abstract void ImprimirInutilizacaoPDF(InutilizaoResposta inutilizao);
+
+        protected override void OnInitialize()
+        {
+            Cancelado = false;
+            QuebrarLinhasObservacao = true;
+            LayoutImpressao = DACTeLayout.Retrato;
+        }
+
+        protected override void OnDisposing()
+        {
+            //
+        }
 
         /// <inheritdoc />
         protected override void ParentChanged(ACBrCTe oldParent, ACBrCTe newParent)
