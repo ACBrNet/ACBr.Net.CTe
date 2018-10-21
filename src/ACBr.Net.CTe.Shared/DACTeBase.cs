@@ -42,8 +42,6 @@ namespace ACBr.Net.CTe
     {
         #region Properties
 
-        public bool Cancelado { get; set; }
-
         public bool QuebrarLinhasObservacao { get; set; }
 
         public DACTeLayout LayoutImpressao { get; set; }
@@ -90,7 +88,6 @@ namespace ACBr.Net.CTe
 
         protected override void OnInitialize()
         {
-            Cancelado = false;
             QuebrarLinhasObservacao = true;
             LayoutImpressao = DACTeLayout.Retrato;
         }
