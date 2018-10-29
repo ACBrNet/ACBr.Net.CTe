@@ -4,7 +4,7 @@
 // Created          : 03-13-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 03-13-2018
+// Last Modified On : 10-10-2018
 // ***********************************************************************
 // <copyright file="CTeProcEvento.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -64,10 +64,8 @@ namespace ACBr.Net.CTe
         [DFeAttribute(TipoCampo.Str, "ipTransmissor", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
         public string IpTransmissor { get; set; }
 
-        [DFeElement("eventoCTe", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeEventoCTe EventoCTe { get; set; }
 
-        [DFeElement("retEventoCTe", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeRetEventoCTe RetEventoCTe { get; set; }
 
         #endregion Properties

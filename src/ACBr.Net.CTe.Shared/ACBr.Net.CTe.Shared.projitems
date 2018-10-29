@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfRespTec.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DACTeBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DACTeLayout.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SchemaCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTe.cs" />

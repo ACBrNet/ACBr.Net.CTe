@@ -4,7 +4,7 @@
 // Created          : 09-30-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 09-30-2018
+// Last Modified On : 10-16-2018
 // ***********************************************************************
 // <copyright file="DACTeBase.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -40,19 +40,27 @@ namespace ACBr.Net.CTe
     // ReSharper disable once InconsistentNaming
     public abstract class DACTeBase : DFeReportClass<ACBrCTe>
     {
+        #region Properties
+
+        public bool QuebrarLinhasObservacao { get; set; }
+
+        public DACTeLayout LayoutImpressao { get; set; }
+
+        #endregion Properties
+
         #region Methods
 
         /// <summary>
         /// Imprime o DACTe do CTe.
         /// </summary>
         /// <param name="conhecimentos"></param>
-        public abstract void Imprimir(CTeProc[] conhecimentos = null);
+        public abstract void Imprimir(CTeProc[] conhecimentos);
 
         /// <summary>
         /// Imprime o DACTe do CTe em PDF.
         /// </summary>
         /// <param name="conhecimentos"></param>
-        public abstract void ImprimirPDF(CTeProc[] conhecimentos = null);
+        public abstract void ImprimirPDF(CTeProc[] conhecimentos);
 
         /// <summary>
         /// Imprime um evento do CTe.
@@ -77,6 +85,17 @@ namespace ACBr.Net.CTe
         /// </summary>
         /// <param name="inutilizao"></param>
         public abstract void ImprimirInutilizacaoPDF(InutilizaoResposta inutilizao);
+
+        protected override void OnInitialize()
+        {
+            QuebrarLinhasObservacao = true;
+            LayoutImpressao = DACTeLayout.Retrato;
+        }
+
+        protected override void OnDisposing()
+        {
+            //
+        }
 
         /// <inheritdoc />
         protected override void ParentChanged(ACBrCTe oldParent, ACBrCTe newParent)
