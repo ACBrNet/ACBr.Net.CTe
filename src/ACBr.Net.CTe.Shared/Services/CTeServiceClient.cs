@@ -35,6 +35,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.CTe.Configuracao;
+using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
@@ -55,8 +56,8 @@ namespace ACBr.Net.CTe.Services
         ///  <param name="service"></param>
         ///  <param name="certificado"></param>
         protected CTeServiceClient(CTeConfig config, ServicoCTe service, X509Certificate2 certificado = null) :
-            base(config, CTeServiceManager.GetServiceAndress(config.Geral.VersaoDFe, config.WebServices.UF, service, config.WebServices.Ambiente),
-                certificado)
+            base(config, CTeServiceManager.GetServiceAndress(config.Geral.VersaoDFe, (DFeSiglaUF)config.WebServices.UF,
+                    service, config.Geral.FormaEmissao, config.WebServices.Ambiente), certificado)
         {
         }
 

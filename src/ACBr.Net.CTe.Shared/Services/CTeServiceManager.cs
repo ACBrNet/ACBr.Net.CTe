@@ -30,16 +30,15 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 using ACBr.Net.Core;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Collection;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
@@ -52,9 +51,25 @@ namespace ACBr.Net.CTe.Services
 
         static CTeServiceManager()
         {
-            Servicos = new Dictionary<CTeVersao, CTeServiceCollection>(1)
+            Servicos = new DFeServices<ServicoCTe, CTeVersao>()
             {
-                {CTeVersao.v300, new CTeServiceCollection()}
+                Webservices = new DFeCollection<DFeServiceInfo<ServicoCTe, CTeVersao>>()
+                {
+                    new DFeServiceInfo<ServicoCTe, CTeVersao>()
+                    {
+                        Versao = CTeVersao.v300,
+                        Tipo = DFeTipoServico.CTe,
+                        TipoEmissao = DFeTipoEmissao.Normal,
+                        Ambientes = new DFeCollection<DFeServiceEnvironment<ServicoCTe>>()
+                    },
+                    new DFeServiceInfo<ServicoCTe, CTeVersao>()
+                    {
+                        Versao = CTeVersao.v300,
+                        Tipo = DFeTipoServico.CTe,
+                        TipoEmissao = DFeTipoEmissao.Contingencia,
+                        Ambientes = new DFeCollection<DFeServiceEnvironment<ServicoCTe>>()
+                    }
+                }
             };
 
             Load();
@@ -67,7 +82,7 @@ namespace ACBr.Net.CTe.Services
         /// <summary>
         /// Lista de serviços CTe.
         /// </summary>
-        public static Dictionary<CTeVersao, CTeServiceCollection> Servicos { get; }
+        public static DFeServices<ServicoCTe, CTeVersao> Servicos { get; private set; }
 
         #endregion Propriedades
 
@@ -79,14 +94,14 @@ namespace ACBr.Net.CTe.Services
         /// <param name="versao">Versão da CTe</param>
         /// <param name="uf">UF do serviço</param>
         /// <param name="tipo">Tipo de serviço</param>
+        /// <param name="tipoEmissao"></param>
         /// <param name="ambiente">Ambiente</param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static string GetServiceAndress(CTeVersao versao, DFeCodUF uf, ServicoCTe tipo, DFeTipoAmbiente ambiente)
+        public static string GetServiceAndress(CTeVersao versao, DFeSiglaUF uf, ServicoCTe tipo, DFeTipoEmissao tipoEmissao, DFeTipoAmbiente ambiente)
         {
-            Guard.Against<ACBrException>(!Servicos.ContainsKey(versao), "Versão não encontrada no arquivo de serviços.");
-
-            return Servicos[versao][uf][ambiente][tipo];
+            Guard.Against<ACBrException>(Servicos[versao, tipoEmissao] == null, "Versão não encontrada no arquivo de serviços.");
+            return Servicos[versao, tipoEmissao]?[ambiente, uf]?[tipo];
         }
 
         /// <summary>
@@ -114,11 +129,7 @@ namespace ACBr.Net.CTe.Services
         /// <param name="stream">O stream.</param>
         public static void Save(Stream stream)
         {
-            using (var zip = new GZipStream(stream, CompressionMode.Compress))
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(zip, Servicos.ToArray());
-            }
+            Servicos.Save(stream);
         }
 
         /// <summary>
@@ -163,17 +174,7 @@ namespace ACBr.Net.CTe.Services
         {
             Guard.Against<ArgumentException>(stream == null, "Arquivo de serviços não encontrado");
 
-            using (var zip = new GZipStream(stream, CompressionMode.Decompress))
-            {
-                var formatter = new BinaryFormatter();
-                var itens = (KeyValuePair<CTeVersao, CTeServiceCollection>[])formatter.Deserialize(zip);
-
-                Servicos.Clear();
-                foreach (var item in itens)
-                {
-                    Servicos.Add(item.Key, item.Value);
-                }
-            }
+            Servicos = DFeServices<ServicoCTe, CTeVersao>.Load(stream);
         }
 
         /// <summary>
@@ -196,8 +197,8 @@ namespace ACBr.Net.CTe.Services
         {
             var ini = ACBrIniFile.Load(stream);
 
-            var dataSource = (from DFeCodUF value in Enum.GetValues(typeof(DFeCodUF))
-                              where !value.IsIn(DFeCodUF.EX, DFeCodUF.AN)
+            var dataSource = (from DFeSiglaUF value in Enum.GetValues(typeof(DFeSiglaUF))
+                              where !value.IsIn(DFeSiglaUF.EX, DFeSiglaUF.AN)
                               orderby value.GetDescription()
                               select value).ToArray();
 
@@ -230,7 +231,7 @@ namespace ACBr.Net.CTe.Services
                     var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
                     var url = sessao.ContainsKey(key) ? sessao[key] : sessaoUsar.ContainsKey(key) ? sessaoUsar[key] : "";
 
-                    Servicos[CTeVersao.v300][codUf][DFeTipoAmbiente.Homologacao][service] = url;
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.Normal]?[DFeTipoAmbiente.Homologacao, codUf]?[service] = url;
                 }
 
                 sectionName = $"CTe_{codUf.GetDescription()}_P";

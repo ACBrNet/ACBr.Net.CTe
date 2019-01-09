@@ -164,9 +164,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ICTeConsulta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeResultBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceCollection.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\EnviarCTeResposta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\CTeInutilizacaoServiceClient.cs" />
