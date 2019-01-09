@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 06-22-2018
 // ***********************************************************************
-// <copyright file="InfCte.cs" company="ACBr.Net">
+// <copyright file="CTeInfCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -121,7 +121,6 @@ namespace ACBr.Net.CTe
 
                 toma = value;
             }
-
         }
         [DFeElement("rem", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public CTeRem Rem

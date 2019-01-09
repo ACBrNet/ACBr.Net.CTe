@@ -6,7 +6,7 @@
 // Last Modified By : marcosgerene
 // Last Modified On : 09-01-2019
 // ***********************************************************************
-// <copyright file="ModeloCTe.cs" company="ACBr.Net">
+// <copyright file="TpPropCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,14 +29,19 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Attributes;
+
 namespace ACBr.Net.CTe
 {
-
     public enum TpPropCTe : byte
     {
+        [DFeEnum("0")]
         TacAgregado = 0,
+
+        [DFeEnum("1")]
         TacIndependente = 1,
+
+        [DFeEnum("2")]
         Outros = 2
     }
-
 }

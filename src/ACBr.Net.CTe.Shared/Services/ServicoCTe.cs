@@ -31,7 +31,7 @@
 
 namespace ACBr.Net.CTe.Services
 {
-    public enum ServicoCTe
+    public enum TipoServicoCTe
     {
         RecepcaoEvento,
         CTeRecepcao,

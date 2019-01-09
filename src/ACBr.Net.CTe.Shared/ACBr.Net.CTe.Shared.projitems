@@ -163,7 +163,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IEventoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IInfoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfCorrecao.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)InfCte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModeloCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeProcEvento.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ConsultaCTeResposta.cs" />

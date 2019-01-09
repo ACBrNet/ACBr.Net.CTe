@@ -46,7 +46,7 @@ namespace ACBr.Net.CTe.Services
         #region Constructors
 
         public CTeRecepcaoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
-            base(config, ServicoCTe.CTeRecepcao, certificado)
+            base(config, TipoServicoCTe.CTeRecepcao, certificado)
         {
             Schema = SchemaCTe.EnviCTe;
             ArquivoEnvio = "env-lot";
