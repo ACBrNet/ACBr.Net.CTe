@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
-// Author           : RFTD
-// Created          : 10-15-2016
+// Author           : marcosgerene
+// Created          : 09-01-2019
 //
 // Last Modified By : marcosgerene
 // Last Modified On : 09-01-2019
 // ***********************************************************************
-// <copyright file="CTeInfCarga.cs" company="ACBr.Net">
+// <copyright file="CTeVeicNovos.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,15 +29,19 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ComponentModel;
+using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Generics;
 using ACBr.Net.DFe.Core.Attributes;
-using ACBr.Net.DFe.Core.Collection;
+using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeInfCarga : GenericClone<CTeInfCarga>, INotifyPropertyChanged
+    public sealed class CTeOSVeic : GenericClone<CTeOSVeic>, INotifyPropertyChanged
     {
         #region Events
 
@@ -45,32 +49,26 @@ namespace ACBr.Net.CTe
 
         #endregion Events
 
-        #region Constructors
+        #region Properties
 
-        public CTeInfCarga()
+        [DFeElement(TipoCampo.Str, "placa", Id = "#005", Min = 7, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Placa { get; set; }
+
+        [DFeElement(TipoCampo.StrNumber, "RENAVAM", Id = "#006", Min = 9, Max = 11, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string Renavam { get; set; }
+
+        [DFeElement(TipoCampo.Enum, "UF", Id = "#016", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeSiglaUF UF { get; set; }
+
+        #endregion Properties
+
+        #region Methods
+
+        private bool ShouldSerializeRenavam()
         {
-            InfQ = new DFeCollection<CTeInfQ>();
+            return !Renavam.IsEmpty();
         }
-
-        #endregion Constructors
-
-        #region Propriedades
-
-        [DFeElement(TipoCampo.De2, "vCarga", Id = "#254", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public decimal VCarga { get; set; }
-
-        [DFeElement(TipoCampo.Str, "proPred", Id = "#255", Min = 1, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public string ProPred { get; set; }
-
-        [DFeElement(TipoCampo.Str, "xOutCat", Id = "#256", Min = 1, Max = 30, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-        public string XOutCat { get; set; }
-
-        [DFeCollection("infQ", MinSize = 1, MaxSize = 990, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public DFeCollection<CTeInfQ> InfQ { get; set; }
-
-        [DFeElement(TipoCampo.De2, "vCargaAverb", Id = "#", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-        public decimal? VCargaAverb { get; set; }
-
-        #endregion Propriedades
+        
+        #endregion Methods
     }
 }
