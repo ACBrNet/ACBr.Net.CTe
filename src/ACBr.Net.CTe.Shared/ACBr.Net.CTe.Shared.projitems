@@ -17,11 +17,22 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigGeral.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigWebServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeEnderecoEmit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTEeOSInfQ.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfRespTec.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfCTeSub.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfDocRef.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfServico.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSNormal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSProp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSRodoOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSSeg.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSToma.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSVeic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DACTeBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DACTeLayout.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventoCTe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResponsavelSeguroCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SchemaCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeAereoModal.cs" />
@@ -202,6 +213,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)StatusCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoDataPeriodo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoHorarioIntervalo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TpPropCTe.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)ACBrCTe.bmp" />
@@ -214,7 +226,6 @@
     <None Include="$(MSBuildThisFileDirectory)Schemas\cancCTeTiposBasico_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)Schemas\consCad_v1.01.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\consCad_v2.00.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\consReciCTeTiposBasico_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -367,7 +378,6 @@
     <None Include="$(MSBuildThisFileDirectory)Schemas\inutCTe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)Schemas\leiauteConsultaCadastro_v1.01.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\leiauteConsultaCadastro_v2.00.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\procCTeOS_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -391,7 +401,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="$(MSBuildThisFileDirectory)Schemas\retConsCad_v1.01.xsd" />
-    <None Include="$(MSBuildThisFileDirectory)Schemas\retConsCad_v2.00.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\retConsReciCTe_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -434,9 +443,11 @@
     </None>
     <None Include="$(MSBuildThisFileDirectory)Schemas\tiposBasico_v1.03.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\tiposDistDFe_v1.00.xsd" />
+    <None Include="$(MSBuildThisFileDirectory)Schemas\tiposGeralCTe_v2.00-OPENSSL.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\tiposGeralCTe_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)Schemas\tiposGeralCTe_v3.00-OPENSSL.xsd" />
     <None Include="$(MSBuildThisFileDirectory)Schemas\tiposGeralCTe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
-// Author           : RFTD
-// Created          : 10-19-2016
+// Author           : marcosgerene
+// Created          : 09-01-2019
 //
-// Last Modified By : RFTD
-// Last Modified On : 10-19-2016
+// Last Modified By : marcosgerene
+// Last Modified On : 09-01-2019
 // ***********************************************************************
-// <copyright file="CTeInfModal.cs" company="ACBr.Net">
+// <copyright file="ModeloCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,35 +29,11 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ComponentModel;
-using ACBr.Net.Core.Generics;
-using ACBr.Net.DFe.Core.Attributes;
-using ACBr.Net.DFe.Core.Serializer;
-
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeInfModal : GenericClone<CTeInfModal>, INotifyPropertyChanged
-	{
-		#region Events
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		#endregion Events
-
-		#region Properties
-
-		[DFeAttribute(TipoCampo.Enum, "versaoModal", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeVersao VersaoModal { get; set; }
-
-        [DFeItem(typeof(CTeOSRodoOS), "rodoOS")]
-        [DFeItem(typeof(CTeRodoModal), "rodo")]
-		[DFeItem(typeof(CTeAereoModal), "aereo")]
-		[DFeItem(typeof(CTeAquavModal), "aquav")]
-		[DFeItem(typeof(CTeFerrovModal), "ferrov")]
-		[DFeItem(typeof(CTeDutoModal), "duto")]
-		[DFeItem(typeof(CTeMultimodal), "multimodal")]
-		public ICTeModal Modal { get; set; }
-
-		#endregion Properties
-	}
+    public enum ResponsavelSeguroCTe : byte
+    {
+        EmitenteCTe = 4,
+        TomadorCTe = 5
+    }
 }
