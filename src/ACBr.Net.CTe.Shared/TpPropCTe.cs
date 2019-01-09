@@ -31,9 +31,12 @@
 
 namespace ACBr.Net.CTe
 {
-    public enum ResponsavelSeguroCTe : byte
+
+    public enum TpPropCTe : byte
     {
-        EmitenteCTe = 4,
-        TomadorCTe = 5
+        TacAgregado = 0,
+        TacIndependente = 1,
+        Outros = 2
     }
+
 }

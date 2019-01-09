@@ -49,7 +49,8 @@ namespace ACBr.Net.CTe
 		[DFeAttribute(TipoCampo.Enum, "versaoModal", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
 		public CTeVersao VersaoModal { get; set; }
 
-		[DFeItem(typeof(CTeRodoModal), "rodo")]
+        [DFeItem(typeof(CTeOSRodoOS), "rodoOS")]
+        [DFeItem(typeof(CTeRodoModal), "rodo")]
 		[DFeItem(typeof(CTeAereoModal), "aereo")]
 		[DFeItem(typeof(CTeAquavModal), "aquav")]
 		[DFeItem(typeof(CTeFerrovModal), "ferrov")]

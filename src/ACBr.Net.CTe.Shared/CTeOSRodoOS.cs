@@ -6,7 +6,7 @@
 // Last Modified By : marcosgerene
 // Last Modified On : 09-01-2019
 // ***********************************************************************
-// <copyright file="ModeloCTe.cs" company="ACBr.Net">
+// <copyright file="CTeVeicNovos.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,11 +29,59 @@
 // <summary></summary>
 // ***********************************************************************
 
+
+using System.ComponentModel;
+using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Collection;
+using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
+
 namespace ACBr.Net.CTe
 {
-    public enum ResponsavelSeguroCTe : byte
+    [DFeRoot("rodoos")]
+    public sealed class CTeOSRodoOS : DFeDocument<CTeOSRodoOS>, ICTeModal, INotifyPropertyChanged
     {
-        EmitenteCTe = 4,
-        TomadorCTe = 5
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
+        #region Constructors
+
+        public CTeOSRodoOS()
+        {
+            Veic = new DFeCollection<CTeOSVeic>();
+        }
+
+        #endregion Constructors
+
+        #region Propriedades
+
+        [DFeElement(TipoCampo.StrNumber, "TAF", Id = "", Min = 12, Max = 12, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string TAF { get; set; }
+
+        [DFeElement(TipoCampo.StrNumber, "NroRegEstadual", Id = "", Min = 25, Max = 25, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string NroRegEstadual { get; set; }
+
+        [DFeCollection("veic", MinSize = 0, MaxSize = 1, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public DFeCollection<CTeOSVeic> Veic { get; set; }
+
+        #endregion Propriedades
+
+        #region Methods
+
+        private bool ShouldSerializeTAF()
+        {
+            return !TAF.IsEmpty();
+        }
+
+        private bool ShouldSerializeNroRegEstadual()
+        {
+            return !NroRegEstadual.IsEmpty();
+        }
+
+        #endregion Methods
     }
 }

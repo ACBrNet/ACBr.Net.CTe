@@ -23,8 +23,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfDocRef.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfServico.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSNormal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSProp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSRodoOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSSeg.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSToma.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeOSVeic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DACTeBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DACTeLayout.cs" />
@@ -213,6 +216,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)StatusCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoDataPeriodo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TipoHorarioIntervalo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TpPropCTe.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)ACBrCTe.bmp" />

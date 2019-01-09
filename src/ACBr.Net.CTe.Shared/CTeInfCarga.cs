@@ -3,8 +3,8 @@
 // Author           : RFTD
 // Created          : 10-15-2016
 //
-// Last Modified By : RFTD
-// Last Modified On : 10-16-2016
+// Last Modified By : marcosgerene
+// Last Modified On : 09-01-2019
 // ***********************************************************************
 // <copyright file="CTeInfCarga.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
@@ -65,7 +65,7 @@ namespace ACBr.Net.CTe
         [DFeElement(TipoCampo.Str, "xOutCat", Id = "#256", Min = 1, Max = 30, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public string XOutCat { get; set; }
 
-        [DFeCollection("infQ", Min = 1, Max = 990, Ocorrencia = Ocorrencia.Obrigatoria)]
+        [DFeCollection("infQ", MinSize = 1, MaxSize = 990, Ocorrencia = Ocorrencia.Obrigatoria)]
         public DFeCollection<CTeInfQ> InfQ { get; set; }
 
         [DFeElement(TipoCampo.De2, "vCargaAverb", Id = "#", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]

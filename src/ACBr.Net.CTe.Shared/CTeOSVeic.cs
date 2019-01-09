@@ -6,7 +6,7 @@
 // Last Modified By : marcosgerene
 // Last Modified On : 09-01-2019
 // ***********************************************************************
-// <copyright file="ModeloCTe.cs" company="ACBr.Net">
+// <copyright file="CTeVeicNovos.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,11 +29,46 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.Core.Extensions;
+using ACBr.Net.Core.Generics;
+using ACBr.Net.DFe.Core.Attributes;
+using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Serializer;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
+
 namespace ACBr.Net.CTe
 {
-    public enum ResponsavelSeguroCTe : byte
+    public sealed class CTeOSVeic : GenericClone<CTeOSVeic>, INotifyPropertyChanged
     {
-        EmitenteCTe = 4,
-        TomadorCTe = 5
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
+        #region Properties
+
+        [DFeElement(TipoCampo.Str, "placa", Id = "#005", Min = 7, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public string Placa { get; set; }
+
+        [DFeElement(TipoCampo.StrNumber, "RENAVAM", Id = "#006", Min = 9, Max = 11, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public string Renavam { get; set; }
+
+        [DFeElement(TipoCampo.Enum, "UF", Id = "#016", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public DFeSiglaUF UF { get; set; }
+
+        #endregion Properties
+
+        #region Methods
+
+        private bool ShouldSerializeRenavam()
+        {
+            return !Renavam.IsEmpty();
+        }
+        
+        #endregion Methods
     }
 }
