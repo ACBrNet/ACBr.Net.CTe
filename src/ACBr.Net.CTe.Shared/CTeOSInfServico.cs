@@ -57,7 +57,7 @@ namespace ACBr.Net.CTe
         #region Propriedades
 
         [DFeElement(TipoCampo.Str, "xDescServ", Id = "#133", Min = 1, Max = 30, Ocorrencia = Ocorrencia.Obrigatoria)]
-        public decimal XDescServ { get; set; }
+        public string XDescServ { get; set; }
 
         [DFeCollection("infQ", Min = 0, Max = 1, Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTEeOSInfQ> InfQ { get; set; }
