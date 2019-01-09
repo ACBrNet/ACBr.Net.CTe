@@ -213,6 +213,18 @@ namespace ACBr.Net.CTe.Demo
 
         private void btnValidarXml_Click(object sender, EventArgs e)
         {
+            try
+            {
+                btnImportarXml_Click(sender, e);
+
+                acbrCTe.Conhecimentos.Validar();
+
+                MessageBox.Show("Arquivo validado!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnCancelarXml_Click(object sender, EventArgs e)

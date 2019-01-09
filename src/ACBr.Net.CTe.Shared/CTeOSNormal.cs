@@ -49,14 +49,14 @@ namespace ACBr.Net.CTe
         #region Constructors
 
         public CTeOSNormal()
-        {
-            InfServico = new CTeOSInfServico();
-            InfDocRef = new DFeCollection<CTeOSInfDocRef>();
-            Seg = new DFeCollection<CTeOSSeg>();
-            InfModal = new CTeInfModal();
-            InfCTeSub = new CTeOSInfCTeSub();
+        {            
+            Cobr = new CTeCobranca();           
             RefCTeCanc = string.Empty;
-            Cobr = new CTeCobranca();
+            InfCTeSub = new CTeOSInfCTeSub();           
+            InfModal = new CTeInfModal();
+            Seg = new DFeCollection<CTeOSSeg>();            
+            InfDocRef = new DFeCollection<CTeOSInfDocRef>();
+            InfServico = new CTeOSInfServico();
         }
 
         #endregion Constructors
