@@ -152,7 +152,7 @@ namespace ACBr.Net.CTe
                 Status = StatusCTe.Recepcao;
                 using (var cliente = new CTeRecepcaoServiceClient(Configuracoes, cert))
                 {
-                    recepcao = cliente.RecepcaoLote(Conhecimentos.ToArray(), lote);
+                    recepcao = cliente.RecepcaoLote(Conhecimentos.CTe, lote);
                 }
             }
             catch (Exception exception)
