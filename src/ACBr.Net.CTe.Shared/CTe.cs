@@ -68,7 +68,7 @@ namespace ACBr.Net.CTe
         public CTeInfCTe InfCTe { get; set; }
 
         [DFeAttribute(TipoCampo.Enum, "versao", Id = "", Min = 4, Max = 4, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-        public CTeVersao Versao => InfCTe.Versao;
+        public CTeVersao Versao { get; set; }
 
         [DFeIgnore]
         public bool Cancelada { get; set; }
