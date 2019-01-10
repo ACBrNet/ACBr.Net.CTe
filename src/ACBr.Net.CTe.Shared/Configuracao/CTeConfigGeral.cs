@@ -52,8 +52,15 @@ namespace ACBr.Net.CTe.Configuracao
         internal CTeConfigGeral(ACBrCTe parent) : base(parent)
         {
             VersaoDFe = CTeVersao.v300;
+            Mod = ModeloCTe.CTe;
         }
 
         #endregion Constructor
+
+        #region Properties
+
+        public ModeloCTe Mod { get; set; }
+
+        #endregion Properties
     }
 }

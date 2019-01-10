@@ -382,26 +382,26 @@ namespace ACBr.Net.CTe
 
             try
             {
-                ServicoCTe service;
+                TipoServicoCTe service;
                 switch (evento)
                 {
                     case CTeEvCancCTe _:
-                        service = ServicoCTe.RecepcaoEvento;
+                        service = TipoServicoCTe.RecepcaoEvento;
                         Status = StatusCTe.Cancelamento;
                         break;
 
                     case CTeEvCCeCTe _:
-                        service = ServicoCTe.RecepcaoEvento;
+                        service = TipoServicoCTe.RecepcaoEvento;
                         Status = StatusCTe.CCe;
                         break;
 
                     case CTeEvEPEC _:
-                        service = ServicoCTe.RecepcaoEventoAN;
+                        service = TipoServicoCTe.RecepcaoEventoAN;
                         Status = StatusCTe.Evento;
                         break;
 
                     default:
-                        service = ServicoCTe.RecepcaoEvento;
+                        service = TipoServicoCTe.RecepcaoEvento;
                         Status = StatusCTe.Evento;
                         break;
                 }

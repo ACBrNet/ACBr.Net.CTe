@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 06-22-2018
 // ***********************************************************************
-// <copyright file="InfCte.cs" company="ACBr.Net">
+// <copyright file="CTeInfCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -121,7 +121,6 @@ namespace ACBr.Net.CTe
 
                 toma = value;
             }
-
         }
         [DFeElement("rem", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public CTeRem Rem
@@ -189,11 +188,13 @@ namespace ACBr.Net.CTe
         [DFeElement("imp", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeImp Imp { get; set; }
 
-        [DFeItem(typeof(CTeOSNormal), "infCTeNorm")]
         [DFeItem(typeof(CTeNormal), "infCTeNorm")]
         [DFeItem(typeof(CTeAnulacao), "infCteAnu")]
         [DFeItem(typeof(CTeComplemento), "infCteComp")]
         public IInfoCTe InfoCTe { get; set; }
+
+        [DFeItem(typeof(CTeNormalOS), "infCTeNorm")]
+        public IInfoCTe InfoCTeOS { get; set; }
 
         [DFeCollection("autXML", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeAutXML> AutXml { get; set; }

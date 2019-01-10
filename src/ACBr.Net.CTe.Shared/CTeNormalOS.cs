@@ -6,7 +6,7 @@
 // Last Modified By : marcosgerene
 // Last Modified On : 01-09-2019
 // ***********************************************************************
-// <copyright file="CTeIde.cs" company="ACBr.Net">
+// <copyright file="CTeNormalOS.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -38,7 +38,7 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    public sealed class CTeOSNormal : GenericClone<CTeOSNormal>, IInfoCTe, INotifyPropertyChanged
+    public sealed class CTeNormalOS : GenericClone<CTeNormalOS>, IInfoCTe, INotifyPropertyChanged
     {
         #region Events
 
@@ -48,13 +48,13 @@ namespace ACBr.Net.CTe
 
         #region Constructors
 
-        public CTeOSNormal()
-        {            
-            Cobr = new CTeCobranca();           
+        public CTeNormalOS()
+        {
+            Cobr = new CTeCobranca();
             RefCTeCanc = string.Empty;
-            InfCTeSub = new CTeOSInfCTeSub();           
+            InfCTeSub = new CTeOSInfCTeSub();
             InfModal = new CTeInfModal();
-            Seg = new DFeCollection<CTeOSSeg>();            
+            Seg = new DFeCollection<CTeOSSeg>();
             InfDocRef = new DFeCollection<CTeOSInfDocRef>();
             InfServico = new CTeOSInfServico();
         }

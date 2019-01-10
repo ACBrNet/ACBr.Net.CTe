@@ -36,7 +36,7 @@ namespace ACBr.Net.CTe.Demo
         {
             cbbVersao.EnumDataSource(CTeVersao.v300, CTeVersao.v200);
             cbbAmbiente.EnumDataSource(DFeTipoAmbiente.Homologacao);
-            cbbUF.EnumDataSource(DFeCodUF.MS, DFeCodUF.EX, DFeCodUF.AN);
+            cbbUF.EnumDataSource(DFeSiglaUF.MS, DFeSiglaUF.EX, DFeSiglaUF.AN, DFeSiglaUF.SU);
             cbbUfWebservice.EnumDataSource(DFeCodUF.MS, DFeCodUF.EX, DFeCodUF.AN);
             loaded = true;
 
@@ -270,16 +270,16 @@ namespace ACBr.Net.CTe.Demo
             if (listViewServicos.SelectedItems.Count < 1) return;
 
             var versao = cbbVersao.GetSelectedValue<CTeVersao>();
-            var uf = cbbUF.GetSelectedValue<DFeCodUF>();
+            var uf = cbbUF.GetSelectedValue<DFeSiglaUF>();
             var ambiente = cbbAmbiente.GetSelectedValue<DFeTipoAmbiente>();
-            var serviceInfo = CTeServiceManager.Servicos[versao][uf][ambiente];
+            var serviceInfo = CTeServiceManager.Servicos[versao, acbrCTe.Configuracoes.Geral.FormaEmissao][ambiente, uf];
 
-            var tipo = (ServicoCTe)listViewServicos.SelectedItems[0].Tag;
+            var tipo = (TipoServicoCTe)listViewServicos.SelectedItems[0].Tag;
             var url = serviceInfo[tipo];
 
             InputBox.Show($"Endereço {tipo.GetDescription()}", "Digite a url.", ref url);
 
-            if (url != serviceInfo[tipo]) serviceInfo[tipo] = url;
+            if (url != serviceInfo[tipo]) serviceInfo.Enderecos[tipo] = url;
         }
 
         private void btnImportar_Click(object sender, EventArgs e)
@@ -352,11 +352,11 @@ namespace ACBr.Net.CTe.Demo
             if (!loaded) return;
 
             var versao = cbbVersao.GetSelectedValue<CTeVersao>();
-            var uf = cbbUF.GetSelectedValue<DFeCodUF>();
+            var uf = cbbUF.GetSelectedValue<DFeSiglaUF>();
             var ambiente = cbbAmbiente.GetSelectedValue<DFeTipoAmbiente>();
 
-            var serviceInfo = CTeServiceManager.Servicos[versao][uf][ambiente];
-            var servicesType = (from ServicoCTe value in Enum.GetValues(typeof(ServicoCTe)) select value).ToArray();
+            var serviceInfo = CTeServiceManager.Servicos[versao, acbrCTe.Configuracoes.Geral.FormaEmissao][ambiente, uf];
+            var servicesType = (from TipoServicoCTe value in Enum.GetValues(typeof(TipoServicoCTe)) select value).ToArray();
 
             var serviceList = new List<ListViewItem>();
 

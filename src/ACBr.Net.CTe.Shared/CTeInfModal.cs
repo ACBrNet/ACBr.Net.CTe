@@ -36,28 +36,28 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-	public sealed class CTeInfModal : GenericClone<CTeInfModal>, INotifyPropertyChanged
-	{
-		#region Events
+    public sealed class CTeInfModal : GenericClone<CTeInfModal>, INotifyPropertyChanged
+    {
+        #region Events
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Events
+        #endregion Events
 
-		#region Properties
+        #region Properties
 
-		[DFeAttribute(TipoCampo.Enum, "versaoModal", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
-		public CTeVersao VersaoModal { get; set; }
+        [DFeAttribute(TipoCampo.Enum, "versaoModal", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao VersaoModal { get; set; }
 
-        [DFeItem(typeof(CTeOSRodoOS), "rodoOS")]
+        [DFeItem(typeof(CTeRodoModalOS), "rodoOS")]
         [DFeItem(typeof(CTeRodoModal), "rodo")]
-		[DFeItem(typeof(CTeAereoModal), "aereo")]
-		[DFeItem(typeof(CTeAquavModal), "aquav")]
-		[DFeItem(typeof(CTeFerrovModal), "ferrov")]
-		[DFeItem(typeof(CTeDutoModal), "duto")]
-		[DFeItem(typeof(CTeMultimodal), "multimodal")]
-		public ICTeModal Modal { get; set; }
+        [DFeItem(typeof(CTeAereoModal), "aereo")]
+        [DFeItem(typeof(CTeAquavModal), "aquav")]
+        [DFeItem(typeof(CTeFerrovModal), "ferrov")]
+        [DFeItem(typeof(CTeDutoModal), "duto")]
+        [DFeItem(typeof(CTeMultimodal), "multimodal")]
+        public ICTeModal Modal { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

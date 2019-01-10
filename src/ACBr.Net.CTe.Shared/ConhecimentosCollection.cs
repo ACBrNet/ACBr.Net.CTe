@@ -61,6 +61,10 @@ namespace ACBr.Net.CTe
         /// </summary>
         public ACBrCTe Parent { get; }
 
+        public CTe[] CTe => this.Where(x => x.InfCTe.Ide.Mod == ModeloCTe.CTe).ToArray();
+
+        public CTe[] CTeOS => this.Where(x => x.InfCTe.Ide.Mod == ModeloCTe.CTeOS).ToArray();
+
         #endregion Properties
 
         #region Methods
@@ -70,6 +74,8 @@ namespace ACBr.Net.CTe
         {
             var instance = base.AddNew();
             instance.InfCTe.Versao = Parent.Configuracoes.Geral.VersaoDFe;
+            instance.InfCTe.Ide.Mod = Parent.Configuracoes.Geral.Mod;
+
             return instance;
         }
 
@@ -150,7 +156,7 @@ namespace ACBr.Net.CTe
 
             var pathSchemaCTe = Parent.Configuracoes.Arquivos.GetSchema(SchemaCTe.CTe);
 
-            foreach (var cte in this)
+            foreach (var cte in CTe)
             {
                 var xml = cte.GetXml();
                 XmlSchemaValidation.ValidarXml(xml, pathSchemaCTe, out var erros, out _);
@@ -186,6 +192,34 @@ namespace ACBr.Net.CTe
 
                     case CTeRodoModal _:
                         schema = SchemaCTe.CTeModalRodoviario;
+                        break;
+
+                    default:
+                        continue;
+                }
+
+                var pathSchemaModal = Parent.Configuracoes.Arquivos.GetSchema(schema);
+                XmlSchemaValidation.ValidarXml(xmlModal, pathSchemaModal, out var errosModal, out _);
+                listaErros.AddRange(errosModal);
+            }
+
+            var pathSchemaCTeOS = Parent.Configuracoes.Arquivos.GetSchema(SchemaCTe.CTeOS);
+            foreach (var cte in CTeOS)
+            {
+                var xml = cte.GetXml();
+                XmlSchemaValidation.ValidarXml(xml, pathSchemaCTeOS, out var erros, out _);
+
+                listaErros.AddRange(erros);
+
+                if (cte.InfCTe.Ide.TpCTe == CTeTipo.Anulacao || cte.InfCTe.Ide.TpCTe == CTeTipo.Complemento) continue;
+
+                var xmlModal = ((CTeNormalOS)cte.InfCTe.InfoCTeOS).InfModal.Modal.GetXml(DFeSaveOptions.DisableFormatting);
+                SchemaCTe schema;
+
+                switch (((CTeNormalOS)cte.InfCTe.InfoCTeOS).InfModal.Modal)
+                {
+                    case CTeRodoModalOS _:
+                        schema = SchemaCTe.CTeModalRodoviarioOS;
                         break;
 
                     default:

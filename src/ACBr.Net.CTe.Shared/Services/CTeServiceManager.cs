@@ -30,16 +30,15 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 using ACBr.Net.Core;
 using ACBr.Net.Core.Exceptions;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core.Collection;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Service;
 
 namespace ACBr.Net.CTe.Services
 {
@@ -52,10 +51,67 @@ namespace ACBr.Net.CTe.Services
 
         static CTeServiceManager()
         {
-            Servicos = new Dictionary<CTeVersao, CTeServiceCollection>(1)
+            Servicos = new DFeServices<TipoServicoCTe, CTeVersao>
             {
-                {CTeVersao.v300, new CTeServiceCollection()}
+                Webservices = new DFeCollection<DFeServiceInfo<TipoServicoCTe, CTeVersao>>
+                {
+                    new DFeServiceInfo<TipoServicoCTe, CTeVersao>
+                    {
+                        Versao = CTeVersao.v300,
+                        Tipo = DFeTipoServico.CTe,
+                        TipoEmissao = DFeTipoEmissao.Normal
+                    },
+                    new DFeServiceInfo<TipoServicoCTe, CTeVersao>
+                    {
+                        Versao = CTeVersao.v300,
+                        Tipo = DFeTipoServico.CTe,
+                        TipoEmissao = DFeTipoEmissao.DPEC
+                    },
+                    new DFeServiceInfo<TipoServicoCTe, CTeVersao>
+                    {
+                        Versao = CTeVersao.v300,
+                        Tipo = DFeTipoServico.CTe,
+                        TipoEmissao = DFeTipoEmissao.SVCRS
+                    },
+                    new DFeServiceInfo<TipoServicoCTe, CTeVersao>
+                    {
+                        Versao = CTeVersao.v300,
+                        Tipo = DFeTipoServico.CTe,
+                        TipoEmissao = DFeTipoEmissao.SVCSP
+                    }
+                }
             };
+
+            var dataSource = (from DFeSiglaUF value in Enum.GetValues(typeof(DFeSiglaUF))
+                              where !value.IsIn(DFeSiglaUF.EX, DFeSiglaUF.AN, DFeSiglaUF.SU)
+                              orderby value.GetDescription()
+                              select value).ToArray();
+
+            var servicoCTes = (from TipoServicoCTe value in Enum.GetValues(typeof(TipoServicoCTe)) select value).ToArray();
+
+            foreach (var serviceInfo in Servicos.Webservices)
+            {
+                foreach (var siglaUF in dataSource)
+                {
+                    var ambiente = serviceInfo.Ambientes.AddNew();
+                    ambiente.UF = siglaUF;
+                    ambiente.Ambiente = DFeTipoAmbiente.Homologacao;
+
+                    foreach (var servicoCTe in servicoCTes)
+                    {
+                        ambiente.Enderecos.Add(servicoCTe, "");
+                    }
+
+                    ambiente = serviceInfo.Ambientes.AddNew();
+                    ambiente.UF = siglaUF;
+                    ambiente.Ambiente = DFeTipoAmbiente.Producao;
+
+                    foreach (var servicoCTe in servicoCTes)
+                    {
+                        ambiente.Enderecos.Add(servicoCTe, "");
+                    }
+                }
+            }
 
             Load();
         }
@@ -67,7 +123,7 @@ namespace ACBr.Net.CTe.Services
         /// <summary>
         /// Lista de serviços CTe.
         /// </summary>
-        public static Dictionary<CTeVersao, CTeServiceCollection> Servicos { get; }
+        public static DFeServices<TipoServicoCTe, CTeVersao> Servicos { get; private set; }
 
         #endregion Propriedades
 
@@ -79,14 +135,14 @@ namespace ACBr.Net.CTe.Services
         /// <param name="versao">Versão da CTe</param>
         /// <param name="uf">UF do serviço</param>
         /// <param name="tipo">Tipo de serviço</param>
+        /// <param name="tipoEmissao"></param>
         /// <param name="ambiente">Ambiente</param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static string GetServiceAndress(CTeVersao versao, DFeCodUF uf, ServicoCTe tipo, DFeTipoAmbiente ambiente)
+        public static string GetServiceAndress(CTeVersao versao, DFeSiglaUF uf, TipoServicoCTe tipo, DFeTipoEmissao tipoEmissao, DFeTipoAmbiente ambiente)
         {
-            Guard.Against<ACBrException>(!Servicos.ContainsKey(versao), "Versão não encontrada no arquivo de serviços.");
-
-            return Servicos[versao][uf][ambiente][tipo];
+            Guard.Against<ACBrException>(Servicos[versao, tipoEmissao] == null, "Versão ou tipo de emissão não encontrada no arquivo de serviços.");
+            return Servicos[versao, tipoEmissao]?[ambiente, uf]?[tipo];
         }
 
         /// <summary>
@@ -114,11 +170,7 @@ namespace ACBr.Net.CTe.Services
         /// <param name="stream">O stream.</param>
         public static void Save(Stream stream)
         {
-            using (var zip = new GZipStream(stream, CompressionMode.Compress))
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(zip, Servicos.ToArray());
-            }
+            Servicos.Save(stream);
         }
 
         /// <summary>
@@ -163,17 +215,7 @@ namespace ACBr.Net.CTe.Services
         {
             Guard.Against<ArgumentException>(stream == null, "Arquivo de serviços não encontrado");
 
-            using (var zip = new GZipStream(stream, CompressionMode.Decompress))
-            {
-                var formatter = new BinaryFormatter();
-                var itens = (KeyValuePair<CTeVersao, CTeServiceCollection>[])formatter.Deserialize(zip);
-
-                Servicos.Clear();
-                foreach (var item in itens)
-                {
-                    Servicos.Add(item.Key, item.Value);
-                }
-            }
+            Servicos = DFeServices<TipoServicoCTe, CTeVersao>.Load(stream);
         }
 
         /// <summary>
@@ -196,12 +238,13 @@ namespace ACBr.Net.CTe.Services
         {
             var ini = ACBrIniFile.Load(stream);
 
-            var dataSource = (from DFeCodUF value in Enum.GetValues(typeof(DFeCodUF))
-                              where !value.IsIn(DFeCodUF.EX, DFeCodUF.AN)
+            var dataSource = (from DFeSiglaUF value in Enum.GetValues(typeof(DFeSiglaUF))
+                              where !value.IsIn(DFeSiglaUF.EX, DFeSiglaUF.AN, DFeSiglaUF.SU)
                               orderby value.GetDescription()
                               select value).ToArray();
 
-            var servicoCTes = (from ServicoCTe value in Enum.GetValues(typeof(ServicoCTe)) select value).ToArray();
+            var servicoCTes =
+                (from TipoServicoCTe value in Enum.GetValues(typeof(TipoServicoCTe)) select value).ToArray();
 
             var getVersion = new Func<CTeVersao, string>(versao =>
             {
@@ -213,9 +256,10 @@ namespace ACBr.Net.CTe.Services
                 }
             });
 
+            // Emissão Normal
             foreach (var codUf in dataSource)
             {
-                var sectionName = $"CTe_{codUf.GetDescription()}_H";
+                var sectionName = $"CTe_{codUf}_H";
 
                 var sessao = ini[sectionName];
                 var sessaoUsar = ini[sectionName];
@@ -230,7 +274,7 @@ namespace ACBr.Net.CTe.Services
                     var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
                     var url = sessao.ContainsKey(key) ? sessao[key] : sessaoUsar.ContainsKey(key) ? sessaoUsar[key] : "";
 
-                    Servicos[CTeVersao.v300][codUf][DFeTipoAmbiente.Homologacao][service] = url;
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.Normal][DFeTipoAmbiente.Homologacao, codUf].Enderecos[service] = url;
                 }
 
                 sectionName = $"CTe_{codUf.GetDescription()}_P";
@@ -245,9 +289,109 @@ namespace ACBr.Net.CTe.Services
                 foreach (var service in servicoCTes)
                 {
                     var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
-                    var url = sessao.ContainsKey(key) ? sessao[key] : sessaoUsar.ContainsKey(key) ? sessaoUsar[key] : "";
+                    var url = sessao.ContainsKey(key) ? sessao[key] :
+                        sessaoUsar.ContainsKey(key) ? sessaoUsar[key] : "";
 
-                    Servicos[CTeVersao.v300][codUf][DFeTipoAmbiente.Producao][service] = url;
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.Normal][DFeTipoAmbiente.Producao, codUf]
+                        .Enderecos[service] = url;
+                }
+            }
+
+            //Emissão DPEC
+            foreach (var codUf in dataSource)
+            {
+                var sectionName = string.Empty;
+
+                switch (codUf)
+                {
+                    case DFeSiglaUF.PE:
+                    case DFeSiglaUF.SP:
+                    case DFeSiglaUF.MS:
+                    case DFeSiglaUF.MT:
+                        sectionName = "CTe_SVC-RS_";
+                        break;
+
+                    default:
+                        sectionName = "CTe_SVC-SP_";
+                        break;
+                }
+
+                var sessao = ini[sectionName + "H"];
+                foreach (var service in servicoCTes)
+                {
+                    if (service == TipoServicoCTe.RecepcaoEventoAN) continue;
+
+                    var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
+                    var url = sessao[key];
+
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.DPEC][DFeTipoAmbiente.Homologacao, codUf].Enderecos[service] = url;
+                }
+
+                sessao = ini[sectionName + "P"];
+                foreach (var service in servicoCTes)
+                {
+                    if (service == TipoServicoCTe.RecepcaoEventoAN) continue;
+
+                    var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
+                    var url = sessao[key];
+
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.DPEC][DFeTipoAmbiente.Producao, codUf].Enderecos[service] = url;
+                }
+            }
+
+            //Emissão SVCRS
+            foreach (var codUf in dataSource)
+            {
+                var sectionName = "CTe_SVC-RS_";
+
+                var sessao = ini[sectionName + "H"];
+                foreach (var service in servicoCTes)
+                {
+                    if (service == TipoServicoCTe.RecepcaoEventoAN) continue;
+
+                    var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
+                    var url = sessao[key];
+
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCRS][DFeTipoAmbiente.Homologacao, codUf].Enderecos[service] = url;
+                }
+
+                sessao = ini[sectionName + "P"];
+                foreach (var service in servicoCTes)
+                {
+                    if (service == TipoServicoCTe.RecepcaoEventoAN) continue;
+
+                    var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
+                    var url = sessao[key];
+
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCRS][DFeTipoAmbiente.Producao, codUf].Enderecos[service] = url;
+                }
+            }
+
+            //Emissão SVCSP
+            foreach (var codUf in dataSource)
+            {
+                var sectionName = "CTe_SVC-SP_";
+
+                var sessao = ini[sectionName + "H"];
+                foreach (var service in servicoCTes)
+                {
+                    if (service == TipoServicoCTe.RecepcaoEventoAN) continue;
+
+                    var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
+                    var url = sessao[key];
+
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCSP][DFeTipoAmbiente.Homologacao, codUf].Enderecos[service] = url;
+                }
+
+                sessao = ini[sectionName + "P"];
+                foreach (var service in servicoCTes)
+                {
+                    if (service == TipoServicoCTe.RecepcaoEventoAN) continue;
+
+                    var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
+                    var url = sessao[key];
+
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCSP][DFeTipoAmbiente.Producao, codUf].Enderecos[service] = url;
                 }
             }
         }

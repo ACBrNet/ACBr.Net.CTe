@@ -43,7 +43,7 @@ namespace ACBr.Net.CTe.Services
         #region Constructors
 
         public CTeStatusServicoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
-            base(config, ServicoCTe.CTeStatusServico, certificado)
+            base(config, TipoServicoCTe.CTeStatusServico, certificado)
         {
             Schema = SchemaCTe.ConsStatServCTe;
             ArquivoEnvio = "ped-sta";

@@ -46,7 +46,7 @@ namespace ACBr.Net.CTe.Services
         #region Constructors
 
         public CTeInutilizacaoServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
-            base(config, ServicoCTe.CTeInutilizacao, certificado)
+            base(config, TipoServicoCTe.CTeInutilizacao, certificado)
         {
             Schema = SchemaCTe.InutCTe;
             ArquivoEnvio = "ped-inu";

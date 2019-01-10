@@ -37,7 +37,7 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    [DFeRoot("cteProc", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    [DFeRoot(Namespace = "http://www.portalfiscal.inf.br/cte")]
     public sealed class CTeProc : DFeDocument<CTeProc>, INotifyPropertyChanged
     {
         #region Events
@@ -76,6 +76,20 @@ namespace ACBr.Net.CTe
         public bool Processado => ProtCTe?.InfProt?.CStat.IsIn(100, 110, 150, 301, 302) ?? false;
 
         #endregion Propriedades
+
+        #region Methods
+
+        private string GetRootName()
+        {
+            return CTe.InfCTe.Ide.Mod == ModeloCTe.CTe ? "cteProc" : "cteOSProc";
+        }
+
+        private static string[] GetRootNames()
+        {
+            return new[] { "cteProc", "cteOSProc" };
+        }
+
+        #endregion Methods
     }
 }
 

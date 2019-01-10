@@ -53,7 +53,7 @@ namespace ACBr.Net.CTe.Services
         ///  <param name="config"></param>
         /// <param name="service"></param>
         /// <param name="certificado"></param>
-        public CTeRecepcaoEventoServiceClient(CTeConfig config, ServicoCTe service, X509Certificate2 certificado = null) :
+        public CTeRecepcaoEventoServiceClient(CTeConfig config, TipoServicoCTe service, X509Certificate2 certificado = null) :
             base(config, service, certificado)
         {
             Schema = SchemaCTe.EventoCTe;

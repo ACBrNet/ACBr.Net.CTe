@@ -45,7 +45,7 @@ namespace ACBr.Net.CTe.Services
         #region Constructors
 
         public CTeConsultaServiceClient(CTeConfig config, X509Certificate2 certificado = null) :
-            base(config, ServicoCTe.CTeConsultaProtocolo, certificado)
+            base(config, TipoServicoCTe.CTeConsultaProtocolo, certificado)
         {
             Schema = SchemaCTe.ConsSitCTe;
             ArquivoEnvio = "ped-sit";

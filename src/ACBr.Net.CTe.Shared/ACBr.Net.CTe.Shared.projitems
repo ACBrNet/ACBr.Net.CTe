@@ -22,9 +22,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfCTeSub.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfDocRef.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CTeOSNormal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeNormalOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSProp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CTeOSRodoOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeRodoModalOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSSeg.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSToma.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSVeic.cs" />
@@ -163,7 +163,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IEventoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IInfoCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfCorrecao.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)InfCte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModeloCTe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeProcEvento.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ConsultaCTeResposta.cs" />
@@ -175,9 +175,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Consulta\ICTeConsulta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeResultBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceCollection.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CTeServiceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Recepcao\EnviarCTeResposta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Inutilizacao\CTeInutilizacaoServiceClient.cs" />

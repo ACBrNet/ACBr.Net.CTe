@@ -6,7 +6,7 @@
 // Last Modified By : marcosgerene
 // Last Modified On : 09-01-2019
 // ***********************************************************************
-// <copyright file="ModeloCTe.cs" company="ACBr.Net">
+// <copyright file="ResponsavelSeguroCTe.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,11 +29,16 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Attributes;
+
 namespace ACBr.Net.CTe
 {
     public enum ResponsavelSeguroCTe : byte
     {
+        [DFeEnum("4")]
         EmitenteCTe = 4,
+
+        [DFeEnum("5")]
         TomadorCTe = 5
     }
 }
