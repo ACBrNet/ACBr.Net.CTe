@@ -458,5 +458,6 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Eventos\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\DistribuicaoDFe\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\RecepcaoOS\" />
   </ItemGroup>
 </Project>
