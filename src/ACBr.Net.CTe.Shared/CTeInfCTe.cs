@@ -188,11 +188,13 @@ namespace ACBr.Net.CTe
         [DFeElement("imp", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeImp Imp { get; set; }
 
-        [DFeItem(typeof(CTeOSNormal), "infCTeNorm")]
         [DFeItem(typeof(CTeNormal), "infCTeNorm")]
         [DFeItem(typeof(CTeAnulacao), "infCteAnu")]
         [DFeItem(typeof(CTeComplemento), "infCteComp")]
         public IInfoCTe InfoCTe { get; set; }
+
+        [DFeItem(typeof(CTeNormalOS), "infCTeNorm")]
+        public IInfoCTe InfoCTeOS { get; set; }
 
         [DFeCollection("autXML", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeAutXML> AutXml { get; set; }

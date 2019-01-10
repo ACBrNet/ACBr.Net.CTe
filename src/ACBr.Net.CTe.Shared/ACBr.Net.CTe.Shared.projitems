@@ -22,9 +22,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfCTeSub.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfDocRef.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CTeOSNormal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeNormalOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSProp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CTeOSRodoOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeRodoModalOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSSeg.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSToma.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSVeic.cs" />

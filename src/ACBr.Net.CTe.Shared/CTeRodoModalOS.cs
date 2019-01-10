@@ -6,7 +6,7 @@
 // Last Modified By : marcosgerene
 // Last Modified On : 09-01-2019
 // ***********************************************************************
-// <copyright file="CTeVeicNovos.cs" company="ACBr.Net">
+// <copyright file="CTeRodoModalOS.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,7 +29,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-
 using System.ComponentModel;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core.Attributes;
@@ -39,8 +38,8 @@ using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
-    [DFeRoot("rodoos")]
-    public sealed class CTeOSRodoOS : DFeDocument<CTeOSRodoOS>, ICTeModal, INotifyPropertyChanged
+    [DFeRoot("rodoOS")]
+    public sealed class CTeRodoModalOS : DFeDocument<CTeRodoModalOS>, ICTeModal, INotifyPropertyChanged
     {
         #region Events
 
@@ -50,7 +49,7 @@ namespace ACBr.Net.CTe
 
         #region Constructors
 
-        public CTeOSRodoOS()
+        public CTeRodoModalOS()
         {
             Veic = new DFeCollection<CTeOSVeic>();
         }
