@@ -42,7 +42,7 @@ using ACBr.Net.DFe.Core.Document;
 namespace ACBr.Net.CTe
 {
     [DFeSignInfoElement("infCte")]
-    [DFeRoot("CTe", Namespace = "http://www.portalfiscal.inf.br/cte")]
+    [DFeRoot(Namespace = "http://www.portalfiscal.inf.br/cte")]
     public sealed class CTe : DFeSignDocument<CTe>, INotifyPropertyChanged
     {
         #region Events
@@ -111,6 +111,16 @@ namespace ACBr.Net.CTe
         public string GetXmlName()
         {
             return $"{InfCTe.Id.OnlyNumbers()}-cte.xml";
+        }
+
+        private string GetRootName()
+        {
+            return InfCTe.Ide.Mod == ModeloCTe.CTe ? "CTe" : "CTeOS";
+        }
+
+        private static string[] GetRootNames()
+        {
+            return new[] { "CTe", "CTeOS" };
         }
 
         #endregion Methods
