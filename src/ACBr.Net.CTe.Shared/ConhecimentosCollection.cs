@@ -109,7 +109,7 @@ namespace ACBr.Net.CTe
         private void LoadXml(string xml)
         {
             Guard.Against<ACBrDFeException>(xml.IsEmpty(), "Carregamento falhou: Não foi possivel ler o conteudo.");
-            Guard.Against<ACBrDFeException>(!xml.Contains("</CTe>"), "Carregamento falhou: Arquivo xml incorreto.");
+            Guard.Against<ACBrDFeException>(!xml.Contains("</CTe>") && !xml.Contains("</CTeOS>"), "Carregamento falhou: Arquivo xml incorreto.");
             Add(Net.CTe.CTe.Load(xml));
         }
 

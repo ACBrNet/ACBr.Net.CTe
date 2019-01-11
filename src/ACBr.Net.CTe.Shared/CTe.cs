@@ -38,6 +38,7 @@ using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
@@ -65,6 +66,9 @@ namespace ACBr.Net.CTe
 
         [DFeElement("infCte", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeInfCTe InfCTe { get; set; }
+
+        [DFeAttribute(TipoCampo.Enum, "versao", Id = "", Min = 4, Max = 4, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+        public CTeVersao Versao { get; set; }
 
         [DFeIgnore]
         public bool Cancelada { get; set; }
@@ -121,6 +125,11 @@ namespace ACBr.Net.CTe
         private static string[] GetRootNames()
         {
             return new[] { "CTe", "CTeOS" };
+        }
+
+        private bool ShouldSerealizeVersao()
+        {
+            return InfCTe.Ide.Mod == ModeloCTe.CTeOS;
         }
 
         #endregion Methods

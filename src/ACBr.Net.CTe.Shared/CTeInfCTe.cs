@@ -247,6 +247,15 @@ namespace ACBr.Net.CTe
 
         private bool ShouldSerializeInfRespTec() => !string.IsNullOrEmpty(InfRespTec.CNPJ) || !string.IsNullOrEmpty(InfRespTec.XNome);
 
+        private bool ShouldSerializeInfoCTe()
+        {
+            return Ide.Mod == ModeloCTe.CTe;
+        }
+
+        private bool ShouldSerializeInfoCTeOS()
+        {
+            return Ide.Mod == ModeloCTe.CTeOS;
+        }
         #endregion Methods
     }
 }
