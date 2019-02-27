@@ -309,7 +309,7 @@ namespace ACBr.Net.CTe.Demo
 
         private void GerarCTe(int nCTe)
         {
-            var cte = acbrCTe.Conhecimentos.AddNew();
+            var cte = acbrCTe.Conhecimentos.AddNewCTe();
             cte.InfCTe.Ide.NCT = nCTe;
         }
 

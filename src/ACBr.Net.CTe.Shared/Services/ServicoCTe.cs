@@ -41,6 +41,7 @@ namespace ACBr.Net.CTe.Services
         CTeStatusServico,
         CTeConsultaCadastro,
         RecepcaoEventoAN,
-        CTeRecepcaoOS
+        CTeRecepcaoOS,
+        DistribuicaoDFe
     }
 }

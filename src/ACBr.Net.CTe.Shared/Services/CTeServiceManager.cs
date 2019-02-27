@@ -141,8 +141,20 @@ namespace ACBr.Net.CTe.Services
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static string GetServiceAndress(CTeVersao versao, DFeSiglaUF uf, TipoServicoCTe tipo, DFeTipoEmissao tipoEmissao, DFeTipoAmbiente ambiente)
         {
-            Guard.Against<ACBrException>(Servicos[versao, tipoEmissao] == null, "Versão ou tipo de emissão não encontrada no arquivo de serviços.");
-            return Servicos[versao, tipoEmissao]?[ambiente, uf]?[tipo];
+            switch (tipo)
+            {
+                case TipoServicoCTe.DistribuicaoDFe:
+                    switch (ambiente)
+                    {
+                        case DFeTipoAmbiente.Homologacao: return "";
+                        default: return "";
+                    }
+
+                default:
+                    var service = Servicos[versao, tipoEmissao];
+                    Guard.Against<ACBrException>(service == null, "Versão ou tipo de emissão não encontrada no arquivo de serviços.");
+                    return service[ambiente, uf]?[tipo];
+            }
         }
 
         /// <summary>
@@ -324,7 +336,7 @@ namespace ACBr.Net.CTe.Services
                     var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
                     var url = sessao[key];
 
-                    Servicos[CTeVersao.v300, DFeTipoEmissao.DPEC][DFeTipoAmbiente.Homologacao, codUf].Enderecos[service] = url;
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.DPEC][DFeTipoAmbiente.Homologacao, codUf][service] = url;
                 }
 
                 sessao = ini[sectionName + "P"];
@@ -335,7 +347,7 @@ namespace ACBr.Net.CTe.Services
                     var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
                     var url = sessao[key];
 
-                    Servicos[CTeVersao.v300, DFeTipoEmissao.DPEC][DFeTipoAmbiente.Producao, codUf].Enderecos[service] = url;
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.DPEC][DFeTipoAmbiente.Producao, codUf][service] = url;
                 }
             }
 
@@ -352,7 +364,7 @@ namespace ACBr.Net.CTe.Services
                     var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
                     var url = sessao[key];
 
-                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCRS][DFeTipoAmbiente.Homologacao, codUf].Enderecos[service] = url;
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCRS][DFeTipoAmbiente.Homologacao, codUf][service] = url;
                 }
 
                 sessao = ini[sectionName + "P"];
@@ -363,7 +375,7 @@ namespace ACBr.Net.CTe.Services
                     var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
                     var url = sessao[key];
 
-                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCRS][DFeTipoAmbiente.Producao, codUf].Enderecos[service] = url;
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCRS][DFeTipoAmbiente.Producao, codUf][service] = url;
                 }
             }
 
@@ -380,7 +392,7 @@ namespace ACBr.Net.CTe.Services
                     var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
                     var url = sessao[key];
 
-                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCSP][DFeTipoAmbiente.Homologacao, codUf].Enderecos[service] = url;
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCSP][DFeTipoAmbiente.Homologacao, codUf][service] = url;
                 }
 
                 sessao = ini[sectionName + "P"];
@@ -391,7 +403,7 @@ namespace ACBr.Net.CTe.Services
                     var key = $"{service.GetDescription()}_{getVersion(CTeVersao.v300)}";
                     var url = sessao[key];
 
-                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCSP][DFeTipoAmbiente.Producao, codUf].Enderecos[service] = url;
+                    Servicos[CTeVersao.v300, DFeTipoEmissao.SVCSP][DFeTipoAmbiente.Producao, codUf][service] = url;
                 }
             }
         }

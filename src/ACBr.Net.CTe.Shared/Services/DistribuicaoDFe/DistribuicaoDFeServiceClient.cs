@@ -1,12 +1,12 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : ACBr.Net.CTe
 // Author           : RFTD
-// Created          : 06-11-2017
+// Created          : 30-07-2018
 //
 // Last Modified By : RFTD
-// Last Modified On : 06-11-2017
+// Last Modified On : 13-01-2019
 // ***********************************************************************
-// <copyright file="CTeConfigWebServices.cs" company="ACBr.Net">
+// <copyright file="DistribuicaoDFeServiceClient.cs" company="ACBr.Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2016 Grupo ACBr.Net
 //
@@ -29,58 +29,23 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.ComponentModel;
-using ACBr.Net.Core;
-using ACBr.Net.Core.Exceptions;
-using ACBr.Net.Core.Extensions;
+using System.Security.Cryptography.X509Certificates;
+using ACBr.Net.CTe.Configuracao;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Extensions;
+using ACBr.Net.DFe.Core.Service;
 
-namespace ACBr.Net.CTe.Configuracao
+namespace ACBr.Net.CTe.Services
 {
-    [TypeConverter(typeof(ACBrExpandableObjectConverter))]
-    public sealed class CTeConfigWebServices : DFeWebserviceConfigBase<ACBrCTe>, INotifyPropertyChanged
+    public sealed class DistribuicaoDFeServiceClient : DFeDistribuicaoServiceClient<CTeConfig, ACBrCTe,
+        CTeConfigGeral, CTeVersao, CTeConfigWebServices, CTeConfigCertificados, CTeConfigArquivos, SchemaCTe>
     {
-        #region Fields
-
-        private DFeCodUF uf;
-
-        #endregion Fields
-
-        #region Events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Events
-
-        #region Constructor
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CTeConfigWebServices"/> class.
-        /// </summary>
-        internal CTeConfigWebServices(ACBrCTe parent) : base(parent)
+        public DistribuicaoDFeServiceClient(CTeConfig config, DFeCodUF uf, X509Certificate2 certificado = null) :
+            base(config, CTeServiceManager.GetServiceAndress(config.Geral.VersaoDFe, uf.ToSiglaUF(), TipoServicoCTe.CTeConsultaCadastro, config.Geral.FormaEmissao, config.WebServices.Ambiente),
+                "http://www.portalfiscal.inf.br/cte/wsdl/CTeDistribuicaoDFe/cteDistDFeInteresse",
+                "http://www.portalfiscal.inf.br/cte/wsdl/CTeDistribuicaoDFe", config.WebServices.UF, certificado, "cteDistDFeInteresse")
         {
-            uf = DFeCodUF.MS;
+            Schema = SchemaCTe.DistDFeInt;
         }
-
-        #endregion Constructor
-
-        #region Properties
-
-        [Browsable(true)]
-        public DFeCodUF UF
-        {
-            get => uf;
-            set
-            {
-                if (value == uf) return;
-
-                Guard.Against<ArgumentException>(value.IsIn(DFeCodUF.EX, DFeCodUF.AN, DFeCodUF.SU), "Estado informado incorreto.");
-
-                uf = value;
-            }
-        }
-
-        #endregion Properties
     }
 }
