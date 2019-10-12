@@ -483,38 +483,38 @@ namespace ACBr.Net.CTe
                 }
             }
 
-            if (CTeOS.Any())
-            {
-                var pathSchemaCTeOS = Parent.Configuracoes.Arquivos.GetSchema(SchemaCTe.CTeOS);
-                foreach (var cte in CTeOS)
-                {
-                    var xml = cte.GetXml();
-                    XmlSchemaValidation.ValidarXml(xml, pathSchemaCTeOS, out var erros, out _);
+            //if (CTeOS.Any())
+            //{
+            //    var pathSchemaCTeOS = Parent.Configuracoes.Arquivos.GetSchema(SchemaCTe.CTeOS);
+            //    foreach (var cte in CTeOS)
+            //    {
+            //        var xml = cte.GetXml();
+            //        XmlSchemaValidation.ValidarXml(xml, pathSchemaCTeOS, out var erros, out _);
 
-                    listaErros.AddRange(erros);
+            //        listaErros.AddRange(erros);
 
-                    if (cte.InfCTe.Ide.TpCTe == CTeTipo.Anulacao ||
-                        cte.InfCTe.Ide.TpCTe == CTeTipo.Complemento) continue;
+            //        if (cte.InfCTe.Ide.TpCTe == CTeTipo.Anulacao ||
+            //            cte.InfCTe.Ide.TpCTe == CTeTipo.Complemento) continue;
 
-                    var xmlModal =
-                        ((CTeNormalOS)cte.InfCTe.InfoCTeOS).InfModal.Modal.GetXml(DFeSaveOptions.DisableFormatting);
-                    SchemaCTe schema;
+            //        var xmlModal =
+            //            ((CTeNormalOS)cte.InfCTe.InfoCTeOS).InfModal.Modal.GetXml(DFeSaveOptions.DisableFormatting);
+            //        SchemaCTe schema;
 
-                    switch (((CTeNormalOS)cte.InfCTe.InfoCTeOS).InfModal.Modal)
-                    {
-                        case CTeRodoModalOS _:
-                            schema = SchemaCTe.CTeModalRodoviarioOS;
-                            break;
+            //        switch (((CTeNormalOS)cte.InfCTe.InfoCTeOS).InfModal.Modal)
+            //        {
+            //            case CTeRodoModalOS _:
+            //                schema = SchemaCTe.CTeModalRodoviarioOS;
+            //                break;
 
-                        default:
-                            continue;
-                    }
+            //            default:
+            //                continue;
+            //        }
 
-                    var pathSchemaModal = Parent.Configuracoes.Arquivos.GetSchema(schema);
-                    XmlSchemaValidation.ValidarXml(xmlModal, pathSchemaModal, out var errosModal, out _);
-                    listaErros.AddRange(errosModal);
-                }
-            }
+            //        var pathSchemaModal = Parent.Configuracoes.Arquivos.GetSchema(schema);
+            //        XmlSchemaValidation.ValidarXml(xmlModal, pathSchemaModal, out var errosModal, out _);
+            //        listaErros.AddRange(errosModal);
+            //    }
+            //}
 
             Guard.Against<ACBrDFeValidationException>(listaErros.Any(), "Erros de validação do xml." +
                                             $"{(Parent.Configuracoes.Geral.ExibirErroSchema ? Environment.NewLine + listaErros.AsString() : "")}");

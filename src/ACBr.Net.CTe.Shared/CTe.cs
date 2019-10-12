@@ -66,6 +66,9 @@ namespace ACBr.Net.CTe
         [DFeElement("infCte", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeInfCTe InfCTe { get; set; }
 
+        [DFeElement("infCTeSupl", Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeInfCteSupl InfCTeSupl { get; set; }
+
         [DFeIgnore]
         public bool Cancelada { get; set; }
 
@@ -98,6 +101,11 @@ namespace ACBr.Net.CTe
             AssinarDocumento(certificado, saveOptions, false, SignDigest.SHA1);
         }
 
+        /// <summary>
+        /// Valida a assinatura da CTe.
+        /// </summary>
+        /// <param name="gerarXml"></param>
+        /// <returns></returns>
         public bool ValidarAssinatura(bool gerarXml = true)
         {
             Guard.Against<ACBrDFeException>(!Assinado, "Documento não esta assinado.");

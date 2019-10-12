@@ -7,6 +7,7 @@ using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Attributes;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Document;
+using ACBr.Net.DFe.Core.Serializer;
 
 namespace ACBr.Net.CTe
 {
@@ -24,6 +25,9 @@ namespace ACBr.Net.CTe
 
         [DFeElement("infCte", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeInfCTe InfCTe { get; set; }
+
+        [DFeAttribute(TipoCampo.Enum, "versao", Id = "#002", Min = 4, Max = 4, Ocorrencia = Ocorrencia.Obrigatoria)]
+        public CTeVersao Versao { get; set; }
 
         [DFeIgnore]
         public bool Cancelada { get; set; }

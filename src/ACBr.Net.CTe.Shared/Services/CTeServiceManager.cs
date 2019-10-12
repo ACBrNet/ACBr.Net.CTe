@@ -146,8 +146,8 @@ namespace ACBr.Net.CTe.Services
                 case TipoServicoCTe.DistribuicaoDFe:
                     switch (ambiente)
                     {
-                        case DFeTipoAmbiente.Homologacao: return "";
-                        default: return "";
+                        case DFeTipoAmbiente.Homologacao: return @"https://hom1.cte.fazenda.gov.br/CTeDistribuicaoDFe/CTeDistribuicaoDFe.asmxhttps://hom1.cte.fazenda.gov.br/CTeDistribuicaoDFe/CTeDistribuicaoDFe.asmx";
+                        default: return @"https://www1.cte.fazenda.gov.br/CTeDistribuicaoDFe/CTeDistribuicaoDFe.asmxhttps://www1.cte.fazenda.gov.br/CTeDistribuicaoDFe/CTeDistribuicaoDFe.asmx";
                     }
 
                 default:
@@ -236,7 +236,7 @@ namespace ACBr.Net.CTe.Services
         /// <param name="path">Caminho para o ini</param>
         public static void ImportIniACBr(string path = "")
         {
-            using (var stream = new FileStream(path, FileMode.Open))
+            using (var stream = File.OpenRead(path))
             {
                 ImportIniACBr(stream);
             }

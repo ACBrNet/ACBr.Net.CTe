@@ -73,7 +73,6 @@ namespace ACBr.Net.CTe
             Emit = new CTeEmit();
             Compl = new CTeCompl();
             Ide = new CTeIde();
-            Toma = new CTeOSToma();
             Versao = CTeVersao.v300;
         }
 
@@ -108,20 +107,6 @@ namespace ACBr.Net.CTe
         [DFeElement("emit", Ocorrencia = Ocorrencia.Obrigatoria)]
         public CTeEmit Emit { get; set; }
 
-        [DFeElement("toma", Ocorrencia = Ocorrencia.NaoObrigatoria)]
-        public CTeOSToma Toma
-        {
-            get => toma;
-            set
-            {
-                if (value.Parent != this)
-                {
-                    value.Parent = this;
-                }
-
-                toma = value;
-            }
-        }
         [DFeElement("rem", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public CTeRem Rem
         {
@@ -193,9 +178,6 @@ namespace ACBr.Net.CTe
         [DFeItem(typeof(CTeComplemento), "infCteComp")]
         public IInfoCTe InfoCTe { get; set; }
 
-        [DFeItem(typeof(CTeNormalOS), "infCTeNorm")]
-        public IInfoCTe InfoCTeOS { get; set; }
-
         [DFeCollection("autXML", Ocorrencia = Ocorrencia.NaoObrigatoria)]
         public DFeCollection<CTeAutXML> AutXml { get; set; }
 
@@ -218,11 +200,6 @@ namespace ACBr.Net.CTe
                    Compl.ShouldSerializeEntrega() ||
                    Compl.ObsCont.Any() ||
                    Compl.ObsFisco.Any();
-        }
-
-        private bool ShouldSerializeToma()
-        {
-            return Ide.Mod == ModeloCTe.CTeOS && (!Toma.CNPJ.IsEmpty() || !Toma.CPF.IsEmpty() || !Toma.XNome.IsEmpty());
         }
 
         private bool ShouldSerializeRem()
@@ -252,10 +229,6 @@ namespace ACBr.Net.CTe
             return Ide.Mod == ModeloCTe.CTe;
         }
 
-        private bool ShouldSerializeInfoCTeOS()
-        {
-            return Ide.Mod == ModeloCTe.CTeOS;
-        }
         #endregion Methods
     }
 }

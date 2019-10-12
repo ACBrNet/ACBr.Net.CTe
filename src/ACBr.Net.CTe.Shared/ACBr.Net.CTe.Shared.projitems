@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuracao\CTeConfigWebServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeEnderecoEmit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTEeOSInfQ.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CTeInfCteSupl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeInfRespTec.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CTeOSInfCTeSub.cs" />

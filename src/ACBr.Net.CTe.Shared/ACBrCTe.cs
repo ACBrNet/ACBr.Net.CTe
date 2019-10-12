@@ -179,7 +179,7 @@ namespace ACBr.Net.CTe
                 var cteAutorizados = new List<CTeProc>();
                 foreach (var protCTe in retorno.RetRecepcaoResposta.Resultado.ProtCTe)
                 {
-                    var cte = Conhecimentos.SingleOrDefault(x => x.InfCTe.Id.Substring(3) == protCTe.InfProt.ChCTe);
+                    var cte = Conhecimentos.CTe.SingleOrDefault(x => x.InfCTe.Id.Substring(3) == protCTe.InfProt.ChCTe);
                     if (cte == null) continue;
 
                     if (Configuracoes.Geral.ValidarDigest)
@@ -264,7 +264,7 @@ namespace ACBr.Net.CTe
         /// <returns>A situação do serviço de CTe</returns>
         public ConsultaCTeResposta Consultar(string chave = "")
         {
-            Guard.Against<ArgumentException>(chave.IsEmpty() && !Conhecimentos.Any(), "ERRO: Nenhum CT-e ou Chave Informada!");
+            Guard.Against<ArgumentException>(chave.IsEmpty() && !Conhecimentos.CTe.Any(), "ERRO: Nenhum CT-e ou Chave Informada!");
 
             var oldProtocol = ServicePointManager.SecurityProtocol;
             ServicePointManager.SecurityProtocol = securityProtocol;
@@ -276,7 +276,7 @@ namespace ACBr.Net.CTe
 
                 using (var cliente = new CTeConsultaServiceClient(Configuracoes, cert))
                 {
-                    return cliente.Consulta(!chave.IsEmpty() ? chave : Conhecimentos.First().InfCTe.Id.OnlyNumbers());
+                    return cliente.Consulta(!chave.IsEmpty() ? chave : Conhecimentos.CTe.First().InfCTe.Id.OnlyNumbers());
                 }
             }
             catch (Exception exception)
